@@ -1,0 +1,68 @@
+[{
+  "_id": {
+    "$oid": "67a85b4035436832048a185e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67a8591991c9b3eaf1917920"
+  },
+  "type": "Stage",
+  "name": "Step Test",
+  "address": "Calgary, AB, Canada",
+  "latitude": 0,
+  "longitude": 0,
+  "arrivalDateTime": {
+    "$date": "2025-07-29T14:05:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-30T12:00:00.000Z"
+  },
+  "travelTime": null,
+  "isArrivalTimeConsistent": true,
+  "notes": "Bienvenue à TEST !!!",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "67a862e71ba201bb05eac99c"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67a864decba77366c5dd80a1"
+    }
+  ],
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "67a860e061109e48f5ddc87f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67a8591991c9b3eaf1917920"
+  },
+  "type": "Stop",
+  "name": "Step Stop",
+  "address": "Calgary, AB, Canada",
+  "latitude": 0,
+  "longitude": 0,
+  "arrivalDateTime": {
+    "$date": "2025-07-30T11:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-31T12:00:00.000Z"
+  },
+  "travelTime": 0,
+  "isArrivalTimeConsistent": true,
+  "notes": "Bienvenue à TEST !!!",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+}]

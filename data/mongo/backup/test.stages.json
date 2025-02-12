@@ -1,0 +1,949 @@
+[{
+  "_id": {
+    "$oid": "670b951d9b1667a1ada89acb"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "670b5c91b93cc62f32c8e413"
+  },
+  "name": "Marina Inn",
+  "nights": 1,
+  "notes": "Notes de Marina Inn",
+  "files": [],
+  "photos": [],
+  "accommodations": [
+    {
+      "$oid": "670b952b9b1667a1ada89ad1"
+    },
+    {
+      "$oid": "67133718db46f11b47b7df23"
+    },
+    {
+      "$oid": "6713463300f70d5943831624"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "671358a13c5c277a794c7e89"
+    },
+    {
+      "$oid": "671358a73c5c277a794c7e8e"
+    },
+    {
+      "$oid": "671358c83c5c277a794c7e92"
+    },
+    {
+      "$oid": "671358fc3c5c277a794c7e9c"
+    },
+    {
+      "$oid": "6713590a3c5c277a794c7ea0"
+    },
+    {
+      "$oid": "67135e873c5c277a794c7ed9"
+    },
+    {
+      "$oid": "671495d0c3d30fa17cfbcedf"
+    }
+  ],
+  "arrivalDateTime": {
+    "$date": "2023-08-03T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-04T09:00:00.000Z"
+  },
+  "__v": 99,
+  "address": "San Francisco, Californie, États-Unis",
+  "documents": [],
+  "latitude": 37.7749295,
+  "longitude": -122.4194155,
+  "travelTime": 0
+},
+{
+  "_id": {
+    "$oid": "6713514076abf468375b7155"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Calgary",
+  "address": "Calgary, AB, Canada",
+  "nights": 1,
+  "arrivalDateTime": {
+    "$date": "2025-07-29T14:05:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-30T12:00:00.000Z"
+  },
+  "notes": "Bienvenue à Calgary !!!",
+  "files": [],
+  "photos": [],
+  "accommodations": [
+    {
+      "$oid": "671648ebebc92c75632ddd0d"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "678d41ea7049333ccbaf1507"
+    }
+  ],
+  "__v": 5,
+  "travelTime": null,
+  "documents": [],
+  "latitude": 51.04473309999999,
+  "longitude": -114.0718831
+},
+{
+  "_id": {
+    "$oid": "67162ed73f265412dc46c8eb"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "670b5c91b93cc62f32c8e413"
+  },
+  "name": "Sequoia National Park",
+  "address": "Sequoia National Park, California, USA",
+  "nights": 1,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 1,
+  "arrivalDateTime": {
+    "$date": "2023-08-04T14:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-05T09:00:00.000Z"
+  },
+  "documents": [],
+  "latitude": 36.4863668,
+  "longitude": -118.5657516,
+  "travelTime": 0
+},
+{
+  "_id": {
+    "$oid": "67164306a8ddb3877b81898f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "670b5c91b93cc62f32c8e413"
+  },
+  "name": "Kingsman",
+  "address": "KOA Kingsman",
+  "nights": 1,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "accommodations": [
+    {
+      "$oid": "6716432fa8ddb3877b81899f"
+    },
+    {
+      "$oid": "6716433da8ddb3877b8189b3"
+    },
+    {
+      "$oid": "671644276660e2ebe8f80741"
+    },
+    {
+      "$oid": "6716445ae8b1a83991cac3c0"
+    }
+  ],
+  "activities": [],
+  "__v": 6,
+  "arrivalDateTime": {
+    "$date": "2023-08-05T17:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-06T08:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67164685ebc92c75632ddcce"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "670b5c91b93cc62f32c8e413"
+  },
+  "name": "Grand Canyon",
+  "address": "",
+  "nights": 1,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "arrivalDateTime": {
+    "$date": "2023-08-06T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-07T18:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67164a219daf629f689c2807"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Lundbreck",
+  "address": "Lundbreck Falls, Range Road 24B, Lundbreck, AB, Canada",
+  "nights": 1,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "accommodations": [
+    {
+      "$oid": "67330c0dddc53133750a5649"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "671656cc748888c3e5671adf"
+    },
+    {
+      "$oid": "67961cdcdd9ade8e6dfddb64"
+    },
+    {
+      "$oid": "67991e7215252844008f17e8"
+    },
+    {
+      "$oid": "67991f9215252844008f17ed"
+    }
+  ],
+  "__v": 17,
+  "arrivalDateTime": {
+    "$date": "2025-07-30T15:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-31T09:00:00.000Z"
+  },
+  "travelTime": 127,
+  "documents": [],
+  "latitude": 49.5832664,
+  "longitude": -114.2081403
+},
+{
+  "_id": {
+    "$oid": "6730bdc24dbae9d8669196f1"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Calgary",
+  "address": "Sheraton Cavalier Calgary Hotel, 32 Avenue Northeast, Calgary, AB, Canada",
+  "nights": 1,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "accommodations": [
+    {
+      "$oid": "6730be304dbae9d866919716"
+    }
+  ],
+  "activities": [],
+  "__v": 2,
+  "arrivalDateTime": {
+    "$date": "2025-08-20T15:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-21T10:00:00.000Z"
+  },
+  "travelTime": 22,
+  "documents": [],
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "6730c3984dbae9d86691974c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Waterton Lakes",
+  "address": "Crooked Creek Campground, Alberta 5, Waterton Park, AB, Canada",
+  "nights": 2,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "accommodations": [
+    {
+      "$oid": "6730c3e84dbae9d866919764"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "6730c4b94dbae9d866919769"
+    },
+    {
+      "$oid": "6731b74d9e2ada44845b752e"
+    }
+  ],
+  "__v": 17,
+  "arrivalDateTime": {
+    "$date": "2025-07-31T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-01T11:00:00.000Z"
+  },
+  "travelTime": 52,
+  "documents": [],
+  "isArrivalTimeConsistent": true
+},
+{
+  "_id": {
+    "$oid": "6733181dfe1f7c1a95e6e40b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Glacier National Park - Saint Mary",
+  "address": "Saint Mary Campground, Glacier National Park, Lp C Road, Browning, Montana, États-Unis",
+  "nights": 1,
+  "travelTime": 61,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "accommodations": [
+    {
+      "$oid": "67331a7e5109ad9af612339e"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67967fff0d35c230f0f39942"
+    }
+  ],
+  "__v": 3,
+  "arrivalDateTime": {
+    "$date": "2025-08-01T18:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-03T08:00:00.000Z"
+  },
+  "documents": [],
+  "latitude": 48.7532455,
+  "longitude": -113.4414147,
+  "thumbnail": {
+    "$oid": "679680fc0d35c230f0f39962"
+  }
+},
+{
+  "_id": {
+    "$oid": "673a0ad48dce16fb010b435f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Bozeman",
+  "address": "Bozeman, MT, USA",
+  "nights": 1,
+  "travelTime": 111,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "accommodations": [
+    {
+      "$oid": "679627ff2222de5ca995e23d"
+    }
+  ],
+  "activities": [],
+  "__v": 5,
+  "arrivalDateTime": {
+    "$date": "2025-08-03T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-04T10:00:00.000Z"
+  },
+  "documents": [],
+  "latitude": 45.67931189999999,
+  "longitude": -111.037259,
+  "thumbnail": {
+    "$oid": "67962a6b565023646e2ba719"
+  }
+},
+{
+  "_id": {
+    "$oid": "673a0ba08dce16fb010b43d8"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Mammoth Hot Spring",
+  "address": "Mammoth Hot Springs, Mammoth, WY, USA",
+  "nights": 1,
+  "travelTime": 92,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "accommodations": [
+    {
+      "$oid": "673a0bd28dce16fb010b43f4"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67971d9f4175d662fd6dde96"
+    }
+  ],
+  "__v": 2,
+  "arrivalDateTime": {
+    "$date": "2025-08-04T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-05T09:00:00.000Z"
+  },
+  "documents": [],
+  "thumbnail": {
+    "$oid": "6797220882f1400875364a0e"
+  },
+  "isArrivalTimeConsistent": true,
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "676f9ee346b8662fdd944061"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a6b871aa5919cb2b2e8dc"
+  },
+  "name": "Step dsqdsqdsq",
+  "address": "Banff, AB, Canada",
+  "nights": 1,
+  "travelTime": null,
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "676fae0759e655f3e7239055"
+    },
+    {
+      "$oid": "6793255f02421fa6da3aab1c"
+    },
+    {
+      "$oid": "679325a502421fa6da3aab20"
+    },
+    {
+      "$oid": "679325c002421fa6da3aab24"
+    },
+    {
+      "$oid": "67932d322b75392d84d9768d"
+    },
+    {
+      "$oid": "67932d6f2b75392d84d97691"
+    },
+    {
+      "$oid": "67932ed42b75392d84d976b1"
+    },
+    {
+      "$oid": "67932f4f2b75392d84d976b5"
+    },
+    {
+      "$oid": "67934dd15caa35dae52b2929"
+    },
+    {
+      "$oid": "67934dd65caa35dae52b292d"
+    },
+    {
+      "$oid": "67934de05caa35dae52b2931"
+    },
+    {
+      "$oid": "67935111cf6e4e4288800556"
+    },
+    {
+      "$oid": "679377b292f82522553e05ff"
+    },
+    {
+      "$oid": "679377ba92f82522553e0603"
+    },
+    {
+      "$oid": "67937a15b989055acaae4157"
+    },
+    {
+      "$oid": "67937a7781b2d836b9d2c775"
+    },
+    {
+      "$oid": "67937ab981b2d836b9d2c787"
+    },
+    {
+      "$oid": "67937ded842b44221de2ecf3"
+    },
+    {
+      "$oid": "67937f23842b44221de2ed05"
+    },
+    {
+      "$oid": "679380c5f2579791184606c4"
+    },
+    {
+      "$oid": "6793811c842b44221de2ed3a"
+    },
+    {
+      "$oid": "67938287f2579791184606f2"
+    },
+    {
+      "$oid": "679383bff257979118460721"
+    },
+    {
+      "$oid": "67938467842b44221de2ed71"
+    },
+    {
+      "$oid": "679384f5842b44221de2ed8f"
+    },
+    {
+      "$oid": "67938622842b44221de2edb2"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "676fae5659e655f3e7239061"
+    },
+    {
+      "$oid": "679382e0f2579791184606f6"
+    },
+    {
+      "$oid": "679382f9f2579791184606fa"
+    },
+    {
+      "$oid": "67938335f2579791184606fe"
+    },
+    {
+      "$oid": "6793833df257979118460702"
+    },
+    {
+      "$oid": "67938347f257979118460706"
+    },
+    {
+      "$oid": "67938358f25797911846070a"
+    },
+    {
+      "$oid": "67938370f25797911846070e"
+    },
+    {
+      "$oid": "67938398f257979118460712"
+    },
+    {
+      "$oid": "679383a1f25797911846071d"
+    },
+    {
+      "$oid": "679383ed842b44221de2ed61"
+    },
+    {
+      "$oid": "67938400842b44221de2ed65"
+    },
+    {
+      "$oid": "67938421842b44221de2ed69"
+    },
+    {
+      "$oid": "67938455842b44221de2ed6d"
+    },
+    {
+      "$oid": "67938470842b44221de2ed75"
+    },
+    {
+      "$oid": "6793848c842b44221de2ed80"
+    },
+    {
+      "$oid": "679384ed842b44221de2ed8b"
+    },
+    {
+      "$oid": "67938520842b44221de2ed93"
+    },
+    {
+      "$oid": "67938532842b44221de2ed97"
+    },
+    {
+      "$oid": "6793854c842b44221de2eda7"
+    },
+    {
+      "$oid": "679386c49aa6deb3295885e6"
+    }
+  ],
+  "__v": 75,
+  "thumbnail": {
+    "$oid": "6794a8352a35101dc5b291f2"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-07-30T11:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-31T12:00:00.000Z"
+  },
+  "notes": "Première étape du roadtrip Canadien.\nChouette, c'est les vacances !!!",
+  "isArrivalTimeConsistent": true,
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "678e711fa3d7b76eb5e802b9"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "670b5c91b93cc62f32c8e413"
+  },
+  "name": "kxtyqh",
+  "address": "jhhzqy",
+  "latitude": 0,
+  "longitude": 0,
+  "arrivalDateTime": {
+    "$date": "2025-01-20T15:51:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-01-20T15:51:00.000Z"
+  },
+  "travelTime": null,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67949b358c5de5ba80b15651"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67949af2458aa0641b3095e5"
+  },
+  "name": "Échecs ",
+  "address": "Authon-du-Perche, France",
+  "latitude": 48.19398899999999,
+  "longitude": 0.8960509999999998,
+  "arrivalDateTime": {
+    "$date": "2025-01-25T13:30:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-01-25T18:00:00.000Z"
+  },
+  "travelTime": null,
+  "notes": "Allez bibou",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "67949b628c5de5ba80b1565c"
+    }
+  ],
+  "activities": [],
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "6794af462a35101dc5b292c4"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a6b871aa5919cb2b2e8dc"
+  },
+  "name": "Ygg",
+  "address": "Vajharda, Gujarat, Inde",
+  "latitude": 21.2109472,
+  "longitude": 73.4474855,
+  "arrivalDateTime": {
+    "$date": "2024-12-05T09:30:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-30T10:30:00.000Z"
+  },
+  "travelTime": null,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6796277a2222de5ca995e207"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "670b5c91b93cc62f32c8e413"
+  },
+  "name": "Bozeman",
+  "address": "Bozeman Hot Springs Campground, Welcome Drive, Bozeman, MT, USA",
+  "latitude": 45.660086,
+  "longitude": -111.1899187,
+  "travelTime": null,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "arrivalDateTime": {
+    "$date": "2025-08-03T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-04T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6797237282f1400875364a30"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Canyon Village",
+  "address": "Canyon Village, Wyoming, États-Unis",
+  "latitude": 44.7338268,
+  "longitude": -110.4899255,
+  "arrivalDateTime": {
+    "$date": "2025-08-05T14:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-06T09:00:00.000Z"
+  },
+  "travelTime": 50,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "679723bf82f1400875364a3f"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "6797240082f1400875364a47"
+    },
+    {
+      "$oid": "6797242f82f1400875364a50"
+    },
+    {
+      "$oid": "6797c2e19d0ca4aaa9cf6a9c"
+    }
+  ],
+  "__v": 4,
+  "thumbnail": {
+    "$oid": "6797287902964af2f83ec6f4"
+  }
+},
+{
+  "_id": {
+    "$oid": "679729cd6c2405010b8fd85a"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Norris Geyser Basin",
+  "address": "44.72685974938221 -110.70217834826018",
+  "latitude": 44.7275087,
+  "longitude": -110.7019681,
+  "arrivalDateTime": {
+    "$date": "2025-08-06T09:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-07T08:00:00.000Z"
+  },
+  "travelTime": 21,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "67972a0e6c2405010b8fd869"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67972a416c2405010b8fd874"
+    }
+  ],
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "67a5b8e37d9822b8f23860e9"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Grant Village",
+  "address": "Grant Village, Rainbow Loop, Yellowstone National Park, Wyoming, États-Unis",
+  "latitude": 44.3895712,
+  "longitude": -110.5553764,
+  "arrivalDateTime": {
+    "$date": "2025-08-07T18:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-08T15:00:00.000Z"
+  },
+  "travelTime": 39,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a5b9617d9822b8f23860f7"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Grand Teton",
+  "address": "100 Colter Bay Campground Road, Colter Bay RV Park, 100 Colter Bay Village Rd, Moran, WY 83013, États-Unis",
+  "latitude": 43.9056526,
+  "longitude": -110.6440562,
+  "arrivalDateTime": {
+    "$date": "2025-08-08T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-09T15:00:00.000Z"
+  },
+  "travelTime": 58,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a5b9dd7d9822b8f2386105"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Jackson Hole",
+  "address": "Jackson Hole, Wyoming, États-Unis",
+  "latitude": 43.4799291,
+  "longitude": -110.7624282,
+  "arrivalDateTime": {
+    "$date": "2025-08-09T17:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-11T09:00:00.000Z"
+  },
+  "travelTime": 55,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a5bb617d9822b8f2386131"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Missoula ",
+  "address": "Missoula, Montana, États-Unis",
+  "latitude": 46.8721284,
+  "longitude": -113.9940314,
+  "arrivalDateTime": {
+    "$date": "2025-08-11T19:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-12T08:00:00.000Z"
+  },
+  "travelTime": 81,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a5bbff7d9822b8f238614e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Fort Steele",
+  "address": "Fort Steele, BC, Canada",
+  "latitude": 49.615543,
+  "longitude": -115.630071,
+  "arrivalDateTime": {
+    "$date": "2025-08-12T18:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-13T09:00:00.000Z"
+  },
+  "travelTime": 174,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+}]

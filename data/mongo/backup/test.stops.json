@@ -1,0 +1,259 @@
+[{
+  "_id": {
+    "$oid": "67162fda1035dbaa7cdeaa28"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "670b5c91b93cc62f32c8e413"
+  },
+  "name": "Welcome Bobby",
+  "address": "dqsdqs",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "duration": 2,
+  "typeDuration": "H",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "__v": 0,
+  "arrivalDateTime": {
+    "$date": "2023-08-04T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-04T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67332b99d2f5b50b1bee596c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Rendre Johnny Boy",
+  "address": "292154 Crosspointe Dr, Calgary, AB T4A 0V2, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "travelTime": 170,
+  "duration": 2,
+  "typeDuration": "H",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "__v": 0,
+  "arrivalDateTime": {
+    "$date": "2025-08-20T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-20T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "673342491e6cfe4950bcb81c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Helena",
+  "address": "Helena, Montana, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "travelTime": 204,
+  "duration": 2,
+  "typeDuration": "H",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "files": [],
+  "photos": [],
+  "__v": 1,
+  "arrivalDateTime": {
+    "$date": "2025-08-03T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-03T16:00:00.000Z"
+  },
+  "documents": [],
+  "isArrivalTimeConsistent": true
+},
+{
+  "_id": {
+    "$oid": "67a3ad7f1578abf6636b4b4f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Grand Prismatic",
+  "address": "44.5250418368572  -110.83742470920984",
+  "latitude": 44.5255948,
+  "longitude": -110.8377252,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "arrivalDateTime": {
+    "$date": "2025-08-07T09:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-07T12:00:00.000Z"
+  },
+  "travelTime": 37,
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a5ba4e7d9822b8f2386113"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Dillon",
+  "address": "Dillon, Montana, États-Unis",
+  "latitude": 45.21663239999999,
+  "longitude": -112.6389244,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "arrivalDateTime": {
+    "$date": "2025-08-11T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-11T14:00:00.000Z"
+  },
+  "travelTime": 216,
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a5bb057d9822b8f2386122"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Dutton Ranch",
+  "address": "Yellowstone Dutton Ranch, Appaloosa Trail, Darby, Montana, États-Unis",
+  "latitude": 45.9974095,
+  "longitude": -114.1717146,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "arrivalDateTime": {
+    "$date": "2025-08-11T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-11T18:00:00.000Z"
+  },
+  "travelTime": 121,
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a5bbc67d9822b8f238613f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Lac Mac Donald",
+  "address": "Lac McDonald, Montana, États-Unis",
+  "latitude": 48.5831721,
+  "longitude": -113.9255736,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "arrivalDateTime": {
+    "$date": "2025-08-12T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-12T16:00:00.000Z"
+  },
+  "travelTime": 163,
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a5bc537d9822b8f238615c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "name": "Saint Clair Canyon",
+  "address": "Sinclair Canyon Trail, Radium Hot Springs, BC, Canada",
+  "latitude": 50.622279,
+  "longitude": -116.0735879,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "arrivalDateTime": {
+    "$date": "2025-08-13T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-13T12:00:00.000Z"
+  },
+  "travelTime": 82,
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+}]

@@ -7,7 +7,10 @@ import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import dotenv from 'dotenv';
 import { calculateTravelTime } from '../utils/googleMapsUtils.js';
 import Step from '../models/Step.js';
-import Stop from '../models/Stop.js';
+import Accommodation from '../models/Accommodation.js';
+import Activity from '../models/Activity.js';
+import File from '../models/File.js';
+import Step from '../models/Step.js';
 import { checkDateTimeConsistency } from '../utils/dateUtils.js';
 
 dotenv.config();

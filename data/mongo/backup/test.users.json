@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "username": "mxh7777",
+  "email": "maxime.heron@gmail.com",
+  "password": "$2a$10$hLBtLf0gh24hY5vvnG0bBei1scqjNQbAUgja5VlevGhwOAMIXMGM.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67091086215f2119f6844225"
+  },
+  "username": "user1",
+  "email": "maxime.heron+user1@gmail.com",
+  "password": "$2a$10$phjFMEz2AZ..z0xE4aHlbu4Dm2n/SRt.hQ8XaAZeq53RP6JhD0cNm",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670918b4215f2119f6844230"
+  },
+  "username": "user2",
+  "email": "maxime.heron+user2@gmail.com",
+  "password": "$2a$10$hrdar/PgKowvWjCiba12O.7YEYCsjmqacreEuds1Mas1xJyOUSm6a",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67091923215f2119f6844233"
+  },
+  "username": "user3",
+  "email": "maxime.heron+user3@gmail.com",
+  "password": "$2a$10$KZLZ8Y1eHUb2RTGqIP8gmeLlrAZwYmTqfNIy8fn5c5Cgg9cNp4oVC",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670944c5db78c20137946ad7"
+  },
+  "username": "loan",
+  "email": "loan.heron@gmail.com",
+  "password": "$2a$10$00GEmxYbOoqrnhIGr63LKOu7Ri5MtHn82elL4R4.QdHnLgHBQcAXu",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670b594112c70a76238ac48a"
+  },
+  "username": "user4",
+  "email": "maxime.heron+user4@gmail.com",
+  "password": "$2a$10$TUkwRrDPfZEJTrM6efBhEOk2Oat/mOBWnAZxTpFIGc7AJ/Au6WHCG",
+  "dateCreated": {
+    "$date": "2024-10-13T05:23:13.223Z"
+  },
+  "__v": 0
+}]

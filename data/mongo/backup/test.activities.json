@@ -1,0 +1,526 @@
+[{
+  "_id": {
+    "$oid": "671495d0c3d30fa17cfbcedf"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "670b951d9b1667a1ada89acb"
+  },
+  "name": "Restaurant Mexicain",
+  "address": "Marina inn Bay",
+  "website": "",
+  "phone": "+15105644444",
+  "email": "",
+  "startDateTime": {
+    "$date": "2023-08-03T16:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2023-08-03T18:00:00.000Z"
+  },
+  "duration": 2,
+  "typeDuration": "H",
+  "reservationNumber": "ABC123",
+  "price": 100,
+  "notes": "Miam miam",
+  "files": [],
+  "photos": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67166a524c352f7355d6adc4"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "671667d620bb889bc3229a7b"
+  },
+  "name": "Randonnée à cheval",
+  "address": "1 marquis road, Waterton Park, AB T0K 2M0, Canada",
+  "website": "https://www.alpinestables.com/",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-01T08:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-01T12:00:00.000Z"
+  },
+  "duration": 4,
+  "typeDuration": "H",
+  "reservationNumber": "",
+  "price": null,
+  "notes": "Daily Rates\n(GST included)\n\n1 hour: $60\n1.5 hour: $85\n2 hour: $110 \n3 hours: $155\n5 hours: $225\n8 hours: $285\n\nJuly & August Schedule\n1 hour — 9am → 5pm leaving every hour on the hour (no ride at noon)\n1.5 hour — 11am, 2pm, 5pm\n2 hour — 9:30am, 12:30pm, 3:30pm\n3 hour — 9:30am, 1:30pm on Sunday\n5 hour — 9am\nFull Day — 8:30am",
+  "files": [],
+  "photos": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6730c4b94dbae9d866919769"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "6730c3984dbae9d86691974c"
+  },
+  "name": "Balade à Cheval",
+  "startDateTime": {
+    "$date": "2025-08-01T08:30:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-01T11:00:00.000Z"
+  },
+  "files": [],
+  "photos": [],
+  "__v": 1,
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67a78afa3addbe9c62248671"
+  },
+  "address": "Alpine Stables Ltd, marquis road, Waterton Park, AB, Canada",
+  "email": "",
+  "notes": "",
+  "phone": "",
+  "price": 0,
+  "reservationNumber": "",
+  "website": "",
+  "duration": 0,
+  "latitude": 0,
+  "longitude": 0,
+  "typeDuration": "M"
+},
+{
+  "_id": {
+    "$oid": "6731b74d9e2ada44845b752e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "6730c3984dbae9d86691974c"
+  },
+  "name": "Red Rock Canyon",
+  "startDateTime": {
+    "$date": "2025-07-31T16:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-31T20:00:00.000Z"
+  },
+  "files": [],
+  "photos": [],
+  "__v": 1,
+  "latitude": 49.0562374,
+  "longitude": -113.9104918,
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67a3aedf1578abf6636b4ba9"
+  },
+  "address": "Red Rock Canyon, AB-5, Waterton Park, Alberta, Canada",
+  "email": "",
+  "notes": "",
+  "phone": "",
+  "price": 0,
+  "reservationNumber": "",
+  "website": "",
+  "duration": 0,
+  "typeDuration": "M"
+},
+{
+  "_id": {
+    "$oid": "676fae5659e655f3e7239061"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "676f9ee346b8662fdd944061"
+  },
+  "name": "Récupérer Johnny Boy",
+  "files": [],
+  "photos": [],
+  "__v": 1,
+  "latitude": 51.2012245,
+  "longitude": -113.9735624,
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67a38c5a4be2d7e461f8230f"
+  },
+  "address": "CanaDream RV Rentals and Sales Calgary, Crosspointe Drive, Calgary, AB, Canada",
+  "email": "Kfjdjf",
+  "notes": "",
+  "phone": "Jdjdjf",
+  "price": 0,
+  "reservationNumber": "Jdjfjf",
+  "website": "1245",
+  "duration": 0,
+  "typeDuration": "M",
+  "endDateTime": {
+    "$date": "2025-07-30T13:15:00.000Z"
+  },
+  "startDateTime": {
+    "$date": "2025-07-30T10:15:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "678d41ea7049333ccbaf1507"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "6713514076abf468375b7155"
+  },
+  "name": "Johnny Boy ",
+  "address": "CanaDream RV Rentals and Sales Calgary, Crosspointe Drive, Calgary, AB, Canada",
+  "latitude": 51.2012245,
+  "longitude": -113.9735624,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-30T10:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-30T12:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67a11ae5b319cf0cc6116e10"
+  }
+},
+{
+  "_id": {
+    "$oid": "67961cdcdd9ade8e6dfddb64"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "67164a219daf629f689c2807"
+  },
+  "name": "Lundbreck Falls",
+  "address": "Lundbreck Falls, Range Road 24B, Lundbreck, AB, Canada",
+  "latitude": 49.5832664,
+  "longitude": -114.2081403,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-30T15:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-30T17:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67961d3edd9ade8e6dfddb7d"
+  },
+  "duration": 0,
+  "typeDuration": "M"
+},
+{
+  "_id": {
+    "$oid": "67967fff0d35c230f0f39942"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "6733181dfe1f7c1a95e6e40b"
+  },
+  "name": "Glacier Grinell",
+  "address": "Browning, MT 59417, États-Unis",
+  "latitude": 48.5569174,
+  "longitude": -113.0134175,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-02T08:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-02T17:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "St. Mary Visitor Center\n8:35 a.m.\n9:35 a.m.\n4:35 p.m.\n6:35 p.m.\nMany Glacier Hotel /\nSwiftcurrent Motor Inn\nAdult $14\nChild $7",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67a1090f77839a3968fc361a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67971d9f4175d662fd6dde96"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "673a0ba08dce16fb010b43d8"
+  },
+  "name": "Mammoth Hot Springs",
+  "address": "Mammoth, WY 82190, États-Unis",
+  "latitude": 44.9768789,
+  "longitude": -110.6991303,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-04T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-04T15:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67971e974175d662fd6ddeb2"
+  },
+  "duration": 0,
+  "typeDuration": "M"
+},
+{
+  "_id": {
+    "$oid": "6797240082f1400875364a47"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "6797237282f1400875364a30"
+  },
+  "name": "Canyon Yellowstone",
+  "address": "Grand Canyon of the Yellowstone, Wyoming, États-Unis",
+  "latitude": 44.719745,
+  "longitude": -110.48532,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-05T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-05T16:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "6797277502964af2f83ec6d6"
+  }
+},
+{
+  "_id": {
+    "$oid": "6797242f82f1400875364a50"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "6797237282f1400875364a30"
+  },
+  "name": "Hayden Valley",
+  "address": "Hayden Valley at Alum Creek, Yellowstone National Park, Wyoming, États-Unis",
+  "latitude": 44.6791654,
+  "longitude": -110.4880301,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-05T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-05T16:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "6797245482f1400875364a58"
+  }
+},
+{
+  "_id": {
+    "$oid": "67972a416c2405010b8fd874"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "679729cd6c2405010b8fd85a"
+  },
+  "name": "Norris Geyser Basin",
+  "address": "Norris Geyser Basin, Wyoming, États-Unis",
+  "latitude": 44.7262352,
+  "longitude": -110.7042812,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-06T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-06T15:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67990dcbff986522cc9cfb09"
+  },
+  "duration": 0,
+  "typeDuration": "M"
+},
+{
+  "_id": {
+    "$oid": "6797c2e19d0ca4aaa9cf6a9c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "6797237282f1400875364a30"
+  },
+  "name": "Tower Roosevelt Falls",
+  "address": "Tower/Roosevelt Service Station, Yellowstone National Park, Wyoming, États-Unis",
+  "latitude": 44.9160357,
+  "longitude": -110.4175261,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-05T08:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-05T11:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67991e7215252844008f17e8"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "67164a219daf629f689c2807"
+  },
+  "name": "Frank Slide Trailhead",
+  "address": "Frank Slide Trailhead, 153 Street, Blairmore, AB, Canada",
+  "latitude": 49.600731,
+  "longitude": -114.3931558,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-30T17:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-30T18:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67a1086477839a3968fc35ec"
+  }
+},
+{
+  "_id": {
+    "$oid": "67991f9215252844008f17ed"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stageId": {
+    "$oid": "67164a219daf629f689c2807"
+  },
+  "name": "Star Creek Falls Loop",
+  "address": "Star Creek Falls, Crowsnest Pass, AB, Canada",
+  "latitude": 49.6263744,
+  "longitude": -114.5387062,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-30T17:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-30T18:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67a108e177839a3968fc3602"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a864decba77366c5dd80a1"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67a85b4035436832048a185e"
+  },
+  "name": "Ballade",
+  "latitude": 0,
+  "longitude": 0,
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "endDateTime": {
+    "$date": "2025-07-30T12:00:00.000Z"
+  },
+  "startDateTime": {
+    "$date": "2025-07-29T14:05:00.000Z"
+  }
+}]

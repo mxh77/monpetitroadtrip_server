@@ -1,0 +1,321 @@
+[{
+  "_id": {
+    "$oid": "670b5c91b93cc62f32c8e413"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "name": "Roadtrip Ouest Américain 2023",
+  "days": 23,
+  "startLocation": "Paris",
+  "endLocation": "Calgary",
+  "currency": "EUR",
+  "notes": "California Dreaming !!",
+  "stages": [
+    {
+      "$oid": "670b951d9b1667a1ada89acb"
+    },
+    {
+      "$oid": "67162ed73f265412dc46c8eb"
+    },
+    {
+      "$oid": "67164306a8ddb3877b81898f"
+    },
+    {
+      "$oid": "67164685ebc92c75632ddcce"
+    },
+    {
+      "$oid": "678e711fa3d7b76eb5e802b9"
+    },
+    {
+      "$oid": "6796277a2222de5ca995e207"
+    }
+  ],
+  "stops": [
+    {
+      "$oid": "6714b5fda37fb4f6b5bc2a67"
+    },
+    {
+      "$oid": "6714b622a37fb4f6b5bc2a6a"
+    },
+    {
+      "$oid": "6714b632a37fb4f6b5bc2a6d"
+    },
+    {
+      "$oid": "67162e8bef841373b61db650"
+    },
+    {
+      "$oid": "67162fda1035dbaa7cdeaa28"
+    }
+  ],
+  "startDateTime": {
+    "$date": "2023-07-29T08:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2023-08-22T22:00:00.000Z"
+  },
+  "__v": 113,
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "676f99712318007a18c423d3"
+  }
+},
+{
+  "_id": {
+    "$oid": "6769a6797a9b6b7daa25f66e"
+  },
+  "userId": {
+    "$oid": "67091086215f2119f6844225"
+  },
+  "name": "Roadtrip au Canada",
+  "days": 25,
+  "startLocation": "Paris, France",
+  "endLocation": "Vancouver, Canada",
+  "currency": "CAD",
+  "notes": "Roadtrip familial pour découvrir les plus beaux parcs nationaux du Canada.",
+  "files": [
+    "itineraire.pdf",
+    "checklist.docx"
+  ],
+  "stages": [
+    {
+      "$oid": "64a7d3c9e4c9e41128e9f1a2"
+    },
+    {
+      "$oid": "64a7d3c9e4c9e41128e9f1a3"
+    }
+  ],
+  "stops": [
+    {
+      "$oid": "64a7d4c9e4c9e41128e9f1b4"
+    },
+    {
+      "$oid": "64a7d4c9e4c9e41128e9f1b5"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676a4a6a77a0fc4bc0c2887a"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "name": "Roadtrip Ouest Canadien 2025",
+  "days": 23,
+  "startLocation": "Paris",
+  "endLocation": "Calgary",
+  "currency": "EUR",
+  "notes": "A nous les grandes Rocheuses !!",
+  "stages": [
+    {
+      "$oid": "6713514076abf468375b7155"
+    },
+    {
+      "$oid": "67164a219daf629f689c2807"
+    },
+    {
+      "$oid": "6730bdc24dbae9d8669196f1"
+    },
+    {
+      "$oid": "6730c3984dbae9d86691974c"
+    },
+    {
+      "$oid": "6733181dfe1f7c1a95e6e40b"
+    },
+    {
+      "$oid": "673a0ad48dce16fb010b435f"
+    },
+    {
+      "$oid": "673a0ba08dce16fb010b43d8"
+    },
+    {
+      "$oid": "6797237282f1400875364a30"
+    },
+    {
+      "$oid": "679729cd6c2405010b8fd85a"
+    },
+    {
+      "$oid": "67a5b8e37d9822b8f23860e9"
+    },
+    {
+      "$oid": "67a5b9617d9822b8f23860f7"
+    },
+    {
+      "$oid": "67a5b9dd7d9822b8f2386105"
+    },
+    {
+      "$oid": "67a5bb617d9822b8f2386131"
+    },
+    {
+      "$oid": "67a5bbff7d9822b8f238614e"
+    }
+  ],
+  "stops": [
+    {
+      "$oid": "673309147503e33b9b0aadb4"
+    },
+    {
+      "$oid": "67332b99d2f5b50b1bee596c"
+    },
+    {
+      "$oid": "673342491e6cfe4950bcb81c"
+    },
+    {
+      "$oid": "67a3ad7f1578abf6636b4b4f"
+    },
+    {
+      "$oid": "67a5ba4e7d9822b8f2386113"
+    },
+    {
+      "$oid": "67a5bb057d9822b8f2386122"
+    },
+    {
+      "$oid": "67a5bbc67d9822b8f238613f"
+    },
+    {
+      "$oid": "67a5bc537d9822b8f238615c"
+    }
+  ],
+  "__v": 19,
+  "startDate": {
+    "$date": "2025-07-29T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2025-08-21T00:00:00.000Z"
+  },
+  "endTime": "20:00",
+  "startTime": "08:00",
+  "endDateTime": {
+    "$date": "2025-08-21T22:00:00.000Z"
+  },
+  "startDateTime": {
+    "$date": "2025-07-29T08:00:00.000Z"
+  },
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "676f99a02318007a18c423da"
+  }
+},
+{
+  "_id": {
+    "$oid": "676a6b871aa5919cb2b2e8dc"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "name": "ROADTRIP TEST",
+  "days": 10,
+  "startLocation": "Calgary",
+  "startDateTime": {
+    "$date": "2025-01-01T08:00:00.000Z"
+  },
+  "endLocation": "Calgary",
+  "endDateTime": {
+    "$date": "2025-08-21T17:00:00.000Z"
+  },
+  "currency": "EUR",
+  "notes": "Let's go to Canada !!!",
+  "stages": [
+    {
+      "$oid": "676f9ee346b8662fdd944061"
+    },
+    {
+      "$oid": "6794af462a35101dc5b292c4"
+    }
+  ],
+  "stops": [],
+  "__v": 46,
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "679901c5126ea5384c4a5037"
+  }
+},
+{
+  "_id": {
+    "$oid": "67949af2458aa0641b3095e5"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "name": "New",
+  "startLocation": "",
+  "startDateTime": {
+    "$date": "2025-01-25T08:03:49.548Z"
+  },
+  "endLocation": "",
+  "endDateTime": {
+    "$date": "2025-01-25T08:03:49.548Z"
+  },
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "stages": [
+    {
+      "$oid": "67949b358c5de5ba80b15651"
+    }
+  ],
+  "stops": [],
+  "thumbnail": {
+    "$oid": "67949af3458aa0641b3095e6"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67a8589091c9b3eaf191791d"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "name": "Roadtrip Nouvelle Version",
+  "startLocation": "Chartres",
+  "startDateTime": {
+    "$date": "2025-07-29T08:00:00.000Z"
+  },
+  "endLocation": "Barcelone",
+  "endDateTime": {
+    "$date": "2025-08-21T22:00:00.000Z"
+  },
+  "currency": "EUR",
+  "notes": "Mini Trip",
+  "photos": [],
+  "documents": [],
+  "steps": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a8591991c9b3eaf1917920"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "name": "Roadtrip With Step",
+  "startLocation": "Chartres",
+  "startDateTime": {
+    "$date": "2025-07-29T08:00:00.000Z"
+  },
+  "endLocation": "Barcelone",
+  "endDateTime": {
+    "$date": "2025-08-21T22:00:00.000Z"
+  },
+  "currency": "EUR",
+  "notes": "Mini Trip",
+  "photos": [],
+  "documents": [],
+  "steps": [
+    {
+      "$oid": "67a85b4035436832048a185e"
+    },
+    {
+      "$oid": "67a860e061109e48f5ddc87f"
+    }
+  ],
+  "__v": 4
+}]
