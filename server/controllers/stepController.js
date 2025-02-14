@@ -285,7 +285,7 @@ export const updateStep = async (req, res) => {
         // Récupérer les accommodations et activities associés
         const populatedStep = await Step.findById(stepUpdated._id)
             .populate('accommodations')
-            .populate('activities');
+            .populate('activities')
 
         // Réactualiser le temps de trajet pour l'étape mise à jour
         await refreshTravelTimeForStep(populatedStep);

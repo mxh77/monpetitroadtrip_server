@@ -427,6 +427,12 @@ export const getRoadtripById = async (req, res) => {
             .populate({
                 path: 'steps',
                 populate: {
+                    path: 'thumbnail'
+                }
+            })
+            .populate({
+                path: 'steps',
+                populate: {
                     path: 'accommodations',
                     populate: [
                         { path: 'photos', model: 'File' },
@@ -607,7 +613,7 @@ export const refreshTravelTimesForRoadtrip = async (req, res) => {
             step.travelTime = travelTime;
             step.isArrivalTimeConsistent = isConsistent;
             await step.save();
-                       
+
         }
 
         res.json({ steps: results });
