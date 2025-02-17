@@ -432,6 +432,12 @@ export const deleteDocumentFromAccommodation = async (req, res) => {
         accommodation.documents = accommodation.documents.filter(document => document.toString() !== documentId);
         await accommodation.save();
 
+        // Peupler les documents dans l'hébergement avant de renvoyer la réponse
+        await accommodation.populate({
+            path: 'documents',
+            model: 'File'
+        });
+
         res.json(accommodation);
     } catch (err) {
         console.error(err.message);
