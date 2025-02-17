@@ -363,12 +363,10 @@ export const deleteAccommodation = async (req, res) => {
     }
 };
 
-//Méthode pour ajouter des documents à un hébergement
 // Méthode pour ajouter des documents à un hébergement
 export const addDocumentsToAccommodation = async (req, res) => {
     try {
         const accommodation = await Accommodation.findById(req.params.idAccommodation);
-
 
         if (!accommodation) {
             return res.status(404).json({ msg: 'Accommodation not found' });
@@ -384,7 +382,7 @@ export const addDocumentsToAccommodation = async (req, res) => {
             const documents = await Promise.all(req.files.documents.map(async (document) => {
                 const name = document.originalname;
                 const url = await uploadToGCS(document, accommodation._id);
-                const file = new File({name, url, type: 'document' });
+                const file = new File({ name, url, type: 'document' });
                 await file.save();
                 return file._id;
             }));
@@ -393,6 +391,13 @@ export const addDocumentsToAccommodation = async (req, res) => {
         }
 
         await accommodation.save();
+
+        // Peupler les documents dans l'hébergement avant de renvoyer la réponse
+        await accommodation.populate({
+            path: 'documents',
+            model: 'File'
+        });
+
         res.json(accommodation);
     } catch (err) {
         console.error(err.message);
