@@ -422,39 +422,37 @@ export const getUserRoadtrips = async (req, res) => {
 // Méthode pour récupérer un roadtrip
 export const getRoadtripById = async (req, res) => {
     try {
+        // Étape 1 : Récupérer le roadtrip avec ses steps
         const roadtrip = await Roadtrip.findById(req.params.idRoadtrip)
-            .populate('steps')
             .populate({
                 path: 'steps',
-                populate: {
-                    path: 'thumbnail'
-                }
-            })
-            .populate({
-                path: 'steps',
-                populate: {
-                    path: 'accommodations',
-                    populate: [
-                        { path: 'photos', model: 'File' },
-                        { path: 'documents', model: 'File' },
-                        { path: 'thumbnail', model: 'File' }
-                    ]
-                }
-            })
-            .populate({
-                path: 'steps',
-                populate: {
-                    path: 'activities',
-                    populate: [
-                        { path: 'photos', model: 'File' },
-                        { path: 'documents', model: 'File' },
-                        { path: 'thumbnail', model: 'File' }
-                    ]
-                }
+                populate: [
+                    { path: 'photos', model: 'File' },
+                    { path: 'documents', model: 'File' },
+                    { path: 'thumbnail', model: 'File' },
+                    {
+                        path: 'accommodations',
+                        populate: [
+                            { path: 'photos', model: 'File' },
+                            { path: 'documents', model: 'File' },
+                            { path: 'thumbnail', model: 'File' }
+                        ]
+                    },
+                    {
+                        path: 'activities',
+                        populate: [
+                            { path: 'photos', model: 'File' },
+                            { path: 'documents', model: 'File' },
+                            { path: 'thumbnail', model: 'File' }
+                        ]
+                    }
+                ]
             })
             .populate('photos')
             .populate('documents')
             .populate('thumbnail');
+
+        console.log("Roadtrip:", roadtrip);
 
         if (!roadtrip) {
             return res.status(404).json({ msg: 'Roadtrip not found' });
@@ -465,66 +463,11 @@ export const getRoadtripById = async (req, res) => {
             return res.status(401).json({ msg: 'User not authorized' });
         }
 
-        // Ajouter les URLs aux attributs thumbnail, photos et documents pour chaque accommodation et activity
-        const stepsWithFiles = roadtrip.steps.map(step => {
-            step.accommodations = step.accommodations.map(accommodation => {
-                if (accommodation.thumbnail) {
-                    accommodation.thumbnailUrl = accommodation.thumbnail.url;
-                }
-                if (accommodation.photos && accommodation.photos.length > 0) {
-                    accommodation.photos = accommodation.photos.map(photo => ({
-                        _id: photo._id,
-                        url: photo.url,
-                        type: photo.type
-                    }));
-                }
-                if (accommodation.documents && accommodation.documents.length > 0) {
-                    accommodation.documents = accommodation.documents.map(document => ({
-                        _id: document._id,
-                        url: document.url,
-                        type: document.type
-                    }));
-                }
-                return accommodation;
-            });
-
-            step.activities = step.activities.map(activity => {
-                if (activity.thumbnail) {
-                    activity.thumbnailUrl = activity.thumbnail.url;
-                }
-                if (activity.photos && activity.photos.length > 0) {
-                    activity.photos = activity.photos.map(photo => ({
-                        _id: photo._id,
-                        url: photo.url,
-                        type: photo.type
-                    }));
-                }
-                if (activity.documents && activity.documents.length > 0) {
-                    activity.documents = activity.documents.map(document => ({
-                        _id: document._id,
-                        url: document.url,
-                        type: document.type
-                    }));
-                }
-                return activity;
-            });
-
-            return step;
-        });
-
-        roadtrip.steps = stepsWithFiles;
-
-        // Trier les `steps` par `arrivalDateTime`
-        const sortedSteps = roadtrip.steps
-            .map(step => step.toObject())
-            .sort((a, b) => new Date(a.arrivalDateTime) - new Date(b.arrivalDateTime));
+        // Tri des steps par arrivalDateTime tout en conservant les données peuplées
+        roadtrip.steps.sort((a, b) => new Date(a.arrivalDateTime) - new Date(b.arrivalDateTime));
 
         // Ajouter les listes triées à la réponse
-        res.json({
-            ...roadtrip.toObject(),
-            steps: sortedSteps
-
-        });
+        res.json(roadtrip);
 
     } catch (err) {
         console.error(err.message);

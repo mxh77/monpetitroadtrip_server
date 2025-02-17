@@ -381,3 +381,38 @@ export const deleteAccommodation = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+
+//Méthode pour ajouter des documents à un hébergement
+// Méthode pour ajouter des documents à un hébergement
+export const addDocumentsToAccommodation = async (req, res) => {
+    try {
+        const accommodation = await Accommodation.findById(req.params.idAccommodation);
+
+        if (!accommodation) {
+            return res.status(404).json({ msg: 'Accommodation not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'hébergement
+        if (accommodation.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        if (req.files && req.files.documents && req.files.documents.length > 0) {
+            console.log('Uploading documents...');
+            const documents = await Promise.all(req.files.documents.map(async (document) => {
+                const url = await uploadToGCS(document, accommodation._id);
+                const file = new File({ url, type: 'document' });
+                await file.save();
+                return file._id;
+            }));
+            accommodation.documents.push(...documents);
+            console.log('Updated accommodation documents:', accommodation.documents);
+        }
+
+        await accommodation.save();
+        res.json(accommodation);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};

@@ -17,6 +17,12 @@ router.put('/:idAccommodation', auth, upload.fields([
     { name: 'documents', maxCount: 10 }
 ]), accommodationController.updateAccommodation);
 
+/********METHOD PATCH********/
+// Route protégée pour ajouter un fichier à l'accommodation
+router.patch('/:idAccommodation/documents', auth, upload.fields([
+    { name: 'documents', maxCount: 10 }
+]), accommodationController.addDocumentsToAccommodation);
+
 /********METHOD GET********/
 // Route protégée pour obtenir les informations d'un hébergement
 router.get('/:idAccommodation', auth, accommodationController.getAccommodationById);
