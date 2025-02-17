@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 
 const fileSchema = new Schema({
     fileId: { type: String, default: uuidv4, unique: true },
+    name: { type: String },
     url: { type: String, required: true },
     type: { type: String, enum: ['photo', 'document', 'thumbnail'], required: true },
     createdAt: { type: Date, default: Date.now }

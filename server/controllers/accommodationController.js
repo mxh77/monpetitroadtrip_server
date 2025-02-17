@@ -279,7 +279,10 @@ export const updateAccommodation = async (req, res) => {
 // Méthode pour obtenir les informations d'un hébergement
 export const getAccommodationById = async (req, res) => {
     try {
-        const accommodation = await Accommodation.findById(req.params.idAccommodation);
+        const accommodation = await Accommodation.findById(req.params.idAccommodation)
+            .populate('documents')
+            .populate('photos')
+            .populate('thumbnail');
 
         if (!accommodation) {
             return res.status(404).json({ msg: 'Hébergement non trouvé !' });
@@ -288,28 +291,6 @@ export const getAccommodationById = async (req, res) => {
         // Vérifier si l'utilisateur est le propriétaire de l'hébergement
         if (accommodation.userId.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'User not authorized' });
-        }
-
-        // Ajouter les URLs aux attributs thumbnail, photos et documents
-        if (accommodation.thumbnail) {
-            const thumbnailFile = await File.findById(accommodation.thumbnail);
-            if (thumbnailFile) {
-                accommodation.thumbnailUrl = thumbnailFile.url;
-            }
-        }
-
-        if (accommodation.photos && accommodation.photos.length > 0) {
-            accommodation.photos = await Promise.all(accommodation.photos.map(async (photoId) => {
-                const photoFile = await File.findById(photoId);
-                return photoFile ? { _id: photoId, url: photoFile.url } : { _id: photoId };
-            }));
-        }
-
-        if (accommodation.documents && accommodation.documents.length > 0) {
-            accommodation.documents = await Promise.all(accommodation.documents.map(async (documentId) => {
-                const documentFile = await File.findById(documentId);
-                return documentFile ? { _id: documentId, url: documentFile.url } : { _id: documentId };
-            }));
         }
 
         res.json(accommodation);
@@ -388,6 +369,7 @@ export const addDocumentsToAccommodation = async (req, res) => {
     try {
         const accommodation = await Accommodation.findById(req.params.idAccommodation);
 
+
         if (!accommodation) {
             return res.status(404).json({ msg: 'Accommodation not found' });
         }
@@ -400,8 +382,9 @@ export const addDocumentsToAccommodation = async (req, res) => {
         if (req.files && req.files.documents && req.files.documents.length > 0) {
             console.log('Uploading documents...');
             const documents = await Promise.all(req.files.documents.map(async (document) => {
+                const name = document.originalname;
                 const url = await uploadToGCS(document, accommodation._id);
-                const file = new File({ url, type: 'document' });
+                const file = new File({name, url, type: 'document' });
                 await file.save();
                 return file._id;
             }));
@@ -410,6 +393,40 @@ export const addDocumentsToAccommodation = async (req, res) => {
         }
 
         await accommodation.save();
+        res.json(accommodation);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour supprimer un document d'un hébergement
+export const deleteDocumentFromAccommodation = async (req, res) => {
+    try {
+        const accommodation = await Accommodation.findById(req.params.idAccommodation);
+
+        if (!accommodation) {
+            return res.status(404).json({ msg: 'Accommodation not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'hébergement
+        if (accommodation.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        const documentId = req.params.idDocument;
+
+        // Supprimer le document de Google Cloud Storage
+        const documentFile = await File.findById(documentId);
+        if (documentFile) {
+            await deleteFromGCS(documentFile.url);
+            await documentFile.deleteOne();
+        }
+
+        // Supprimer le document de la liste des documents de l'hébergement
+        accommodation.documents = accommodation.documents.filter(document => document.toString() !== documentId);
+        await accommodation.save();
+
         res.json(accommodation);
     } catch (err) {
         console.error(err.message);

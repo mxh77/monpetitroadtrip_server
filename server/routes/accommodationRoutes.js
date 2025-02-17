@@ -31,4 +31,7 @@ router.get('/:idAccommodation', auth, accommodationController.getAccommodationBy
 // Route protégée pour supprimer un hébergement
 router.delete('/:idAccommodation', auth, accommodationController.deleteAccommodation);
 
+// Route protégée pour supprimer un document d'un hébergement
+router.delete('/:idAccommodation/documents/:idDocument', auth, accommodationController.deleteDocumentFromAccommodation);
+
 export default router;
