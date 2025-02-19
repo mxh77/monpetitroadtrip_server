@@ -135,7 +135,7 @@ export const updateStep = async (req, res) => {
 
 
         // Mettre à jour les hébergements si type = 'stage'
-        if (updateData.type === 'stage') {
+        if (updateData.type === 'Stage') {
             if (Array.isArray(updateData.accommodations)) {
                 for (const accommodation of updateData.accommodations) {
                     if (accommodation._id) {
@@ -163,7 +163,7 @@ export const updateStep = async (req, res) => {
             }
         }
         // Mettre à jour les activités si type = 'stage'
-        if (updateData.type === 'stage') {
+        if (updateData.type === 'Stage') {
             if (Array.isArray(updateData.activities)) {
                 for (const activity of updateData.activities) {
                     if (activity._id) {
@@ -260,32 +260,27 @@ export const updateStep = async (req, res) => {
 
         const stepUpdated = await step.save();
 
-        // Ajouter les URLs aux attributs thumbnail, photos et documents
-        if (stepUpdated.thumbnail) {
-            const thumbnailFile = await File.findById(stepUpdated.thumbnail);
-            if (thumbnailFile) {
-                stepUpdated.thumbnailUrl = thumbnailFile.url;
-            }
-        }
-
-        if (stepUpdated.photos && stepUpdated.photos.length > 0) {
-            stepUpdated.photos = await Promise.all(stepUpdated.photos.map(async (photoId) => {
-                const photoFile = await File.findById(photoId);
-                return photoFile ? { _id: photoId, url: photoFile.url } : { _id: photoId };
-            }));
-        }
-
-        if (stepUpdated.documents && stepUpdated.documents.length > 0) {
-            stepUpdated.documents = await Promise.all(stepUpdated.documents.map(async (documentId) => {
-                const documentFile = await File.findById(documentId);
-                return documentFile ? { _id: documentId, url: documentFile.url } : { _id: documentId };
-            }));
-        }
-
         // Récupérer les accommodations et activities associés
         const populatedStep = await Step.findById(stepUpdated._id)
-            .populate('accommodations')
-            .populate('activities')
+            .populate({
+                path: 'accommodations',
+                populate: [
+                    { path: 'photos', model: 'File' },
+                    { path: 'documents', model: 'File' },
+                    { path: 'thumbnail', model: 'File' }
+                ]
+            })
+            .populate({
+                path: 'activities',
+                populate: [
+                    { path: 'photos', model: 'File' },
+                    { path: 'documents', model: 'File' },
+                    { path: 'thumbnail', model: 'File' }
+                ]
+            })
+            .populate('photos')
+            .populate('documents')
+            .populate('thumbnail');
 
         // Réactualiser le temps de trajet pour l'étape mise à jour
         await refreshTravelTimeForStep(populatedStep);
@@ -517,7 +512,7 @@ export const refreshTravelTimeForStep = async (step) => {
         // Récupérer le step précédent (stage ou stop) pour calculer le temps de trajet
         const lastSteps = await Step.find({ roadtripId: roadtrip._id }).sort({ arrivalDateTime: -1 }).limit(2);
         const lastStep = lastSteps.length > 1 ? lastSteps[1] : null;
-        
+
         let travelTime = null;
         let isArrivalTimeConsistent = true;
         if (lastStep) {
