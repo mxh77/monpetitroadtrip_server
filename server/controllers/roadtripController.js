@@ -500,14 +500,6 @@ export const refreshTravelTimesForRoadtrip = async (req, res) => {
                     }
                 ]
             })
-            .populate({
-                path: 'stops',
-                populate: [
-                    { path: 'photos', model: 'File' },
-                    { path: 'documents', model: 'File' },
-                    { path: 'thumbnail', model: 'File' }
-                ]
-            })
             .populate('photos')
             .populate('documents')
             .populate('thumbnail');
@@ -522,10 +514,7 @@ export const refreshTravelTimesForRoadtrip = async (req, res) => {
         }
 
         // Trier les étapes par ordre croissant de arrivalDateTime
-        const steps = roadtrip.steps
-            .map(step => step.toObject())
-            .sort((a, b) => new Date(a.arrivalDateTime) - new Date(b.arrivalDateTime));
-
+        const steps = roadtrip.steps.sort((a, b) => new Date(a.arrivalDateTime) - new Date(b.arrivalDateTime));
 
         // Calculer et vérifier la cohérence des dates/heures pour chaque étape sauf la première
         const results = [];
