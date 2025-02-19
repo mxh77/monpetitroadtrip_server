@@ -510,8 +510,12 @@ export const refreshTravelTimeForStep = async (step) => {
         }
 
         // Récupérer le step précédent (stage ou stop) pour calculer le temps de trajet
-        const lastSteps = await Step.find({ roadtripId: roadtrip._id }).sort({ arrivalDateTime: -1 }).limit(2);
-        const lastStep = lastSteps.length > 1 ? lastSteps[1] : null;
+        const lastStep = await Step.findOne({
+            roadtripId: roadtrip._id,
+            departureDateTime: { $lt: step.arrivalDateTime }
+        }).sort({ departureDateTime: -1 });
+
+        console.log('Previous Step:', lastStep);
 
         let travelTime = null;
         let isArrivalTimeConsistent = true;
