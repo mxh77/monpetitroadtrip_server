@@ -528,7 +528,9 @@ export const refreshTravelTimesForRoadtrip = async (req, res) => {
 
             console.log("Origin:", origin);
             console.log("Destination:", destination);
-            const travelTime = await calculateTravelTime(origin, destination, arrivalDateTime);
+            const travelData = await calculateTravelTime(origin, destination, arrivalDateTime);
+            const travelTime = travelData.travelTime;
+            const distance = travelData.distance;
             console.log("Travel time:", travelTime);
 
             // Vérifier la cohérence des dates/heures
@@ -537,12 +539,14 @@ export const refreshTravelTimesForRoadtrip = async (req, res) => {
             const isConsistent = checkDateTimeConsistency(previousStep.departureDateTime, step.arrivalDateTime, travelTime);
             results.push({
                 step: step,
-                travelTime: travelTime,
+                travelTimePreviousStep: travelTime,
+                distancePreviousStep: distance,
                 isConsistent: isConsistent
             });
 
             // Mettre à jour le temps de trajet et le champ isArrivalTimeConsistent pour l'étape
-            step.travelTime = travelTime;
+            step.travelTimePreviousStep = travelTime;
+            step.distancePreviousStep = distance;
             step.isArrivalTimeConsistent = isConsistent;
             await step.save();
 

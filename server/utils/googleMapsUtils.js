@@ -19,7 +19,7 @@ export const getCoordinates = async (address) => {
     }
 };
 
-// Fonction pour calculer le temps de trajet entre deux adresses
+// Fonction pour calculer le temps de trajet et la distance entre deux adresses
 export const calculateTravelTime = async (origin, destination, departure_time = new Date()) => {
     if (!origin || !destination) {
         throw new Error('Origin and destination must be provided');
@@ -43,7 +43,9 @@ export const calculateTravelTime = async (origin, destination, departure_time = 
     if (data.routes.length > 0) {
         const durationInSeconds = data.routes[0].legs[0].duration.value;
         const durationInMinutes = Math.ceil(durationInSeconds / 60); // Convertir les secondes en minutes
-        return durationInMinutes;
+        const distanceInMeters = data.routes[0].legs[0].distance.value;
+        const distanceInKilometers = (distanceInMeters / 1000).toFixed(2); // Convertir les mètres en kilomètres
+        return { travelTime: durationInMinutes, distance: distanceInKilometers };
     } else {
         throw new Error('No route found');
     }

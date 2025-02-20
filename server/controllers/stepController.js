@@ -60,7 +60,7 @@ export const createStepForRoadtrip = async (req, res) => {
             stops: req.body.stops,
             roadtripId: req.params.idRoadtrip,
             userId: req.user.id,
-            travelTime: travelTime // Stocker le temps de trajet
+            travelTimePreviousStep: travelTime // Stocker le temps de trajet
         });
 
         const step = await newStep.save();
@@ -518,10 +518,13 @@ export const refreshTravelTimeForStep = async (step) => {
         console.log('Previous Step:', lastStep);
 
         let travelTime = null;
+        let distance = null;
         let isArrivalTimeConsistent = true;
         if (lastStep) {
             try {
-                travelTime = await calculateTravelTime(lastStep.address, step.address);
+                const travelData = await calculateTravelTime(lastStep.address, step.address);
+                travelTime = travelData.travelTime;
+                distance = travelData.distance;
                 console.log('Travel time:', travelTime);
 
                 // Vérifier la cohérence des dates/heures
@@ -531,7 +534,8 @@ export const refreshTravelTimeForStep = async (step) => {
             }
         }
 
-        step.travelTime = travelTime;
+        step.travelTimePreviousStep = travelTime;
+        step.distancePreviousStep = distance;   
         step.isArrivalTimeConsistent = isArrivalTimeConsistent;
         const updatedStep = await step.save();
 
