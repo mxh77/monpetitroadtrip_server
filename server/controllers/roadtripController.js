@@ -10,6 +10,7 @@ import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import dotenv from 'dotenv';
 import { calculateTravelTime } from '../utils/googleMapsUtils.js';
 import { checkDateTimeConsistency } from '../utils/dateUtils.js';
+import { getObjectFirstLast } from '../utils/utils.js';
 
 dotenv.config();
 
@@ -522,21 +523,25 @@ export const refreshTravelTimesForRoadtrip = async (req, res) => {
             const step = steps[i];
             const previousStep = steps[i - 1];
 
-            const origin = previousStep.address;
-            const destination = step.address;
-            const arrivalDateTime = step.arrivalDateTime;
+            //récupérer le LAST objet du step précédent
+            let lastObjet = await getObjectFirstLast(previousStep._id, 'LAST');
+            console.log("LAST OBJET : " + lastObjet.address);
 
-            console.log("Origin:", origin);
-            console.log("Destination:", destination);
-            const travelData = await calculateTravelTime(origin, destination, arrivalDateTime);
+
+            //récupérer le FIRST objet du step actuel
+            let firstObjet = await getObjectFirstLast(step._id, 'FIRST');
+            console.log("FIRST OBJET : " + firstObjet.address);
+
+            
+            const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
             const travelTime = travelData.travelTime;
             const distance = travelData.distance;
             console.log("Travel time:", travelTime);
 
             // Vérifier la cohérence des dates/heures
-            console.log("Previous Step Departure DateTime:", previousStep.departureDateTime);
-            console.log("Step Arrival DateTime:", step.arrivalDateTime, "\n");
-            const isConsistent = checkDateTimeConsistency(previousStep.departureDateTime, step.arrivalDateTime, travelTime);
+            console.log("Previous Step Departure DateTime:", lastObjet.endDateTime);
+            console.log("Step Arrival DateTime:", firstObjet.startDateTime, "\n");
+            const isConsistent = checkDateTimeConsistency(lastObjet.endDateTime, firstObjet.startDateTime, travelTime);
             results.push({
                 step: step,
                 travelTimePreviousStep: travelTime,

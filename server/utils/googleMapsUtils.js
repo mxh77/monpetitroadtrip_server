@@ -26,7 +26,13 @@ export const calculateTravelTime = async (origin, destination, departure_time = 
     }
 
     // Convertir la date de départ en timestamp
-    const departureTimestamp = Math.floor(new Date(departure_time).getTime() / 1000);
+    let departureTimestamp = Math.floor(new Date(departure_time).getTime() / 1000);
+    // Vérifier si la date de départ est inférieure à la date du jour
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    if (departureTimestamp < currentTimestamp) {
+        departureTimestamp = currentTimestamp;
+    }
+
     console.log("   departureTimestamp : " + departureTimestamp);
     // Obtenir les coordonnées géographiques pour l'origine et la destination
     const originCoordinates = await getCoordinates(origin);
