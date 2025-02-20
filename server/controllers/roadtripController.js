@@ -8,9 +8,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import dotenv from 'dotenv';
-import { calculateTravelTime } from '../utils/googleMapsUtils.js';
-import { checkDateTimeConsistency } from '../utils/dateUtils.js';
-import { getObjectFirstLast } from '../utils/utils.js';
+import { refreshTravelTimeForStep } from '../utils/travelTimeUtils.js';
 
 dotenv.config();
 
@@ -517,47 +515,14 @@ export const refreshTravelTimesForRoadtrip = async (req, res) => {
         // Trier les étapes par ordre croissant de arrivalDateTime
         const steps = roadtrip.steps.sort((a, b) => new Date(a.arrivalDateTime) - new Date(b.arrivalDateTime));
 
-        // Calculer et vérifier la cohérence des dates/heures pour chaque étape sauf la première
-        const results = [];
+
+        // Rafraîchir les temps de trajet pour chaque étape
         for (let i = 1; i < steps.length; i++) {
             const step = steps[i];
-            const previousStep = steps[i - 1];
-
-            //récupérer le LAST objet du step précédent
-            let lastObjet = await getObjectFirstLast(previousStep._id, 'LAST');
-            console.log("LAST OBJET : " + lastObjet.address);
-
-
-            //récupérer le FIRST objet du step actuel
-            let firstObjet = await getObjectFirstLast(step._id, 'FIRST');
-            console.log("FIRST OBJET : " + firstObjet.address);
-
-            
-            const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
-            const travelTime = travelData.travelTime;
-            const distance = travelData.distance;
-            console.log("Travel time:", travelTime);
-
-            // Vérifier la cohérence des dates/heures
-            console.log("Previous Step Departure DateTime:", lastObjet.endDateTime);
-            console.log("Step Arrival DateTime:", firstObjet.startDateTime, "\n");
-            const isConsistent = checkDateTimeConsistency(lastObjet.endDateTime, firstObjet.startDateTime, travelTime);
-            results.push({
-                step: step,
-                travelTimePreviousStep: travelTime,
-                distancePreviousStep: distance,
-                isConsistent: isConsistent
-            });
-
-            // Mettre à jour le temps de trajet et le champ isArrivalTimeConsistent pour l'étape
-            step.travelTimePreviousStep = travelTime;
-            step.distancePreviousStep = distance;
-            step.isArrivalTimeConsistent = isConsistent;
-            await step.save();
-
+            await refreshTravelTimeForStep(step);
         }
 
-        res.json({ steps: results });
+        res.json({ steps });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

@@ -6,8 +6,8 @@ import File from '../models/File.js';
 import { calculateTravelTime, getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import e from 'express';
-import { checkDateTimeConsistency } from '../utils/dateUtils.js';
-import { getObjectFirstLast } from '../utils/utils.js';
+import { refreshTravelTimeForStep } from '../utils/travelTimeUtils.js';
+
 
 // Méthode pour créer un nouveau step pour un roadtrip donné
 export const createStepForRoadtrip = async (req, res) => {
@@ -284,7 +284,7 @@ export const updateStep = async (req, res) => {
             .populate('thumbnail');
 
         // Réactualiser le temps de trajet pour l'étape mise à jour
-        await refreshTravelTimeForStep(populatedStep);
+        await refreshTravelTimeForStep(stepUpdated);
 
         res.json(populatedStep);
 
@@ -490,65 +490,14 @@ export const refreshTravelTimeForStepWrapper = async (req, res) => {
             return res.status(401).json({ msg: 'User not authorized' });
         }
 
-        const updatedStep = await refreshTravelTimeForStep(step);
-        res.json(updatedStep);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
-};
-
-//Méthode pour réactualiser le temps de trajet d'une étape par rapport à la précédente
-export const refreshTravelTimeForStep = async (step) => {
-    try {
-        console.log('Refreshing travel time for step:', step._id);
-
-        // Vérifier si l'utilisateur est le propriétaire du roadtrip de l'arrêt
-        const roadtrip = await Roadtrip.findById(step.roadtripId);
-
-        if (!roadtrip) {
-            throw new Error('Roadtrip not found');
-        }
-
-
-        // Récupérer le step précédent (stage ou stop) pour calculer le temps de trajet
-        let lastStep = await Step.findOne({
+          // Récupérer l'étape précédente
+          const previousStep = await Step.findOne({
             roadtripId: roadtrip._id,
             departureDateTime: { $lt: step.arrivalDateTime }
         }).sort({ departureDateTime: -1 });
 
-        let travelTime = null;
-        let distance = null;
-        let isArrivalTimeConsistent = true;
-        if (lastStep) {
-            try {
-
-                //récupérer le LAST objet du step précédent
-                let lastObjet = await getObjectFirstLast(lastStep._id, 'LAST');
-                console.log("LAST OBJET : " + lastObjet.address);
-
-                //récupérer le FIRST objet du step actuel
-                let firstObjet = await getObjectFirstLast(step._id, 'FIRST');
-                console.log("FIRST OBJET : " + firstObjet.address);
-
-                const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
-                travelTime = travelData.travelTime;
-                distance = travelData.distance;
-                console.log('Travel time:', travelTime);
-
-                // Vérifier la cohérence des dates/heures
-                isArrivalTimeConsistent = checkDateTimeConsistency(lastObjet.endDateTime, firstObjet.startDateTime, travelTime);
-            } catch (error) {
-                console.error('Error calculating travel time:', error);
-            }
-        }
-
-        step.travelTimePreviousStep = travelTime;
-        step.distancePreviousStep = distance;
-        step.isArrivalTimeConsistent = isArrivalTimeConsistent;
-        const updatedStep = await step.save();
-
-        return updatedStep;
+        const updatedStep = await refreshTravelTimeBetweenStep(step, previousStep);
+         res.json(updatedStep);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

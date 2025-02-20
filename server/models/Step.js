@@ -15,6 +15,7 @@ const stepSchema = new Schema({
     travelTimePreviousStep: { type: Number, default: 0 },
     distancePreviousStep: { type: Number, default: 0 },
     isArrivalTimeConsistent: { type: Boolean, default: true },
+    travelTimeNote  : { type: String, enum: ['ERROR', 'WARNING', 'OK'], default: 'OK' },
     notes: { type: String, default: '' },
     photos: [{ type: Schema.Types.ObjectId, ref: 'File' }],
     documents: [{ type: Schema.Types.ObjectId, ref: 'File' }],
