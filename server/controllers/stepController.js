@@ -23,19 +23,6 @@ export const createStepForRoadtrip = async (req, res) => {
             return res.status(401).json({ msg: 'User not authorized' });
         }
 
-        // Récupérer le step précédent (stage ou stop) pour calculer le temps de trajet
-        const lastSteps = await Step.find({ roadtripId: roadtrip._id }).sort({ arrivalDateTime: -1 }).limit(1);
-        const lastStep = lastSteps.length > 0 ? lastSteps[0] : null;
-
-        let travelTime = null;
-        if (lastStep) {
-            try {
-                travelTime = await calculateTravelTime(lastStep.address, req.body.address);
-            } catch (error) {
-                console.error('Error calculating travel time:', error);
-            }
-        }
-
         // Obtenir les coordonnées géographiques à partir de l'adresse
         let coordinates = {};
         if (req.body.address) {
@@ -60,11 +47,13 @@ export const createStepForRoadtrip = async (req, res) => {
             activities: req.body.activities, // Activités par défaut si non fournies
             stops: req.body.stops,
             roadtripId: req.params.idRoadtrip,
-            userId: req.user.id,
-            travelTimePreviousStep: travelTime // Stocker le temps de trajet
+            userId: req.user.id
         });
 
         const step = await newStep.save();
+
+        // Réactualiser le temps de trajet pour l'étape mise à jour
+        await refreshTravelTimeForStep(step);
 
         // Ajouter l'ID de la nouvelle étape au tableau steps du roadtrip
         roadtrip.steps.push(step);
@@ -490,14 +479,14 @@ export const refreshTravelTimeForStepWrapper = async (req, res) => {
             return res.status(401).json({ msg: 'User not authorized' });
         }
 
-          // Récupérer l'étape précédente
-          const previousStep = await Step.findOne({
+        // Récupérer l'étape précédente
+        const previousStep = await Step.findOne({
             roadtripId: roadtrip._id,
             departureDateTime: { $lt: step.arrivalDateTime }
         }).sort({ departureDateTime: -1 });
 
         const updatedStep = await refreshTravelTimeBetweenStep(step, previousStep);
-         res.json(updatedStep);
+        res.json(updatedStep);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

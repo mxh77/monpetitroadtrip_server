@@ -156,6 +156,6 @@ export const refreshTravelTimeForStep = async (step) => {
     step.travelTimeNote = travelTimeNote;
     console.log("Travel time note:", travelTimeNote);
     await step.save();
-console.log("Step updated", step);
+    console.log("Step updated", step);
     return step;
 };
