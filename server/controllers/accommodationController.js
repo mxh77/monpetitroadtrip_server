@@ -363,6 +363,29 @@ export const deleteAccommodation = async (req, res) => {
     }
 };
 
+// Méthode pour obtenir les documents d'un hébergement
+export const getDocumentsFromAccommodation = async (req, res) => {
+    try {
+        const accommodation = await Accommodation.findById(req.params.idAccommodation).populate('documents');
+
+        if (!accommodation) {
+            return res.status(404).json({ msg: 'Accommodation not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'hébergement
+        if (accommodation.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        res.json(accommodation.documents);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+
+
 // Méthode pour ajouter des documents à un hébergement
 export const addDocumentsToAccommodation = async (req, res) => {
     try {

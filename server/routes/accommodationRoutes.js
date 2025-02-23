@@ -27,6 +27,9 @@ router.patch('/:idAccommodation/documents', auth, upload.fields([
 // Route protégée pour obtenir les informations d'un hébergement
 router.get('/:idAccommodation', auth, accommodationController.getAccommodationById);
 
+//Route protégée pour obtenir les documents d'un hébergement
+router.get('/:idAccommodation/documents', auth, accommodationController.getDocumentsFromAccommodation); 
+
 /********METHOD DELETE ********/
 // Route protégée pour supprimer un hébergement
 router.delete('/:idAccommodation', auth, accommodationController.deleteAccommodation);
