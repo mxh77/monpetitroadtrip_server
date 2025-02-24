@@ -479,13 +479,7 @@ export const refreshTravelTimeForStepWrapper = async (req, res) => {
             return res.status(401).json({ msg: 'User not authorized' });
         }
 
-        // Récupérer l'étape précédente
-        const previousStep = await Step.findOne({
-            roadtripId: roadtrip._id,
-            departureDateTime: { $lt: step.arrivalDateTime }
-        }).sort({ departureDateTime: -1 });
-
-        const updatedStep = await refreshTravelTimeBetweenStep(step, previousStep);
+        const updatedStep = await refreshTravelTimeForStep(step);
         res.json(updatedStep);
     } catch (err) {
         console.error(err.message);

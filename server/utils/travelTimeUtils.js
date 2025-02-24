@@ -64,14 +64,19 @@ export const getObjectFirstLast = async (stepId, typeObjet) => {
             const activity = await Activity.findOne({ stepId: step._id }).sort({ startDateTime: 1 });
 
             if (accommodation && activity) {
+                console.log("ACCOMMODATION / ACTIVITY : " + accommodation);
                 result = accommodation.arrivalDateTime < activity.startDateTime ? accommodation : activity;
             } else if (accommodation) {
+                console.log("ACCOMMODATION : " + accommodation);
                 result = accommodation;
             } else if (activity) {
+                console.log("ACTIVITY : " + activity);
                 result = activity;
             } else {
+                console.log("STEP : " + step);
                 result = step;
             }
+
         } else if (step.type === 'Stop') {
             result = step;
         }
@@ -122,6 +127,8 @@ export const refreshTravelTimeForStep = async (step) => {
     if (!previousStep) {
         return step;
     }
+
+    console.log("PREVIOUS STEP : " + previousStep);
 
     // Récupérer le LAST objet du step précédent
     let lastObjet = await getObjectFirstLast(previousStep._id, 'LAST');
