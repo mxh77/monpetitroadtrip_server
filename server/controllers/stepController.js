@@ -68,6 +68,7 @@ export const createStepForRoadtrip = async (req, res) => {
 
 // Méthode pour mettre à jour un step
 export const updateStep = async (req, res) => {
+    console.log('updateStep');
     try {
         const step = await Step.findById(req.params.idStep);
 
@@ -273,6 +274,7 @@ export const updateStep = async (req, res) => {
             .populate('thumbnail');
 
         // Réactualiser le temps de trajet pour l'étape mise à jour
+        console.log('Refreshing travel time for step:', stepUpdated._id);
         await refreshTravelTimeForStep(stepUpdated);
 
         res.json(populatedStep);
@@ -281,6 +283,47 @@ export const updateStep = async (req, res) => {
         console.error(err.message);
         res.status(500).send('Server error');
     }
+};
+
+/**
+ * Met à jour les dates d'arrivée et de départ d'un step en fonction des accommodations et activities associées.
+ * @param {ObjectId} stepId - L'ID du step à mettre à jour.
+ */
+export const updateStepDates = async (stepId) => {
+    const step = await Step.findById(stepId);
+
+    if (!step) {
+        throw new Error('Step not found');
+    }
+
+    const accommodations = await Accommodation.find({ stepId });
+    const activities = await Activity.find({ stepId });
+
+    let arrivalDateTime = null;
+    let departureDateTime = null;
+
+    accommodations.forEach(accommodation => {
+        if (!arrivalDateTime || new Date(accommodation.arrivalDateTime) < new Date(arrivalDateTime)) {
+            arrivalDateTime = accommodation.arrivalDateTime;
+        }
+        if (!departureDateTime || new Date(accommodation.departureDateTime) > new Date(departureDateTime)) {
+            departureDateTime = accommodation.departureDateTime;
+        }
+    });
+
+    activities.forEach(activity => {
+        if (!arrivalDateTime || new Date(activity.startDateTime) < new Date(arrivalDateTime)) {
+            arrivalDateTime = activity.startDateTime;
+        }
+        if (!departureDateTime || new Date(activity.endDateTime) > new Date(departureDateTime)) {
+            departureDateTime = activity.endDateTime;
+        }
+    });
+
+    step.arrivalDateTime = arrivalDateTime;
+    step.departureDateTime = departureDateTime;
+
+    await step.save();
 };
 
 // Méthode pour obtenir les informations de toutes les étapes d'un roadtrip
@@ -460,6 +503,8 @@ export const deleteStep = async (req, res) => {
 
 // Wrapper pour appeler refreshTravelTimeForStep avec req et res
 export const refreshTravelTimeForStepWrapper = async (req, res) => {
+    console.log('Refreshing travel time for step:', req.params.idStep);
+
     try {
         const step = await Step.findById(req.params.idStep);
 

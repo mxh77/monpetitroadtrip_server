@@ -4,6 +4,7 @@ import Roadtrip from '../models/Roadtrip.js';
 import File from '../models/File.js';
 import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
+import { updateStepDates } from '../controllers/stepController.js';
 
 // Méthode pour créer un nouvel hébergement pour une étape donnée
 export const createAccommodationForStep = async (req, res) => {
@@ -114,6 +115,10 @@ export const createAccommodationForStep = async (req, res) => {
         await step.save();
 
         await accommodation.save();
+
+        // Mettre à jour les dates du step
+        await updateStepDates(accommodation.stepId);
+
         res.status(201).json(accommodation);
     } catch (err) {
         console.error(err.message);
@@ -247,27 +252,8 @@ export const updateAccommodation = async (req, res) => {
 
         await accommodation.save();
 
-        // Ajouter les URLs aux attributs thumbnail, photos et documents
-        if (accommodation.thumbnail) {
-            const thumbnailFile = await File.findById(accommodation.thumbnail);
-            if (thumbnailFile) {
-                accommodation.thumbnailUrl = thumbnailFile.url;
-            }
-        }
-
-        if (accommodation.photos && accommodation.photos.length > 0) {
-            accommodation.photos = await Promise.all(accommodation.photos.map(async (photoId) => {
-                const photoFile = await File.findById(photoId);
-                return photoFile ? { _id: photoId, url: photoFile.url } : { _id: photoId };
-            }));
-        }
-
-        if (accommodation.documents && accommodation.documents.length > 0) {
-            accommodation.documents = await Promise.all(accommodation.documents.map(async (documentId) => {
-                const documentFile = await File.findById(documentId);
-                return documentFile ? { _id: documentId, url: documentFile.url } : { _id: documentId };
-            }));
-        }
+        // Mettre à jour les dates du step
+        await updateStepDates(accommodation.stepId);
 
         res.json(accommodation);
     } catch (err) {
@@ -355,6 +341,9 @@ export const deleteAccommodation = async (req, res) => {
 
         // Supprimer l'hébergement
         await Accommodation.deleteOne({ _id: req.params.idAccommodation });
+
+        // Mettre à jour les dates du step
+        await updateStepDates(accommodation.stepId);
 
         res.json({ msg: 'Accommodation removed' });
     } catch (err) {

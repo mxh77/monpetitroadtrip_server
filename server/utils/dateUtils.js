@@ -10,7 +10,10 @@ export const checkDateTimeConsistency = (departureDateTime, arrivalDateTime, tra
     const departure = new Date(departureDateTime);
     const arrival = new Date(arrivalDateTime);
     const travelTimeInMilliseconds = travelTime * 60 * 1000;
-
+    console.log('departure', departure);
+    console.log('arrival', arrival);
+    console.log('travelTimeInMilliseconds', travelTimeInMilliseconds);
+    
     // Calculer la date/heure d'arrivée estimée en ajoutant le temps de trajet à la date/heure de départ
     const estimatedArrival = new Date(departure.getTime() + travelTimeInMilliseconds);
 
@@ -34,6 +37,8 @@ export const checkDateTimeConsistency = (departureDateTime, arrivalDateTime, tra
  * @returns {string} - Retourne la note (ERROR, WARNING, OK).
  */
 export const determineTravelTimeNote = (travelTime, timeDifference, thresholds = { error: 0, warning: 15 }) => {
+    console.log('travelTime', travelTime);
+    console.log('timeDifference', timeDifference);
     if (travelTime > timeDifference) {
         return 'ERROR';
     } else if (timeDifference - travelTime < thresholds.warning) {

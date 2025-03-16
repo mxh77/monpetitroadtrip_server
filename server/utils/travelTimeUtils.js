@@ -64,16 +64,16 @@ export const getObjectFirstLast = async (stepId, typeObjet) => {
             const activity = await Activity.findOne({ stepId: step._id }).sort({ startDateTime: 1 });
 
             if (accommodation && activity) {
-                console.log("ACCOMMODATION / ACTIVITY : " + accommodation);
+                // console.log("ACCOMMODATION / ACTIVITY : " + accommodation);
                 result = accommodation.arrivalDateTime < activity.startDateTime ? accommodation : activity;
             } else if (accommodation) {
-                console.log("ACCOMMODATION : " + accommodation);
+                // console.log("ACCOMMODATION : " + accommodation);
                 result = accommodation;
             } else if (activity) {
-                console.log("ACTIVITY : " + activity);
+                // console.log("ACTIVITY : " + activity);
                 result = activity;
             } else {
-                console.log("STEP : " + step);
+                // console.log("STEP : " + step);
                 result = step;
             }
 
@@ -128,7 +128,7 @@ export const refreshTravelTimeForStep = async (step) => {
         return step;
     }
 
-    console.log("PREVIOUS STEP : " + previousStep);
+    // console.log("PREVIOUS STEP : " + previousStep);
 
     // Récupérer le LAST objet du step précédent
     let lastObjet = await getObjectFirstLast(previousStep._id, 'LAST');
@@ -136,7 +136,7 @@ export const refreshTravelTimeForStep = async (step) => {
         console.warn(`No LAST object found for step ${previousStep._id}`);
         return step;
     }
-    console.log("LAST OBJET : " + lastObjet.address);
+    console.log("LAST OBJET : " + lastObjet.address, lastObjet.endDateTime);
 
     // Récupérer le FIRST objet du step actuel
     let firstObjet = await getObjectFirstLast(step._id, 'FIRST');
@@ -144,7 +144,7 @@ export const refreshTravelTimeForStep = async (step) => {
         console.warn(`No FIRST object found for step ${step._id}`);
         return step;
     }
-    console.log("FIRST OBJET : " + firstObjet.address);
+    console.log("FIRST OBJET : " + firstObjet.address, firstObjet.startDateTime);
 
     const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
     const travelTime = travelData.travelTime;

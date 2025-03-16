@@ -4,6 +4,7 @@ import Roadtrip from '../models/Roadtrip.js';
 import File from '../models/File.js';
 import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
+import { updateStepDates } from '../controllers/stepController.js';
 
 // Méthode pour créer une nouvelle activité pour une étape donnée
 export const createActivityForStep = async (req, res) => {
@@ -27,10 +28,10 @@ export const createActivityForStep = async (req, res) => {
             return res.status(401).json({ msg: 'User not authorized' });
         }
 
-                // Vérifier si le type de l'étape est 'Stop' et retourner une erreur si des accommodations existent
-                if (step.type === 'Stop') {
-                    return res.status(400).json({ msg: "Erreur lors de la création du Step : un step de type 'Stop' ne peut pas contenir d'activités" });
-                }
+        // Vérifier si le type de l'étape est 'Stop' et retourner une erreur si des accommodations existent
+        if (step.type === 'Stop') {
+            return res.status(400).json({ msg: "Erreur lors de la création du Step : un step de type 'Stop' ne peut pas contenir d'activités" });
+        }
 
         // Extraire les données JSON du champ 'data' si elles existent
         let data = {};
@@ -112,6 +113,10 @@ export const createActivityForStep = async (req, res) => {
         await step.save();
 
         await activity.save();
+
+        // Mettre à jour les dates du step
+        await updateStepDates(activity.stepId);
+
         res.status(201).json(activity);
     } catch (err) {
         console.error(err.message);
@@ -246,6 +251,9 @@ export const updateActivity = async (req, res) => {
 
         await activity.save();
 
+        // Mettre à jour les dates du step
+        await updateStepDates(activity.stepId);
+
         res.status(200).json(activity);
     } catch (err) {
         console.error(err.message);
@@ -289,6 +297,10 @@ export const updateActivityDates = async (req, res) => {
         activity.endDateTime = data.endDateTime;
 
         await activity.save();
+
+        // Mettre à jour les dates du step
+        await updateStepDates(activity.stepId);
+
         res.json(activity);
     } catch (err) {
         console.error(err.message);
@@ -393,6 +405,9 @@ export const deleteActivity = async (req, res) => {
 
         // Supprimer l'activité
         await Activity.deleteOne({ _id: req.params.idActivity });
+
+        // Mettre à jour les dates du step
+        await updateStepDates(activity.stepId);
 
         res.json({ msg: 'Activité supprimée' });
     } catch (err) {
