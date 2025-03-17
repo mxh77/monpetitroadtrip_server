@@ -116,8 +116,8 @@ export const createAccommodationForStep = async (req, res) => {
 
         await accommodation.save();
 
-        // Mettre à jour les dates du step
-        await updateStepDates(accommodation.stepId);
+        // Réactualiser le temps de trajet pour l'étape mise à jour
+        await updateStepDatesAndTravelTime(accommodation.stepId);
 
         res.status(201).json(accommodation);
     } catch (err) {
@@ -342,8 +342,8 @@ export const deleteAccommodation = async (req, res) => {
         // Supprimer l'hébergement
         await Accommodation.deleteOne({ _id: req.params.idAccommodation });
 
-        // Mettre à jour les dates du step
-        await updateStepDates(accommodation.stepId);
+        // Réactualiser le temps de trajet pour l'étape mise à jour
+        await updateStepDatesAndTravelTime(accommodation.stepId);
 
         res.json({ msg: 'Accommodation removed' });
     } catch (err) {

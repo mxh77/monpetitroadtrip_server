@@ -406,8 +406,8 @@ export const deleteActivity = async (req, res) => {
         // Supprimer l'activité
         await Activity.deleteOne({ _id: req.params.idActivity });
 
-        // Mettre à jour les dates du step
-        await updateStepDates(activity.stepId);
+        // Réactualiser le temps de trajet pour l'étape mise à jour
+        await updateStepDatesAndTravelTime(activity.stepId);
 
         res.json({ msg: 'Activité supprimée' });
     } catch (err) {
