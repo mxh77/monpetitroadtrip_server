@@ -169,17 +169,17 @@ export const updateAccommodation = async (req, res) => {
 
         // Mettre à jour les champs de l'hébergement
         accommodation.name = data.name || accommodation.name; //Obligatoire
-        accommodation.address = data.address;
-        accommodation.website = data.website;
-        accommodation.phone = data.phone;
-        accommodation.email = data.email;
-        accommodation.arrivalDateTime = data.arrivalDateTime;
-        accommodation.departureDateTime = data.departureDateTime;
-        accommodation.confirmationDateTime = data.confirmationDateTime;
-        accommodation.reservationNumber = data.reservationNumber;
-        accommodation.nights = data.nights;
-        accommodation.price = data.price;
-        accommodation.notes = data.notes;
+        accommodation.address = data.address || accommodation.address; //Obligatoire
+        accommodation.website = data.website || accommodation.website;
+        accommodation.phone = data.phone || accommodation.phone;
+        accommodation.email = data.email || accommodation.email;
+        accommodation.arrivalDateTime = data.arrivalDateTime || accommodation.arrivalDateTime; //Obligatoire
+        accommodation.departureDateTime = data.departureDateTime || accommodation.departureDateTime; //Obligatoire
+        accommodation.confirmationDateTime = data.confirmationDateTime || accommodation.confirmationDateTime;
+        accommodation.reservationNumber = data.reservationNumber || accommodation.reservationNumber;
+        accommodation.nights = data.nights || accommodation.nights;
+        accommodation.price = data.price || accommodation.price;
+        accommodation.notes = data.notes || accommodation.notes;
 
         console.log("Accommodation: ", accommodation);
 
