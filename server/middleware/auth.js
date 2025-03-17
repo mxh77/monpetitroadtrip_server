@@ -2,7 +2,8 @@ import jwt from 'jsonwebtoken';
 
 export const auth = (req, res, next) => {
     const token = req.cookies.token;
-
+    console.log('token:', token);
+    
     if (!token) {
 
         console.log('No token found, redirecting to /auth/login');
