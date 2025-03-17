@@ -163,54 +163,55 @@ export const updateStepDates = async (stepId) => {
  * @returns {Object} - L'étape mise à jour.
  */
 export const refreshTravelTimeForStep = async (step) => {
+    console.log("Fonction refreshTravelTimeForStep");
     //récupérer l'étape précédente
     const previousStep = await Step.findOne
         ({ roadtripId: step.roadtripId, departureDateTime: { $lt: step.departureDateTime } })
         .sort({ departureDateTime: -1 });
 
-    if (!previousStep) {
-        return step;
+    if (previousStep) {
+
+        console.log("PREVIOUS STEP : " + previousStep);
+
+        // Récupérer le LAST objet du step précédent
+        let lastObjet = await getObjectFirstLast(previousStep._id, 'LAST');
+        if (!lastObjet) {
+            console.warn(`No LAST object found for step ${previousStep._id}`);
+            return step;
+        }
+        console.log("LAST OBJET : " + lastObjet.address, lastObjet.endDateTime);
+
+        // Récupérer le FIRST objet du step actuel
+        let firstObjet = await getObjectFirstLast(step._id, 'FIRST');
+        if (!firstObjet) {
+            console.warn(`No FIRST object found for step ${step._id}`);
+            return step;
+        }
+        console.log("FIRST OBJET : " + firstObjet.address, firstObjet.startDateTime);
+
+        const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
+        const travelTime = travelData.travelTime;
+        const distance = travelData.distance;
+        console.log("Travel time:", travelTime);
+
+        // Vérifier la cohérence des dates/heures et obtenir la note
+        const { isConsistency, note } = checkDateTimeConsistency(lastObjet.endDateTime, firstObjet.startDateTime, travelTime);
+        const isArrivalTimeConsistent = isConsistency;
+        const travelTimeNote = note;
+
+        // Mettre à jour le temps de trajet et le champ isArrivalTimeConsistent pour l'étape
+        step.travelTimePreviousStep = travelTime;
+        step.distancePreviousStep = distance;
+        step.isArrivalTimeConsistent = isArrivalTimeConsistent;
+        step.travelTimeNote = travelTimeNote;
+        console.log("Travel time note:", travelTimeNote);
+        await step.save();
+        console.log("Step updated", step);
     }
-
-    // console.log("PREVIOUS STEP : " + previousStep);
-
-    // Récupérer le LAST objet du step précédent
-    let lastObjet = await getObjectFirstLast(previousStep._id, 'LAST');
-    if (!lastObjet) {
-        console.warn(`No LAST object found for step ${previousStep._id}`);
-        return step;
-    }
-    console.log("LAST OBJET : " + lastObjet.address, lastObjet.endDateTime);
-
-    // Récupérer le FIRST objet du step actuel
-    let firstObjet = await getObjectFirstLast(step._id, 'FIRST');
-    if (!firstObjet) {
-        console.warn(`No FIRST object found for step ${step._id}`);
-        return step;
-    }
-    console.log("FIRST OBJET : " + firstObjet.address, firstObjet.startDateTime);
-
-    const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
-    const travelTime = travelData.travelTime;
-    const distance = travelData.distance;
-    console.log("Travel time:", travelTime);
-
-    // Vérifier la cohérence des dates/heures et obtenir la note
-    const { isConsistency, note } = checkDateTimeConsistency(lastObjet.endDateTime, firstObjet.startDateTime, travelTime);
-    const isArrivalTimeConsistent = isConsistency;
-    const travelTimeNote = note;
-
-    // Mettre à jour le temps de trajet et le champ isArrivalTimeConsistent pour l'étape
-    step.travelTimePreviousStep = travelTime;
-    step.distancePreviousStep = distance;
-    step.isArrivalTimeConsistent = isArrivalTimeConsistent;
-    step.travelTimeNote = travelTimeNote;
-    console.log("Travel time note:", travelTimeNote);
-    await step.save();
-    console.log("Step updated", step);
-
+    
     // Récupérer l'étape suivante
     const nextStep = await Step.findOne({ roadtripId: step.roadtripId, arrivalDateTime: { $gt: step.arrivalDateTime } }).sort({ arrivalDateTime: 1 });
+    console.log("NEXT STEP : " + nextStep);
 
     if (nextStep) {
         // Récupérer le LAST objet de l'étape actuelle

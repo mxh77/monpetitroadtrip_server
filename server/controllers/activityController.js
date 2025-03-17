@@ -252,6 +252,7 @@ export const updateActivity = async (req, res) => {
         await activity.save();
 
         // Mettre à jour les dates du step et le temps de trajet
+        console.log("Mise à jour des dates et du temps de trajet pour l'étape mise à jour");
         await updateStepDatesAndTravelTime(activity.stepId);
 
         res.status(200).json(activity);
