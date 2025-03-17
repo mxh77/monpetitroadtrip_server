@@ -112,6 +112,50 @@ export const getObjectFirstLast = async (stepId, typeObjet) => {
     return null;
 };
 
+
+
+/**
+ * Met à jour les dates d'arrivée et de départ d'un step en fonction des accommodations et activities associées.
+ * @param {ObjectId} stepId - L'ID du step à mettre à jour.
+ */
+export const updateStepDates = async (stepId) => {
+    const step = await Step.findById(stepId);
+
+    if (!step) {
+        throw new Error('Step not found');
+    }
+
+    const accommodations = await Accommodation.find({ stepId });
+    const activities = await Activity.find({ stepId });
+
+    let arrivalDateTime = null;
+    let departureDateTime = null;
+
+    accommodations.forEach(accommodation => {
+        if (!arrivalDateTime || new Date(accommodation.arrivalDateTime) < new Date(arrivalDateTime)) {
+            arrivalDateTime = accommodation.arrivalDateTime;
+        }
+        if (!departureDateTime || new Date(accommodation.departureDateTime) > new Date(departureDateTime)) {
+            departureDateTime = accommodation.departureDateTime;
+        }
+    });
+
+    activities.forEach(activity => {
+        if (!arrivalDateTime || new Date(activity.startDateTime) < new Date(arrivalDateTime)) {
+            arrivalDateTime = activity.startDateTime;
+        }
+        if (!departureDateTime || new Date(activity.endDateTime) > new Date(departureDateTime)) {
+            departureDateTime = activity.endDateTime;
+        }
+    });
+
+    step.arrivalDateTime = arrivalDateTime;
+    step.departureDateTime = departureDateTime;
+    console.log("Step : " + step);
+
+    await step.save();
+};
+
 /**
  * Rafraîchit le temps de trajet pour une étape donnée.
  * @param {Object} step - L'étape à traiter.
@@ -164,5 +208,57 @@ export const refreshTravelTimeForStep = async (step) => {
     console.log("Travel time note:", travelTimeNote);
     await step.save();
     console.log("Step updated", step);
+
+    // Récupérer l'étape suivante
+    const nextStep = await Step.findOne({ roadtripId: step.roadtripId, arrivalDateTime: { $gt: step.arrivalDateTime } }).sort({ arrivalDateTime: 1 });
+
+    if (nextStep) {
+        // Récupérer le LAST objet de l'étape actuelle
+        let lastObjet = await getObjectFirstLast(step._id, 'LAST');
+        if (!lastObjet) {
+            console.warn(`No LAST object found for step ${step._id}`);
+            return step;
+        }
+        console.log("LAST OBJET : " + lastObjet.address, lastObjet.endDateTime);
+
+        // Récupérer le FIRST objet de l'étape suivante
+        let firstObjet = await getObjectFirstLast(nextStep._id, 'FIRST');
+        if (!firstObjet) {
+            console.warn(`No FIRST object found for step ${nextStep._id}`);
+            return step;
+        }
+        console.log("FIRST OBJET : " + firstObjet.address, firstObjet.startDateTime);
+
+        const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
+        const travelTime = travelData.travelTime;
+        const distance = travelData.distance;
+        console.log("Travel time:", travelTime);
+
+        // Vérifier la cohérence des dates/heures et obtenir la note
+        const { isConsistency, note } = checkDateTimeConsistency(lastObjet.endDateTime, firstObjet.startDateTime, travelTime);
+        const isArrivalTimeConsistent = isConsistency;
+        const travelTimeNote = note;
+
+        // Mettre à jour le temps de trajet et le champ isArrivalTimeConsistent pour l'étape suivante
+        nextStep.travelTimePreviousStep = travelTime;
+        nextStep.distancePreviousStep = distance;
+        nextStep.isArrivalTimeConsistent = isArrivalTimeConsistent;
+        nextStep.travelTimeNote = travelTimeNote;
+        console.log("Travel time note:", travelTimeNote);
+        await nextStep.save();
+        console.log("Next step updated", nextStep);
+    }
+
     return step;
+};
+
+/**
+ * Met à jour les dates et les temps de trajet d'un step.
+ * @param {ObjectId} stepId - L'ID du step à mettre à jour.
+ */
+export const updateStepDatesAndTravelTime = async (stepId) => {
+    await updateStepDates(stepId);
+
+    const step = await Step.findById(stepId);
+    await refreshTravelTimeForStep(step);
 };

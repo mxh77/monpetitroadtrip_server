@@ -6,7 +6,7 @@ import File from '../models/File.js';
 import { calculateTravelTime, getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import e from 'express';
-import { refreshTravelTimeForStep } from '../utils/travelTimeUtils.js';
+import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 
 
 // Méthode pour créer un nouveau step pour un roadtrip donné
@@ -53,7 +53,7 @@ export const createStepForRoadtrip = async (req, res) => {
         const step = await newStep.save();
 
         // Réactualiser le temps de trajet pour l'étape mise à jour
-        await refreshTravelTimeForStep(step);
+        await updateStepDatesAndTravelTime(step._id);
 
         // Ajouter l'ID de la nouvelle étape au tableau steps du roadtrip
         roadtrip.steps.push(step);
@@ -251,6 +251,9 @@ export const updateStep = async (req, res) => {
 
         const stepUpdated = await step.save();
 
+        // Réactualiser le temps de trajet pour l'étape mise à jour
+        await updateStepDatesAndTravelTime(stepUpdated._id);
+
         // Récupérer les accommodations et activities associés
         const populatedStep = await Step.findById(stepUpdated._id)
             .populate({
@@ -273,10 +276,6 @@ export const updateStep = async (req, res) => {
             .populate('documents')
             .populate('thumbnail');
 
-        // Réactualiser le temps de trajet pour l'étape mise à jour
-        console.log('Refreshing travel time for step:', stepUpdated._id);
-        await refreshTravelTimeForStep(stepUpdated);
-
         res.json(populatedStep);
 
     } catch (err) {
@@ -285,46 +284,6 @@ export const updateStep = async (req, res) => {
     }
 };
 
-/**
- * Met à jour les dates d'arrivée et de départ d'un step en fonction des accommodations et activities associées.
- * @param {ObjectId} stepId - L'ID du step à mettre à jour.
- */
-export const updateStepDates = async (stepId) => {
-    const step = await Step.findById(stepId);
-
-    if (!step) {
-        throw new Error('Step not found');
-    }
-
-    const accommodations = await Accommodation.find({ stepId });
-    const activities = await Activity.find({ stepId });
-
-    let arrivalDateTime = null;
-    let departureDateTime = null;
-
-    accommodations.forEach(accommodation => {
-        if (!arrivalDateTime || new Date(accommodation.arrivalDateTime) < new Date(arrivalDateTime)) {
-            arrivalDateTime = accommodation.arrivalDateTime;
-        }
-        if (!departureDateTime || new Date(accommodation.departureDateTime) > new Date(departureDateTime)) {
-            departureDateTime = accommodation.departureDateTime;
-        }
-    });
-
-    activities.forEach(activity => {
-        if (!arrivalDateTime || new Date(activity.startDateTime) < new Date(arrivalDateTime)) {
-            arrivalDateTime = activity.startDateTime;
-        }
-        if (!departureDateTime || new Date(activity.endDateTime) > new Date(departureDateTime)) {
-            departureDateTime = activity.endDateTime;
-        }
-    });
-
-    step.arrivalDateTime = arrivalDateTime;
-    step.departureDateTime = departureDateTime;
-
-    await step.save();
-};
 
 // Méthode pour obtenir les informations de toutes les étapes d'un roadtrip
 export const getStepsByRoadtrip = async (req, res) => {

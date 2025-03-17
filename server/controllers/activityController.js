@@ -4,7 +4,7 @@ import Roadtrip from '../models/Roadtrip.js';
 import File from '../models/File.js';
 import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
-import { updateStepDates } from '../controllers/stepController.js';
+import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 
 // Méthode pour créer une nouvelle activité pour une étape donnée
 export const createActivityForStep = async (req, res) => {
@@ -114,8 +114,8 @@ export const createActivityForStep = async (req, res) => {
 
         await activity.save();
 
-        // Mettre à jour les dates du step
-        await updateStepDates(activity.stepId);
+        // Mettre à jour les dates du step et le temps de trajet
+        await updateStepDatesAndTravelTime(activity.stepId);
 
         res.status(201).json(activity);
     } catch (err) {
@@ -251,8 +251,8 @@ export const updateActivity = async (req, res) => {
 
         await activity.save();
 
-        // Mettre à jour les dates du step
-        await updateStepDates(activity.stepId);
+        // Mettre à jour les dates du step et le temps de trajet
+        await updateStepDatesAndTravelTime(activity.stepId);
 
         res.status(200).json(activity);
     } catch (err) {
@@ -298,8 +298,8 @@ export const updateActivityDates = async (req, res) => {
 
         await activity.save();
 
-        // Mettre à jour les dates du step
-        await updateStepDates(activity.stepId);
+        // Réactualiser le temps de trajet pour l'étape mise à jour
+        await updateStepDatesAndTravelTime(activity.stepId);
 
         res.json(activity);
     } catch (err) {

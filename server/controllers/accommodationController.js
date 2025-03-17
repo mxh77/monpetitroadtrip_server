@@ -4,7 +4,7 @@ import Roadtrip from '../models/Roadtrip.js';
 import File from '../models/File.js';
 import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
-import { updateStepDates } from '../controllers/stepController.js';
+import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 
 // Méthode pour créer un nouvel hébergement pour une étape donnée
 export const createAccommodationForStep = async (req, res) => {
@@ -252,8 +252,8 @@ export const updateAccommodation = async (req, res) => {
 
         await accommodation.save();
 
-        // Mettre à jour les dates du step
-        await updateStepDates(accommodation.stepId);
+        // Réactualiser le temps de trajet pour l'étape mise à jour
+        await updateStepDatesAndTravelTime(accommodation.stepId);
 
         res.json(accommodation);
     } catch (err) {
