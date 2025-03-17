@@ -4,6 +4,7 @@ export const auth = (req, res, next) => {
     const token = req.cookies.token;
 
     if (!token) {
+
         console.log('No token found, redirecting to /auth/login');
         return res.redirect('/auth/login');
     }
@@ -14,6 +15,8 @@ export const auth = (req, res, next) => {
         next();
     } catch (err) {
         console.log('Token is not valid:', err.message);
+        //retourner une erreur 401
+        res.status(401).json({ msg: 'No token, authorization denied' });
         res.redirect('/auth/login');
     }
 };
