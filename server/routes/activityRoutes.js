@@ -21,12 +21,23 @@ router.put('/:idActivity', auth, upload.fields([
 // Route protégée pour modifier les dates d'une activité
 router.patch('/:idActivity/dates', auth, activityController.updateActivityDates);
 
+// Route protégée pour ajouter un fichier à l'activité
+router.patch('/:idActivity/documents', auth, upload.fields([
+    { name: 'documents', maxCount: 10 }
+]), activityController.addDocumentsToActivity);
+
 /********METHOD GET********/
 // Route protégée pour obtenir les informations d'une activité
 router.get('/:idActivity', auth, activityController.getActivityById);
 
+//Route protégée pour obtenir les documents d'un activité
+router.get('/:idActivity/documents', auth, activityController.getDocumentsFromActivity); 
+
 /********METHOD DELETE ********/
 // Route protégée pour supprimer un activité
 router.delete('/:idActivity', auth, activityController.deleteActivity);
+
+// Route protégée pour supprimer un document d'un activité
+router.delete('/:idActivity/documents/:idDocument', auth, activityController.deleteDocumentFromActivity);
 
 export default router;

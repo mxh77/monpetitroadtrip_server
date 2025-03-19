@@ -373,8 +373,6 @@ export const getDocumentsFromAccommodation = async (req, res) => {
     }
 };
 
-
-
 // Méthode pour ajouter des documents à un hébergement
 export const addDocumentsToAccommodation = async (req, res) => {
     try {

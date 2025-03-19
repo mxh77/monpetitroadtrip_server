@@ -83,8 +83,8 @@ export const login = async (req, res) => {
                 if (err) throw err;
                 res.cookie('token', token, {
                     httpOnly: true,
-                    secure: true,
-                    sameSite: 'none'
+                    secure: false, // Passe à true si HTTPS
+                    sameSite: "lax", // Essaie aussi "none" avec HTTPS
                 });
                 console.log('Token:', token);
                 res.json({ msg: 'Login successful', redirectTo: '/home' });

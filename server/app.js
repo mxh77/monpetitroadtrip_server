@@ -13,7 +13,7 @@ import stepRoutes from './routes/stepRoutes.js';
 import accommodationRoutes from './routes/accommodationRoutes.js';
 import activityRoutes from './routes/activityRoutes.js';
 import googleMapsRoutes from './routes/googleMapsRoutes.js';
-import {connectDB} from './config/db.js';
+import { connectDB } from './config/db.js';
 
 const app = express();
 
@@ -37,9 +37,10 @@ app.use(cookieParser());
 
 // CORS
 app.use(cors({
-  origin: '*', // Vous pouvez restreindre cela à votre domaine spécifique
+  origin: ["http://localhost:3000", "http://192.168.1.2:3000"], // Liste des domaines autorisés
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 
 // Serve static files
@@ -66,45 +67,45 @@ app.use('/gm', auth, googleMapsRoutes);
 
 // Route pour servir index.html
 app.get('/home', auth, (req, res) => {
-    console.log('Route /home called');
-    res.sendFile(path.resolve(path.join(__dirname, '../public/index.html')));
+  console.log('Route /home called');
+  res.sendFile(path.resolve(path.join(__dirname, '../public/index.html')));
 });
 
 // Rediriger vers /home si l'utilisateur est connecté
 app.get('/', auth, (req, res) => {
-    console.log('Route / called');
-    res.redirect('/home');
+  console.log('Route / called');
+  res.redirect('/home');
 });
 
 // Route pour vérifier l'état de connexion
 app.get('/auth/status', auth, (req, res) => {
-    res.json({ isAuthenticated: true });
+  res.json({ isAuthenticated: true });
 });
 
 app.get('/autocomplete', async (req, res) => {
-    const input = req.query.input;  // Input de l'utilisateur
-  
-    try {
-      const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/place/autocomplete/json`, 
-        {
-          params: {
-            input: input,
-            key: process.env.GOOGLE_MAPS_API_KEY,
-            types: '',  // Filtrer par type, par exemple pour des adresses
-          },
-        }
-      );
-  
-      res.json(response.data);  // Envoi des résultats au client
-    } catch (error) {
-      res.status(500).json({ error: 'Erreur lors de la requête à l\'API Google Places' });
-    }
-  });
+  const input = req.query.input;  // Input de l'utilisateur
+
+  try {
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json`,
+      {
+        params: {
+          input: input,
+          key: process.env.GOOGLE_MAPS_API_KEY,
+          types: '',  // Filtrer par type, par exemple pour des adresses
+        },
+      }
+    );
+
+    res.json(response.data);  // Envoi des résultats au client
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la requête à l\'API Google Places' });
+  }
+});
 
 
 // Start server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

@@ -28,7 +28,7 @@ export const createActivityForStep = async (req, res) => {
             return res.status(401).json({ msg: 'User not authorized' });
         }
 
-        // Vérifier si le type de l'étape est 'Stop' et retourner une erreur si des accommodations existent
+        // Vérifier si le type de l'étape est 'Stop' et retourner une erreur si des activities existent
         if (step.type === 'Stop') {
             return res.status(400).json({ msg: "Erreur lors de la création du Step : un step de type 'Stop' ne peut pas contenir d'activités" });
         }
@@ -309,48 +309,28 @@ export const updateActivityDates = async (req, res) => {
     }
 };
 
-
 // Méthode pour obtenir les informations d'une activité
 export const getActivityById = async (req, res) => {
-    try {
-        const activity = await Activity.findById(req.params.idActivity);
-
-        if (!activity) {
-            return res.status(404).json({ msg: 'Activité non trouvée' });
-        }
-
-        // Vérifier si l'utilisateur est le propriétaire de l'activité
-        if (activity.userId.toString() !== req.user.id) {
-            return res.status(401).json({ msg: 'User not authorized' });
-        }
-
-        // Ajouter les URLs aux attributs thumbnail, photos et documents
-        if (activity.thumbnail) {
-            const thumbnailFile = await File.findById(activity.thumbnail);
-            if (thumbnailFile) {
-                activity.thumbnailUrl = thumbnailFile.url;
+        try {
+            const activity = await Activity.findById(req.params.idActivity)
+                .populate('documents')
+                .populate('photos')
+                .populate('thumbnail');
+    
+            if (!activity) {
+                return res.status(404).json({ msg: 'Activité non trouvé !' });
             }
+    
+            // Vérifier si l'utilisateur est le propriétaire de l'activité
+            if (activity.userId.toString() !== req.user.id) {
+                return res.status(401).json({ msg: 'User not authorized' });
+            }
+    
+            res.json(activity);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server error');
         }
-
-        if (activity.photos && activity.photos.length > 0) {
-            activity.photos = await Promise.all(activity.photos.map(async (photoId) => {
-                const photoFile = await File.findById(photoId);
-                return photoFile ? { _id: photoId, url: photoFile.url } : { _id: photoId };
-            }));
-        }
-
-        if (activity.documents && activity.documents.length > 0) {
-            activity.documents = await Promise.all(activity.documents.map(async (documentId) => {
-                const documentFile = await File.findById(documentId);
-                return documentFile ? { _id: documentId, url: documentFile.url } : { _id: documentId };
-            }));
-        }
-
-        res.json(activity);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
 };
 
 // Méthode pour supprimer une activité
@@ -411,6 +391,109 @@ export const deleteActivity = async (req, res) => {
         await updateStepDatesAndTravelTime(activity.stepId);
 
         res.json({ msg: 'Activité supprimée' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour obtenir les documents d'une activité
+export const getDocumentsFromActivity = async (req, res) => {
+    try {
+        const activity = await Activity.findById(req.params.idActivity).populate('documents');
+
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvée' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'activité
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        res.json(activity.documents);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour ajouter des documents à une activité
+export const addDocumentsToActivity = async (req, res) => {
+    try {
+        const activity = await Activity.findById(req.params.idActivity);
+
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvée' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'activité
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        if (req.files && req.files.documents && req.files.documents.length > 0) {
+            console.log('Uploading documents...');
+            const documents = await Promise.all(req.files.documents.map(async (document) => {
+                const name = document.originalname;
+                const url = await uploadToGCS(document, activity._id);
+                const file = new File({ name, url, type: 'document' });
+                await file.save();
+                return file._id;
+            }));
+            activity.documents.push(...documents);
+            console.log('Updated activity documents:', activity.documents);
+        }
+
+        await activity.save();
+
+        // Peupler les documents dans l'hébergement avant de renvoyer la réponse
+        await activity.populate({
+            path: 'documents',
+            model: 'File'
+        });
+
+        res.status(201).json(activity.documents);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour supprimer un document d'une activité
+export const deleteDocumentFromActivity = async (req, res) => {
+    try {
+        const activity = await Activity.findById(req.params.idActivity);
+
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvée' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'activité
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        const documentId = req.params.idDocument;
+
+        // Supprimer le document de Google Cloud Storage
+        const documentFile = await File.findById(documentId);
+        if (documentFile) {
+            await deleteFromGCS(documentFile.url);
+            await documentFile.deleteOne();
+        }
+
+        // Supprimer le document de la liste des documents de l'activité
+        activity.documents = activity.documents.filter(document => document.toString() !== documentId.toString());
+        await activity.save();
+
+        // Peupler les documents dans l'activité avant de renvoyer la réponse
+        await activity.populate({
+            path: 'documents',
+            model: 'File'
+        });
+
+        res.json(activity);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
