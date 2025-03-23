@@ -128,29 +128,56 @@ export const updateStepDates = async (stepId) => {
     const accommodations = await Accommodation.find({ stepId });
     const activities = await Activity.find({ stepId });
 
+    // Fonction pour convertir une date en format ISO 8601
+    const toISODateString = (date) => {
+        if (date instanceof Date && !isNaN(date)) {
+            return date.toISOString();
+        }
+        return null;
+    };
+
+    // Initialisation des dates à null
     let arrivalDateTime = null;
     let departureDateTime = null;
 
+    // Fonction pour comparer et mettre à jour les dates
+    const updateDate = (currentDate, newDate, isMin) => {
+        if (newDate instanceof Date && !isNaN(newDate)) {
+            if (isMin) {
+                return currentDate === null || newDate < currentDate ? newDate : currentDate;
+            } else {
+                return currentDate === null || newDate > currentDate ? newDate : currentDate;
+            }
+        }
+        return currentDate;
+    };
+
+    // Parcours des accommodations pour trouver les dates minimales et maximales
     accommodations.forEach(accommodation => {
-        if (!arrivalDateTime || new Date(accommodation.arrivalDateTime) < new Date(arrivalDateTime)) {
-            arrivalDateTime = accommodation.arrivalDateTime;
-        }
-        if (!departureDateTime || new Date(accommodation.departureDateTime) > new Date(departureDateTime)) {
-            departureDateTime = accommodation.departureDateTime;
-        }
+        const accommodationArrival = new Date(accommodation.arrivalDateTime);
+        const accommodationDeparture = new Date(accommodation.departureDateTime);
+
+        arrivalDateTime = updateDate(arrivalDateTime, accommodationArrival, true);
+        departureDateTime = updateDate(departureDateTime, accommodationDeparture, false);
     });
 
+    // Parcours des activities pour trouver les dates minimales et maximales
     activities.forEach(activity => {
-        if (!arrivalDateTime || new Date(activity.startDateTime) < new Date(arrivalDateTime)) {
-            arrivalDateTime = activity.startDateTime;
-        }
-        if (!departureDateTime || new Date(activity.endDateTime) > new Date(departureDateTime)) {
-            departureDateTime = activity.endDateTime;
-        }
+        const activityStart = new Date(activity.startDateTime);
+        const activityEnd = new Date(activity.endDateTime);
+
+        arrivalDateTime = updateDate(arrivalDateTime, activityStart, true);
+        departureDateTime = updateDate(departureDateTime, activityEnd, false);
     });
 
-    step.arrivalDateTime = arrivalDateTime;
-    step.departureDateTime = departureDateTime;
+    // Mise à jour de 'step' si des dates ont été trouvées
+    if (arrivalDateTime !== null) {
+        step.arrivalDateTime = toISODateString(arrivalDateTime);
+    }
+    if (departureDateTime !== null) {
+        step.departureDateTime = toISODateString(departureDateTime);
+    }
+
     console.log("Step : " + step);
 
     await step.save();
@@ -179,7 +206,7 @@ export const refreshTravelTimeForStep = async (step) => {
             console.warn(`No LAST object found for step ${previousStep._id}`);
             return step;
         }
-        console.log("LAST OBJET : " + lastObjet.address, lastObjet.endDateTime);
+        console.log("LAST OBJET : " + lastObjet.id + ", " + lastObjet.typeObjet + ", " + lastObjet.address, lastObjet.endDateTime);
 
         // Récupérer le FIRST objet du step actuel
         let firstObjet = await getObjectFirstLast(step._id, 'FIRST');
@@ -187,17 +214,28 @@ export const refreshTravelTimeForStep = async (step) => {
             console.warn(`No FIRST object found for step ${step._id}`);
             return step;
         }
-        console.log("FIRST OBJET : " + firstObjet.address, firstObjet.startDateTime);
+        console.log("FIRST OBJET : " + firstObjet.id + ", " + firstObjet.typeObjet + ", " + firstObjet.address, firstObjet.startDateTime);
 
-        const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
-        const travelTime = travelData.travelTime;
-        const distance = travelData.distance;
-        console.log("Travel time:", travelTime);
+        let travelTime, distance, isArrivalTimeConsistent, travelTimeNote;
 
-        // Vérifier la cohérence des dates/heures et obtenir la note
-        const { isConsistency, note } = checkDateTimeConsistency(lastObjet.endDateTime, firstObjet.startDateTime, travelTime);
-        const isArrivalTimeConsistent = isConsistency;
-        const travelTimeNote = note;
+        if (lastObjet.address && firstObjet.address) {
+            const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
+            travelTime = travelData.travelTime;
+            distance = travelData.distance;
+            console.log("Travel time:", travelTime);
+
+            // Vérifier la cohérence des dates/heures et obtenir la note
+            const { isConsistency, note } = checkDateTimeConsistency(lastObjet.endDateTime, firstObjet.startDateTime, travelTime);
+            isArrivalTimeConsistent = isConsistency;
+            travelTimeNote = note;
+        } else {
+            console.warn("Addresses for lastObjet or firstObjet are null");
+            travelTime = null;
+            distance = null;
+            isArrivalTimeConsistent = false;
+            travelTimeNote = 'ERROR';
+        }
+
 
         // Mettre à jour le temps de trajet et le champ isArrivalTimeConsistent pour l'étape
         step.travelTimePreviousStep = travelTime;
@@ -208,7 +246,7 @@ export const refreshTravelTimeForStep = async (step) => {
         await step.save();
         console.log("Step updated", step);
     }
-    
+
     // Récupérer l'étape suivante
     const nextStep = await Step.findOne({ roadtripId: step.roadtripId, arrivalDateTime: { $gt: step.arrivalDateTime } }).sort({ arrivalDateTime: 1 });
     console.log("NEXT STEP : " + nextStep);
@@ -220,7 +258,7 @@ export const refreshTravelTimeForStep = async (step) => {
             console.warn(`No LAST object found for step ${step._id}`);
             return step;
         }
-        console.log("LAST OBJET : " + lastObjet.address, lastObjet.endDateTime);
+        console.log("LAST OBJET : " + lastObjet.id + ", " + lastObjet.typeObjet + ", " + lastObjet.address, lastObjet.endDateTime);
 
         // Récupérer le FIRST objet de l'étape suivante
         let firstObjet = await getObjectFirstLast(nextStep._id, 'FIRST');
@@ -228,7 +266,7 @@ export const refreshTravelTimeForStep = async (step) => {
             console.warn(`No FIRST object found for step ${nextStep._id}`);
             return step;
         }
-        console.log("FIRST OBJET : " + firstObjet.address, firstObjet.startDateTime);
+        console.log("FIRST OBJET : " + firstObjet.id + ", " + firstObjet.typeObjet + ", " + firstObjet.address, firstObjet.startDateTime);
 
         const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
         const travelTime = travelData.travelTime;

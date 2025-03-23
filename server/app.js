@@ -37,7 +37,7 @@ app.use(cookieParser());
 
 // CORS
 app.use(cors({
-  origin: ["http://localhost:3000", "http://192.168.1.2:3000"], // Liste des domaines autorisés
+  origin: ["http://localhost:3000", "http://localhost:3001", "http://192.168.1.2:3000", "http://192.168.1.2:3001"], // Liste des domaines autorisés
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true

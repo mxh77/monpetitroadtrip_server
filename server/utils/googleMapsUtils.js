@@ -53,6 +53,6 @@ export const calculateTravelTime = async (origin, destination, departure_time = 
         const distanceInKilometers = (distanceInMeters / 1000).toFixed(2); // Convertir les mètres en kilomètres
         return { travelTime: durationInMinutes, distance: distanceInKilometers };
     } else {
-        throw new Error('No route found');
+        return { travelTime: 0, distance: 0, error: 'No route found' };
     }
 };
