@@ -72,6 +72,7 @@ export const createAccommodationForStep = async (req, res) => {
             reservationNumber: data.reservationNumber,
             nights: data.nights,
             price: data.price,
+            currency: data.currency,
             notes: data.notes,
             stepId: req.params.idStep,
             userId: req.user.id
@@ -179,6 +180,7 @@ export const updateAccommodation = async (req, res) => {
         accommodation.reservationNumber = data.reservationNumber || accommodation.reservationNumber;
         accommodation.nights = data.nights || accommodation.nights;
         accommodation.price = data.price || accommodation.price;
+        accommodation.currency = data.currency || accommodation.currency;
         accommodation.notes = data.notes || accommodation.notes;
 
         console.log("Accommodation: ", accommodation);

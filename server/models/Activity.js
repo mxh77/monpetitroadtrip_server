@@ -24,7 +24,13 @@ const ActivitySchema = new Schema({
     },
     reservationNumber: { type: String, default: '' },
     price: { type: Number, default: 0 },
-    notes: { type: String, default: '' },
+    currency: {
+        type: String,
+        default: 'USD',
+        enum: ['USD', 'CAD', 'EUR'],
+        message: 'La devise doit être soit "USD", "CAD" ou "EUR"'
+    },
+     notes: { type: String, default: '' },
     photos: [{ type: Schema.Types.ObjectId, ref: 'File' }],
     documents: [{ type: Schema.Types.ObjectId, ref: 'File' }],
     thumbnail: { type: Schema.Types.ObjectId, ref: 'File' }

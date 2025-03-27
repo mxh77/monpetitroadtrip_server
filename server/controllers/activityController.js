@@ -70,6 +70,7 @@ export const createActivityForStep = async (req, res) => {
             duration: data.duration,
             reservationNumber: data.reservationNumber,
             price: data.price,
+            currency: data.currency,
             notes: data.notes,
             stepId: req.params.idStep,
             userId: req.user.id
@@ -180,6 +181,7 @@ export const updateActivity = async (req, res) => {
         activity.typeDuration = data.typeDuration || activity.typeDuration
         activity.reservationNumber = data.reservationNumber || activity.reservationNumber
         activity.price = data.price || activity.price
+        activity.currency = data.currency || activity.currency
         activity.notes = data.notes || activity.notes
 
         // Gérer les suppressions différées

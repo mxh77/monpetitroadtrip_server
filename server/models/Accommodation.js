@@ -17,6 +17,12 @@ export const AccommodationSchema = new Schema({
     departureDateTime: { type: Date },
     nights: { type: Number, default: 0 },
     price: { type: Number, default: 0 },
+    currency: {
+        type: String,
+        default: 'USD',
+        enum: ['USD', 'CAD', 'EUR'],
+        message: 'La devise doit être soit "USD", "CAD" ou "EUR"'
+    },
     notes: { type: String, default: '' },
     photos: [{ type: Schema.Types.ObjectId, ref: 'File' }],
     documents: [{ type: Schema.Types.ObjectId, ref: 'File' }],
