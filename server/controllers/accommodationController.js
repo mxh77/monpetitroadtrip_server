@@ -59,6 +59,7 @@ export const createAccommodationForStep = async (req, res) => {
         }
 
         const accommodation = new Accommodation({
+            active: data.active,
             name: data.name,
             address: data.address,
             latitude: coordinates.lat,
@@ -169,6 +170,7 @@ export const updateAccommodation = async (req, res) => {
         }
 
         // Mettre à jour les champs de l'hébergement
+        accommodation.active = data.active || accommodation.active; 
         accommodation.name = data.name || accommodation.name; //Obligatoire
         accommodation.address = data.address || accommodation.address; //Obligatoire
         accommodation.website = data.website || accommodation.website;
