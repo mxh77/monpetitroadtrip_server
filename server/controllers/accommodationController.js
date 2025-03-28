@@ -170,7 +170,9 @@ export const updateAccommodation = async (req, res) => {
         }
 
         // Mettre à jour les champs de l'hébergement
-        accommodation.active = data.active || accommodation.active; 
+        if (data.active !== undefined) {
+            accommodation.active = data.active;
+        }
         accommodation.name = data.name || accommodation.name; //Obligatoire
         accommodation.address = data.address || accommodation.address; //Obligatoire
         accommodation.website = data.website || accommodation.website;
@@ -253,6 +255,8 @@ export const updateAccommodation = async (req, res) => {
                 console.log('Updated accommodation documents:', accommodation.documents);
             }
         }
+
+        console.log("Accommodation after update: ", accommodation);
 
         await accommodation.save();
 
