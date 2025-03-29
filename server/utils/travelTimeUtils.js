@@ -60,8 +60,8 @@ export const getObjectFirstLast = async (stepId, typeObjet) => {
 
     if (typeObjet === 'FIRST') {
         if (step.type === 'Stage') {
-            const accommodation = await Accommodation.findOne({ stepId: step._id }).sort({ arrivalDateTime: 1 });
-            const activity = await Activity.findOne({ stepId: step._id }).sort({ startDateTime: 1 });
+            const accommodation = await Accommodation.findOne({ stepId: step._id, active: true }).sort({ arrivalDateTime: 1 });
+            const activity = await Activity.findOne({ stepId: step._id, active: true }).sort({ startDateTime: 1 });
 
             if (accommodation && activity) {
                 // console.log("ACCOMMODATION / ACTIVITY : " + accommodation);
@@ -82,8 +82,8 @@ export const getObjectFirstLast = async (stepId, typeObjet) => {
         }
     } else if (typeObjet === 'LAST') {
         if (step.type === 'Stage') {
-            const accommodation = await Accommodation.findOne({ stepId: step._id }).sort({ departureDateTime: -1 });
-            const activity = await Activity.findOne({ stepId: step._id }).sort({ endDateTime: -1 });
+            const accommodation = await Accommodation.findOne({ stepId: step._id, active:true }).sort({ departureDateTime: -1 });
+            const activity = await Activity.findOne({ stepId: step._id,active:true }).sort({ endDateTime: -1 });
 
             if (accommodation && activity) {
                 result = accommodation.departureDateTime > activity.endDateTime ? accommodation : activity;
@@ -125,8 +125,8 @@ export const updateStepDates = async (stepId) => {
         throw new Error('Step not found');
     }
 
-    const accommodations = await Accommodation.find({ stepId });
-    const activities = await Activity.find({ stepId });
+    const accommodations = await Accommodation.find({ stepId, active: true });
+    const activities = await Activity.find({ stepId, active: true });
 
     // Fonction pour convertir une date en format ISO 8601
     const toISODateString = (date) => {

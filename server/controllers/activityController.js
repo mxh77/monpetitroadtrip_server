@@ -57,6 +57,7 @@ export const createActivityForStep = async (req, res) => {
         }
 
         const activity = new Activity({
+            active: data.active,
             name: data.name,
             address: data.address,
             latitude: coordinates.lat,
@@ -170,6 +171,9 @@ export const updateActivity = async (req, res) => {
         }
 
         // Mettre à jour les champs de l'activité
+        if (data.active !== undefined) {
+            activity.active = data.active;
+        }
         activity.name = data.name || activity.name //Obligatoire
         activity.address = data.address || activity.address //Obligatoire
         activity.website = data.website || activity.website
@@ -313,26 +317,26 @@ export const updateActivityDates = async (req, res) => {
 
 // Méthode pour obtenir les informations d'une activité
 export const getActivityById = async (req, res) => {
-        try {
-            const activity = await Activity.findById(req.params.idActivity)
-                .populate('documents')
-                .populate('photos')
-                .populate('thumbnail');
-    
-            if (!activity) {
-                return res.status(404).json({ msg: 'Activité non trouvé !' });
-            }
-    
-            // Vérifier si l'utilisateur est le propriétaire de l'activité
-            if (activity.userId.toString() !== req.user.id) {
-                return res.status(401).json({ msg: 'User not authorized' });
-            }
-    
-            res.json(activity);
-        } catch (err) {
-            console.error(err.message);
-            res.status(500).send('Server error');
+    try {
+        const activity = await Activity.findById(req.params.idActivity)
+            .populate('documents')
+            .populate('photos')
+            .populate('thumbnail');
+
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvé !' });
         }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'activité
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        res.json(activity);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
 };
 
 // Méthode pour supprimer une activité
