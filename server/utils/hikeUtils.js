@@ -73,14 +73,23 @@ export const fetchTrailDetails = async (trailId) => {
         }
     );
 
-    return response.data;
+    const trail = response.data.trails[0]; // Récupérer le premier trail de la réponse
+    console.log('Trail details:', trail); // Debugging
+    return {
+        id: trail.id,
+        name: trail.name,
+        overview: trail.overview,
+        routeType: trail.routeType?.name || 'Type de route inconnu', // Récupérer le type de route
+        popularity: trail.popularity,
+        location: trail.location,
+    };
 };
 
 // Fonction pour récupérer les avis d'un trail via l'API AllTrails
 export const fetchTrailReviews = async (trailId, limit = 5) => {
-const datadomeCookie = await getCachedDatadomeCookie();
+    const datadomeCookie = await getCachedDatadomeCookie();
 
-        const response = await axios.post(
+    const response = await axios.post(
         `https://www.alltrails.com/api/alltrails/v2/trails/${trailId}/reviews/search`,
         { limit },
         {

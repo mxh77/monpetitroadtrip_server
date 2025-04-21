@@ -470,17 +470,18 @@ export const getHikeSuggestions = async (req, res) => {
                     return {
                         id: trail.ID,
                         name: trail.name,
-                        popularity: trail.popularity,
-                        length: trail.length,
-                        elevationGain: trail.elevation_gain,
+                        popularity: parseFloat(trail.popularity.toFixed(2)), // Arrondi à 2 décimales
+                        length: Math.ceil(trail.length), // Arrondi au mètre supérieur
+                        elevationGain: Math.ceil(trail.elevation_gain), // Arrondi au mètre supérieur
                         avgRating: trail.avg_rating,
                         durationMinutes: trail.duration_minutes,
+                        routeType: trailDetails.routeType, // Inclure le type de route
                         description: trail.description,
                         location: trail._geoloc,
                         reviews
                     };
                 } catch (error) {
-                     console.error(`Error fetching details for trail ID ${trail.ID}:`, error);
+                    console.error(`Error fetching details for trail ID ${trail.ID}:`, error);
                     return null;
                 }
             })
