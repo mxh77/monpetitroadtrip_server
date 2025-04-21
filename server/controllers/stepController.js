@@ -465,8 +465,13 @@ export const getHikeSuggestions = async (req, res) => {
 
                     const trailDetails = await fetchTrailDetails(trail.ID);
 
-                    const reviews = await fetchTrailReviews(trail.ID);
+                    //Pause aléatoire entre 1 et 3s
+                    const randomDelay = Math.floor(Math.random() * 2000) + 1000;
+                    await new Promise((resolve) => setTimeout(resolve, randomDelay));
 
+                    // const reviews = await fetchTrailReviews(trail.ID);
+                    const reviews = null
+                    
                     return {
                         id: trail.ID,
                         thumbnail: trailDetails.defaultPhotoUrl, // URL de la photo du trail
