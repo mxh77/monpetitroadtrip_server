@@ -28,6 +28,11 @@ router.patch('/:idStep/refresh-travel-time', auth, stepController.refreshTravelT
 // Route protégée pour obtenir les informations d'un step
 router.get('/:idStep', auth, stepController.getStepById);
 
+// Route protégée pour obtenir les randonnées d'un step
+router.get('/:idStep/hikes-algolia', auth, stepController.getHikesFromAlgolia);
+
+router.get('/:idStep/hikes-suggestion', auth, stepController.getHikeSuggestions);
+
 /********METHOD DELETE ********/
 // Route protégée pour supprimer un step
 router.delete('/:idStep', auth, stepController.deleteStep);

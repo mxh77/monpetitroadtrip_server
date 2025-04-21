@@ -3,11 +3,11 @@ import Step from '../models/Step.js';
 import Accommodation from '../models/Accommodation.js';
 import Activity from '../models/Activity.js';
 import File from '../models/File.js';
-import { calculateTravelTime, getCoordinates } from '../utils/googleMapsUtils.js';
+import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
-import e from 'express';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
-
+import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
+import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails, fetchTrailReviews } from '../utils/hikeUtils.js';
 
 // Méthode pour créer un nouveau step pour un roadtrip donné
 export const createStepForRoadtrip = async (req, res) => {
@@ -377,6 +377,136 @@ export const getStepById = async (req, res) => {
     }
 };
 
+// Méthode pour obtenir les randonnées d'un step
+export const getHikesFromAlgolia = async (req, res) => {
+    try {
+        const { idStep } = req.params;
+
+        // Récupérer le step par son ID
+        const step = await Step.findById(idStep);
+
+        if (!step) {
+            return res.status(404).json({ msg: 'Step not found' });
+        }
+
+        if (!step.address) {
+            return res.status(400).json({ msg: 'Step address is required to fetch hikes' });
+        }
+
+        // Obtenir les coordonnées de l'adresse
+        const coordinatesString = await getCoordinates(step.address);
+
+        if (!coordinatesString) {
+            return res.status(400).json({ msg: 'Unable to fetch coordinates for the given address' });
+        }
+
+        // Convertir la chaîne de coordonnées en objet { lat, lng }
+        const [lat, lng] = coordinatesString.split(' ').map(Number);
+        const coordinates = { lat, lng };
+
+        console.log('Parsed Coordinates:', coordinates);
+
+        // Scraper les randonnées avec Puppeteer
+        const hikes = await fetchTrailsFromAlgolia(coordinates);
+
+        res.json({
+            step: {
+                id: step._id,
+                name: step.name,
+                address: step.address,
+                coordinates,
+            },
+            hikes,
+        });
+    } catch (error) {
+        console.error('Error fetching hikes for step:', error);
+        res.status(500).send('Server error');
+    }
+};
+
+export const getHikeSuggestions = async (req, res) => {
+    try {
+        const { idStep } = req.params;
+
+        // Récupérer le step par son ID
+        const step = await Step.findById(idStep);
+
+        if (!step) {
+            return res.status(404).json({ msg: 'Step not found' });
+        }
+
+        if (!step.address) {
+            return res.status(400).json({ msg: 'Step address is required to fetch hikes' });
+        }
+
+        // Obtenir les coordonnées de l'adresse
+        const coordinatesString = await getCoordinates(step.address);
+
+        if (!coordinatesString) {
+            return res.status(400).json({ msg: 'Unable to fetch coordinates for the given address' });
+        }
+
+        // Convertir la chaîne de coordonnées en objet { lat, lng }
+        const [lat, lng] = coordinatesString.split(' ').map(Number);
+        const coordinates = { lat, lng };
+
+        console.log('Parsed Coordinates:', coordinates);
+
+        // Étape 1 : Récupérer les trails depuis l'API Algolia
+        console.log('Fetching trails from Algolia...');
+        const trails = await fetchTrailsFromAlgoliaAPI(coordinates);
+        console.log('Trails fetched:', trails);
+
+        // Étape 2 : Récupérer les détails et avis pour chaque trail
+        const detailedTrails = await Promise.all(
+            trails.map(async (trail) => {
+                try {
+
+                    const trailDetails = await fetchTrailDetails(trail.ID);
+
+                    const reviews = await fetchTrailReviews(trail.ID);
+
+                    // Générer une synthèse des avis
+                    // const reviewsSummary = await genererSyntheseAvis(reviews);
+
+                    return {
+                        id: trail.ID,
+                        name: trail.name,
+                        popularity: trail.popularity,
+                        length: trail.length,
+                        elevationGain: trail.elevation_gain,
+                        avgRating: trail.avg_rating,
+                        durationMinutes: trail.duration_minutes,
+                        description: trail.description,
+                        location: trail._geoloc,
+                        reviews
+                    };
+                } catch (error) {
+                     console.error(`Error fetching details for trail ID ${trail.ID}:`, error);
+                    return null;
+                }
+            })
+        );
+
+        console.log('Trail details:', detailedTrails);
+
+        // Filtrer les trails valides
+        const validTrails = detailedTrails.filter((trail) => trail !== null);
+
+        res.json({
+            step: {
+                id: step._id,
+                name: step.name,
+                address: step.address,
+                coordinates
+            },
+            hikes: validTrails
+        });
+    } catch (error) {
+        console.error('Error fetching hike suggestions:', error);
+        res.status(500).send('Server error');
+    }
+};
 //Méthode pour supprimer une étape
 export const deleteStep = async (req, res) => {
     try {

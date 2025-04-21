@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const StopSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     roadtripId: { type: Schema.Types.ObjectId, ref: 'Roadtrip', required: true },
+    type: { type: String, enum: ['Randonnée', 'Courses', 'Visite','Autre'], default: 'Randonnée' },
     name: { type: String, required: true },
     address: { type: String, default: '' },
     latitude: { type: Number, default: 0 },
@@ -27,6 +28,9 @@ const StopSchema = new Schema({
     },
     reservationNumber: { type: String, default: '' },
     price: { type: Number, default: 0 },
+    trailDistance: { type: Number, default: 0 },
+    trailElevation: { type: Number, default: 0 },
+    trailType: { type: String, default: '' },
     notes: { type: String, default: '' },
     photos: [{ type: Schema.Types.ObjectId, ref: 'File' }],
     documents: [{ type: Schema.Types.ObjectId, ref: 'File' }],
