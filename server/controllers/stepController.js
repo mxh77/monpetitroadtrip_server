@@ -469,7 +469,7 @@ export const getHikeSuggestions = async (req, res) => {
 
                     return {
                         id: trail.ID,
-                        defaultPhoto: trailDetails.defaultPhotoUrl, // URL de la photo du trail
+                        thumbnail: trailDetails.defaultPhotoUrl, // URL de la photo du trail
                         name: trail.name,
                         popularity: parseFloat(trail.popularity.toFixed(2)), // Arrondi à 2 décimales
                         length: Math.ceil(trail.length), // Arrondi au mètre supérieur

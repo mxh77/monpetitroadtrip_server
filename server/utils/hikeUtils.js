@@ -3,7 +3,7 @@ import { getCachedDatadomeCookie } from './datadome.js';
 
 
 // Fonction pour récupérer les trails depuis l'API Algolia
-export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 5000, limit = 20) => {
+export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 20000, limit = 20, limitLength = 13000) => {
     const { lat, lng } = coordinates;
 
     const payload = {
@@ -22,6 +22,7 @@ export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 5000, limi
         ],
         hitsPerPage: limit,
         facetFilters: [["type:trail"]],
+        numericFilters: [`length < ${limitLength}`],
         aroundLatLng: `${lat}, ${lng}`,
         aroundRadius: radius,
         attributesToHighlight: ["name"],
