@@ -33,6 +33,10 @@ router.get('/:idStep/hikes-algolia', auth, stepController.getHikesFromAlgolia);
 
 router.get('/:idStep/hikes-suggestion', auth, stepController.getHikeSuggestions);
 
+// Route pour générer une synthèse des avis
+router.get('/trails/:idTrail/reviews/summary', auth, stepController.generateReviewSummary);
+
+
 /********METHOD DELETE ********/
 // Route protégée pour supprimer un step
 router.delete('/:idStep', auth, stepController.deleteStep);

@@ -8,6 +8,7 @@ import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
 import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails, fetchTrailReviews } from '../utils/hikeUtils.js';
+import { genererSyntheseAvis } from '../utils/openaiUtils.js';
 
 // Méthode pour créer un nouveau step pour un roadtrip donné
 export const createStepForRoadtrip = async (req, res) => {
@@ -466,9 +467,6 @@ export const getHikeSuggestions = async (req, res) => {
 
                     const reviews = await fetchTrailReviews(trail.ID);
 
-                    // Générer une synthèse des avis
-                    // const reviewsSummary = await genererSyntheseAvis(reviews);
-
                     return {
                         id: trail.ID,
                         name: trail.name,
@@ -492,6 +490,8 @@ export const getHikeSuggestions = async (req, res) => {
 
         // Filtrer les trails valides
         const validTrails = detailedTrails.filter((trail) => trail !== null);
+        //Trier les trails par popularité
+        validTrails.sort((a, b) => b.popularity - a.popularity);
 
         res.json({
             step: {
@@ -507,6 +507,33 @@ export const getHikeSuggestions = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+
+export const generateReviewSummary = async (req, res) => {
+    try {
+        const { idTrail } = req.params;
+        const { maxReviews } = req.query; // Nombre maximum d'avis à prendre en compte (optionnel)
+
+        // Récupérer les avis du trail
+        const reviews = await fetchTrailReviews(idTrail, maxReviews || 5);
+
+        if (!reviews || reviews.length === 0) {
+            return res.status(404).json({ msg: 'No reviews found for this trail' });
+        }
+
+        // Générer une synthèse des avis
+        const reviewSummary = await genererSyntheseAvis(reviews);
+
+        res.json({
+            trailId: idTrail,
+            reviewSummary,
+            reviewsCount: reviews.length,
+        });
+    } catch (error) {
+        console.error('Error generating review summary:', error);
+        res.status(500).json({ msg: 'Failed to generate review summary' });
+    }
+};
+
 //Méthode pour supprimer une étape
 export const deleteStep = async (req, res) => {
     try {
