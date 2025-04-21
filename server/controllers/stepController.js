@@ -469,6 +469,7 @@ export const getHikeSuggestions = async (req, res) => {
 
                     return {
                         id: trail.ID,
+                        defaultPhoto: trailDetails.defaultPhotoUrl, // URL de la photo du trail
                         name: trail.name,
                         popularity: parseFloat(trail.popularity.toFixed(2)), // Arrondi à 2 décimales
                         length: Math.ceil(trail.length), // Arrondi au mètre supérieur
@@ -491,8 +492,6 @@ export const getHikeSuggestions = async (req, res) => {
 
         // Filtrer les trails valides
         const validTrails = detailedTrails.filter((trail) => trail !== null);
-        //Trier les trails par popularité
-        validTrails.sort((a, b) => b.popularity - a.popularity);
 
         res.json({
             step: {

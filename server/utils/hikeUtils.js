@@ -3,7 +3,7 @@ import { getCachedDatadomeCookie } from './datadome.js';
 
 
 // Fonction pour récupérer les trails depuis l'API Algolia
-export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 5000, limit = 50) => {
+export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 5000, limit = 20) => {
     const { lat, lng } = coordinates;
 
     const payload = {
@@ -40,7 +40,9 @@ export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 5000, limi
         }
     );
 
-    return response.data.hits;
+    return response.data.hits
+        .sort((a, b) => b.popularity - a.popularity)
+        .slice(0, 10);
 };
 
 // Fonction pour récupérer les détails d'un trail via l'API AllTrails
@@ -73,15 +75,48 @@ export const fetchTrailDetails = async (trailId) => {
         }
     );
 
-    const trail = response.data.trails[0]; // Récupérer le premier trail de la réponse
-    console.log('Trail details:', trail); // Debugging
+    const trail = response.data.trails[0]; // Le trail concerné
+    let photoUrl = null;
+
+    if (trail.defaultPhoto.id) {
+        try {
+            const photoRes = await axios.get(
+                `https://www.alltrails.com/photos/${trail.defaultPhoto.id}/credit-link?provide_set_as_default=true`,
+                {
+                    headers: {
+                        'Accept': '*/*',
+                        'Accept-Encoding': 'gzip, deflate, br, zstd',
+                        'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache',
+                        'Connection': 'keep-alive',
+                        "Cookie": datadomeCookie,
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0',
+                        'X-AT-CALLER': 'Mugen',
+                        'X-AT-KEY': process.env.ALLTRAILS_API_KEY,
+                        'X-CSRF-TOKEN': 'undefined',
+                        'X-Language-Locale': 'fr-FR',
+                        'Origin': 'https://www.alltrails.com',
+                        'Host': 'www.alltrails.com'
+                    }
+                }
+            );
+
+            console.log('Photo URL:', photoRes);
+            photoUrl = photoRes.data?.photo?.image?.url || null;
+        } catch (error) {
+            console.warn('Erreur lors de la récupération de la photo par défaut :', error.message);
+        }
+    }
+
     return {
         id: trail.id,
         name: trail.name,
         overview: trail.overview,
-        routeType: trail.routeType?.name || 'Type de route inconnu', // Récupérer le type de route
+        routeType: trail.routeType?.name || 'Type de route inconnu',
         popularity: trail.popularity,
         location: trail.location,
+        defaultPhotoUrl: photoUrl, // 🎉 Ajout ici
     };
 };
 
