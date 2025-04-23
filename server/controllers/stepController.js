@@ -464,7 +464,6 @@ export const getHikeSuggestions = async (req, res) => {
                 try {
 
                     const trailDetails = await fetchTrailDetails(trail.ID);
-                    // const trailDetails = await getTrailDetailsWithPlaywright(trail.ID);
 
                     //Pause aléatoire entre 1 et 3s
                     const randomDelay = Math.floor(Math.random() * 2000) + 1000;

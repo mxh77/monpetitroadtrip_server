@@ -4,6 +4,7 @@ import { getCachedDatadomeCookie } from './datadome.js';
 
 // Fonction pour récupérer les trails depuis l'API Algolia
 export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 5000, limit = 50) => {
+    console
     const { lat, lng } = coordinates;
 
     const payload = {
@@ -40,7 +41,10 @@ export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 5000, limi
         }
     );
 
-    return response.data.hits;
+    const sortedHits = response.data.hits
+        .sort((a, b) => b.popularity - a.popularity) // Trier par popularité décroissante
+        .slice(0, 10); // Limiter à 10 résultats
+    return sortedHits;
 };
 
 // Fonction pour récupérer les détails d'un trail via l'API AllTrails
