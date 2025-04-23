@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const CACHE_FILE = path.join(__dirname, 'datadome_cache.json');
-const COOKIE_TTL_MS = 1000 * 60 * 60; // 1 heure
+const COOKIE_TTL_MS = 1000 * 2; // 10 secondes
 
 async function getDatadomeFromBrowser() {
   const browser = await puppeteer.launch({ headless: 'new' });

@@ -7,7 +7,7 @@ import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
-import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails, fetchTrailReviews } from '../utils/hikeUtils.js';
+import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails } from '../utils/hikeUtils.js';
 import { genererSyntheseAvis } from '../utils/openaiUtils.js';
 
 // Méthode pour créer un nouveau step pour un roadtrip donné
@@ -456,7 +456,7 @@ export const getHikeSuggestions = async (req, res) => {
         // Étape 1 : Récupérer les trails depuis l'API Algolia
         console.log('Fetching trails from Algolia...');
         const trails = await fetchTrailsFromAlgoliaAPI(coordinates);
-        console.log('Trails fetched:', trails);
+        // console.log('Trails fetched:', trails);
 
         // Étape 2 : Récupérer les détails et avis pour chaque trail
         const detailedTrails = await Promise.all(
@@ -464,6 +464,7 @@ export const getHikeSuggestions = async (req, res) => {
                 try {
 
                     const trailDetails = await fetchTrailDetails(trail.ID);
+                    // const trailDetails = await getTrailDetailsWithPlaywright(trail.ID);
 
                     //Pause aléatoire entre 1 et 3s
                     const randomDelay = Math.floor(Math.random() * 2000) + 1000;
@@ -471,7 +472,7 @@ export const getHikeSuggestions = async (req, res) => {
 
                     // const reviews = await fetchTrailReviews(trail.ID);
                     const reviews = null
-                    
+
                     return {
                         id: trail.ID,
                         thumbnail: trailDetails.defaultPhotoUrl, // URL de la photo du trail
