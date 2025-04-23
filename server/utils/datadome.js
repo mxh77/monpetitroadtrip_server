@@ -1,40 +1,67 @@
 import fs from 'fs/promises';
 import path from 'path';
 import puppeteer from 'puppeteer';
+import chromium from 'chrome-aws-lambda';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const CACHE_FILE = path.join(__dirname, 'datadome_cache.json');
-const COOKIE_TTL_MS = 1000 * 2; // 10 secondes
+const COOKIE_TTL_MS = 1000 * 60 * 10; // 10 minutes
 
 async function getDatadomeFromBrowser() {
-  const browser = await puppeteer.launch({ headless: 'new' });
-  const page = await browser.newPage();
+  const isVercel = !!process.env.VERCEL; // Détecter si on est sur Vercel
+  let browser;
 
-  await page.goto('https://www.alltrails.com', {
-    waitUntil: 'networkidle2',
-    timeout: 60000
-  });
+  try {
+    if (isVercel) {
+      // Configuration pour Vercel
+      browser = await chromium.puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: chromium.headless,
+      });
+    } else {
+      // Configuration pour local
+      browser = await puppeteer.launch({
+        headless: true,
+      });
+    }
 
-  await new Promise(resolve => setTimeout(resolve, 3000));
+    const page = await browser.newPage();
 
-  const cookies = await page.cookies();
-  await browser.close();
+    // Naviguer vers la page pour récupérer le cookie DataDome
+    await page.goto('https://www.alltrails.com', {
+      waitUntil: 'networkidle2',
+      timeout: 60000,
+    });
 
-  const datadome = cookies.find(c => c.name === 'datadome');
-  if (!datadome) throw new Error('Cookie datadome non trouvé');
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // Attendre que DataDome s'exécute
 
-  const cookieValue = `${datadome.name}=${datadome.value}`;
+    const cookies = await page.cookies();
+    await browser.close();
 
-  // Save to cache
-  await fs.writeFile(CACHE_FILE, JSON.stringify({
-    value: cookieValue,
-    createdAt: Date.now()
-  }, null, 2));
+    const datadome = cookies.find((c) => c.name === 'datadome');
+    if (!datadome) throw new Error('Cookie datadome non trouvé');
 
-  return cookieValue;
+    const cookieValue = `${datadome.name}=${datadome.value}`;
+
+    // Sauvegarder le cookie dans le cache
+    await fs.writeFile(
+      CACHE_FILE,
+      JSON.stringify({
+        value: cookieValue,
+        createdAt: Date.now(),
+      }, null, 2)
+    );
+
+    return cookieValue;
+  } catch (error) {
+    if (browser) await browser.close();
+    throw error;
+  }
 }
 
 async function getCachedDatadomeCookie() {
@@ -44,13 +71,13 @@ async function getCachedDatadomeCookie() {
 
     const age = Date.now() - createdAt;
     if (age < COOKIE_TTL_MS) {
-      return value;
+      return value; // Retourner le cookie si encore valide
     }
 
-    // Cookie expiré → on en récupère un nouveau
+    // Cookie expiré → en récupérer un nouveau
     return await getDatadomeFromBrowser();
   } catch (err) {
-    // Fichier manquant ou invalide → on en récupère un nouveau
+    // Fichier manquant ou invalide → en récupérer un nouveau
     return await getDatadomeFromBrowser();
   }
 }
