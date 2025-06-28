@@ -33,6 +33,9 @@ router.get('/:idStep/hikes-algolia', auth, stepController.getHikesFromAlgolia);
 
 router.get('/:idStep/hikes-suggestion', auth, stepController.getHikeSuggestions);
 
+// Route pour générer le récit chronologique d'un step
+router.get('/:idStep/story', auth, stepController.generateStepStory);
+
 // Route pour générer une synthèse des avis
 router.get('/trails/:idTrail/reviews/summary', auth, stepController.generateReviewSummary);
 

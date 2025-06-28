@@ -49,7 +49,7 @@ export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 5000, limi
 
 // Fonction pour récupérer les détails d'un trail via l'API AllTrails
 export const fetchTrailDetails = async (trailId) => {
-    // const datadomeCookie = await getCachedDatadomeCookie();
+    const datadomeCookie = await getCachedDatadomeCookie();
 
     const response = await axios.get(
         `https://www.alltrails.com/api/alltrails/trails/${trailId}`,
@@ -62,7 +62,7 @@ export const fetchTrailDetails = async (trailId) => {
                 'Pragma': 'no-cache',
                 'Connection': 'keep-alive',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0',
-                // "Cookie": datadomeCookie,
+                "Cookie": datadomeCookie,
                 'X-AT-CALLER': 'Mugen',
                 'X-AT-KEY': process.env.ALLTRAILS_API_KEY,
                 'X-CSRF-TOKEN': 'undefined',

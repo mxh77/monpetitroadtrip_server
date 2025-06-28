@@ -3,12 +3,13 @@ import Step from '../models/Step.js';
 import Accommodation from '../models/Accommodation.js';
 import Activity from '../models/Activity.js';
 import File from '../models/File.js';
+import mongoose from 'mongoose';
 import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
 import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails } from '../utils/hikeUtils.js';
-import { genererSyntheseAvis } from '../utils/openaiUtils.js';
+import { genererSyntheseAvis, genererRecitStep } from '../utils/openaiUtils.js';
 
 // Méthode pour créer un nouveau step pour un roadtrip donné
 export const createStepForRoadtrip = async (req, res) => {
@@ -651,5 +652,148 @@ export const refreshTravelTimeForStepWrapper = async (req, res) => {
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour générer le récit chronologique d'un step
+export const generateStepStory = async (req, res) => {
+    try {
+        const { idStep } = req.params;
+
+        // Récupérer le step
+        const step = await Step.findById(idStep);
+
+        if (!step) {
+            return res.status(404).json({ msg: 'Step not found' });
+        }
+
+        // Vérifier si l'utilisateur est autorisé à accéder à ce step
+        if (step.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        // Récupérer toutes les accommodations liées à ce step
+        console.log('Searching accommodations with stepId:', idStep);
+        const accommodations = await Accommodation.find({ 
+            stepId: new mongoose.Types.ObjectId(idStep), 
+            active: true 
+        });
+
+        // Récupérer toutes les activités liées à ce step
+        console.log('Searching activities with stepId:', idStep);
+        
+        // D'abord, récupérons toutes les activités pour debug
+        const allActivities = await Activity.find({ stepId: new mongoose.Types.ObjectId(idStep) });
+        console.log(`Debug - Total activities for step ${idStep}:`, allActivities.length);
+        console.log('Activities details:', allActivities.map(act => ({ 
+            id: act._id, 
+            name: act.name, 
+            active: act.active, 
+            activeType: typeof act.active 
+        })));
+
+        // Filtrer les activités actives côté JavaScript pour avoir plus de contrôle
+        const activities = allActivities.filter(act => {
+            // Gérer différents types de valeurs pour 'active'
+            if (act.active === true || act.active === 'true' || act.active === 1) {
+                return true;
+            }
+            // Si active n'est pas défini, considérer comme actif par défaut
+            if (act.active === undefined || act.active === null) {
+                return true;
+            }
+            return false;
+        });
+
+        console.log('Activities after filtering:', activities.length);
+
+        console.log(`Step ${idStep}: Found ${accommodations.length} accommodations and ${activities.length} activities`);
+        console.log('Activities found:', activities.map(act => ({ id: act._id, name: act.name, startDateTime: act.startDateTime })));
+
+        // Tri côté JavaScript pour gérer les valeurs nulles
+        accommodations.sort((a, b) => {
+            const dateA = a.arrivalDateTime ? new Date(a.arrivalDateTime) : new Date(0);
+            const dateB = b.arrivalDateTime ? new Date(b.arrivalDateTime) : new Date(0);
+            return dateA - dateB;
+        });
+
+        activities.sort((a, b) => {
+            const dateA = a.startDateTime ? new Date(a.startDateTime) : new Date(0);
+            const dateB = b.startDateTime ? new Date(b.startDateTime) : new Date(0);
+            return dateA - dateB;
+        });
+
+        // Préparer les données pour le LLM
+        const stepData = {
+            step: {
+                name: step.name,
+                type: step.type,
+                address: step.address,
+                arrivalDateTime: step.arrivalDateTime,
+                departureDateTime: step.departureDateTime,
+                distancePreviousStep: step.distancePreviousStep,
+                travelTimePreviousStep: step.travelTimePreviousStep,
+                notes: step.notes
+            },
+            accommodations: accommodations.map(acc => ({
+                name: acc.name,
+                address: acc.address,
+                arrivalDateTime: acc.arrivalDateTime,
+                departureDateTime: acc.departureDateTime,
+                nights: acc.nights,
+                price: acc.price,
+                currency: acc.currency,
+                reservationNumber: acc.reservationNumber,
+                confirmationDateTime: acc.confirmationDateTime,
+                notes: acc.notes
+            })),
+            activities: activities.map(act => ({
+                name: act.name,
+                type: act.type,
+                address: act.address,
+                startDateTime: act.startDateTime,
+                endDateTime: act.endDateTime,
+                duration: act.duration,
+                typeDuration: act.typeDuration,
+                price: act.price,
+                currency: act.currency,
+                reservationNumber: act.reservationNumber,
+                trailDistance: act.trailDistance,
+                trailElevation: act.trailElevation,
+                trailType: act.trailType,
+                notes: act.notes
+            }))
+        };
+
+        // Générer le récit avec OpenAI
+        const result = await genererRecitStep(stepData);
+
+        res.json({
+            stepId: idStep,
+            stepName: step.name,
+            story: result.story,
+            prompt: result.prompt,
+            generatedAt: new Date().toISOString(),
+            dataUsed: {
+                stepInfo: !!step.name || !!step.address || !!step.notes,
+                accommodationsCount: accommodations.length,
+                activitiesCount: activities.length
+            }
+        });
+
+    } catch (error) {
+        console.error('Error generating step story:', error);
+        
+        if (error.message.includes('OpenAI')) {
+            return res.status(503).json({ 
+                msg: 'Service temporarily unavailable', 
+                error: 'Unable to generate story due to AI service error' 
+            });
+        }
+        
+        res.status(500).json({ 
+            msg: 'Server error', 
+            error: error.message 
+        });
     }
 };

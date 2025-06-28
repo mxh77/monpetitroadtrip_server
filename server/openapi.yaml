@@ -422,4 +422,75 @@ paths:
           description: Non autorisé
         '500':
           description: Erreur interne du serveur
+  /steps/{idStep}/story:
+    get:
+      summary: Générer le récit chronologique d'un step
+      description: Utilise un LLM pour créer un récit engageant et chronologique du déroulement d'un step, incluant tous ses éléments (hébergements, activités, notes, prix, etc.)
+      tags:
+        - Steps
+        - AI Features
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: idStep
+          required: true
+          schema:
+            type: string
+          description: ID du step pour lequel générer le récit
+      responses:
+        '200':
+          description: Récit généré avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stepId:
+                    type: string
+                    description: ID du step
+                  stepName:
+                    type: string
+                    description: Nom du step
+                  story:
+                    type: string
+                    description: Récit chronologique généré par IA
+                  prompt:
+                    type: string
+                    description: Prompt utilisé pour générer le récit avec le LLM
+                  generatedAt:
+                    type: string
+                    format: date-time
+                    description: Date et heure de génération du récit
+                  dataUsed:
+                    type: object
+                    properties:
+                      stepInfo:
+                        type: boolean
+                        description: Indique si les informations du step ont été utilisées
+                      accommodationsCount:
+                        type: integer
+                        description: Nombre d'hébergements inclus dans le récit
+                      activitiesCount:
+                        type: integer
+                        description: Nombre d'activités incluses dans le récit
+        '401':
+          description: Non autorisé - utilisateur non authentifié
+        '404':
+          description: Step non trouvé
+        '503':
+          description: Service temporairement indisponible (erreur du service IA)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Service temporarily unavailable"
+                  error:
+                    type: string
+                    example: "Unable to generate story due to AI service error"
+        '500':
+          description: Erreur interne du serveur
 tags: []
