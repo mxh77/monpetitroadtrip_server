@@ -22,13 +22,7 @@
     ],
     "build": {
         "env": {
-            "NODE_VERSION": "14" 
-        }
-    },
-    "functions": {
-        "api/*.js": {
-            "memory": 1024,
-            "maxDuration": 10
+            "NODE_VERSION": "18" 
         }
     }
 }
