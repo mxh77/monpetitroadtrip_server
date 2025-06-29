@@ -563,28 +563,6 @@ export const deleteDocumentFromActivity = async (req, res) => {
     }
 };
 
-// Associer ou mettre à jour l'identifiant Algolia d'une activité
-export const setAlgoliaIdForActivity = async (req, res) => {
-    try {
-        const activity = await Activity.findById(req.params.idActivity);
-        if (!activity) {
-            return res.status(404).json({ msg: 'Activité non trouvée' });
-        }
-        if (activity.userId.toString() !== req.user.id) {
-            return res.status(401).json({ msg: 'User not authorized' });
-        }
-        if (!req.body.algoliaId) {
-            return res.status(400).json({ msg: 'algoliaId requis' });
-        }
-        activity.algoliaId = req.body.algoliaId;
-        await activity.save();
-        res.json({ msg: 'AlgoliaId mis à jour', algoliaId: activity.algoliaId });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
-};
-
 // Recherche de randonnées dans Algolia (proxy sécurisé)
 export const searchAlgoliaHikes = async (req, res) => {
     try {

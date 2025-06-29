@@ -51,10 +51,7 @@ router.patch('/:idActivity/photos', auth, upload.fields([
     { name: 'photos', maxCount: 10 }
 ]), activityController.addPhotosToActivity);
 
-// Associer un algoliaId à une activité
-router.patch('/:idActivity/algolia', activityController.setAlgoliaIdForActivity);
-
-// Associer une activité à un résultat de recherche Algolia (plus simple)
+// Associer une activité à un résultat de recherche Algolia
 router.post('/:idActivity/link/algolia', auth, activityController.linkActivityToAlgoliaResult);
 
 /********METHOD GET********/
