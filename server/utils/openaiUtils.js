@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { getAvisRandonnéeViaAlgolia } from './algoliaUtils.js';
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -126,4 +127,22 @@ Récit :`;
         console.error('Error in OpenAI API call for step story:', error.response?.data || error.message);
         throw new Error('Failed to generate step story from OpenAI');
     }
+};
+
+/**
+ * Récupère les avis d'une randonnée via Algolia (infos .env) et génère une synthèse IA
+ * @param {string} nomRandonnee - Le nom de la randonnée à rechercher
+ * @param {string} indexName - Le nom de l'index Algolia à utiliser
+ * @param {number} [maxAvis=10] - Nombre maximum d'avis à récupérer
+ * @returns {Promise<string>} - Synthèse générée
+ */
+export const genererSyntheseAvisRandonnée = async (nomRandonnee, indexName, maxAvis = 10) => {
+    const applicationId = process.env.ALGOLIA_APP_ID;
+    const apiKey = process.env.ALGOLIA_API_KEY;
+    const avis = await getAvisRandonnéeViaAlgolia(applicationId, apiKey, indexName, nomRandonnee, maxAvis);
+    const avisArray = avis.map(a => ({
+        comment: a.comment || a.text || '',
+        rating: a.rating || a.stars || 0
+    }));
+    return await genererSyntheseAvis(avisArray);
 };

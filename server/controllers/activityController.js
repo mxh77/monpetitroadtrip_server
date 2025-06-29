@@ -6,6 +6,62 @@ import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 
+/**
+ * Fonction spécifique pour convertir une adresse en coordonnées pour la recherche Algolia
+ * Parse la string retournée par getCoordinates (format "lat lng") en objet {lat, lng}
+ * @param {string} address - L'adresse à convertir
+ * @returns {Promise<{lat: number|null, lng: number|null}>} - Coordonnées parsées
+ */
+async function getCoordinatesForAlgolia(address) {
+    if (!address) {
+        return { lat: null, lng: null };
+    }
+    
+    try {
+        // getCoordinates retourne une string au format "lat lng"
+        const coordinatesString = await getCoordinates(address);
+        
+        if (!coordinatesString || typeof coordinatesString !== 'string') {
+            return { lat: null, lng: null };
+        }
+        
+        // Parser la string avec regex pour gérer les espaces multiples
+        const parts = coordinatesString.trim().split(/\s+/);
+        if (parts.length !== 2) {
+            return { lat: null, lng: null };
+        }
+        
+        const lat = parseFloat(parts[0]);
+        const lng = parseFloat(parts[1]);
+        
+        if (isNaN(lat) || isNaN(lng)) {
+            return { lat: null, lng: null };
+        }
+        
+        return { lat, lng };
+        
+    } catch (error) {
+        console.error('Erreur lors de la conversion d\'adresse pour Algolia:', error.message);
+        return { lat: null, lng: null };
+    }
+}
+
+/**
+ * Calcule la distance en mètres entre deux coordonnées géographiques
+ * Utilise la formule de Haversine
+ */
+function calculateDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371000; // Rayon de la Terre en mètres
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLng/2) * Math.sin(dLng/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c; // Distance en mètres
+}
+
 // Méthode pour créer une nouvelle activité pour une étape donnée
 export const createActivityForStep = async (req, res) => {
     try {
@@ -503,5 +559,335 @@ export const deleteDocumentFromActivity = async (req, res) => {
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
+    }
+};
+
+// Associer ou mettre à jour l'identifiant Algolia d'une activité
+export const setAlgoliaIdForActivity = async (req, res) => {
+    try {
+        const activity = await Activity.findById(req.params.idActivity);
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvée' });
+        }
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+        if (!req.body.algoliaId) {
+            return res.status(400).json({ msg: 'algoliaId requis' });
+        }
+        activity.algoliaId = req.body.algoliaId;
+        await activity.save();
+        res.json({ msg: 'AlgoliaId mis à jour', algoliaId: activity.algoliaId });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Recherche de randonnées dans Algolia (proxy sécurisé)
+export const searchAlgoliaHikes = async (req, res) => {
+    try {
+        const { query, indexName, hitsPerPage = 5 } = req.body;
+        if (!query || !indexName) {
+            return res.status(400).json({ msg: 'query et indexName requis' });
+        }
+        
+        // Import et utilisation de l'API Algolia v5
+        const { algoliasearch } = await import('algoliasearch');
+        const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY);
+        
+        // Vérifier d'abord si l'index existe
+        try {
+            const { items } = await client.listIndices();
+            const indexExists = items.some(index => index.name === indexName);
+            
+            if (!indexExists) {
+                return res.status(404).json({ 
+                    msg: `L'index '${indexName}' n'existe pas`,
+                    availableIndices: items.map(index => index.name)
+                });
+            }
+        } catch (listError) {
+            console.warn('Impossible de vérifier les index disponibles:', listError.message);
+        }
+        
+        const { results } = await client.search([{
+            indexName,
+            query,
+            params: {
+                hitsPerPage
+            }
+        }]);
+        
+        res.json({
+            indexName,
+            query,
+            hitsPerPage,
+            results: results[0]?.hits || [],
+            nbHits: results[0]?.nbHits || 0
+        });
+    } catch (err) {
+        console.error('Erreur Algolia:', err.message);
+        
+        // Gestion spécifique des erreurs d'index
+        if (err.message.includes('does not exist')) {
+            return res.status(404).json({ 
+                msg: `L'index '${req.body.indexName}' n'existe pas sur Algolia`,
+                error: err.message,
+                suggestion: "Vérifiez le nom de l'index ou utilisez l'endpoint /activities/algolia/indices pour voir les index disponibles"
+            });
+        }
+        
+        res.status(500).json({ 
+            msg: 'Erreur lors de la recherche Algolia',
+            error: err.message 
+        });
+    }
+};
+
+// Recherche automatique de randonnées Algolia basée sur une activité existante
+export const searchAlgoliaHikesForActivity = async (req, res) => {
+    try {
+        const activity = await Activity.findById(req.params.idActivity);
+        
+        console.log("Activity pour la recherche Algolia:", activity);
+
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvée' });
+        }
+        
+        // Vérifier si l'utilisateur est le propriétaire de l'activité
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+        
+        // Convertir l'adresse en coordonnées si elles ne sont pas présentes
+        if (!activity.latitude || !activity.longitude) {
+            if (activity.address) {
+                console.log('🗺️ Conversion de l\'adresse en coordonnées:', activity.address);
+                const coordinates = await getCoordinatesForAlgolia(activity.address);
+                if (coordinates.lat && coordinates.lng) {
+                    activity.latitude = coordinates.lat;
+                    activity.longitude = coordinates.lng;
+                    await activity.save(); // Sauvegarder les coordonnées pour les prochaines fois
+                    console.log(`✅ Coordonnées obtenues: ${coordinates.lat}, ${coordinates.lng}`);
+                } else {
+                    console.log('⚠️ Impossible d\'obtenir des coordonnées valides');
+                }
+            } else {
+                console.log('⚠️ Aucune adresse disponible pour la géolocalisation');
+            }
+        }
+        
+        // Construction simple de la requête de recherche
+        let searchQuery = activity.name;
+        
+        // Ajouter l'adresse complète à la recherche
+        if (activity.address) {
+            searchQuery += ` ${activity.address}`;
+        }
+        
+        const { hitsPerPage = 10 } = req.query;
+        const indexName = 'alltrails_primary_fr-FR'; // Index par défaut découvert
+        
+        // Log de la requête de recherche pour debug
+        console.log('🔍 Recherche Algolia:', {
+            activityName: activity.name || 'N/A',
+            activityAddress: activity.address || 'N/A',
+            searchQuery: searchQuery,
+            indexName: indexName,
+            hitsPerPage: hitsPerPage,
+            coordinates: activity.latitude && activity.longitude ? 
+                `${activity.latitude}, ${activity.longitude}` : 'Non disponibles',
+            geoFiltering: activity.latitude && activity.longitude ? 'Activé (50km)' : 'Désactivé'
+        });
+        
+        // Import et utilisation de l'API Algolia v5
+        const { algoliasearch } = await import('algoliasearch');
+        const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY);
+        
+        const radiusMeters = 10000; // 50km de rayon
+        
+        const { results } = await client.search([{
+            indexName,
+            query: searchQuery,
+            params: {
+                hitsPerPage: hitsPerPage * 2, // Demander plus de résultats pour compenser le filtrage
+                filters: '', // Peut être étendu selon les besoins
+                getRankingInfo: true, // Pour récupérer les distances
+                // Recherche géographique si on a les coordonnées
+                ...(activity.latitude && activity.longitude && {
+                    aroundLatLng: `${activity.latitude},${activity.longitude}`,
+                    aroundRadius: radiusMeters
+                })
+            }
+        }]);
+        
+        let hits = results[0]?.hits || [];
+        
+        // Filtrage côté serveur pour respecter strictement le rayon
+        if (activity.latitude && activity.longitude) {
+            const originalCount = hits.length;
+            hits = hits.filter(hit => {
+                let distance = hit._rankingInfo?.geoDistance;
+                
+                // Si Algolia ne fournit pas la distance, la calculer nous-même
+                if (distance === undefined && hit._geoloc?.lat && hit._geoloc?.lng) {
+                    distance = calculateDistance(
+                        activity.latitude, 
+                        activity.longitude, 
+                        hit._geoloc.lat, 
+                        hit._geoloc.lng
+                    );
+                }
+                
+                return distance === undefined || distance <= radiusMeters;
+            });
+            
+            // Limiter au nombre demandé après filtrage
+            hits = hits.slice(0, hitsPerPage);
+            
+            // Log du filtrage pour debug
+            console.log(`📏 Filtrage géographique: ${originalCount} → ${hits.length} résultats (rayon ${radiusMeters/1000}km)`);
+            
+            if (hits.length > 0) {
+                console.log('Distances des résultats filtrés:');
+                hits.forEach((hit, index) => {
+                    const algoliaDistance = hit._rankingInfo?.geoDistance;
+                    let distance = algoliaDistance;
+                    let source = 'Algolia';
+                    
+                    // Si pas de distance Algolia, calculer
+                    if (distance === undefined && hit._geoloc?.lat && hit._geoloc?.lng) {
+                        distance = calculateDistance(
+                            activity.latitude, 
+                            activity.longitude, 
+                            hit._geoloc.lat, 
+                            hit._geoloc.lng
+                        );
+                        source = 'Calculée';
+                    }
+                    
+                    const name = hit.name || 'Nom non disponible';
+                    if (distance !== undefined) {
+                        console.log(`  ${index + 1}. ${name} - ${(distance/1000).toFixed(2)}km (${source})`);
+                    } else {
+                        console.log(`  ${index + 1}. ${name} - Distance inconnue`);
+                    }
+                });
+            }
+        } else {
+            // Pas de coordonnées disponibles, recherche textuelle uniquement
+            console.log('📍 Recherche textuelle uniquement (pas de coordonnées disponibles)');
+            hits = hits.slice(0, hitsPerPage);
+        }
+        
+        res.json({
+            activity: {
+                id: activity._id,
+                name: activity.name,
+                address: activity.address,
+                currentAlgoliaId: activity.algoliaId || null
+            },
+            search: {
+                query: searchQuery,
+                indexName,
+                hitsPerPage: parseInt(hitsPerPage),
+                nbHits: results[0]?.nbHits || 0,
+                radiusKm: activity.latitude && activity.longitude ? radiusMeters / 1000 : null,
+                filteredResults: activity.latitude && activity.longitude
+            },
+            suggestions: hits.map(hit => {
+                // Calculer ou récupérer la distance pour l'inclure dans la réponse
+                let distance = hit._rankingInfo?.geoDistance;
+                if (distance === undefined && activity.latitude && activity.longitude && hit._geoloc?.lat && hit._geoloc?.lng) {
+                    distance = calculateDistance(
+                        activity.latitude, 
+                        activity.longitude, 
+                        hit._geoloc.lat, 
+                        hit._geoloc.lng
+                    );
+                }
+                
+                return {
+                    objectID: hit.objectID,
+                    name: hit.name,
+                    slug: hit.slug,
+                    rating: hit.avg_rating,
+                    numReviews: hit.num_reviews,
+                    difficulty: hit.difficulty_rating,
+                    length: hit.length,
+                    elevationGain: hit.elevation_gain,
+                    location: {
+                        lat: hit._geoloc?.lat,
+                        lng: hit._geoloc?.lng
+                    },
+                    distance: distance ? Math.round(distance) : null, // Distance en mètres
+                    distanceKm: distance ? parseFloat((distance / 1000).toFixed(2)) : null, // Distance en km
+                    features: hit.features || [],
+                    url: hit.slug ? `https://www.alltrails.com/${hit.slug}` : null
+                };
+            })
+        });
+        
+    } catch (err) {
+        console.error('Erreur lors de la recherche Algolia pour l\'activité:', err.message);
+        res.status(500).json({ 
+            msg: 'Erreur lors de la recherche automatique de randonnées',
+            error: err.message 
+        });
+    }
+};
+
+// Associer une activité à un résultat de recherche Algolia
+export const linkActivityToAlgoliaResult = async (req, res) => {
+    try {
+        const activity = await Activity.findById(req.params.idActivity);
+        
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvée' });
+        }
+        
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+        
+        const { objectID, name, slug } = req.body;
+        
+        if (!objectID) {
+            return res.status(400).json({ msg: 'objectID requis' });
+        }
+        
+        // Mettre à jour l'activité avec les informations Algolia
+        activity.algoliaId = objectID;
+        
+        // Optionnellement, mettre à jour le nom de l'activité avec celui d'Algolia
+        if (req.body.updateActivityName === true && name) {
+            activity.name = name;
+        }
+        
+        await activity.save();
+        
+        res.json({ 
+            msg: 'Activité associée avec succès à la randonnée Algolia',
+            activity: {
+                id: activity._id,
+                name: activity.name,
+                algoliaId: activity.algoliaId
+            },
+            algolia: {
+                objectID,
+                name,
+                slug,
+                url: slug ? `https://www.alltrails.com/${slug}` : null
+            }
+        });
+        
+    } catch (err) {
+        console.error('Erreur lors de l\'association avec Algolia:', err.message);
+        res.status(500).json({ 
+            msg: 'Erreur lors de l\'association avec la randonnée',
+            error: err.message 
+        });
     }
 };

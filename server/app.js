@@ -56,7 +56,7 @@ app.get('/auth/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/login.html'));
 });
 
-// Routes
+// Routes avec authentification
 app.use('/auth', authRoutes);
 app.use('/roadtrips', auth, roadtripRoutes);
 app.use('/steps', auth, stepRoutes);

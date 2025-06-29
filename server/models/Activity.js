@@ -38,7 +38,8 @@ const ActivitySchema = new Schema({
     notes: { type: String, default: '' },
     photos: [{ type: Schema.Types.ObjectId, ref: 'File' }],
     documents: [{ type: Schema.Types.ObjectId, ref: 'File' }],
-    thumbnail: { type: Schema.Types.ObjectId, ref: 'File' }
+    thumbnail: { type: Schema.Types.ObjectId, ref: 'File' },
+    algoliaId: { type: String, default: '' } // Lien optionnel vers l'id Algolia de la randonnée
 });
 
 export default mongoose.model('Activity', ActivitySchema);
