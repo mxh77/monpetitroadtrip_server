@@ -13,6 +13,7 @@ import stepRoutes from './routes/stepRoutes.js';
 import accommodationRoutes from './routes/accommodationRoutes.js';
 import activityRoutes from './routes/activityRoutes.js';
 import googleMapsRoutes from './routes/googleMapsRoutes.js';
+import settingsRoutes from './routes/settingsRoutes.js';
 import { connectDB } from './config/db.js';
 
 const app = express();
@@ -64,6 +65,7 @@ app.use('/steps', auth, stepRoutes);
 app.use('/accommodations', auth, accommodationRoutes);
 app.use('/activities', auth, activityRoutes);
 app.use('/gm', auth, googleMapsRoutes);
+app.use('/settings', auth, settingsRoutes);
 
 // Route pour servir index.html
 app.get('/home', auth, (req, res) => {

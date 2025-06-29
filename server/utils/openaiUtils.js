@@ -32,7 +32,7 @@ export const genererSyntheseAvis = async (avisArray) => {
     }
 };
 
-export const genererRecitStep = async (stepData) => {
+export const genererRecitStep = async (stepData, systemPrompt) => {
     try {
         // Fonction utilitaire pour formater les dates sans décalage de fuseau horaire
         const formatDateWithoutTimezone = (dateString) => {
@@ -48,7 +48,7 @@ export const genererRecitStep = async (stepData) => {
             });
         };
 
-        // Construire le prompt avec toutes les informations du step
+        // Prompt utilisateur (récit)
         const prompt = `Tu es un narrateur de voyage expert. Raconte de manière engageante et chronologique le déroulement d'un step de voyage en français, en te basant sur les informations suivantes :
 
 **Informations du Step :**
@@ -89,7 +89,7 @@ ${index + 1}. ${act.name} (${act.type || 'Type non spécifié'})
 `).join('')}` : ''}
 
 Instructions :
-1. Crée un récit chronologique et fluide qui raconte cette étape du voyage à la 1ère personne du pluriel
+1. Crée un récit chronologique (primordial) et fluide qui raconte cette étape du voyage à la 1ère personne du pluriel
 2. Intègre naturellement tous les éléments fournis (dates, prix, notes, etc.)
 3. Utilise un ton engageant mais informatif
 4. Respecte l'ordre chronologique des événements
@@ -100,9 +100,17 @@ Instructions :
 
 Récit :`;
 
+        // System prompt par défaut si non fourni
+        const systemMsg = systemPrompt || "Tu es le narrateur officiel de MonPetitRoadtrip, une application de roadtrip personnalisée pour les familles et amis. Sois chaleureux, informatif et inclusif.";
+
+        // Log du prompt utilisé (system + user)
+        console.log("\n===== SYSTEM PROMPT =====\n" + systemMsg + "\n========================\n");
+        console.log("\n===== USER PROMPT =====\n" + prompt + "\n======================\n");
+
         const response = await openai.chat.completions.create({
-            model: 'gpt-4',
+            model: 'gpt-4o-mini',
             messages: [
+                { role: 'system', content: systemMsg },
                 { role: 'user', content: prompt }
             ],
             temperature: 0.7,

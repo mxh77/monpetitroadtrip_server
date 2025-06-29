@@ -11,6 +11,7 @@ import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
 import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails } from '../utils/hikeUtils.js';
 import { genererSyntheseAvis, genererRecitStep } from '../utils/openaiUtils.js';
 import StepStoryJob from '../models/StepStoryJob.js';
+import UserSetting from '../models/UserSetting.js';
 
 // Méthode pour créer un nouveau step pour un roadtrip donné
 export const createStepForRoadtrip = async (req, res) => {
@@ -777,8 +778,12 @@ export const generateStepStory = async (req, res) => {
             });
         }
 
+        // Récupérer le systemPrompt personnalisé
+        const userSettings = await UserSetting.findOne({ userId: req.user.id });
+        const systemPrompt = userSettings?.systemPrompt;
+
         // Générer le récit avec OpenAI
-        const result = await genererRecitStep(stepData);
+        const result = await genererRecitStep(stepData, systemPrompt);
 
         // Sauvegarder le récit dans le step
         step.story = result.story;
@@ -884,7 +889,11 @@ export const regenerateStepStory = async (req, res) => {
                 notes: act.notes
             }))
         };
-        const result = await genererRecitStep(stepData);
+        // Récupérer le systemPrompt personnalisé
+        const userSettings = await UserSetting.findOne({ userId: req.user.id });
+        const systemPrompt = userSettings?.systemPrompt;
+        // Générer le récit avec OpenAI
+        const result = await genererRecitStep(stepData, systemPrompt);
         step.story = result.story;
         await step.save();
         res.json({
@@ -983,7 +992,11 @@ export const generateStepStoryAsync = async (req, res) => {
                         notes: act.notes
                     }))
                 };
-                const result = await genererRecitStep(stepData);
+                // Récupérer le systemPrompt personnalisé
+                const userSettings = await UserSetting.findOne({ userId: req.user.id });
+                const systemPrompt = userSettings?.systemPrompt;
+                // Générer le récit avec OpenAI
+                const result = await genererRecitStep(stepData, systemPrompt);
                 step.story = result.story;
                 await step.save();
                 job.status = 'done';
