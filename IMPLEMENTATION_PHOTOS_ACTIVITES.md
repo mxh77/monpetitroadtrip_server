@@ -88,3 +88,6 @@ DELETE /api/activities/:idActivity/photos/:idPhoto
 3. Ajouter la prévisualisation des images
 4. Gérer la suppression avec confirmation
 5. Optionnel : ajouter la réorganisation par drag & drop
+
+## Note de cohérence
+Cette implémentation a également été appliquée aux **Accommodations** avec les mêmes patterns et structures. Voir `IMPLEMENTATION_PHOTOS_ACCOMMODATIONS.md` pour les détails spécifiques aux hébergements.

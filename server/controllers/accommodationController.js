@@ -462,3 +462,106 @@ export const deleteDocumentFromAccommodation = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+
+// Méthode pour obtenir les photos d'un hébergement
+export const getPhotosFromAccommodation = async (req, res) => {
+    try {
+        const accommodation = await Accommodation.findById(req.params.idAccommodation).populate('photos');
+
+        if (!accommodation) {
+            return res.status(404).json({ msg: 'Accommodation not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'hébergement
+        if (accommodation.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        res.json(accommodation.photos);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour ajouter des photos à un hébergement
+export const addPhotosToAccommodation = async (req, res) => {
+    try {
+        const accommodation = await Accommodation.findById(req.params.idAccommodation);
+
+        if (!accommodation) {
+            return res.status(404).json({ msg: 'Accommodation not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'hébergement
+        if (accommodation.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        if (req.files && req.files.photos && req.files.photos.length > 0) {
+            console.log('Uploading photos...');
+            const photos = await Promise.all(req.files.photos.map(async (photo) => {
+                const name = photo.originalname;
+                const url = await uploadToGCS(photo, accommodation._id);
+                const file = new File({ name, url, type: 'photo' });
+                await file.save();
+                return file._id;
+            }));
+            accommodation.photos.push(...photos);
+            console.log('Updated accommodation photos:', accommodation.photos);
+        }
+
+        await accommodation.save();
+
+        // Peupler les photos dans l'hébergement avant de renvoyer la réponse
+        await accommodation.populate({
+            path: 'photos',
+            model: 'File'
+        });
+
+        res.status(201).json(accommodation.photos);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour supprimer une photo d'un hébergement
+export const deletePhotoFromAccommodation = async (req, res) => {
+    try {
+        const accommodation = await Accommodation.findById(req.params.idAccommodation);
+
+        if (!accommodation) {
+            return res.status(404).json({ msg: 'Accommodation not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'hébergement
+        if (accommodation.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        const photoId = req.params.idPhoto;
+
+        // Supprimer la photo de Google Cloud Storage
+        const photoFile = await File.findById(photoId);
+        if (photoFile) {
+            await deleteFromGCS(photoFile.url);
+            await photoFile.deleteOne();
+        }
+
+        // Supprimer la photo de la liste des photos de l'hébergement
+        accommodation.photos = accommodation.photos.filter(photo => photo.toString() !== photoId.toString());
+        await accommodation.save();
+
+        // Peupler les photos dans l'hébergement avant de renvoyer la réponse
+        await accommodation.populate({
+            path: 'photos',
+            model: 'File'
+        });
+
+        res.json(accommodation);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
