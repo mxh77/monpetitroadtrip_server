@@ -5,12 +5,12 @@ import Activity from '../models/Activity.js';
 import File from '../models/File.js';
 import UserSetting from '../models/UserSetting.js';
 import mongoose from 'mongoose';
-import { getCoordinates } from '../utils/googleMapsUtils.js';
+import { getCoordinates, getAddressFromCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
 import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails } from '../utils/hikeUtils.js';
-import { genererSyntheseAvis, genererRecitStep } from '../utils/openaiUtils.js';
+import { genererSyntheseAvis, genererRecitStep, analyserPromptEtape } from '../utils/openaiUtils.js';
 import StepStoryJob from '../models/StepStoryJob.js';
 import { getUserAlgoliaRadius } from '../utils/userSettingsUtils.js';
 
@@ -1066,5 +1066,110 @@ export const getStepStoryJobStatus = async (req, res) => {
     } catch (error) {
         console.error('Error fetching job status:', error);
         res.status(500).json({ msg: 'Server error', error: error.message });
+    }
+};
+
+// Méthode pour créer une étape via un prompt en langage naturel
+export const createStepFromNaturalLanguage = async (req, res) => {
+    try {
+        const { prompt, userLatitude, userLongitude } = req.body;
+        
+        if (!prompt) {
+            return res.status(400).json({ msg: 'Le prompt est requis' });
+        }
+
+        const roadtrip = await Roadtrip.findById(req.params.idRoadtrip);
+
+        if (!roadtrip) {
+            return res.status(404).json({ msg: 'Roadtrip not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire du roadtrip
+        if (roadtrip.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        // Préparer les informations de localisation utilisateur si disponibles
+        let userLocation = null;
+        if (userLatitude && userLongitude) {
+            try {
+                const userAddress = await getAddressFromCoordinates(userLatitude, userLongitude);
+                userLocation = {
+                    latitude: userLatitude,
+                    longitude: userLongitude,
+                    address: userAddress
+                };
+            } catch (error) {
+                console.error('Error getting user address from coordinates:', error);
+                // Continuer sans la localisation utilisateur
+            }
+        }
+
+        // Analyser le prompt avec OpenAI pour extraire les informations de l'étape
+        const stepData = await analyserPromptEtape(prompt, userLocation);
+
+        // Déterminer l'adresse et les coordonnées finales
+        let finalAddress = stepData.address;
+        let coordinates = {};
+
+        if (stepData.useUserLocation && userLocation) {
+            // Utiliser la localisation de l'utilisateur
+            finalAddress = userLocation.address;
+            coordinates = { lat: userLocation.latitude, lng: userLocation.longitude };
+        } else if (stepData.address) {
+            // Utiliser l'adresse extraite du prompt
+            try {
+                coordinates = await getCoordinates(stepData.address);
+            } catch (error) {
+                console.error('Error getting coordinates for extracted address:', error);
+                // Si on ne peut pas géocoder l'adresse extraite et qu'on a la localisation utilisateur, l'utiliser en fallback
+                if (userLocation) {
+                    finalAddress = userLocation.address;
+                    coordinates = { lat: userLocation.latitude, lng: userLocation.longitude };
+                    stepData.useUserLocation = true;
+                }
+            }
+        }
+
+        const newStep = new Step({
+            type: stepData.type || 'Stage',
+            name: stepData.name,
+            address: finalAddress,
+            latitude: coordinates.lat || 0,
+            longitude: coordinates.lng || 0,
+            arrivalDateTime: stepData.arrivalDateTime ? new Date(stepData.arrivalDateTime) : undefined,
+            departureDateTime: stepData.departureDateTime ? new Date(stepData.departureDateTime) : undefined,
+            notes: stepData.notes || '',
+            roadtripId: req.params.idRoadtrip,
+            userId: req.user.id
+        });
+
+        const step = await newStep.save();
+
+        // Réactualiser le temps de trajet pour l'étape mise à jour
+        await updateStepDatesAndTravelTime(step._id);
+
+        // Ajouter l'ID de la nouvelle étape au tableau steps du roadtrip
+        roadtrip.steps.push(step);
+        await roadtrip.save();
+
+        res.json({
+            step,
+            extractedData: stepData // Retourner aussi les données extraites pour debug
+        });
+    } catch (err) {
+        console.error('Error creating step from natural language:', err.message);
+        
+        if (err.message.includes('analyse du prompt')) {
+            return res.status(400).json({ 
+                msg: 'Erreur lors de l\'analyse du prompt',
+                error: err.message 
+            });
+        }
+        
+        res.status(500).json({ 
+            msg: 'Erreur serveur lors de la création de l\'étape',
+            error: err.message 
+        });
     }
 };

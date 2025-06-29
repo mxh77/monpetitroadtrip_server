@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer une étape - Langage Naturel</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #007AFF;
+        }
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #0056CC;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .examples {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .examples h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .examples ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .examples li {
+            margin-bottom: 8px;
+            color: #666;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 6px;
+            display: none;
+        }
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .result pre {
+            background: rgba(0,0,0,0.05);
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+        .config-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗺️ Créer une étape via langage naturel</h1>
+        
+        <div class="config-info">
+            <strong>⚙️ Configuration requise:</strong><br>
+            • Serveur démarré sur localhost:3000<br>
+            • Token JWT valide<br>
+            • ID de roadtrip existant
+        </div>
+
+        <div class="examples">
+            <h3>💡 Exemples de prompts</h3>
+            <ul>
+                <li>"Visite du Louvre demain à 10h et repartir à 16h"</li>
+                <li>"Nuit à l'hôtel Ritz, Paris, arrivée ce soir 19h"</li>
+                <li>"Arrêt rapide station-service A6 dans 2 heures"</li>
+                <li>"Déjeuner chez Paul rue de Rivoli à 12h30"</li>
+                <li>"Visite château de Versailles samedi de 9h à 17h"</li>
+            </ul>
+        </div>
+
+        <form id="stepForm">
+            <div class="form-group">
+                <label for="roadtripId">ID du Roadtrip :</label>
+                <input type="text" id="roadtripId" placeholder="ex: 507f1f77bcf86cd799439011" required>
+            </div>
+
+            <div class="form-group">
+                <label for="authToken">Token JWT :</label>
+                <input type="text" id="authToken" placeholder="Votre token JWT" required>
+            </div>
+
+            <div class="form-group">
+                <label for="geolocation">
+                    <input type="checkbox" id="geolocation" style="width: auto; margin-right: 10px;">
+                    Utiliser ma géolocalisation actuelle
+                </label>
+                <div id="locationInfo" style="margin-top: 10px; padding: 10px; background: #f0f0f0; border-radius: 4px; display: none;">
+                    <small>Coordonnées détectées: <span id="coordinates"></span></small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="prompt">Décrivez votre étape en langage naturel :</label>
+                <textarea id="prompt" placeholder="Ex: Visite du Louvre demain à 10h et repartir à 16h avec réservation des billets" required></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">Créer l'étape</button>
+        </form>
+
+        <div id="result" class="result">
+            <h3>Résultat :</h3>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let userCoordinates = null;
+
+        // Gérer la géolocalisation
+        document.getElementById('geolocation').addEventListener('change', function(e) {
+            const locationInfo = document.getElementById('locationInfo');
+            const coordinates = document.getElementById('coordinates');
+            
+            if (e.target.checked) {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        userCoordinates = {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        };
+                        coordinates.textContent = `${userCoordinates.latitude.toFixed(6)}, ${userCoordinates.longitude.toFixed(6)}`;
+                        locationInfo.style.display = 'block';
+                    }, function(error) {
+                        alert('Erreur lors de la récupération de la géolocalisation: ' + error.message);
+                        e.target.checked = false;
+                    });
+                } else {
+                    alert('La géolocalisation n\'est pas supportée par ce navigateur');
+                    e.target.checked = false;
+                }
+            } else {
+                userCoordinates = null;
+                locationInfo.style.display = 'none';
+            }
+        });
+
+        document.getElementById('stepForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const result = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            
+            const roadtripId = document.getElementById('roadtripId').value;
+            const authToken = document.getElementById('authToken').value;
+            const prompt = document.getElementById('prompt').value;
+            
+            // Préparer les données à envoyer
+            const requestData = { prompt };
+            if (userCoordinates) {
+                requestData.userLatitude = userCoordinates.latitude;
+                requestData.userLongitude = userCoordinates.longitude;
+            }
+            
+            // Désactiver le bouton pendant la requête
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Création en cours...';
+            result.style.display = 'none';
+            
+            try {
+                const response = await fetch(`http://localhost:3000/api/roadtrips/${roadtripId}/steps/natural-language`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                const data = await response.json();
+                
+                result.style.display = 'block';
+                
+                if (response.ok) {
+                    result.className = 'result success';
+                    resultContent.innerHTML = `
+                        <strong>✅ Étape créée avec succès !</strong><br><br>
+                        <strong>Nom:</strong> ${data.step.name}<br>
+                        <strong>Adresse:</strong> ${data.step.address}<br>
+                        <strong>Type:</strong> ${data.step.type}<br>
+                        <strong>Arrivée:</strong> ${data.step.arrivalDateTime ? new Date(data.step.arrivalDateTime).toLocaleString('fr-FR') : 'Non spécifiée'}<br>
+                        <strong>Départ:</strong> ${data.step.departureDateTime ? new Date(data.step.departureDateTime).toLocaleString('fr-FR') : 'Non spécifiée'}<br>
+                        <strong>Notes:</strong> ${data.step.notes || 'Aucune'}<br>
+                        <strong>Coordonnées:</strong> ${data.step.latitude}, ${data.step.longitude}<br>
+                        ${data.extractedData.useUserLocation ? '<strong>🌍 Localisation utilisateur utilisée</strong><br>' : ''}<br>
+                        <strong>Données extraites par l'IA:</strong>
+                        <pre>${JSON.stringify(data.extractedData, null, 2)}</pre>
+                    `;
+                } else {
+                    result.className = 'result error';
+                    resultContent.innerHTML = `
+                        <strong>❌ Erreur lors de la création</strong><br><br>
+                        ${data.msg || data.error || 'Erreur inconnue'}
+                    `;
+                }
+            } catch (error) {
+                result.style.display = 'block';
+                result.className = 'result error';
+                resultContent.innerHTML = `
+                    <strong>❌ Erreur de connexion</strong><br><br>
+                    ${error.message}<br><br>
+                    Vérifiez que le serveur est démarré sur localhost:3000
+                `;
+            } finally {
+                // Réactiver le bouton
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Créer l\'étape';
+            }
+        });
+    </script>
+</body>
+</html>

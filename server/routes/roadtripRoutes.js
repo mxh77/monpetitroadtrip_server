@@ -123,6 +123,87 @@ router.post('/:idRoadtrip/steps', auth, stepController.createStepForRoadtrip);
 
 /**
  * @swagger
+ * /{idRoadtrip}/steps/natural-language:
+ *   post:
+ *     summary: Créer une étape via un prompt en langage naturel
+ *     description: Utilise l'intelligence artificielle pour analyser un prompt en français et créer automatiquement une étape avec nom, adresse, dates et heures. Peut utiliser la géolocalisation de l'utilisateur si aucune adresse spécifique n'est mentionnée.
+ *     tags: [Steps]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idRoadtrip
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du roadtrip
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - prompt
+ *             properties:
+ *               prompt:
+ *                 type: string
+ *                 description: Description en langage naturel de l'étape à créer
+ *                 example: "Visite du Louvre demain à 10h et repartir à 16h avec réservation des billets"
+ *               userLatitude:
+ *                 type: number
+ *                 description: Latitude de la position actuelle de l'utilisateur (optionnel)
+ *                 example: 48.8566
+ *               userLongitude:
+ *                 type: number
+ *                 description: Longitude de la position actuelle de l'utilisateur (optionnel)
+ *                 example: 2.3522
+ *     responses:
+ *       200:
+ *         description: Étape créée avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 step:
+ *                   $ref: '#/components/schemas/Step'
+ *                 extractedData:
+ *                   type: object
+ *                   description: Données extraites du prompt par l'IA
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                     address:
+ *                       type: string
+ *                     arrivalDateTime:
+ *                       type: string
+ *                       format: date-time
+ *                     departureDateTime:
+ *                       type: string
+ *                       format: date-time
+ *                     type:
+ *                       type: string
+ *                       enum: [Stage, Stop]
+ *                     notes:
+ *                       type: string
+ *                     useUserLocation:
+ *                       type: boolean
+ *                       description: Indique si la géolocalisation de l'utilisateur a été utilisée
+ *       400:
+ *         description: Prompt manquant ou erreur d'analyse
+ *       401:
+ *         description: Non autorisé
+ *       404:
+ *         description: Roadtrip non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
+// Route protégée pour créer un step via un prompt en langage naturel
+router.post('/:idRoadtrip/steps/natural-language', auth, stepController.createStepFromNaturalLanguage);
+
+/**
+ * @swagger
  * /{idRoadtrip}/steps/{idStep}/accommodations:
  *   post:
  *     summary: Créer un nouvel hébergement pour une étape de roadtrip

@@ -56,3 +56,26 @@ export const calculateTravelTime = async (origin, destination, departure_time = 
         return { travelTime: 0, distance: 0, error: 'No route found' };
     }
 };
+
+// Fonction pour obtenir l'adresse à partir des coordonnées (géocodage inverse)
+export const getAddressFromCoordinates = async (latitude, longitude) => {
+    try {
+        const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                latlng: `${latitude},${longitude}`,
+                key: GOOGLE_MAPS_API_KEY,
+                language: 'fr'
+            }
+        });
+
+        if (response.data.status === 'OK' && response.data.results.length > 0) {
+            // Prendre la première adresse formatée
+            return response.data.results[0].formatted_address;
+        } else {
+            throw new Error('No address found for coordinates');
+        }
+    } catch (error) {
+        console.error('Error in reverse geocoding:', error);
+        throw new Error('Failed to get address from coordinates');
+    }
+};
