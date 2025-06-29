@@ -7,7 +7,27 @@ const router = express.Router();
 
 // Configuration de multer pour gérer les uploads de fichiers
 const multerStorage = multer.memoryStorage();
-const upload = multer({ storage: multerStorage });
+const upload = multer({ 
+    storage: multerStorage,
+    limits: {
+        fileSize: 20 * 1024 * 1024, // 20MB par fichier (augmenté pour les photos haute résolution)
+        files: 10 // Maximum 10 fichiers
+    },
+    fileFilter: (req, file, cb) => {
+        // Autoriser les images et documents
+        const allowedMimes = [
+            'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'image/heic', 'image/heif',
+            'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'text/plain'
+        ];
+        
+        if (allowedMimes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error(`Type de fichier non autorisé: ${file.mimetype}`), false);
+        }
+    }
+});
 
 /********METHOD PUT ********/
 //route pour modifier une activité avec une vignette, des photos ou des documents

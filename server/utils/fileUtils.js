@@ -33,36 +33,69 @@ export { uploadPhotos, uploadThumbnail };
 // Fonction pour uploader un fichier sur Google Cloud Storage
 export const uploadToGCS = (file, entityId) => {
     return new Promise((resolve, reject) => {
-        console.log('Uploading to GCS:', { originalname: file.originalname, entityId });
+        // Validation des paramètres d'entrée
+        if (!file || !file.buffer || !file.originalname) {
+            return reject(new Error('Fichier invalide ou manquant'));
+        }
+        
+        if (!entityId) {
+            return reject(new Error('Entity ID manquant'));
+        }
 
-        const newFileName = `${entityId}/${uuidv4()}-${path.extname(file.originalname)}`;
+        console.log('Uploading to GCS:', { 
+            originalname: file.originalname, 
+            entityId, 
+            size: file.buffer.length,
+            mimetype: file.mimetype 
+        });
+
+        // Vérifier la taille du fichier (limite 20MB)
+        if (file.buffer.length > 20 * 1024 * 1024) {
+            return reject(new Error('Fichier trop volumineux (max 20MB)'));
+        }
+
+        const fileExtension = path.extname(file.originalname);
+        const newFileName = `${entityId}/${uuidv4()}${fileExtension}`;
         console.log('Generated new file name:', newFileName);
 
         const blob = bucket.file(newFileName);
         const blobStream = blob.createWriteStream({
-            resumable: false,
+            resumable: false, // Garder false pour les fichiers < 20MB
             contentType: file.mimetype,
             metadata: {
-                contentType: file.mimetype
+                contentType: file.mimetype,
+                cacheControl: 'public, max-age=31536000',
             }
         });
 
+        // Timeout adapté pour les gros fichiers
+        const timeout = setTimeout(() => {
+            blobStream.destroy();
+            reject(new Error('Timeout lors de l\'upload vers GCS'));
+        }, 60000); // 60 secondes pour les gros fichiers
+
         blobStream.on('error', (err) => {
+            clearTimeout(timeout);
             console.error('Error during blob stream:', err);
-            reject(err);
+            reject(new Error(`Erreur upload GCS: ${err.message}`));
         });
 
         blobStream.on('finish', async () => {
+            clearTimeout(timeout);
             try {
+                console.log('File uploaded successfully to GCS');
+                
+                // Générer l'URL signée avec une expiration longue
                 const [url] = await blob.getSignedUrl({
                     action: 'read',
-                    expires: '03-01-2500' // Vous pouvez ajuster la date d'expiration selon vos besoins
+                    expires: '03-01-2500' // Expiration en 2500
                 });
-                console.log('File uploaded successfully. URL:', url);
+                
+                console.log('Signed URL generated:', url);
                 resolve(url);
             } catch (err) {
                 console.error('Error getting signed URL:', err);
-                reject(err);
+                reject(new Error(`Erreur finalisation upload: ${err.message}`));
             }
         });
 
