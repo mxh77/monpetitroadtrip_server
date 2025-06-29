@@ -37,7 +37,8 @@ const stepSchema = new Schema({
             },
             message: 'Activities should not exist when type is Stop'
         }
-    }
+    },
+    story: { type: String, default: '' }
 });
 
 export default mongoose.model('Step', stepSchema);

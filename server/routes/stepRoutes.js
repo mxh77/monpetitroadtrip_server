@@ -23,6 +23,9 @@ router.put('/:idStep', auth, upload.fields([
 // Route pour calculer le travelTime d'un step par rapport au step précédent
 router.patch('/:idStep/refresh-travel-time', auth, stepController.refreshTravelTimeForStepWrapper);
 
+// Route pour régénérer explicitement le récit d'un step
+router.patch('/:idStep/story/regenerate', auth, stepController.regenerateStepStory);
+
 
 /********METHOD GET********/
 // Route protégée pour obtenir les informations d'un step

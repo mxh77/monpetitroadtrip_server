@@ -765,8 +765,23 @@ export const generateStepStory = async (req, res) => {
             }))
         };
 
+        // Si un récit existe déjà, le retourner sans regénération
+        if (step.story && step.story.length > 0) {
+            return res.json({
+                stepId: idStep,
+                stepName: step.name,
+                story: step.story,
+                generatedAt: step.updatedAt || step.createdAt,
+                fromCache: true
+            });
+        }
+
         // Générer le récit avec OpenAI
         const result = await genererRecitStep(stepData);
+
+        // Sauvegarder le récit dans le step
+        step.story = result.story;
+        await step.save();
 
         res.json({
             stepId: idStep,
@@ -778,7 +793,8 @@ export const generateStepStory = async (req, res) => {
                 stepInfo: !!step.name || !!step.address || !!step.notes,
                 accommodationsCount: accommodations.length,
                 activitiesCount: activities.length
-            }
+            },
+            fromCache: false
         });
 
     } catch (error) {
@@ -795,5 +811,97 @@ export const generateStepStory = async (req, res) => {
             msg: 'Server error', 
             error: error.message 
         });
+    }
+};
+
+// Méthode pour régénérer explicitement le récit d'un step
+export const regenerateStepStory = async (req, res) => {
+    try {
+        const { idStep } = req.params;
+        const step = await Step.findById(idStep);
+        if (!step) {
+            return res.status(404).json({ msg: 'Step not found' });
+        }
+        if (step.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+        // Récupérer accommodations et activités comme dans generateStepStory
+        const accommodations = await Accommodation.find({ stepId: new mongoose.Types.ObjectId(idStep), active: true });
+        const allActivities = await Activity.find({ stepId: new mongoose.Types.ObjectId(idStep) });
+        const activities = allActivities.filter(act => {
+            if (act.active === true || act.active === 'true' || act.active === 1) return true;
+            if (act.active === undefined || act.active === null) return true;
+            return false;
+        });
+        accommodations.sort((a, b) => {
+            const dateA = a.arrivalDateTime ? new Date(a.arrivalDateTime) : new Date(0);
+            const dateB = b.arrivalDateTime ? new Date(b.arrivalDateTime) : new Date(0);
+            return dateA - dateB;
+        });
+        activities.sort((a, b) => {
+            const dateA = a.startDateTime ? new Date(a.startDateTime) : new Date(0);
+            const dateB = b.startDateTime ? new Date(b.startDateTime) : new Date(0);
+            return dateA - dateB;
+        });
+        const stepData = {
+            step: {
+                name: step.name,
+                type: step.type,
+                address: step.address,
+                arrivalDateTime: step.arrivalDateTime,
+                departureDateTime: step.departureDateTime,
+                distancePreviousStep: step.distancePreviousStep,
+                travelTimePreviousStep: step.travelTimePreviousStep,
+                notes: step.notes
+            },
+            accommodations: accommodations.map(acc => ({
+                name: acc.name,
+                address: acc.address,
+                arrivalDateTime: acc.arrivalDateTime,
+                departureDateTime: acc.departureDateTime,
+                nights: acc.nights,
+                price: acc.price,
+                currency: acc.currency,
+                reservationNumber: acc.reservationNumber,
+                confirmationDateTime: acc.confirmationDateTime,
+                notes: acc.notes
+            })),
+            activities: activities.map(act => ({
+                name: act.name,
+                type: act.type,
+                address: act.address,
+                startDateTime: act.startDateTime,
+                endDateTime: act.endDateTime,
+                duration: act.duration,
+                typeDuration: act.typeDuration,
+                price: act.price,
+                currency: act.currency,
+                reservationNumber: act.reservationNumber,
+                trailDistance: act.trailDistance,
+                trailElevation: act.trailElevation,
+                trailType: act.trailType,
+                notes: act.notes
+            }))
+        };
+        const result = await genererRecitStep(stepData);
+        step.story = result.story;
+        await step.save();
+        res.json({
+            stepId: idStep,
+            stepName: step.name,
+            story: result.story,
+            prompt: result.prompt,
+            generatedAt: new Date().toISOString(),
+            dataUsed: {
+                stepInfo: !!step.name || !!step.address || !!step.notes,
+                accommodationsCount: accommodations.length,
+                activitiesCount: activities.length
+            },
+            fromCache: false,
+            regenerated: true
+        });
+    } catch (error) {
+        console.error('Error regenerating step story:', error);
+        res.status(500).json({ msg: 'Server error', error: error.message });
     }
 };
