@@ -900,3 +900,106 @@ export const linkActivityToAlgoliaResult = async (req, res) => {
         });
     }
 };
+
+// Méthode pour obtenir les photos d'une activité
+export const getPhotosFromActivity = async (req, res) => {
+    try {
+        const activity = await Activity.findById(req.params.idActivity).populate('photos');
+
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvée' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'activité
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        res.json(activity.photos);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour ajouter des photos à une activité
+export const addPhotosToActivity = async (req, res) => {
+    try {
+        const activity = await Activity.findById(req.params.idActivity);
+
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvée' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'activité
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        if (req.files && req.files.photos && req.files.photos.length > 0) {
+            console.log('Uploading photos...');
+            const photos = await Promise.all(req.files.photos.map(async (photo) => {
+                const name = photo.originalname;
+                const url = await uploadToGCS(photo, activity._id);
+                const file = new File({ name, url, type: 'photo' });
+                await file.save();
+                return file._id;
+            }));
+            activity.photos.push(...photos);
+            console.log('Updated activity photos:', activity.photos);
+        }
+
+        await activity.save();
+
+        // Peupler les photos dans l'activité avant de renvoyer la réponse
+        await activity.populate({
+            path: 'photos',
+            model: 'File'
+        });
+
+        res.status(201).json(activity.photos);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour supprimer une photo d'une activité
+export const deletePhotoFromActivity = async (req, res) => {
+    try {
+        const activity = await Activity.findById(req.params.idActivity);
+
+        if (!activity) {
+            return res.status(404).json({ msg: 'Activité non trouvée' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire de l'activité
+        if (activity.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        const photoId = req.params.idPhoto;
+
+        // Supprimer la photo de Google Cloud Storage
+        const photoFile = await File.findById(photoId);
+        if (photoFile) {
+            await deleteFromGCS(photoFile.url);
+            await photoFile.deleteOne();
+        }
+
+        // Supprimer la photo de la liste des photos de l'activité
+        activity.photos = activity.photos.filter(photo => photo.toString() !== photoId.toString());
+        await activity.save();
+
+        // Peupler les photos dans l'activité avant de renvoyer la réponse
+        await activity.populate({
+            path: 'photos',
+            model: 'File'
+        });
+
+        res.json(activity);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};

@@ -26,6 +26,11 @@ router.patch('/:idActivity/documents', auth, upload.fields([
     { name: 'documents', maxCount: 10 }
 ]), activityController.addDocumentsToActivity);
 
+// Route protégée pour ajouter des photos à l'activité
+router.patch('/:idActivity/photos', auth, upload.fields([
+    { name: 'photos', maxCount: 10 }
+]), activityController.addPhotosToActivity);
+
 // Associer un algoliaId à une activité
 router.patch('/:idActivity/algolia', activityController.setAlgoliaIdForActivity);
 
@@ -39,6 +44,9 @@ router.get('/:idActivity', auth, activityController.getActivityById);
 //Route protégée pour obtenir les documents d'un activité
 router.get('/:idActivity/documents', auth, activityController.getDocumentsFromActivity); 
 
+//Route protégée pour obtenir les photos d'une activité
+router.get('/:idActivity/photos', auth, activityController.getPhotosFromActivity);
+
 // Recherche automatique de randonnées Algolia pour une activité
 router.get('/:idActivity/search/algolia', auth, activityController.searchAlgoliaHikesForActivity);
 
@@ -48,6 +56,9 @@ router.delete('/:idActivity', auth, activityController.deleteActivity);
 
 // Route protégée pour supprimer un document d'un activité
 router.delete('/:idActivity/documents/:idDocument', auth, activityController.deleteDocumentFromActivity);
+
+// Route protégée pour supprimer une photo d'une activité
+router.delete('/:idActivity/photos/:idPhoto', auth, activityController.deletePhotoFromActivity);
 
 
 export default router;
