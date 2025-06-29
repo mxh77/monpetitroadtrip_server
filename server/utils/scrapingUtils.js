@@ -45,8 +45,13 @@ export const fetchTrailsFromAlgolia = async (coordinates, radius = 5000) => {
             }
         );
 
-        // Extraire les résultats
-        const trails = response.data.hits.map((trail) => ({
+        // Extraire et filtrer les résultats (seulement les trails)
+        const allHits = response.data.hits;
+        const trailsOnly = allHits.filter(hit => hit.objectID && hit.objectID.startsWith('trail-'));
+        
+        console.log(`🔍 Filtrage trails dans scrapingUtils: ${allHits.length} → ${trailsOnly.length} résultats (objectID commence par "trail-")`);
+        
+        const trails = trailsOnly.map((trail) => ({
             id: trail.ID,
             popularity: trail.popularity,
             length: trail.length,

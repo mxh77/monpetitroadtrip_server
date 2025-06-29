@@ -17,6 +17,18 @@ export const updateSettings = async (req, res) => {
     try {
         const update = {};
         if (typeof req.body.systemPrompt === 'string') update.systemPrompt = req.body.systemPrompt;
+        if (typeof req.body.algoliaSearchRadius === 'number') {
+            // Validation du rayon (entre 1km et 200km)
+            const radius = req.body.algoliaSearchRadius;
+            if (radius >= 1000 && radius <= 200000) {
+                update.algoliaSearchRadius = radius;
+            } else {
+                return res.status(400).json({ 
+                    msg: 'Le rayon de recherche doit être entre 1000m (1km) et 200000m (200km)',
+                    currentValue: radius 
+                });
+            }
+        }
         // Ajoute d'autres champs ici si besoin
         const settings = await UserSetting.findOneAndUpdate(
             { userId: req.user.id },

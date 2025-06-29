@@ -11,7 +11,7 @@ import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
 import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails } from '../utils/hikeUtils.js';
 import { genererSyntheseAvis, genererRecitStep } from '../utils/openaiUtils.js';
 import StepStoryJob from '../models/StepStoryJob.js';
-import UserSetting from '../models/UserSetting.js';
+import { getUserAlgoliaRadius } from '../utils/userSettingsUtils.js';
 
 // Méthode pour créer un nouveau step pour un roadtrip donné
 export const createStepForRoadtrip = async (req, res) => {
@@ -393,9 +393,19 @@ export const getHikesFromAlgolia = async (req, res) => {
             return res.status(404).json({ msg: 'Step not found' });
         }
 
+        // Vérifier que le step appartient à l'utilisateur connecté
+        // Il faut remonter jusqu'au roadtrip pour vérifier l'userId
+        const roadtrip = await Roadtrip.findById(step.roadtripId);
+        if (!roadtrip || roadtrip.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
         if (!step.address) {
             return res.status(400).json({ msg: 'Step address is required to fetch hikes' });
         }
+
+        // Récupérer le rayon de recherche personnalisé de l'utilisateur
+        const radiusMeters = await getUserAlgoliaRadius(req.user.id);
 
         // Obtenir les coordonnées de l'adresse
         const coordinatesString = await getCoordinates(step.address);
@@ -409,9 +419,10 @@ export const getHikesFromAlgolia = async (req, res) => {
         const coordinates = { lat, lng };
 
         console.log('Parsed Coordinates:', coordinates);
+        console.log(`Using user search radius: ${radiusMeters/1000}km`);
 
-        // Scraper les randonnées avec Puppeteer
-        const hikes = await fetchTrailsFromAlgolia(coordinates);
+        // Scraper les randonnées avec le rayon personnalisé
+        const hikes = await fetchTrailsFromAlgolia(coordinates, radiusMeters);
 
         res.json({
             step: {
@@ -419,6 +430,10 @@ export const getHikesFromAlgolia = async (req, res) => {
                 name: step.name,
                 address: step.address,
                 coordinates,
+            },
+            searchParams: {
+                radiusKm: radiusMeters / 1000,
+                radiusMeters: radiusMeters
             },
             hikes,
         });
@@ -439,9 +454,18 @@ export const getHikeSuggestions = async (req, res) => {
             return res.status(404).json({ msg: 'Step not found' });
         }
 
+        // Vérifier que le step appartient à l'utilisateur connecté
+        const roadtrip = await Roadtrip.findById(step.roadtripId);
+        if (!roadtrip || roadtrip.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
         if (!step.address) {
             return res.status(400).json({ msg: 'Step address is required to fetch hikes' });
         }
+
+        // Récupérer le rayon de recherche personnalisé de l'utilisateur
+        const radiusMeters = await getUserAlgoliaRadius(req.user.id);
 
         // Obtenir les coordonnées de l'adresse
         const coordinatesString = await getCoordinates(step.address);
@@ -455,10 +479,11 @@ export const getHikeSuggestions = async (req, res) => {
         const coordinates = { lat, lng };
 
         console.log('Parsed Coordinates:', coordinates);
+        console.log(`Using user search radius: ${radiusMeters/1000}km`);
 
-        // Étape 1 : Récupérer les trails depuis l'API Algolia
+        // Étape 1 : Récupérer les trails depuis l'API Algolia avec le rayon personnalisé
         console.log('Fetching trails from Algolia...');
-        const trails = await fetchTrailsFromAlgoliaAPI(coordinates);
+        const trails = await fetchTrailsFromAlgoliaAPI(coordinates, radiusMeters);
         // console.log('Trails fetched:', trails);
 
         // Étape 2 : Récupérer les détails et avis pour chaque trail

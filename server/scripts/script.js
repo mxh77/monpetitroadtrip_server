@@ -115,7 +115,12 @@ async function fetchTrailsFromAlgoliaAPI(coordinates, radius = 5000, limit = 50)
     }
   );
 
-  return response.data.hits.sort((a, b) => b.popularity - a.popularity).slice(0, 10);
+  const allHits = response.data.hits;
+  const trailsOnly = allHits.filter(hit => hit.objectID && hit.objectID.startsWith('trail-'));
+  
+  console.log(`🔍 Filtrage trails dans script.js: ${allHits.length} → ${trailsOnly.length} résultats (objectID commence par "trail-")`);
+
+  return trailsOnly.sort((a, b) => b.popularity - a.popularity).slice(0, 10);
 }
 
 async function fetchTrailDetails(trailId) {

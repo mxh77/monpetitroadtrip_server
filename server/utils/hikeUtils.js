@@ -41,7 +41,12 @@ export const fetchTrailsFromAlgoliaAPI = async (coordinates, radius = 5000, limi
         }
     );
 
-    const sortedHits = response.data.hits
+    const allHits = response.data.hits;
+    const trailsOnly = allHits.filter(hit => hit.objectID && hit.objectID.startsWith('trail-'));
+    
+    console.log(`🔍 Filtrage trails dans hikeUtils: ${allHits.length} → ${trailsOnly.length} résultats (objectID commence par "trail-")`);
+
+    const sortedHits = trailsOnly
         .sort((a, b) => b.popularity - a.popularity) // Trier par popularité décroissante
         .slice(0, 10); // Limiter à 10 résultats
     return sortedHits;

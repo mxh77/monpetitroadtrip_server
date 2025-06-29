@@ -5,6 +5,7 @@ import File from '../models/File.js';
 import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
+import { getUserSettings, getUserAlgoliaRadius } from '../utils/userSettingsUtils.js';
 
 /**
  * Fonction spécifique pour convertir une adresse en coordonnées pour la recherche Algolia
@@ -679,13 +680,16 @@ export const searchAlgoliaHikesForActivity = async (req, res) => {
             }
         }
         
+        // Récupérer les paramètres utilisateur pour le rayon de recherche
+        const radiusMeters = await getUserAlgoliaRadius(req.user.id);
+        
         // Construction simple de la requête de recherche
         let searchQuery = activity.name;
         
         // Ajouter l'adresse complète à la recherche
-        if (activity.address) {
-            searchQuery += ` ${activity.address}`;
-        }
+        // if (activity.address) {
+        //     searchQuery += ` ${activity.address}`;
+        // }
         
         const { hitsPerPage = 10 } = req.query;
         const indexName = 'alltrails_primary_fr-FR'; // Index par défaut découvert
@@ -699,14 +703,13 @@ export const searchAlgoliaHikesForActivity = async (req, res) => {
             hitsPerPage: hitsPerPage,
             coordinates: activity.latitude && activity.longitude ? 
                 `${activity.latitude}, ${activity.longitude}` : 'Non disponibles',
-            geoFiltering: activity.latitude && activity.longitude ? 'Activé (50km)' : 'Désactivé'
+            searchRadius: `${radiusMeters/1000}km (paramètre utilisateur)`,
+            geoFiltering: activity.latitude && activity.longitude ? `Activé (${radiusMeters/1000}km)` : 'Désactivé'
         });
         
         // Import et utilisation de l'API Algolia v5
         const { algoliasearch } = await import('algoliasearch');
         const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY);
-        
-        const radiusMeters = 10000; // 50km de rayon
         
         const { results } = await client.search([{
             indexName,
@@ -724,6 +727,12 @@ export const searchAlgoliaHikesForActivity = async (req, res) => {
         }]);
         
         let hits = results[0]?.hits || [];
+        
+        // Filtrage pour ne récupérer que les trails (objectID commence par "trail-")
+        const originalCountBeforeTrailFilter = hits.length;
+        hits = hits.filter(hit => hit.objectID && hit.objectID.startsWith('trail-'));
+        
+        console.log(`🔍 Filtrage trails: ${originalCountBeforeTrailFilter} → ${hits.length} résultats (objectID commence par "trail-")`);
         
         // Filtrage côté serveur pour respecter strictement le rayon
         if (activity.latitude && activity.longitude) {
