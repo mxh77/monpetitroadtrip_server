@@ -10,6 +10,7 @@ import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
 import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails } from '../utils/hikeUtils.js';
 import { genererSyntheseAvis, genererRecitStep } from '../utils/openaiUtils.js';
+import StepStoryJob from '../models/StepStoryJob.js';
 
 // Méthode pour créer un nouveau step pour un roadtrip donné
 export const createStepForRoadtrip = async (req, res) => {
@@ -902,6 +903,129 @@ export const regenerateStepStory = async (req, res) => {
         });
     } catch (error) {
         console.error('Error regenerating step story:', error);
+        res.status(500).json({ msg: 'Server error', error: error.message });
+    }
+};
+
+// Endpoint asynchrone pour lancer la génération du récit d'un step
+export const generateStepStoryAsync = async (req, res) => {
+    try {
+        const { idStep } = req.params;
+        const step = await Step.findById(idStep);
+        if (!step) {
+            return res.status(404).json({ msg: 'Step not found' });
+        }
+        if (step.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+        // Créer un job en base
+        const job = await StepStoryJob.create({ stepId: idStep, status: 'pending' });
+        // Lancer le worker simple (setImmediate)
+        setImmediate(async () => {
+            try {
+                job.status = 'processing';
+                await job.save();
+                // Reprendre la logique de generateStepStory
+                const accommodations = await Accommodation.find({ stepId: new mongoose.Types.ObjectId(idStep), active: true });
+                const allActivities = await Activity.find({ stepId: new mongoose.Types.ObjectId(idStep) });
+                const activities = allActivities.filter(act => {
+                    if (act.active === true || act.active === 'true' || act.active === 1) return true;
+                    if (act.active === undefined || act.active === null) return true;
+                    return false;
+                });
+                accommodations.sort((a, b) => {
+                    const dateA = a.arrivalDateTime ? new Date(a.arrivalDateTime) : new Date(0);
+                    const dateB = b.arrivalDateTime ? new Date(b.arrivalDateTime) : new Date(0);
+                    return dateA - dateB;
+                });
+                activities.sort((a, b) => {
+                    const dateA = a.startDateTime ? new Date(a.startDateTime) : new Date(0);
+                    const dateB = b.startDateTime ? new Date(b.startDateTime) : new Date(0);
+                    return dateA - dateB;
+                });
+                const stepData = {
+                    step: {
+                        name: step.name,
+                        type: step.type,
+                        address: step.address,
+                        arrivalDateTime: step.arrivalDateTime,
+                        departureDateTime: step.departureDateTime,
+                        distancePreviousStep: step.distancePreviousStep,
+                        travelTimePreviousStep: step.travelTimePreviousStep,
+                        notes: step.notes
+                    },
+                    accommodations: accommodations.map(acc => ({
+                        name: acc.name,
+                        address: acc.address,
+                        arrivalDateTime: acc.arrivalDateTime,
+                        departureDateTime: acc.departureDateTime,
+                        nights: acc.nights,
+                        price: acc.price,
+                        currency: acc.currency,
+                        reservationNumber: acc.reservationNumber,
+                        confirmationDateTime: acc.confirmationDateTime,
+                        notes: acc.notes
+                    })),
+                    activities: activities.map(act => ({
+                        name: act.name,
+                        type: act.type,
+                        address: act.address,
+                        startDateTime: act.startDateTime,
+                        endDateTime: act.endDateTime,
+                        duration: act.duration,
+                        typeDuration: act.typeDuration,
+                        price: act.price,
+                        currency: act.currency,
+                        reservationNumber: act.reservationNumber,
+                        trailDistance: act.trailDistance,
+                        trailElevation: act.trailElevation,
+                        trailType: act.trailType,
+                        notes: act.notes
+                    }))
+                };
+                const result = await genererRecitStep(stepData);
+                step.story = result.story;
+                await step.save();
+                job.status = 'done';
+                job.result = {
+                    stepId: idStep,
+                    stepName: step.name,
+                    story: result.story,
+                    prompt: result.prompt,
+                    generatedAt: new Date().toISOString(),
+                    dataUsed: {
+                        stepInfo: !!step.name || !!step.address || !!step.notes,
+                        accommodationsCount: accommodations.length,
+                        activitiesCount: activities.length
+                    },
+                    fromCache: false
+                };
+                await job.save();
+            } catch (err) {
+                job.status = 'error';
+                job.error = err.message;
+                await job.save();
+            }
+        });
+        // Réponse immédiate
+        res.status(202).json({ jobId: job._id, status: job.status });
+    } catch (error) {
+        console.error('Error launching async step story:', error);
+        res.status(500).json({ msg: 'Server error', error: error.message });
+    }
+};
+
+// Endpoint pour consulter le statut d'un job de génération de récit
+export const getStepStoryJobStatus = async (req, res) => {
+    try {
+        const { jobId } = req.params;
+        const job = await StepStoryJob.findById(jobId);
+        if (!job) {
+            return res.status(404).json({ msg: 'Job not found' });
+        }
+        res.json({ status: job.status, result: job.result, error: job.error });
+    } catch (error) {
+        console.error('Error fetching job status:', error);
         res.status(500).json({ msg: 'Server error', error: error.message });
     }
 };

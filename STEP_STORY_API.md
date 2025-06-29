@@ -4,10 +4,12 @@
 
 Cette fonctionnalité permet de générer automatiquement un récit chronologique et engageant d'un step de voyage en utilisant l'intelligence artificielle (OpenAI GPT-4). Le récit intègre tous les éléments du step : informations générales, hébergements, et activités.
 
-## Endpoint
+## Endpoints
 
 ```
 GET /api/steps/{idStep}/story
+POST /api/steps/{idStep}/story/async
+GET  /api/steps/{idStep}/story/status/{jobId}
 ```
 
 ## Authentification
@@ -23,10 +25,17 @@ Authorization: Bearer {votre_jwt_token}
 | Paramètre | Type | Obligatoire | Description |
 |-----------|------|-------------|-------------|
 | idStep | string | Oui | ID unique du step pour lequel générer le récit |
+| jobId  | string | Pour /status | ID du job asynchrone |
 
-## Réponse
+## Fonctionnement asynchrone
 
-### Succès (200)
+- **POST `/api/steps/{idStep}/story/async`** : Lance la génération du récit en tâche de fond. Répond immédiatement avec un `jobId` et le statut (`pending` ou `processing`).
+- **GET `/api/steps/{idStep}/story/status/{jobId}`** : Permet de consulter le statut (`pending`, `processing`, `done`, `error`) et le résultat ou l’erreur du job.
+- **GET `/api/steps/{idStep}/story`** : (mode synchrone, bloquant) Génère et retourne le récit immédiatement (comportement historique).
+
+## Réponses
+
+### Succès (synchrone)
 
 ```json
 {
@@ -43,12 +52,41 @@ Authorization: Bearer {votre_jwt_token}
 }
 ```
 
+### Succès (asynchrone)
+
+- **POST /story/async**
+
+```json
+{
+  "jobId": "66a1b2c3d4e5f6789012345a",
+  "status": "pending"
+}
+```
+
+- **GET /story/status/{jobId}**
+
+```json
+{
+  "status": "done",
+  "result": {
+    "stepId": "648a1b2c3d4e5f6789012345",
+    "stepName": "Parc National de Banff",
+    "story": "Votre voyage commence...",
+    "prompt": "...",
+    "generatedAt": "2025-06-28T10:30:00.000Z",
+    "dataUsed": { ... },
+    "fromCache": false
+  },
+  "error": null
+}
+```
+
 ### Erreurs
 
 | Code | Description | Réponse |
 |------|-------------|---------|
 | 401 | Non autorisé | `{"msg": "User not authorized"}` |
-| 404 | Step non trouvé | `{"msg": "Step not found"}` |
+| 404 | Step ou job non trouvé | `{"msg": "Step not found"}` ou `{"msg": "Job not found"}` |
 | 503 | Service IA indisponible | `{"msg": "Service temporarily unavailable", "error": "..."}` |
 | 500 | Erreur serveur | `{"msg": "Server error", "error": "..."}` |
 
@@ -116,6 +154,29 @@ async function getStepStory(stepId, authToken) {
         console.error('Erreur:', error.response?.data || error.message);
     }
 }
+
+async function generateStepStoryAsync(stepId, authToken) {
+    // Lancer la génération asynchrone
+    const launch = await axios.post(`http://localhost:3000/api/steps/${stepId}/story/async`, {}, {
+        headers: { 'Authorization': `Bearer ${authToken}` }
+    });
+    const jobId = launch.data.jobId;
+    // Polling pour le statut
+    let status = launch.data.status;
+    let result = null;
+    while (status !== 'done' && status !== 'error') {
+        await new Promise(r => setTimeout(r, 2000));
+        const poll = await axios.get(`http://localhost:3000/api/steps/${stepId}/story/status/${jobId}`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        status = poll.data.status;
+        result = poll.data.result;
+        if (poll.data.error) console.error('Erreur:', poll.data.error);
+    }
+    if (status === 'done') {
+        console.log('Récit généré:', result.story);
+    }
+}
 ```
 
 ### cURL
@@ -124,6 +185,13 @@ async function getStepStory(stepId, authToken) {
 curl -X GET "http://localhost:3000/api/steps/648a1b2c3d4e5f6789012345/story" \
      -H "Authorization: Bearer your_jwt_token_here" \
      -H "Content-Type: application/json"
+
+# Lancer la génération asynchrone
+curl -X POST "http://localhost:3000/api/steps/648a1b2c3d4e5f6789012345/story/async" \
+     -H "Authorization: Bearer your_jwt_token_here"
+# Vérifier le statut
+curl -X GET "http://localhost:3000/api/steps/648a1b2c3d4e5f6789012345/story/status/{jobId}" \
+     -H "Authorization: Bearer your_jwt_token_here"
 ```
 
 ## Configuration requise

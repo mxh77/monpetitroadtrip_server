@@ -47,4 +47,10 @@ router.get('/trails/:idTrail/reviews/summary', auth, stepController.generateRevi
 // Route protégée pour supprimer un step
 router.delete('/:idStep', auth, stepController.deleteStep);
 
+// Route pour lancer la génération asynchrone du récit d'un step
+router.post('/:idStep/story/async', auth, stepController.generateStepStoryAsync);
+
+// Route pour consulter le statut d'un job de génération de récit
+router.get('/:idStep/story/status/:jobId', auth, stepController.getStepStoryJobStatus);
+
 export default router;
