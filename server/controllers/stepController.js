@@ -3,6 +3,7 @@ import Step from '../models/Step.js';
 import Accommodation from '../models/Accommodation.js';
 import Activity from '../models/Activity.js';
 import File from '../models/File.js';
+import UserSetting from '../models/UserSetting.js';
 import mongoose from 'mongoose';
 import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
