@@ -318,6 +318,92 @@ router.post('/:idRoadtrip/steps/:idStep/activities', auth, upload.fields([
     { name: 'documents', maxCount: 10 }
 ]), activityController.createActivityForStep);
 
+/**
+ * @swagger
+ * /{idRoadtrip}/steps/{idStep}/activities/natural-language:
+ *   post:
+ *     summary: Créer une activité via un prompt en langage naturel
+ *     description: Utilise l'intelligence artificielle pour analyser un prompt en français et créer automatiquement une activité avec nom, adresse, dates, heures et type. Peut utiliser la géolocalisation de l'utilisateur ou l'adresse de l'étape si aucune adresse spécifique n'est mentionnée.
+ *     tags: [Activities]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idRoadtrip
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du roadtrip
+ *       - in: path
+ *         name: idStep
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID de l'étape
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - prompt
+ *             properties:
+ *               prompt:
+ *                 type: string
+ *                 description: Description de l'activité en langage naturel
+ *                 example: "Déjeuner au restaurant Le Procope demain à 12h30"
+ *               userLatitude:
+ *                 type: number
+ *                 description: Latitude de l'utilisateur (optionnel)
+ *                 example: 48.8566
+ *               userLongitude:
+ *                 type: number
+ *                 description: Longitude de l'utilisateur (optionnel)
+ *                 example: 2.3522
+ *           examples:
+ *             visite:
+ *               summary: Visite touristique
+ *               value:
+ *                 prompt: "Visite guidée du Louvre demain de 10h à 12h avec réservation"
+ *             restaurant:
+ *               summary: Repas au restaurant
+ *               value:
+ *                 prompt: "Déjeuner au restaurant Le Procope demain à 12h30"
+ *                 userLatitude: 48.8566
+ *                 userLongitude: 2.3522
+ *             activite_locale:
+ *               summary: Activité près de l'utilisateur
+ *               value:
+ *                 prompt: "Course à pied dans le parc dans 1 heure"
+ *                 userLatitude: 48.8566
+ *                 userLongitude: 2.3522
+ *     responses:
+ *       200:
+ *         description: Activité créée avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 activity:
+ *                   type: object
+ *                   description: L'activité créée
+ *                 extractedData:
+ *                   type: object
+ *                   description: Les données extraites par l'IA
+ *       400:
+ *         description: Requête invalide ou prompt manquant
+ *       401:
+ *         description: Non autorisé
+ *       404:
+ *         description: Roadtrip ou étape non trouvé
+ *       500:
+ *         description: Erreur interne du serveur
+ */
+// Route protégée pour créer une activité via un prompt en langage naturel
+router.post('/:idRoadtrip/steps/:idStep/activities/natural-language', auth, activityController.createActivityFromNaturalLanguage);
+
 /***************************/
 /********METHOD PUT*********/
 /***************************/

@@ -2,10 +2,11 @@ import Activity from '../models/Activity.js';
 import Step from '../models/Step.js';
 import Roadtrip from '../models/Roadtrip.js';
 import File from '../models/File.js';
-import { getCoordinates } from '../utils/googleMapsUtils.js';
+import { getCoordinates, getAddressFromCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 import { getUserSettings, getUserAlgoliaRadius } from '../utils/userSettingsUtils.js';
+import { analyserPromptActivite } from '../utils/openaiUtils.js';
 
 /**
  * Fonction spécifique pour convertir une adresse en coordonnées pour la recherche Algolia
@@ -979,5 +980,142 @@ export const deletePhotoFromActivity = async (req, res) => {
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour créer une activité via un prompt en langage naturel
+export const createActivityFromNaturalLanguage = async (req, res) => {
+    try {
+        const { prompt, userLatitude, userLongitude } = req.body;
+        
+        if (!prompt) {
+            return res.status(400).json({ msg: 'Le prompt est requis' });
+        }
+
+        const roadtrip = await Roadtrip.findById(req.params.idRoadtrip);
+        const step = await Step.findById(req.params.idStep);
+
+        if (!roadtrip) {
+            return res.status(404).json({ msg: 'Roadtrip not found' });
+        }
+
+        if (!step) {
+            return res.status(404).json({ msg: 'Step not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire du roadtrip et de l'étape
+        if (roadtrip.userId.toString() !== req.user.id || step.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        // Vérifier si le type de l'étape est 'Stop' et retourner une erreur si des activities existent
+        if (step.type === 'Stop') {
+            return res.status(400).json({ msg: "Erreur lors de la création de l'activité : un step de type 'Stop' ne peut pas contenir d'activités" });
+        }
+
+        // Préparer les données de localisation utilisateur si disponibles
+        let userLocation = null;
+        if (userLatitude && userLongitude) {
+            try {
+                const address = await getAddressFromCoordinates(userLatitude, userLongitude);
+                userLocation = {
+                    latitude: userLatitude,
+                    longitude: userLongitude,
+                    address: address
+                };
+            } catch (error) {
+                console.error('Error getting address from coordinates:', error);
+                userLocation = {
+                    latitude: userLatitude,
+                    longitude: userLongitude,
+                    address: `Coordonnées: ${userLatitude}, ${userLongitude}`
+                };
+            }
+        }
+
+        // Préparer les données de l'étape pour le contexte
+        const stepData = {
+            name: step.name,
+            address: step.address,
+            arrivalDateTime: step.arrivalDateTime,
+            departureDateTime: step.departureDateTime
+        };
+
+        // Analyser le prompt avec OpenAI
+        const activityData = await analyserPromptActivite(prompt, stepData, userLocation);
+
+        // Déterminer l'adresse finale à utiliser
+        let finalAddress = activityData.address;
+        let coordinates = { lat: 0, lng: 0 };
+
+        // Géocodage de l'adresse
+        if (activityData.useUserLocation && userLocation) {
+            finalAddress = userLocation.address;
+            coordinates = { lat: userLocation.latitude, lng: userLocation.longitude };
+        } else if (activityData.useStepLocation) {
+            finalAddress = step.address;
+            coordinates = { lat: step.latitude, lng: step.longitude };
+        } else if (activityData.address) {
+            // Utiliser l'adresse extraite du prompt
+            try {
+                coordinates = await getCoordinates(activityData.address);
+            } catch (error) {
+                console.error('Error getting coordinates for extracted address:', error);
+                // Si on ne peut pas géocoder l'adresse extraite, utiliser l'adresse de l'étape en fallback
+                finalAddress = step.address;
+                coordinates = { lat: step.latitude, lng: step.longitude };
+                activityData.useStepLocation = true;
+            }
+        }
+
+        const newActivity = new Activity({
+            active: true,
+            name: activityData.name,
+            address: finalAddress,
+            latitude: coordinates.lat || 0,
+            longitude: coordinates.lng || 0,
+            website: activityData.website || '',
+            phone: activityData.phone || '',
+            email: activityData.email || '',
+            startDateTime: activityData.startDateTime ? new Date(activityData.startDateTime) : undefined,
+            endDateTime: activityData.endDateTime ? new Date(activityData.endDateTime) : undefined,
+            duration: activityData.duration || 0,
+            typeDuration: activityData.typeDuration || 'H',
+            type: activityData.type || 'Autre',
+            reservationNumber: activityData.reservationNumber || '',
+            price: activityData.price || 0,
+            currency: activityData.currency || 'EUR',
+            notes: activityData.notes || '',
+            stepId: req.params.idStep,
+            userId: req.user.id
+        });
+
+        const activity = await newActivity.save();
+
+        // Ajouter l'activité à la liste des activités de l'étape
+        step.activities.push(activity._id);
+        await step.save();
+
+        // Mettre à jour les dates du step et le temps de trajet
+        await updateStepDatesAndTravelTime(activity.stepId);
+
+        res.json({
+            activity,
+            extractedData: activityData // Retourner aussi les données extraites pour debug
+        });
+    } catch (err) {
+        console.error('Error creating activity from natural language:', err.message);
+        
+        if (err.message.includes('analyse du prompt')) {
+            return res.status(400).json({ 
+                msg: 'Erreur lors de l\'analyse du prompt',
+                error: err.message 
+            });
+        }
+        
+        res.status(500).json({ 
+            msg: 'Server error', 
+            error: err.message 
+        });
     }
 };

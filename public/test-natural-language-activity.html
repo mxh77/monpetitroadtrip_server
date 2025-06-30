@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer une activité - Langage Naturel</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        button:hover:not(:disabled) {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .examples {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .examples h3 {
+            margin-top: 0;
+            color: #0056b3;
+        }
+        .examples ul {
+            margin-bottom: 0;
+        }
+        .examples li {
+            margin-bottom: 8px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 6px;
+            display: none;
+        }
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .config-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: #856404;
+        }
+        .location-btn {
+            background: #28a745;
+            margin-bottom: 10px;
+            width: auto;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .location-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Créer une activité via langage naturel</h1>
+        
+        <div class="config-info">
+            <strong>⚙️ Configuration requise:</strong><br>
+            • Serveur démarré sur localhost:3000<br>
+            • Token JWT valide<br>
+            • ID de roadtrip et étape existants
+        </div>
+
+        <div class="examples">
+            <h3>💡 Exemples de prompts pour activités</h3>
+            <ul>
+                <li>"Déjeuner au restaurant Le Procope demain à 12h30"</li>
+                <li>"Visite guidée du Louvre de 10h à 12h avec réservation"</li>
+                <li>"Course à pied dans le parc dans 1 heure pendant 45 minutes"</li>
+                <li>"Shopping aux Champs-Élysées cet après-midi"</li>
+                <li>"Randonnée en montagne samedi de 8h à 16h"</li>
+                <li>"Spa et détente à l'hôtel en fin de journée"</li>
+                <li>"Concert jazz au New Morning ce soir 21h"</li>
+                <li>"Cours de cuisine française demain matin"</li>
+            </ul>
+        </div>
+
+        <form id="activityForm">
+            <div class="form-group">
+                <label for="authToken">Token JWT :</label>
+                <input type="text" id="authToken" placeholder="Votre token d'authentification" required>
+            </div>
+
+            <div class="form-group">
+                <label for="roadtripId">ID du Roadtrip :</label>
+                <input type="text" id="roadtripId" placeholder="ID du roadtrip" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stepId">ID de l'Étape :</label>
+                <input type="text" id="stepId" placeholder="ID de l'étape" required>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="location-btn" id="locationBtn">📍 Activer la géolocalisation</button>
+                <div id="locationInfo" style="margin-top: 10px; padding: 10px; background: #f0f0f0; border-radius: 4px; display: none;">
+                    <small>Coordonnées détectées: <span id="coordinates"></span></small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="prompt">Décrivez votre activité en langage naturel :</label>
+                <textarea id="prompt" placeholder="Ex: Déjeuner au Café de Flore demain à 12h30 avec terrasse" required></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">Créer l'activité</button>
+        </form>
+
+        <div id="result" class="result">
+            <h3>Résultat :</h3>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let userCoordinates = null;
+
+        // Gérer la géolocalisation
+        document.getElementById('locationBtn').addEventListener('click', function() {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        userCoordinates = {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        };
+                        document.getElementById('coordinates').textContent = 
+                            `${userCoordinates.latitude.toFixed(6)}, ${userCoordinates.longitude.toFixed(6)}`;
+                        document.getElementById('locationInfo').style.display = 'block';
+                        document.getElementById('locationBtn').textContent = '✅ Géolocalisation activée';
+                        document.getElementById('locationBtn').style.background = '#28a745';
+                    },
+                    function(error) {
+                        alert('Erreur de géolocalisation: ' + error.message);
+                    }
+                );
+            } else {
+                alert('La géolocalisation n\'est pas supportée par ce navigateur.');
+            }
+        });
+
+        // Gérer la soumission du formulaire
+        document.getElementById('activityForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const result = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            
+            const roadtripId = document.getElementById('roadtripId').value;
+            const stepId = document.getElementById('stepId').value;
+            const authToken = document.getElementById('authToken').value;
+            const prompt = document.getElementById('prompt').value;
+            
+            // Préparer les données à envoyer
+            const requestData = { prompt };
+            if (userCoordinates) {
+                requestData.userLatitude = userCoordinates.latitude;
+                requestData.userLongitude = userCoordinates.longitude;
+            }
+            
+            // Désactiver le bouton pendant la requête
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Création en cours...';
+            result.style.display = 'none';
+            
+            try {
+                const response = await fetch(`http://localhost:3000/api/roadtrips/${roadtripId}/steps/${stepId}/activities/natural-language`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                const data = await response.json();
+                
+                result.style.display = 'block';
+                
+                if (response.ok) {
+                    result.className = 'result success';
+                    resultContent.innerHTML = `
+                        <strong>✅ Activité créée avec succès !</strong><br><br>
+                        <strong>Nom:</strong> ${data.activity.name}<br>
+                        <strong>Type:</strong> ${data.activity.type}<br>
+                        <strong>Adresse:</strong> ${data.activity.address}<br>
+                        <strong>Début:</strong> ${data.activity.startDateTime ? new Date(data.activity.startDateTime).toLocaleString('fr-FR') : 'Non spécifiée'}<br>
+                        <strong>Fin:</strong> ${data.activity.endDateTime ? new Date(data.activity.endDateTime).toLocaleString('fr-FR') : 'Non spécifiée'}<br>
+                        <strong>Durée:</strong> ${data.activity.duration ? `${data.activity.duration} ${data.activity.typeDuration}` : 'Non spécifiée'}<br>
+                        <strong>Prix:</strong> ${data.activity.price ? `${data.activity.price} ${data.activity.currency}` : 'Non spécifié'}<br>
+                        <strong>Notes:</strong> ${data.activity.notes || 'Aucune'}<br>
+                        <strong>Coordonnées:</strong> ${data.activity.latitude}, ${data.activity.longitude}<br>
+                        ${data.extractedData.useUserLocation ? '<strong>🌍 Localisation utilisateur utilisée</strong><br>' : ''}
+                        ${data.extractedData.useStepLocation ? '<strong>📍 Adresse de l\'étape utilisée</strong><br>' : ''}<br>
+                        <strong>Données extraites par l'IA:</strong>
+                        <pre>${JSON.stringify(data.extractedData, null, 2)}</pre>
+                    `;
+                } else {
+                    result.className = 'result error';
+                    resultContent.innerHTML = `
+                        <strong>❌ Erreur lors de la création</strong><br><br>
+                        ${data.msg || data.error || 'Erreur inconnue'}
+                    `;
+                }
+            } catch (error) {
+                result.style.display = 'block';
+                result.className = 'result error';
+                resultContent.innerHTML = `
+                    <strong>❌ Erreur de connexion</strong><br><br>
+                    ${error.message}<br><br>
+                    Vérifiez que le serveur est démarré sur localhost:3000
+                `;
+            } finally {
+                // Réactiver le bouton
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Créer l\'activité';
+            }
+        });
+    </script>
+</body>
+</html>
