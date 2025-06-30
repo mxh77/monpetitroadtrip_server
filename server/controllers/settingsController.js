@@ -29,6 +29,20 @@ export const updateSettings = async (req, res) => {
                 });
             }
         }
+        if (typeof req.body.dragSnapInterval === 'number') {
+            // Validation du pas de déplacement (valeurs autorisées: 5, 10, 15, 30, 60)
+            const VALID_DRAG_SNAP_INTERVALS = [5, 10, 15, 30, 60];
+            const dragSnapInterval = req.body.dragSnapInterval;
+            if (VALID_DRAG_SNAP_INTERVALS.includes(dragSnapInterval)) {
+                update.dragSnapInterval = dragSnapInterval;
+            } else {
+                return res.status(400).json({ 
+                    msg: 'dragSnapInterval doit être l\'une des valeurs: 5, 10, 15, 30, 60',
+                    currentValue: dragSnapInterval,
+                    validValues: VALID_DRAG_SNAP_INTERVALS
+                });
+            }
+        }
         // Ajoute d'autres champs ici si besoin
         const settings = await UserSetting.findOneAndUpdate(
             { userId: req.user.id },

@@ -231,6 +231,45 @@ components:
           format: date-time
         __v:
           type: integer
+    UserSetting:
+      type: object
+      properties:
+        _id:
+          type: string
+        userId:
+          type: string
+        systemPrompt:
+          type: string
+          default: "Tu es le narrateur officiel de MonPetitRoadtrip, une application de roadtrip personnalisée pour les familles et amis. Sois chaleureux, informatif et inclusif."
+          description: "Prompt système personnalisé pour l'IA"
+        algoliaSearchRadius:
+          type: number
+          default: 50000
+          minimum: 1000
+          maximum: 200000
+          description: "Rayon de recherche Algolia en mètres (défaut: 50km, min: 1km, max: 200km)"
+        dragSnapInterval:
+          type: number
+          default: 15
+          enum: [5, 10, 15, 30, 60]
+          description: "Pas de déplacement en minutes pour le planning du roadtrip"
+        __v:
+          type: integer
+    UserSettingInput:
+      type: object
+      properties:
+        systemPrompt:
+          type: string
+          description: "Prompt système personnalisé pour l'IA"
+        algoliaSearchRadius:
+          type: number
+          minimum: 1000
+          maximum: 200000
+          description: "Rayon de recherche Algolia en mètres"
+        dragSnapInterval:
+          type: number
+          enum: [5, 10, 15, 30, 60]
+          description: "Pas de déplacement en minutes pour le planning du roadtrip"
 paths:
   /:
     post:
@@ -493,4 +532,106 @@ paths:
                     example: "Unable to generate story due to AI service error"
         '500':
           description: Erreur interne du serveur
+  /api/settings:
+    get:
+      summary: Récupérer les paramètres utilisateur
+      tags:
+        - Settings
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Paramètres récupérés avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSetting'
+        '500':
+          description: Erreur lors de la récupération des paramètres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Erreur lors de la récupération des paramètres"
+                  error:
+                    type: string
+    put:
+      summary: Mettre à jour les paramètres utilisateur
+      tags:
+        - Settings
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSettingInput'
+            examples:
+              complete:
+                summary: Mise à jour complète
+                value:
+                  systemPrompt: "Tu es un assistant voyage expert et bienveillant."
+                  algoliaSearchRadius: 75000
+                  dragSnapInterval: 30
+              partial:
+                summary: Mise à jour partielle
+                value:
+                  dragSnapInterval: 15
+              dragSnapOnly:
+                summary: Modification du pas de déplacement uniquement
+                value:
+                  dragSnapInterval: 5
+      responses:
+        '200':
+          description: Paramètres mis à jour avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSetting'
+        '400':
+          description: Erreur de validation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "dragSnapInterval doit être l'une des valeurs: 5, 10, 15, 30, 60"
+                  currentValue:
+                    type: number
+                    example: 99
+                  validValues:
+                    type: array
+                    items:
+                      type: number
+                    example: [5, 10, 15, 30, 60]
+              examples:
+                dragSnapError:
+                  summary: Erreur de validation dragSnapInterval
+                  value:
+                    msg: "dragSnapInterval doit être l'une des valeurs: 5, 10, 15, 30, 60"
+                    currentValue: 99
+                    validValues: [5, 10, 15, 30, 60]
+                radiusError:
+                  summary: Erreur de validation rayon de recherche
+                  value:
+                    msg: "Le rayon de recherche doit être entre 1000m (1km) et 200000m (200km)"
+                    currentValue: 500000
+        '500':
+          description: Erreur lors de la mise à jour des paramètres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Erreur lors de la mise à jour des paramètres"
+                  error:
+                    type: string
 tags: []
