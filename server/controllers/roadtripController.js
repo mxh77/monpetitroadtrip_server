@@ -3,6 +3,7 @@ import Step from '../models/Step.js';
 import Accommodation from '../models/Accommodation.js';
 import Activity from '../models/Activity.js';
 import File from '../models/File.js';
+import TravelTimeJob from '../models/TravelTimeJob.js';
 import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -474,7 +475,7 @@ export const getRoadtripById = async (req, res) => {
     }
 };
 
-// Méthode pour réactualiser les temps de trajet entre chaque étape
+// Méthode pour réactualiser les temps de trajet entre chaque étape (synchrone - existante)
 export const refreshTravelTimesForRoadtrip = async (req, res) => {
     try {
         const roadtrip = await Roadtrip.findById(req.params.idRoadtrip)
@@ -515,7 +516,6 @@ export const refreshTravelTimesForRoadtrip = async (req, res) => {
         // Trier les étapes par ordre croissant de arrivalDateTime
         const steps = roadtrip.steps.sort((a, b) => new Date(a.arrivalDateTime) - new Date(b.arrivalDateTime));
 
-
         // Rafraîchir les temps de trajet pour chaque étape
         for (let i = 1; i < steps.length; i++) {
             const step = steps[i];
@@ -528,3 +528,230 @@ export const refreshTravelTimesForRoadtrip = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+
+// Méthode asynchrone pour lancer le recalcul des temps de trajet
+export const startTravelTimeCalculationJob = async (req, res) => {
+    try {
+        const roadtrip = await Roadtrip.findById(req.params.idRoadtrip);
+
+        if (!roadtrip) {
+            return res.status(404).json({ msg: 'Roadtrip not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire du roadtrip
+        if (roadtrip.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        // Vérifier s'il y a déjà un job en cours pour ce roadtrip
+        const existingJob = await TravelTimeJob.findOne({
+            roadtripId: req.params.idRoadtrip,
+            status: { $in: ['pending', 'running'] }
+        });
+
+        if (existingJob) {
+            return res.status(409).json({ 
+                msg: 'Un calcul est déjà en cours pour ce roadtrip',
+                jobId: existingJob._id,
+                status: existingJob.status,
+                progress: existingJob.progress
+            });
+        }
+
+        // Récupérer les steps pour calculer le nombre total
+        const steps = await Step.find({ roadtripId: req.params.idRoadtrip })
+            .sort({ arrivalDateTime: 1 });
+
+        // Créer un nouveau job
+        const job = new TravelTimeJob({
+            userId: req.user.id,
+            roadtripId: req.params.idRoadtrip,
+            status: 'pending',
+            progress: {
+                total: Math.max(0, steps.length - 1), // Premier step n'a pas de temps de trajet
+                completed: 0,
+                percentage: 0
+            }
+        });
+
+        await job.save();
+
+        // Lancer le traitement asynchrone
+        processTravelTimeCalculation(job._id, steps).catch(err => {
+            console.error('Erreur lors du traitement du job:', err);
+        });
+
+        res.status(202).json({
+            msg: 'Calcul des temps de trajet démarré',
+            jobId: job._id,
+            status: job.status,
+            progress: job.progress,
+            estimatedDuration: `${Math.ceil(steps.length * 2)} secondes` // Estimation
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour vérifier le statut d'un job de calcul
+export const getTravelTimeJobStatus = async (req, res) => {
+    try {
+        const job = await TravelTimeJob.findById(req.params.jobId);
+
+        if (!job) {
+            return res.status(404).json({ msg: 'Job not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire du job
+        if (job.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        res.json({
+            jobId: job._id,
+            status: job.status,
+            progress: job.progress,
+            startedAt: job.startedAt,
+            completedAt: job.completedAt,
+            errorMessage: job.errorMessage,
+            results: job.results
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Méthode pour lister les jobs de calcul d'un roadtrip
+export const getTravelTimeJobs = async (req, res) => {
+    try {
+        const roadtrip = await Roadtrip.findById(req.params.idRoadtrip);
+
+        if (!roadtrip) {
+            return res.status(404).json({ msg: 'Roadtrip not found' });
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire du roadtrip
+        if (roadtrip.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        // Récupérer les jobs des 7 derniers jours
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+        const jobs = await TravelTimeJob.find({
+            roadtripId: req.params.idRoadtrip,
+            createdAt: { $gte: sevenDaysAgo }
+        })
+        .sort({ createdAt: -1 })
+        .limit(10);
+
+        res.json({
+            roadtripId: req.params.idRoadtrip,
+            jobs: jobs.map(job => ({
+                jobId: job._id,
+                status: job.status,
+                progress: job.progress,
+                createdAt: job.createdAt,
+                startedAt: job.startedAt,
+                completedAt: job.completedAt,
+                errorMessage: job.errorMessage,
+                results: job.status === 'completed' ? job.results.summary : null
+            }))
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
+
+// Fonction de traitement asynchrone des calculs
+async function processTravelTimeCalculation(jobId, steps) {
+    const job = await TravelTimeJob.findById(jobId);
+    
+    if (!job) {
+        console.error('Job not found:', jobId);
+        return;
+    }
+
+    try {
+        // Marquer le job comme démarré
+        job.status = 'running';
+        job.startedAt = new Date();
+        await job.save();
+
+        console.log(`🚀 Démarrage du calcul des temps de trajet pour le roadtrip ${job.roadtripId}`);
+
+        let totalDistance = 0;
+        let totalTravelTime = 0;
+        let inconsistentSteps = 0;
+        const errors = [];
+
+        // Traiter chaque step (sauf le premier)
+        for (let i = 1; i < steps.length; i++) {
+            const step = steps[i];
+            
+            try {
+                console.log(`📍 Traitement de l'étape ${i}/${steps.length - 1}: ${step.name}`);
+                
+                // Rafraîchir le temps de trajet pour cette étape
+                const updatedStep = await refreshTravelTimeForStep(step);
+                
+                // Accumuler les statistiques
+                if (updatedStep.distancePreviousStep) {
+                    totalDistance += updatedStep.distancePreviousStep;
+                }
+                if (updatedStep.travelTimePreviousStep) {
+                    totalTravelTime += updatedStep.travelTimePreviousStep;
+                }
+                if (!updatedStep.isArrivalTimeConsistent) {
+                    inconsistentSteps++;
+                }
+
+                // Mettre à jour le progrès
+                job.progress.completed = i;
+                job.progress.percentage = Math.round((i / (steps.length - 1)) * 100);
+                job.results.stepsProcessed = i;
+                await job.save();
+
+                // Petite pause pour éviter de surcharger l'API Google Maps
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+            } catch (error) {
+                console.error(`Erreur lors du traitement de l'étape ${step.name}:`, error);
+                errors.push({
+                    stepId: step._id,
+                    error: error.message
+                });
+            }
+        }
+
+        // Finaliser le job
+        job.status = 'completed';
+        job.completedAt = new Date();
+        job.results.errors = errors;
+        job.results.summary = {
+            totalDistance: Math.round(totalDistance * 100) / 100, // Arrondir à 2 décimales
+            totalTravelTime: Math.round(totalTravelTime),
+            inconsistentSteps
+        };
+        
+        await job.save();
+
+        console.log(`✅ Calcul terminé pour le roadtrip ${job.roadtripId}`);
+        console.log(`📊 Résumé: ${totalDistance.toFixed(2)}km, ${totalTravelTime}min, ${inconsistentSteps} incohérences`);
+
+    } catch (error) {
+        console.error('Erreur lors du traitement du job:', error);
+        
+        job.status = 'failed';
+        job.completedAt = new Date();
+        job.errorMessage = error.message;
+        await job.save();
+    }
+}

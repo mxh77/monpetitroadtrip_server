@@ -417,8 +417,168 @@ router.put('/:idRoadtrip', auth, upload.fields([
 /***************************/
 /********METHOD PATCH********/
 /***************************/
-// Route protégée pour réactualiser les temps de trajet entre chaque étape
+/**
+ * @swagger
+ * /{idRoadtrip}/refresh-travel-times:
+ *   patch:
+ *     summary: Recalculer les temps de trajet (synchrone)
+ *     description: Recalcule les temps de trajet entre toutes les étapes du roadtrip de manière synchrone
+ *     tags: [Roadtrips]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idRoadtrip
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du roadtrip
+ *     responses:
+ *       200:
+ *         description: Temps de trajet recalculés avec succès
+ *       401:
+ *         description: Non autorisé
+ *       404:
+ *         description: Roadtrip non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
+// Route protégée pour réactualiser les temps de trajet entre chaque étape (synchrone)
 router.patch('/:idRoadtrip/refresh-travel-times', auth, roadtripController.refreshTravelTimesForRoadtrip);
+
+/**
+ * @swagger
+ * /{idRoadtrip}/refresh-travel-times/async:
+ *   patch:
+ *     summary: Lancer le recalcul asynchrone des temps de trajet
+ *     description: Lance un job asynchrone pour recalculer tous les temps de trajet du roadtrip. Utile pour corriger les erreurs et obtenir des statistiques complètes.
+ *     tags: [Roadtrips]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idRoadtrip
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du roadtrip
+ *     responses:
+ *       202:
+ *         description: Job de calcul démarré avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                 jobId:
+ *                   type: string
+ *                 status:
+ *                   type: string
+ *                   enum: [pending, running, completed, failed]
+ *                 progress:
+ *                   type: object
+ *                   properties:
+ *                     total:
+ *                       type: number
+ *                     completed:
+ *                       type: number
+ *                     percentage:
+ *                       type: number
+ *                 estimatedDuration:
+ *                   type: string
+ *       409:
+ *         description: Un calcul est déjà en cours
+ *       401:
+ *         description: Non autorisé
+ *       404:
+ *         description: Roadtrip non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
+// Route protégée pour lancer le recalcul asynchrone des temps de trajet
+router.patch('/:idRoadtrip/refresh-travel-times/async', auth, roadtripController.startTravelTimeCalculationJob);
+
+/**
+ * @swagger
+ * /{idRoadtrip}/travel-time-jobs/{jobId}/status:
+ *   get:
+ *     summary: Vérifier le statut d'un job de calcul
+ *     description: Retourne le statut et les résultats d'un job de calcul des temps de trajet
+ *     tags: [Roadtrips]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idRoadtrip
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du roadtrip
+ *       - in: path
+ *         name: jobId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du job
+ *     responses:
+ *       200:
+ *         description: Statut du job récupéré avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 jobId:
+ *                   type: string
+ *                 status:
+ *                   type: string
+ *                   enum: [pending, running, completed, failed]
+ *                 progress:
+ *                   type: object
+ *                   properties:
+ *                     total:
+ *                       type: number
+ *                     completed:
+ *                       type: number
+ *                     percentage:
+ *                       type: number
+ *                 startedAt:
+ *                   type: string
+ *                   format: date-time
+ *                 completedAt:
+ *                   type: string
+ *                   format: date-time
+ *                 results:
+ *                   type: object
+ *                   properties:
+ *                     stepsProcessed:
+ *                       type: number
+ *                     summary:
+ *                       type: object
+ *                       properties:
+ *                         totalDistance:
+ *                           type: number
+ *                           description: Distance totale en km
+ *                         totalTravelTime:
+ *                           type: number
+ *                           description: Temps de trajet total en minutes
+ *                         inconsistentSteps:
+ *                           type: number
+ *                           description: Nombre d'étapes avec des incohérences temporelles
+ *       401:
+ *         description: Non autorisé
+ *       404:
+ *         description: Job non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
+// Route protégée pour vérifier le statut d'un job de calcul
+router.get('/:idRoadtrip/travel-time-jobs/:jobId/status', auth, roadtripController.getTravelTimeJobStatus);
+
+// Route protégée pour lister les jobs de calcul d'un roadtrip
+router.get('/:idRoadtrip/travel-time-jobs', auth, roadtripController.getTravelTimeJobs);
 
 
 /***************************/
