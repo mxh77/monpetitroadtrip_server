@@ -7,7 +7,7 @@ import UserSetting from '../models/UserSetting.js';
 import mongoose from 'mongoose';
 import { getCoordinates, getAddressFromCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
-import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
+import { updateStepDatesAndTravelTime, refreshTravelTimeForStep } from '../utils/travelTimeUtils.js';
 import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
 import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails } from '../utils/hikeUtils.js';
 import { genererSyntheseAvis, genererRecitStep, analyserPromptEtape } from '../utils/openaiUtils.js';

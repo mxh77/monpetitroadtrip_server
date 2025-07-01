@@ -580,6 +580,200 @@ router.get('/:idRoadtrip/travel-time-jobs/:jobId/status', auth, roadtripControll
 // Route protégée pour lister les jobs de calcul d'un roadtrip
 router.get('/:idRoadtrip/travel-time-jobs', auth, roadtripController.getTravelTimeJobs);
 
+/**
+ * @swagger
+ * /{idRoadtrip}/sync-steps/async:
+ *   patch:
+ *     summary: Lancer la synchronisation asynchrone des heures des steps
+ *     description: Lance un job asynchrone pour resynchroniser les heures d'arrivée et de départ de tous les steps avec leurs accommodations et activités
+ *     tags: [Roadtrips]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idRoadtrip
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du roadtrip
+ *     responses:
+ *       202:
+ *         description: Job de synchronisation démarré avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                 jobId:
+ *                   type: string
+ *                 status:
+ *                   type: string
+ *                 progress:
+ *                   type: object
+ *                 estimatedDuration:
+ *                   type: string
+ *       409:
+ *         description: Une synchronisation est déjà en cours
+ *       401:
+ *         description: Non autorisé
+ *       404:
+ *         description: Roadtrip non trouvé
+ */
+router.patch('/:idRoadtrip/sync-steps/async', auth, roadtripController.startStepSynchronizationJob);
+
+/**
+ * @swagger
+ * /{idRoadtrip}/sync-jobs/{jobId}/status:
+ *   get:
+ *     summary: Vérifier le statut d'un job de synchronisation
+ *     description: Retourne le statut et les résultats d'un job de synchronisation des steps
+ *     tags: [Roadtrips]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idRoadtrip
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du roadtrip
+ *       - in: path
+ *         name: jobId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du job
+ *     responses:
+ *       200:
+ *         description: Statut du job récupéré avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 jobId:
+ *                   type: string
+ *                 status:
+ *                   type: string
+ *                   enum: [pending, running, completed, failed]
+ *                 progress:
+ *                   type: object
+ *                   properties:
+ *                     total:
+ *                       type: number
+ *                     completed:
+ *                       type: number
+ *                     percentage:
+ *                       type: number
+ *                 results:
+ *                   type: object
+ *                   properties:
+ *                     summary:
+ *                       type: object
+ *                       properties:
+ *                         totalSteps:
+ *                           type: number
+ *                         synchronizedSteps:
+ *                           type: number
+ *                         unchangedSteps:
+ *                           type: number
+ */
+router.get('/:idRoadtrip/sync-jobs/:jobId/status', auth, roadtripController.getStepSyncJobStatus);
+
+// Route protégée pour lister les jobs de synchronisation d'un roadtrip
+router.get('/:idRoadtrip/sync-jobs', auth, roadtripController.getStepSyncJobs);
+
+/**
+ * @swagger
+ * /{idRoadtrip}/steps/{idStep}/sync:
+ *   patch:
+ *     summary: Synchroniser les heures d'un step spécifique
+ *     description: Synchronise immédiatement les heures d'arrivée et de départ d'un step avec ses accommodations et activités
+ *     tags: [Steps]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idRoadtrip
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du roadtrip
+ *       - in: path
+ *         name: idStep
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du step à synchroniser
+ *     responses:
+ *       200:
+ *         description: Step synchronisé avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                 stepId:
+ *                   type: string
+ *                 stepName:
+ *                   type: string
+ *                 changed:
+ *                   type: boolean
+ *                 before:
+ *                   type: object
+ *                   properties:
+ *                     arrivalDateTime:
+ *                       type: string
+ *                       format: date-time
+ *                     departureDateTime:
+ *                       type: string
+ *                       format: date-time
+ *                 after:
+ *                   type: object
+ *                   properties:
+ *                     arrivalDateTime:
+ *                       type: string
+ *                       format: date-time
+ *                     departureDateTime:
+ *                       type: string
+ *                       format: date-time
+ *                 changes:
+ *                   type: object
+ *                   properties:
+ *                     arrivalDateTime:
+ *                       type: object
+ *                       properties:
+ *                         changed:
+ *                           type: boolean
+ *                         before:
+ *                           type: string
+ *                           format: date-time
+ *                         after:
+ *                           type: string
+ *                           format: date-time
+ *                     departureDateTime:
+ *                       type: object
+ *                       properties:
+ *                         changed:
+ *                           type: boolean
+ *                         before:
+ *                           type: string
+ *                           format: date-time
+ *                         after:
+ *                           type: string
+ *                           format: date-time
+ *       400:
+ *         description: Step n'appartient pas au roadtrip
+ *       401:
+ *         description: Non autorisé
+ *       404:
+ *         description: Roadtrip ou step non trouvé
+ */
+router.patch('/:idRoadtrip/steps/:idStep/sync', auth, roadtripController.syncSingleStep);
 
 /***************************/
 /********METHOD GET*********/

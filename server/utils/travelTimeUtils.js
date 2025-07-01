@@ -3,34 +3,7 @@ import Accommodation from '../models/Accommodation.js';
 import Activity from '../models/Activity.js';
 import Step from '../models/Step.js';
 import { calculateTravelTime } from './googleMapsUtils.js';
-
-/**
- * Vérifie la cohérence des dates/heures de départ et d'arrivée par rapport au temps de trajet.
- * @param {Date} departureDateTime - La date/heure de départ.
- * @param {Date} arrivalDateTime - La date/heure d'arrivée.
- * @param {number} travelTime - Le temps de trajet en minutes.
- * @param {object} thresholds - Les seuils pour déterminer les notes.
- * @returns {object} - Retourne un objet contenant isConsistency et note.
- */
-export const checkDateTimeConsistency = (departureDateTime, arrivalDateTime, travelTime, thresholds = { error: 0, warning: 15 }) => {
-    const departure = new Date(departureDateTime);
-    const arrival = new Date(arrivalDateTime);
-    const travelTimeInMilliseconds = travelTime * 60 * 1000;
-
-    // Calculer la date/heure d'arrivée estimée en ajoutant le temps de trajet à la date/heure de départ
-    const estimatedArrival = new Date(departure.getTime() + travelTimeInMilliseconds);
-
-    // Vérifier si la date/heure d'arrivée réelle est cohérente avec la date/heure d'arrivée estimée
-    const isConsistency = arrival.getTime() >= estimatedArrival.getTime();
-
-    // Calculer la différence de temps entre les deux étapes
-    const timeDifference = (arrival.getTime() - departure.getTime()) / (1000 * 60); // en minutes
-
-    // Déterminer la note en fonction du temps de trajet et de la différence de temps
-    const note = determineTravelTimeNote(travelTime, timeDifference, thresholds);
-
-    return { isConsistency, note };
-};
+import { checkDateTimeConsistency } from './dateUtils.js';
 
 /**
  * Détermine la note en fonction du temps de trajet et de la différence de temps entre deux étapes.
@@ -128,6 +101,10 @@ export const updateStepDates = async (stepId) => {
     const accommodations = await Accommodation.find({ stepId, active: true });
     const activities = await Activity.find({ stepId, active: true });
 
+    console.log(`🔍 DEBUG updateStepDates pour step ${stepId}:`);
+    console.log(`   - ${accommodations.length} accommodations trouvées`);
+    console.log(`   - ${activities.length} activités trouvées`);
+
     // Fonction pour convertir une date en format ISO 8601
     const toISODateString = (date) => {
         if (date instanceof Date && !isNaN(date)) {
@@ -153,34 +130,60 @@ export const updateStepDates = async (stepId) => {
     };
 
     // Parcours des accommodations pour trouver les dates minimales et maximales
-    accommodations.forEach(accommodation => {
+    accommodations.forEach((accommodation, index) => {
         const accommodationArrival = new Date(accommodation.arrivalDateTime);
         const accommodationDeparture = new Date(accommodation.departureDateTime);
 
+        console.log(`   📍 Accommodation ${index + 1}: ${accommodation.name}`);
+        console.log(`      - arrivalDateTime: ${accommodation.arrivalDateTime} → ${accommodationArrival}`);
+        console.log(`      - departureDateTime: ${accommodation.departureDateTime} → ${accommodationDeparture}`);
+        console.log(`      - Valid arrival: ${!isNaN(accommodationArrival)}, Valid departure: ${!isNaN(accommodationDeparture)}`);
+
         arrivalDateTime = updateDate(arrivalDateTime, accommodationArrival, true);
         departureDateTime = updateDate(departureDateTime, accommodationDeparture, false);
+        
+        console.log(`      - After update: arrivalDateTime=${arrivalDateTime}, departureDateTime=${departureDateTime}`);
     });
 
     // Parcours des activities pour trouver les dates minimales et maximales
-    activities.forEach(activity => {
+    activities.forEach((activity, index) => {
         const activityStart = new Date(activity.startDateTime);
         const activityEnd = new Date(activity.endDateTime);
 
+        console.log(`   🎯 Activity ${index + 1}: ${activity.name}`);
+        console.log(`      - startDateTime: ${activity.startDateTime} → ${activityStart}`);
+        console.log(`      - endDateTime: ${activity.endDateTime} → ${activityEnd}`);
+        console.log(`      - Valid start: ${!isNaN(activityStart)}, Valid end: ${!isNaN(activityEnd)}`);
+
         arrivalDateTime = updateDate(arrivalDateTime, activityStart, true);
         departureDateTime = updateDate(departureDateTime, activityEnd, false);
+        
+        console.log(`      - After update: arrivalDateTime=${arrivalDateTime}, departureDateTime=${departureDateTime}`);
     });
 
     // Mise à jour de 'step' si des dates ont été trouvées
+    console.log(`🎯 RÉSULTAT FINAL pour step ${stepId}:`);
+    console.log(`   - arrivalDateTime calculée: ${arrivalDateTime}`);
+    console.log(`   - departureDateTime calculée: ${departureDateTime}`);
+    console.log(`   - step.arrivalDateTime avant: ${step.arrivalDateTime}`);
+    console.log(`   - step.departureDateTime avant: ${step.departureDateTime}`);
+
     if (arrivalDateTime !== null) {
         step.arrivalDateTime = toISODateString(arrivalDateTime);
+        console.log(`   ✅ step.arrivalDateTime mise à jour: ${step.arrivalDateTime}`);
     }
     if (departureDateTime !== null) {
         step.departureDateTime = toISODateString(departureDateTime);
+        console.log(`   ✅ step.departureDateTime mise à jour: ${step.departureDateTime}`);
     }
 
     console.log("Step : " + step);
 
     await step.save();
+    
+    console.log(`🔥 Step ${stepId} sauvegardé avec succès!`);
+    console.log(`   - Nouvelle arrivalDateTime: ${step.arrivalDateTime}`);
+    console.log(`   - Nouvelle departureDateTime: ${step.departureDateTime}`);
 };
 
 /**
@@ -222,12 +225,48 @@ export const refreshTravelTimeForStep = async (step) => {
             const travelData = await calculateTravelTime(lastObjet.address, firstObjet.address, lastObjet.endDateTime);
             travelTime = travelData.travelTime;
             distance = travelData.distance;
-            console.log("Travel time:", travelTime);
+            console.log("Travel time:", travelTime, "minutes");
+            console.log("lastObjet.endDateTime:", lastObjet.endDateTime);
+            console.log("firstObjet.startDateTime:", firstObjet.startDateTime);
+
+            // Calculer manuellement la différence de temps pour debug
+            const lastTime = new Date(lastObjet.endDateTime);
+            const firstTime = new Date(firstObjet.startDateTime);
+            const timeDifferenceMinutes = (firstTime.getTime() - lastTime.getTime()) / (1000 * 60);
+            console.log("Manual time difference calculation:", timeDifferenceMinutes, "minutes");
+            console.log("Travel time vs time difference:", travelTime, "vs", timeDifferenceMinutes);
 
             // Vérifier la cohérence des dates/heures et obtenir la note
+            console.log("🔍 DEBUG AVANT APPEL checkDateTimeConsistency:");
+            console.log("  - lastObjet.endDateTime (string):", lastObjet.endDateTime);
+            console.log("  - firstObjet.startDateTime (string):", firstObjet.startDateTime);
+            console.log("  - travelTime:", travelTime, "minutes");
+            
             const { isConsistency, note } = checkDateTimeConsistency(lastObjet.endDateTime, firstObjet.startDateTime, travelTime);
-            isArrivalTimeConsistent = isConsistency;
-            travelTimeNote = note;
+            
+            console.log("🔍 DEBUG APRÈS APPEL checkDateTimeConsistency:");
+            console.log("  - note retournée:", note);
+            console.log("  - isConsistency retournée:", isConsistency);
+            
+            // Vérification manuelle pour debug
+            const manualCheck = determineTravelTimeNote(travelTime, timeDifferenceMinutes);
+            console.log("🔍 DEBUG VÉRIFICATION MANUELLE:");
+            console.log("  - determineTravelTimeNote(", travelTime, ",", timeDifferenceMinutes, ") =", manualCheck);
+            console.log("  - Si", travelTime, ">", timeDifferenceMinutes, "alors ERROR attendu:", travelTime > timeDifferenceMinutes);
+            
+            // Si il y a une incohérence, forcer la correction
+            if (travelTime > timeDifferenceMinutes && note !== 'ERROR') {
+                console.log("🚨 CORRECTION FORCÉE: note devrait être ERROR");
+                travelTimeNote = 'ERROR';
+                isArrivalTimeConsistent = false;
+            } else {
+                isArrivalTimeConsistent = isConsistency;
+                travelTimeNote = note;
+            }
+            
+            console.log("Calculated isConsistency:", isConsistency);
+            console.log("Calculated note:", note);
+            console.log("Expected note should be ERROR because", travelTime, ">", timeDifferenceMinutes);
         } else {
             console.warn("Addresses for lastObjet or firstObjet are null");
             travelTime = null;
