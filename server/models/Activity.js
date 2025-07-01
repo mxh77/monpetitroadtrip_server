@@ -5,7 +5,7 @@ const ActivitySchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     stepId: { type: Schema.Types.ObjectId, ref: 'Step', required: true },
     active: { type: Boolean, default: true },
-    type: { type: String, enum: ['Randonnée', 'Courses', 'Visite', 'Autre'], default: 'Randonnée' },
+    type: { type: String, enum: ['Randonnée', 'Courses', 'Visite', 'Transport', 'Autre'], default: 'Randonnée' },
     name: { type: String, required: true },
     address: { type: String, default: '' },
     latitude: { type: Number, default: 0 },

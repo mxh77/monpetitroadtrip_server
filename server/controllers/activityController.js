@@ -116,6 +116,7 @@ export const createActivityForStep = async (req, res) => {
 
         const activity = new Activity({
             active: data.active,
+            type: data.type,
             name: data.name,
             address: data.address,
             latitude: coordinates.lat,
@@ -131,6 +132,7 @@ export const createActivityForStep = async (req, res) => {
             price: data.price,
             currency: data.currency,
             notes: data.notes,
+            algoliaId: data.algoliaId || '',
             stepId: req.params.idStep,
             userId: req.user.id
         });
@@ -207,12 +209,24 @@ export const updateActivity = async (req, res) => {
         if (req.body.data) {
             try {
                 data = JSON.parse(req.body.data);
+                console.log('Données reçues pour mise à jour activité:', {
+                    activityId: req.params.idActivity,
+                    algoliaId: data.algoliaId,
+                    name: data.name,
+                    type: data.type
+                });
             } catch (error) {
                 return res.status(400).json({ msg: 'Invalid JSON in data field' });
             }
         } else {
             // Si 'data' n'est pas présent, utiliser les champs individuels
             data = req.body;
+            console.log('Données reçues directement (pas de champ data):', {
+                activityId: req.params.idActivity,
+                algoliaId: data.algoliaId,
+                name: data.name,
+                type: data.type
+            });
         }
 
 
@@ -232,6 +246,7 @@ export const updateActivity = async (req, res) => {
         if (data.active !== undefined) {
             activity.active = data.active;
         }
+        activity.type = data.type || activity.type
         activity.name = data.name || activity.name //Obligatoire
         activity.address = data.address || activity.address //Obligatoire
         activity.website = data.website || activity.website
@@ -245,6 +260,11 @@ export const updateActivity = async (req, res) => {
         activity.price = data.price || activity.price
         activity.currency = data.currency || activity.currency
         activity.notes = data.notes || activity.notes
+        
+        // Mettre à jour algoliaId si présent (permet d'associer/dissocier)
+        if (data.algoliaId !== undefined) {
+            activity.algoliaId = data.algoliaId;
+        }
 
         // Gérer les suppressions différées
         if (data.existingFiles) {
@@ -314,6 +334,13 @@ export const updateActivity = async (req, res) => {
         }
 
         await activity.save();
+
+        console.log('Activité mise à jour avec succès:', {
+            activityId: activity._id,
+            algoliaId: activity.algoliaId,
+            name: activity.name,
+            type: activity.type
+        });
 
         // Mettre à jour les dates du step et le temps de trajet
         console.log("Mise à jour des dates et du temps de trajet pour l'étape mise à jour");

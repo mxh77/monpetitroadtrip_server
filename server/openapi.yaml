@@ -173,6 +173,11 @@ components:
           type: string
         stepId:
           type: string
+        active:
+          type: boolean
+        type:
+          type: string
+          enum: ['Randonnée', 'Courses', 'Visite', 'Transport', 'Autre']
         name:
           type: string
         address:
@@ -197,10 +202,20 @@ components:
           type: number
         typeDuration:
           type: string
+          enum: ['M', 'H', 'J']
         reservationNumber:
           type: string
         price:
           type: number
+        currency:
+          type: string
+          enum: ['USD', 'CAD', 'EUR']
+        trailDistance:
+          type: number
+        trailElevation:
+          type: number
+        trailType:
+          type: string
         notes:
           type: string
         photos:
@@ -213,6 +228,8 @@ components:
             $ref: '#/components/schemas/File'
         thumbnail:
           $ref: '#/components/schemas/File'
+        algoliaId:
+          type: string
         __v:
           type: integer
     File:
