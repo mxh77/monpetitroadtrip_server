@@ -1002,9 +1002,11 @@ export const generateStepStoryAsync = async (req, res) => {
             try {
                 job.status = 'processing';
                 await job.save();
-                // Reprendre la logique de generateStepStory
-                const accommodations = await Accommodation.find({ stepId: new mongoose.Types.ObjectId(idStep), active: true });
-                const allActivities = await Activity.find({ stepId: new mongoose.Types.ObjectId(idStep) });
+                // Reprendre la logique de generateStepStory (avec population des photos pour collectStepPhotos)
+                const accommodations = await Accommodation.find({ stepId: new mongoose.Types.ObjectId(idStep), active: true })
+                    .populate('photos').populate('thumbnail');
+                const allActivities = await Activity.find({ stepId: new mongoose.Types.ObjectId(idStep) })
+                    .populate('photos').populate('thumbnail');
                 const activities = allActivities.filter(act => {
                     if (act.active === true || act.active === 'true' || act.active === 1) return true;
                     if (act.active === undefined || act.active === null) return true;
@@ -1105,6 +1107,8 @@ export const generateStepStoryAsync = async (req, res) => {
                 };
                 await job.save();
             } catch (err) {
+                console.error('❌ Erreur dans le job asynchrone de génération de récit:', err);
+                console.error('Stack trace:', err.stack);
                 job.status = 'error';
                 job.error = err.message;
                 await job.save();
