@@ -43,6 +43,10 @@ export const updateSettings = async (req, res) => {
                 });
             }
         }
+        if (typeof req.body.enablePhotosInStories === 'boolean') {
+            // Activation/désactivation de l'analyse des photos dans les récits
+            update.enablePhotosInStories = req.body.enablePhotosInStories;
+        }
         // Ajoute d'autres champs ici si besoin
         const settings = await UserSetting.findOneAndUpdate(
             { userId: req.user.id },

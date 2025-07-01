@@ -10,7 +10,7 @@ import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime, refreshTravelTimeForStep } from '../utils/travelTimeUtils.js';
 import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
 import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails } from '../utils/hikeUtils.js';
-import { genererSyntheseAvis, genererRecitStep, analyserPromptEtape } from '../utils/openaiUtils.js';
+import { genererSyntheseAvis, genererRecitStep, genererRecitStepAvecPhotos, analyserPromptEtape } from '../utils/openaiUtils.js';
 import StepStoryJob from '../models/StepStoryJob.js';
 import { getUserAlgoliaRadius } from '../utils/userSettingsUtils.js';
 
@@ -804,12 +804,29 @@ export const generateStepStory = async (req, res) => {
             });
         }
 
-        // Récupérer le systemPrompt personnalisé
+        // Récupérer le systemPrompt personnalisé et les préférences photos
         const userSettings = await UserSetting.findOne({ userId: req.user.id });
         const systemPrompt = userSettings?.systemPrompt;
+        const enablePhotosInStories = userSettings?.enablePhotosInStories !== false; // Par défaut true
 
-        // Générer le récit avec OpenAI
-        const result = await genererRecitStep(stepData, systemPrompt);
+        // Collecter les photos des hébergements et activités si l'utilisateur l'a activé
+        let photos = [];
+        if (enablePhotosInStories) {
+            photos = await collectStepPhotos(accommodations, activities);
+            console.log(`📸 ${photos.length} photos collectées pour enrichir le récit (activé par l'utilisateur)`);
+        } else {
+            console.log(`📸 Analyse des photos désactivée dans les paramètres utilisateur`);
+        }
+
+        // Générer le récit avec OpenAI (avec ou sans photos selon les préférences)
+        let result;
+        if (enablePhotosInStories && photos.length > 0) {
+            // Utiliser la version avec photos (GPT-4 Vision)
+            result = await genererRecitStepAvecPhotos(stepData, systemPrompt, photos);
+        } else {
+            // Utiliser la version texte standard
+            result = await genererRecitStep(stepData, systemPrompt);
+        }
 
         // Sauvegarder le récit dans le step
         step.story = result.story;
@@ -824,8 +841,11 @@ export const generateStepStory = async (req, res) => {
             dataUsed: {
                 stepInfo: !!step.name || !!step.address || !!step.notes,
                 accommodationsCount: accommodations.length,
-                activitiesCount: activities.length
+                activitiesCount: activities.length,
+                photosCount: photos.length
             },
+            model: result.model || 'gpt-4o-mini',
+            photosAnalyzed: result.photosAnalyzed || 0,
             fromCache: false
         });
 
@@ -915,11 +935,30 @@ export const regenerateStepStory = async (req, res) => {
                 notes: act.notes
             }))
         };
-        // Récupérer le systemPrompt personnalisé
+        // Récupérer le systemPrompt personnalisé et les préférences photos
         const userSettings = await UserSetting.findOne({ userId: req.user.id });
         const systemPrompt = userSettings?.systemPrompt;
-        // Générer le récit avec OpenAI
-        const result = await genererRecitStep(stepData, systemPrompt);
+        const enablePhotosInStories = userSettings?.enablePhotosInStories !== false; // Par défaut true
+        
+        // Collecter les photos des hébergements et activités si l'utilisateur l'a activé
+        let photos = [];
+        if (enablePhotosInStories) {
+            photos = await collectStepPhotos(accommodations, activities);
+            console.log(`📸 ${photos.length} photos collectées pour régénérer le récit (activé par l'utilisateur)`);
+        } else {
+            console.log(`📸 Analyse des photos désactivée dans les paramètres utilisateur`);
+        }
+        
+        // Générer le récit avec OpenAI (avec ou sans photos selon les préférences)
+        let result;
+        if (enablePhotosInStories && photos.length > 0) {
+            // Utiliser la version avec photos (GPT-4 Vision)
+            result = await genererRecitStepAvecPhotos(stepData, systemPrompt, photos);
+        } else {
+            // Utiliser la version texte standard
+            result = await genererRecitStep(stepData, systemPrompt);
+        }
+        
         step.story = result.story;
         await step.save();
         res.json({
@@ -931,8 +970,11 @@ export const regenerateStepStory = async (req, res) => {
             dataUsed: {
                 stepInfo: !!step.name || !!step.address || !!step.notes,
                 accommodationsCount: accommodations.length,
-                activitiesCount: activities.length
+                activitiesCount: activities.length,
+                photosCount: photos.length
             },
+            model: result.model || 'gpt-4o-mini',
+            photosAnalyzed: result.photosAnalyzed || 0,
             fromCache: false,
             regenerated: true
         });
@@ -1018,11 +1060,30 @@ export const generateStepStoryAsync = async (req, res) => {
                         notes: act.notes
                     }))
                 };
-                // Récupérer le systemPrompt personnalisé
+                // Récupérer le systemPrompt personnalisé et les préférences photos
                 const userSettings = await UserSetting.findOne({ userId: req.user.id });
                 const systemPrompt = userSettings?.systemPrompt;
-                // Générer le récit avec OpenAI
-                const result = await genererRecitStep(stepData, systemPrompt);
+                const enablePhotosInStories = userSettings?.enablePhotosInStories !== false; // Par défaut true
+                
+                // Collecter les photos des hébergements et activités si l'utilisateur l'a activé
+                let photos = [];
+                if (enablePhotosInStories) {
+                    photos = await collectStepPhotos(accommodations, activities);
+                    console.log(`📸 ${photos.length} photos collectées pour génération asynchrone (activé par l'utilisateur)`);
+                } else {
+                    console.log(`📸 Analyse des photos désactivée dans les paramètres utilisateur`);
+                }
+                
+                // Générer le récit avec OpenAI (avec ou sans photos selon les préférences)
+                let result;
+                if (enablePhotosInStories && photos.length > 0) {
+                    // Utiliser la version avec photos (GPT-4 Vision)
+                    result = await genererRecitStepAvecPhotos(stepData, systemPrompt, photos);
+                } else {
+                    // Utiliser la version texte standard
+                    result = await genererRecitStep(stepData, systemPrompt);
+                }
+                
                 step.story = result.story;
                 await step.save();
                 job.status = 'done';
@@ -1035,8 +1096,11 @@ export const generateStepStoryAsync = async (req, res) => {
                     dataUsed: {
                         stepInfo: !!step.name || !!step.address || !!step.notes,
                         accommodationsCount: accommodations.length,
-                        activitiesCount: activities.length
+                        activitiesCount: activities.length,
+                        photosCount: photos.length
                     },
+                    model: result.model || 'gpt-4o-mini',
+                    photosAnalyzed: result.photosAnalyzed || 0,
                     fromCache: false
                 };
                 await job.save();
@@ -1170,6 +1234,248 @@ export const createStepFromNaturalLanguage = async (req, res) => {
         res.status(500).json({ 
             msg: 'Erreur serveur lors de la création de l\'étape',
             error: err.message 
+        });
+    }
+};
+
+/**
+ * Collecte les photos des hébergements et activités d'un step
+ * @param {Array} accommodations - Liste des hébergements
+ * @param {Array} activities - Liste des activités
+ * @returns {Array} - Liste des photos avec métadonnées
+ */
+const collectStepPhotos = async (accommodations, activities) => {
+    const photos = [];
+    
+    try {
+        // Collecter les photos des hébergements
+        for (const accommodation of accommodations) {
+            if (accommodation.photos && accommodation.photos.length > 0) {
+                // Récupérer les détails des photos
+                const accommodationPhotos = await File.find({
+                    _id: { $in: accommodation.photos },
+                    type: 'photo'
+                });
+                
+                accommodationPhotos.forEach(photo => {
+                    photos.push({
+                        url: photo.url,
+                        source: `Hébergement: ${accommodation.name}`,
+                        type: 'accommodation',
+                        itemId: accommodation._id,
+                        itemName: accommodation.name,
+                        fileId: photo._id
+                    });
+                });
+            }
+            
+            // Ajouter la photo thumbnail si elle existe
+            if (accommodation.thumbnail) {
+                const thumbnail = await File.findById(accommodation.thumbnail);
+                if (thumbnail && thumbnail.type === 'thumbnail') {
+                    photos.push({
+                        url: thumbnail.url,
+                        source: `Hébergement: ${accommodation.name} (miniature)`,
+                        type: 'accommodation_thumbnail',
+                        itemId: accommodation._id,
+                        itemName: accommodation.name,
+                        fileId: thumbnail._id
+                    });
+                }
+            }
+        }
+        
+        // Collecter les photos des activités
+        for (const activity of activities) {
+            if (activity.photos && activity.photos.length > 0) {
+                // Récupérer les détails des photos
+                const activityPhotos = await File.find({
+                    _id: { $in: activity.photos },
+                    type: 'photo'
+                });
+                
+                activityPhotos.forEach(photo => {
+                    photos.push({
+                        url: photo.url,
+                        source: `Activité: ${activity.name}`,
+                        type: 'activity',
+                        itemId: activity._id,
+                        itemName: activity.name,
+                        fileId: photo._id
+                    });
+                });
+            }
+            
+            // Ajouter la photo thumbnail si elle existe
+            if (activity.thumbnail) {
+                const thumbnail = await File.findById(activity.thumbnail);
+                if (thumbnail && thumbnail.type === 'thumbnail') {
+                    photos.push({
+                        url: thumbnail.url,
+                        source: `Activité: ${activity.name} (miniature)`,
+                        type: 'activity_thumbnail',
+                        itemId: activity._id,
+                        itemName: activity.name,
+                        fileId: thumbnail._id
+                    });
+                }
+            }
+        }
+        
+        console.log(`✅ Collecté ${photos.length} photos pour le step (${accommodations.length} hébergements, ${activities.length} activités)`);
+        return photos;
+        
+    } catch (error) {
+        console.error('❌ Erreur lors de la collecte des photos:', error);
+        return [];
+    }
+};
+
+// Méthode pour générer le récit avec photos (force l'analyse des images)
+export const generateStepStoryWithPhotos = async (req, res) => {
+    try {
+        const { idStep } = req.params;
+
+        // Récupérer le step
+        const step = await Step.findById(idStep);
+
+        if (!step) {
+            return res.status(404).json({ msg: 'Step not found' });
+        }
+
+        // Vérifier si l'utilisateur est autorisé à accéder à ce step
+        if (step.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        // Récupérer toutes les accommodations liées à ce step avec leurs photos
+        const accommodations = await Accommodation.find({ 
+            stepId: new mongoose.Types.ObjectId(idStep), 
+            active: true 
+        }).populate('photos').populate('thumbnail');
+
+        // Récupérer toutes les activités liées à ce step avec leurs photos
+        const allActivities = await Activity.find({ 
+            stepId: new mongoose.Types.ObjectId(idStep) 
+        }).populate('photos').populate('thumbnail');
+        
+        const activities = allActivities.filter(act => {
+            if (act.active === true || act.active === 'true' || act.active === 1) return true;
+            if (act.active === undefined || act.active === null) return true;
+            return false;
+        });
+
+        console.log(`Step ${idStep}: Found ${accommodations.length} accommodations and ${activities.length} activities for photo story`);
+
+        // Tri côté JavaScript pour gérer les valeurs nulles
+        accommodations.sort((a, b) => {
+            const dateA = a.arrivalDateTime ? new Date(a.arrivalDateTime) : new Date(0);
+            const dateB = b.arrivalDateTime ? new Date(b.arrivalDateTime) : new Date(0);
+            return dateA - dateB;
+        });
+
+        activities.sort((a, b) => {
+            const dateA = a.startDateTime ? new Date(a.startDateTime) : new Date(0);
+            const dateB = b.startDateTime ? new Date(b.startDateTime) : new Date(0);
+            return dateA - dateB;
+        });
+
+        // Préparer les données pour le LLM
+        const stepData = {
+            step: {
+                name: step.name,
+                type: step.type,
+                address: step.address,
+                arrivalDateTime: step.arrivalDateTime,
+                departureDateTime: step.departureDateTime,
+                distancePreviousStep: step.distancePreviousStep,
+                travelTimePreviousStep: step.travelTimePreviousStep,
+                notes: step.notes
+            },
+            accommodations: accommodations.map(acc => ({
+                name: acc.name,
+                address: acc.address,
+                arrivalDateTime: acc.arrivalDateTime,
+                departureDateTime: acc.departureDateTime,
+                nights: acc.nights,
+                price: acc.price,
+                currency: acc.currency,
+                reservationNumber: acc.reservationNumber,
+                confirmationDateTime: acc.confirmationDateTime,
+                notes: acc.notes
+            })),
+            activities: activities.map(act => ({
+                name: act.name,
+                type: act.type,
+                address: act.address,
+                startDateTime: act.startDateTime,
+                endDateTime: act.endDateTime,
+                duration: act.duration,
+                typeDuration: act.typeDuration,
+                price: act.price,
+                currency: act.currency,
+                reservationNumber: act.reservationNumber,
+                trailDistance: act.trailDistance,
+                trailElevation: act.trailElevation,
+                trailType: act.trailType,
+                notes: act.notes
+            }))
+        };
+
+        // Récupérer le systemPrompt personnalisé
+        const userSettings = await UserSetting.findOne({ userId: req.user.id });
+        const systemPrompt = userSettings?.systemPrompt;
+
+        // Collecter les photos des hébergements et activités
+        const photos = await collectStepPhotos(accommodations, activities);
+        console.log(`📸 ${photos.length} photos collectées pour génération avec photos`);
+
+        if (photos.length === 0) {
+            return res.status(400).json({ 
+                msg: 'Aucune photo trouvée pour ce step',
+                error: 'Ce step ne contient aucune photo d\'hébergement ou d\'activité à analyser'
+            });
+        }
+
+        // Forcer l'utilisation de GPT-4 Vision avec les photos
+        const result = await genererRecitStepAvecPhotos(stepData, systemPrompt, photos);
+
+        // Optionnel : sauvegarder le récit dans le step
+        // step.story = result.story;
+        // await step.save();
+
+        res.json({
+            stepId: idStep,
+            stepName: step.name,
+            story: result.story,
+            prompt: result.prompt,
+            generatedAt: new Date().toISOString(),
+            dataUsed: {
+                stepInfo: !!step.name || !!step.address || !!step.notes,
+                accommodationsCount: accommodations.length,
+                activitiesCount: activities.length,
+                photosCount: photos.length
+            },
+            model: result.model,
+            photosAnalyzed: result.photosAnalyzed,
+            photosSources: photos.map(p => ({ source: p.source, type: p.type })),
+            fromCache: false,
+            forcePhotos: true
+        });
+
+    } catch (error) {
+        console.error('Error generating step story with photos:', error);
+        
+        if (error.message.includes('OpenAI')) {
+            return res.status(503).json({ 
+                msg: 'Service temporarily unavailable', 
+                error: 'Unable to generate story due to AI service error' 
+            });
+        }
+        
+        res.status(500).json({ 
+            msg: 'Server error', 
+            error: error.message 
         });
     }
 };

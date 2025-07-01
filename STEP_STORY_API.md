@@ -225,6 +225,66 @@ Cette fonctionnalité utilise les dépendances suivantes :
 >
 > Le lendemain matin, vous vous lancez dans une randonnée au Lake Louise, une activité de 4 heures qui vous mènera sur un sentier de 8 km avec 500m de dénivelé. Cette excursion, réservée sous le numéro #LL789, vous coûtera 75 CAD et vous offrira des vues spectaculaires sur le lac turquoise..."
 
+## Fonctionnalité Photos dans les Récits
+
+### Vue d'ensemble
+
+Le système de génération de récits supporte maintenant l'analyse automatique des photos associées aux hébergements et activités d'un step. Cette fonctionnalité utilise **GPT-4 Vision** pour analyser les images et enrichir le récit avec des détails visuels authentiques.
+
+### Comportement automatique
+
+Par défaut, l'endpoint `/api/steps/{idStep}/story` détecte automatiquement la présence de photos :
+- **Sans photos** : Utilise GPT-4o-mini (rapide, économique)
+- **Avec photos** : Utilise GPT-4o avec Vision (analyse les images)
+
+### Endpoint dédié
+
+Pour forcer l'analyse des photos :
+```
+GET /api/steps/{idStep}/story/with-photos
+```
+
+### Types de photos analysées
+
+Le système collecte automatiquement :
+- **Photos d'hébergements** : Images associées aux accommodations
+- **Photos d'activités** : Images associées aux activités
+- **Miniatures (thumbnails)** : Photos principales des hébergements/activités
+
+### Réponse enrichie
+
+Quand des photos sont analysées, la réponse inclut :
+```json
+{
+  "stepId": "...",
+  "story": "Récit enrichi avec détails visuels...",
+  "model": "gpt-4o",
+  "photosAnalyzed": 5,
+  "photosSources": [
+    {"source": "Hébergement: Hotel Plaza", "type": "accommodation"},
+    {"source": "Activité: Randonnée Mont Blanc", "type": "activity"}
+  ],
+  "dataUsed": {
+    "photosCount": 5
+  }
+}
+```
+
+### Avantages de l'analyse photos
+
+1. **Récits plus vivants** : Descriptions visuelles authentiques
+2. **Détails atmosphériques** : Ambiance, couleurs, architecture
+3. **Personnalisation** : Basée sur les vraies photos du voyage
+4. **Immersion** : Récits plus engageants et mémorables
+
+### Exemples d'enrichissement
+
+**Sans photos :**
+> "Vous arrivez à l'hôtel Plaza pour votre séjour de 2 nuits..."
+
+**Avec photos :**
+> "Vous arrivez à l'hôtel Plaza, dont la façade Art déco aux tons dorés brille sous le soleil de fin d'après-midi. Les balcons ornés de fer forgé donnent sur une place pavée animée..."
+
 ## Test
 
 Utilisez le script de test fourni (`testStepStory.js`) pour valider le fonctionnement de l'API :

@@ -39,6 +39,9 @@ router.get('/:idStep/hikes-suggestion', auth, stepController.getHikeSuggestions)
 // Route pour générer le récit chronologique d'un step
 router.get('/:idStep/story', auth, stepController.generateStepStory);
 
+// Route pour générer le récit avec photos (force l'analyse des images)
+router.get('/:idStep/story/with-photos', auth, stepController.generateStepStoryWithPhotos);
+
 // Route pour générer une synthèse des avis
 router.get('/trails/:idTrail/reviews/summary', auth, stepController.generateReviewSummary);
 
