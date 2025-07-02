@@ -1125,12 +1125,43 @@ export const generateStepStoryAsync = async (req, res) => {
 // Endpoint pour consulter le statut d'un job de génération de récit
 export const getStepStoryJobStatus = async (req, res) => {
     try {
-        const { jobId } = req.params;
+        const { idStep, jobId } = req.params;
+        
+        // Vérifier que le step existe et appartient à l'utilisateur
+        const step = await Step.findById(idStep);
+        if (!step) {
+            return res.status(404).json({ msg: 'Step not found' });
+        }
+        
+        if (step.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+        
+        // Récupérer le job et vérifier qu'il appartient au bon step
         const job = await StepStoryJob.findById(jobId);
         if (!job) {
             return res.status(404).json({ msg: 'Job not found' });
         }
-        res.json({ status: job.status, result: job.result, error: job.error });
+        
+        // Vérifier que le job correspond bien au step demandé
+        if (job.stepId.toString() !== idStep) {
+            return res.status(400).json({ 
+                msg: 'Job does not belong to the specified step',
+                jobStepId: job.stepId,
+                requestedStepId: idStep
+            });
+        }
+        
+        res.json({ 
+            jobId: job._id,
+            stepId: job.stepId,
+            stepName: step.name,
+            status: job.status, 
+            result: job.result, 
+            error: job.error,
+            createdAt: job.createdAt,
+            updatedAt: job.updatedAt
+        });
     } catch (error) {
         console.error('Error fetching job status:', error);
         res.status(500).json({ msg: 'Server error', error: error.message });

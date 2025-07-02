@@ -9,8 +9,8 @@ const router = express.Router();
 const multerStorage = multer.memoryStorage();
 const upload = multer({ storage: multerStorage });
 
-// IMPORTANT : Organisation par MODULES FONCTIONNELS choisie pour stepRoutes.js
-// Ce fichier groupe les routes par fonctionnalité métier pour une meilleure cohérence
+// ORGANISATION PAR MODULES FONCTIONNELS (Version Alternative)
+// Ce fichier présente les routes groupées par fonctionnalité métier
 
 /***************************/
 /*******GESTION STEP********/

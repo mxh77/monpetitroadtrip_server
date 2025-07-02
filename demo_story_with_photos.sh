@@ -36,7 +36,7 @@ echo "Job lancé: $JOB_ID"
 
 # Attendre et vérifier le statut
 sleep 5
-curl -s -X GET "${BASE_URL}/api/steps/${STEP_ID}/story/status/${JOB_ID}" \
+curl -s -X GET "${BASE_URL}/api/steps/${STEP_ID}/story/${JOB_ID}/status" \
      -H "Authorization: Bearer ${AUTH_TOKEN}" | \
      jq -r '"Statut: " + .status + " | Photos: " + (.result.photosAnalyzed // 0 | tostring)'
 

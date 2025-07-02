@@ -36,13 +36,53 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// CORS
+// CORS - Configuration flexible pour développement local
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001", 
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:3001",
+  "http://192.168.1.2:3000", 
+  "http://192.168.1.2:3001",
+  // Ajouter d'autres IP courantes de réseaux locaux
+  "http://192.168.0.2:3000",
+  "http://192.168.0.2:3001",
+  "http://192.168.1.3:3000",
+  "http://192.168.1.3:3001",
+  "http://192.168.1.4:3000",
+  "http://192.168.1.4:3001"
+];
+
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001", "http://192.168.1.2:3000", "http://192.168.1.2:3001"], // Liste des domaines autorisés
+  origin: function (origin, callback) {
+    // Permettre les requêtes sans origin (Postman, mobile apps, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Permettre tous les localhost et 127.0.0.1
+    if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+      return callback(null, true);
+    }
+    
+    // Permettre tous les réseaux locaux 192.168.x.x
+    if (origin.match(/^http:\/\/192\.168\.\d+\.\d+:(3000|3001)$/)) {
+      return callback(null, true);
+    }
+    
+    // Vérifier la liste explicite
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log('CORS: Origin not allowed:', origin);
+      console.log('CORS: Allowed patterns: localhost:*, 127.0.0.1:*, 192.168.x.x:3000/3001');
+      callback(null, true); // En développement, on peut être plus permissif
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '../public')));
@@ -108,6 +148,13 @@ app.get('/autocomplete', async (req, res) => {
 
 // Start server
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const HOST = process.env.HOST || '0.0.0.0'; // Écouter sur toutes les interfaces
+
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
+  console.log(`Server accessible via:`);
+  console.log(`  - http://localhost:${PORT}`);
+  console.log(`  - http://127.0.0.1:${PORT}`);
+  console.log(`  - http://192.168.1.2:${PORT} (your current IP)`);
+  console.log(`CORS enabled for local development (localhost, 127.0.0.1, 192.168.x.x)`);
 });

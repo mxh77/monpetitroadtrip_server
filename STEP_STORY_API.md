@@ -1,4 +1,4 @@
-# 📖 API de Récit de Step - Documentation
+# 📖 API de Récit de Step - Docu- **GET `/api/steps/{idStep}/story/{jobId}/status`** : Permet de consulter le statut (`pending`, `processing`, `done`, `error`) et le résultat ou l'erreur du job.entation
 
 ## Vue d'ensemble
 
@@ -9,7 +9,7 @@ Cette fonctionnalité permet de générer automatiquement un récit chronologiqu
 ```
 GET /api/steps/{idStep}/story
 POST /api/steps/{idStep}/story/async
-GET  /api/steps/{idStep}/story/status/{jobId}
+GET  /api/steps/{idStep}/story/{jobId}/status
 ```
 
 ## Authentification
@@ -63,7 +63,7 @@ Authorization: Bearer {votre_jwt_token}
 }
 ```
 
-- **GET /story/status/{jobId}**
+- **GET /story/{jobId}/status**
 
 ```json
 {
@@ -166,7 +166,7 @@ async function generateStepStoryAsync(stepId, authToken) {
     let result = null;
     while (status !== 'done' && status !== 'error') {
         await new Promise(r => setTimeout(r, 2000));
-        const poll = await axios.get(`http://localhost:3000/api/steps/${stepId}/story/status/${jobId}`, {
+        const poll = await axios.get(`http://localhost:3000/api/steps/${stepId}/story/${jobId}/status`, {
             headers: { 'Authorization': `Bearer ${authToken}` }
         });
         status = poll.data.status;
@@ -190,7 +190,7 @@ curl -X GET "http://localhost:3000/api/steps/648a1b2c3d4e5f6789012345/story" \
 curl -X POST "http://localhost:3000/api/steps/648a1b2c3d4e5f6789012345/story/async" \
      -H "Authorization: Bearer your_jwt_token_here"
 # Vérifier le statut
-curl -X GET "http://localhost:3000/api/steps/648a1b2c3d4e5f6789012345/story/status/{jobId}" \
+curl -X GET "http://localhost:3000/api/steps/648a1b2c3d4e5f6789012345/story/{jobId}/status" \
      -H "Authorization: Bearer your_jwt_token_here"
 ```
 

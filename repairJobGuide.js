@@ -32,7 +32,7 @@ db.stepstoryjobs.deleteOne({ _id: ObjectId("VOTRE_JOB_ID") })
 2️⃣ VIA L'API REST :
 -------------------
 // Vérifier le statut d'un job
-GET /api/steps/:stepId/story/status/:jobId
+GET /api/steps/:stepId/story/:jobId/status
 
 // Relancer la génération de récit asynchrone
 POST /api/steps/:stepId/story/async
