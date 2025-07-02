@@ -91,24 +91,24 @@ router.post('/:idRoadtrip/steps/:idStep/activities/natural-language', auth, acti
 /***************************/
 
 // Recalculer les temps de trajet (synchrone)
-router.patch('/:idRoadtrip/refresh-travel-times', auth, roadtripController.refreshTravelTimesForRoadtrip);
+router.patch('/:idRoadtrip/travel-time/refresh', auth, roadtripController.refreshTravelTimesForRoadtrip);
 
 // Lancer le recalcul asynchrone des temps de trajet
-router.patch('/:idRoadtrip/refresh-travel-times/async', auth, roadtripController.startTravelTimeCalculationJob);
+router.patch('/:idRoadtrip/travel-time/refresh/async', auth, roadtripController.startTravelTimeCalculationJob);
 
 // Vérifier le statut d'un job de calcul des temps de trajet
-router.get('/:idRoadtrip/travel-time-jobs/:jobId/status', auth, roadtripController.getTravelTimeJobStatus);
+router.get('/:idRoadtrip/travel-time/jobs/:jobId/status', auth, roadtripController.getTravelTimeJobStatus);
 
 // Lister les jobs de calcul d'un roadtrip
-router.get('/:idRoadtrip/travel-time-jobs', auth, roadtripController.getTravelTimeJobs);
+router.get('/:idRoadtrip/travel-time/jobs', auth, roadtripController.getTravelTimeJobs);
 
 // Lancer la synchronisation asynchrone des heures des steps
-router.patch('/:idRoadtrip/sync-steps/async', auth, roadtripController.startStepSynchronizationJob);
+router.patch('/:idRoadtrip/steps/sync/async', auth, roadtripController.startStepSynchronizationJob);
 
 // Vérifier le statut d'un job de synchronisation des steps
-router.get('/:idRoadtrip/sync-jobs/:jobId/status', auth, roadtripController.getStepSyncJobStatus);
+router.get('/:idRoadtrip/steps/sync/jobs/:jobId/status', auth, roadtripController.getStepSyncJobStatus);
 
 // Lister les jobs de synchronisation d'un roadtrip
-router.get('/:idRoadtrip/sync-jobs', auth, roadtripController.getStepSyncJobs);
+router.get('/:idRoadtrip/steps/sync/jobs', auth, roadtripController.getStepSyncJobs);
 
 export default router;
