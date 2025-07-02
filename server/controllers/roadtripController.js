@@ -10,7 +10,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import dotenv from 'dotenv';
-import { refreshTravelTimeForStep, updateStepDates } from '../utils/travelTimeUtils.js';
+import { refreshTravelTimeForStep, updateStepDates, updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
+import { calculateNights } from '../utils/dateUtils.js';
 
 dotenv.config();
 
@@ -1208,6 +1209,101 @@ export const syncSingleStep = async (req, res) => {
         console.error('Erreur lors de la synchronisation du step:', err.message);
         res.status(500).json({ 
             msg: 'Erreur lors de la synchronisation du step',
+            error: err.message 
+        });
+    }
+};
+
+// Méthode pour corriger les dates et calculs d'un step spécifique
+export const fixStepDates = async (req, res) => {
+    try {
+        const { idRoadtrip, idStep } = req.params;
+        
+        // Vérifier l'existence du roadtrip et de l'étape
+        const roadtrip = await Roadtrip.findById(idRoadtrip);
+        if (!roadtrip) {
+            return res.status(404).json({ msg: 'Roadtrip not found' });
+        }
+
+        const step = await Step.findById(idStep);
+        if (!step) {
+            return res.status(404).json({ msg: 'Step not found' });
+        }
+
+        // Vérifier l'autorisation
+        if (roadtrip.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        console.log(`🔧 Correction des dates pour le step: ${step.name} (${idStep})`);
+        
+        // État avant les modifications
+        const beforeState = {
+            stepArrival: step.arrivalDateTime,
+            stepDeparture: step.departureDateTime
+        };
+
+        // 1. Corriger le calcul des nuits pour les accommodations
+        const accommodations = await Accommodation.find({ stepId: idStep });
+        const accommodationsFixes = [];
+        
+        for (const accommodation of accommodations) {
+            const oldNights = accommodation.nights;
+            const calculatedNights = calculateNights(accommodation.arrivalDateTime, accommodation.departureDateTime);
+            
+            if (oldNights !== calculatedNights) {
+                accommodation.nights = calculatedNights;
+                await accommodation.save();
+                
+                accommodationsFixes.push({
+                    name: accommodation.name,
+                    oldNights,
+                    newNights: calculatedNights,
+                    arrivalDateTime: accommodation.arrivalDateTime,
+                    departureDateTime: accommodation.departureDateTime
+                });
+                
+                console.log(`  🏨 ${accommodation.name}: ${oldNights} → ${calculatedNights} nuits`);
+            }
+        }
+
+        // 2. Synchroniser les dates du step
+        await updateStepDatesAndTravelTime(idStep);
+        
+        // Récupérer l'état après synchronisation
+        const updatedStep = await Step.findById(idStep);
+        const afterState = {
+            stepArrival: updatedStep.arrivalDateTime,
+            stepDeparture: updatedStep.departureDateTime
+        };
+
+        // Vérifier si le step a changé
+        const stepChanged = 
+            beforeState.stepArrival?.getTime() !== afterState.stepArrival?.getTime() ||
+            beforeState.stepDeparture?.getTime() !== afterState.stepDeparture?.getTime();
+
+        console.log(`  📋 Step dates: ${beforeState.stepArrival} → ${afterState.stepArrival}`);
+        console.log(`  📋 Step dates: ${beforeState.stepDeparture} → ${afterState.stepDeparture}`);
+
+        const response = {
+            msg: 'Correction des dates terminée',
+            stepId: idStep,
+            stepName: step.name,
+            fixes: {
+                accommodationsFixed: accommodationsFixes.length,
+                stepDatesChanged: stepChanged,
+                accommodationDetails: accommodationsFixes
+            },
+            before: beforeState,
+            after: afterState
+        };
+
+        res.json(response);
+
+    } catch (err) {
+        console.error('Erreur lors de la correction des dates:', err.message);
+        res.status(500).json({ 
+            msg: 'Erreur lors de la correction des dates',
             error: err.message 
         });
     }

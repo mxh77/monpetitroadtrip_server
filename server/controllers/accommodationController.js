@@ -5,6 +5,7 @@ import File from '../models/File.js';
 import { getCoordinates } from '../utils/googleMapsUtils.js';
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
+import { calculateNights } from '../utils/dateUtils.js';
 
 // Méthode pour créer un nouvel hébergement pour une étape donnée
 export const createAccommodationForStep = async (req, res) => {
@@ -58,6 +59,13 @@ export const createAccommodationForStep = async (req, res) => {
             }
         }
 
+        // Calculer automatiquement le nombre de nuits si les dates sont fournies
+        let calculatedNights = data.nights || 0;
+        if (data.arrivalDateTime && data.departureDateTime) {
+            calculatedNights = calculateNights(data.arrivalDateTime, data.departureDateTime);
+            console.log(`🏨 Calcul automatique des nuits: ${calculatedNights} nuits entre ${data.arrivalDateTime} et ${data.departureDateTime}`);
+        }
+
         const accommodation = new Accommodation({
             active: data.active,
             name: data.name,
@@ -71,7 +79,7 @@ export const createAccommodationForStep = async (req, res) => {
             departureDateTime: data.departureDateTime,
             confirmationDateTime: data.confirmationDateTime,
             reservationNumber: data.reservationNumber,
-            nights: data.nights,
+            nights: calculatedNights,
             price: data.price,
             currency: data.currency,
             notes: data.notes,
@@ -182,7 +190,16 @@ export const updateAccommodation = async (req, res) => {
         accommodation.departureDateTime = data.departureDateTime || accommodation.departureDateTime; //Obligatoire
         accommodation.confirmationDateTime = data.confirmationDateTime || accommodation.confirmationDateTime;
         accommodation.reservationNumber = data.reservationNumber || accommodation.reservationNumber;
-        accommodation.nights = data.nights || accommodation.nights;
+        
+        // Calculer automatiquement le nombre de nuits si les dates sont modifiées
+        if (data.arrivalDateTime || data.departureDateTime) {
+            const calculatedNights = calculateNights(accommodation.arrivalDateTime, accommodation.departureDateTime);
+            console.log(`🏨 Recalcul automatique des nuits: ${calculatedNights} nuits entre ${accommodation.arrivalDateTime} et ${accommodation.departureDateTime}`);
+            accommodation.nights = calculatedNights;
+        } else {
+            accommodation.nights = data.nights || accommodation.nights;
+        }
+        
         accommodation.price = data.price || accommodation.price;
         accommodation.currency = data.currency || accommodation.currency;
         accommodation.notes = data.notes || accommodation.notes;

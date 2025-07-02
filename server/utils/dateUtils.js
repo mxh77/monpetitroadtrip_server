@@ -30,6 +30,37 @@ export const checkDateTimeConsistency = (departureDateTime, arrivalDateTime, tra
 };
 
 /**
+ * Calcule automatiquement le nombre de nuits entre deux dates.
+ * @param {Date|string} arrivalDateTime - La date/heure d'arrivée.
+ * @param {Date|string} departureDateTime - La date/heure de départ.
+ * @returns {number} - Le nombre de nuits calculé.
+ */
+export const calculateNights = (arrivalDateTime, departureDateTime) => {
+    if (!arrivalDateTime || !departureDateTime) return 0;
+    
+    const arrival = new Date(arrivalDateTime);
+    const departure = new Date(departureDateTime);
+    
+    // Vérifier que les dates sont valides
+    if (isNaN(arrival.getTime()) || isNaN(departure.getTime())) {
+        console.warn('calculateNights: Dates invalides', { arrivalDateTime, departureDateTime });
+        return 0;
+    }
+    
+    // Si la date de départ est avant l'arrivée, retourner 0
+    if (departure <= arrival) {
+        console.warn('calculateNights: Date de départ antérieure ou égale à l\'arrivée', { arrivalDateTime, departureDateTime });
+        return 0;
+    }
+    
+    // Calculer la différence en jours (arrondi vers le haut pour les nuits partielles)
+    const diffTime = departure.getTime() - arrival.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    return Math.max(0, diffDays);
+};
+
+/**
  * Détermine la note en fonction du temps de trajet et de la différence de temps entre deux étapes.
  * @param {number} travelTime - Le temps de trajet en minutes.
  * @param {number} timeDifference - La différence de temps entre deux étapes en minutes.

@@ -61,6 +61,9 @@ router.get('/:idRoadtrip/steps', auth, stepController.getStepsByRoadtrip);
 // Synchroniser les heures d'un step spécifique
 router.patch('/:idRoadtrip/steps/:idStep/sync', auth, roadtripController.syncSingleStep);
 
+// Recalculer et corriger les dates d'un step spécifique (nouveau)
+router.patch('/:idRoadtrip/steps/:idStep/fix-dates', auth, roadtripController.fixStepDates);
+
 /***************************/
 /****GESTION ACCOMMODATIONS*/
 /***************************/
