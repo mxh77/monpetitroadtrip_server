@@ -4,6 +4,7 @@ import * as roadtripController from '../controllers/roadtripController.js';
 import * as stepController from '../controllers/stepController.js';
 import * as accommodationController from '../controllers/accommodationController.js';
 import * as activityController from '../controllers/activityController.js';
+import * as aiRoadtripController from '../controllers/aiRoadtripController.js';
 import multer from 'multer';
 
 const router = express.Router();
@@ -18,6 +19,9 @@ const upload = multer({ storage: multerStorage });
 /***************************/
 /*****GESTION ROADTRIP******/
 /***************************/
+
+// Génération d'un roadtrip complet via l'IA
+router.post('/ai', auth, aiRoadtripController.generateRoadtripWithAI);
 
 // Créer un nouveau roadtrip avec fichiers (thumbnail, photos, documents)
 router.post('/', auth, upload.fields([

@@ -1,5 +1,5 @@
 import { algoliasearch } from 'algoliasearch';
-import { genererSyntheseAvis } from './openaiUtils.js';
+import { genererSyntheseAvis } from './openAI/syntheseAvis.js';
 
 /**
  * Récupère les avis d'une randonnée via Algolia

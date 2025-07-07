@@ -10,7 +10,9 @@ import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime, refreshTravelTimeForStep } from '../utils/travelTimeUtils.js';
 import { fetchTrailsFromAlgolia } from '../utils/scrapingUtils.js';
 import { fetchTrailsFromAlgoliaAPI, fetchTrailDetails } from '../utils/hikeUtils.js';
-import { genererSyntheseAvis, genererRecitStep, genererRecitStepAvecPhotos, analyserPromptEtape } from '../utils/openaiUtils.js';
+import { genererSyntheseAvis } from '../utils/openAI/syntheseAvis.js';
+import { genererRecitStep, genererRecitStepAvecPhotos } from '../utils/openAI/recitStep.js';
+import { analyserPromptEtape } from '../utils/openAI/analyserPrompt.js';
 import StepStoryJob from '../models/StepStoryJob.js';
 import { getUserAlgoliaRadius } from '../utils/userSettingsUtils.js';
 

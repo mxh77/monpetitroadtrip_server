@@ -31,6 +31,118 @@
 
 /**
  * @swagger
+ * /ai:
+ *   post:
+ *     summary: Générer un nouveau roadtrip via l'IA
+ *     description: Crée un roadtrip complet avec étapes, hébergements et activités générés par IA.
+ *     tags: [Roadtrips]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - startLocation
+ *             properties:
+ *               startLocation:
+ *                 type: string
+ *                 description: Point de départ du roadtrip (obligatoire)
+ *               endLocation:
+ *                 type: string
+ *                 description: Destination finale (optionnel)
+ *               startDate:
+ *                 type: string
+ *                 format: date
+ *                 description: Date de début (YYYY-MM-DD)
+ *               endDate:
+ *                 type: string
+ *                 format: date
+ *                 description: Date de fin (YYYY-MM-DD)
+ *               duration:
+ *                 type: integer
+ *                 description: Durée en jours (alternative à endDate)
+ *               budget:
+ *                 type: number
+ *                 description: Budget total pour le voyage
+ *               travelers:
+ *                 type: integer
+ *                 description: Nombre de voyageurs
+ *               description:
+ *                 type: string
+ *                 description: Description en langage naturel du voyage souhaité
+ *               preferences:
+ *                 type: object
+ *                 description: Préférences de voyage
+ *                 properties:
+ *                   experienceTypes:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     description: Types d'expériences (Aventure, Culture, Gastronomie, etc.)
+ *                   pace:
+ *                     type: string
+ *                     enum: [slow, moderate, fast]
+ *                     description: Rythme du voyage
+ *                   accommodationTypes:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     description: Types d'hébergement préférés
+ *                   transportTypes:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     description: Moyens de transport préférés
+ *                   interests:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     description: Centres d'intérêt
+ *               constraints:
+ *                 type: object
+ *                 description: Contraintes pour le voyage
+ *                 properties:
+ *                   maxDailyDistance:
+ *                     type: number
+ *                     description: Distance maximale par jour en km
+ *                   avoid:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     description: Éléments à éviter
+ *                   accessibility:
+ *                     type: string
+ *                     description: Besoins d'accessibilité
+ *                   languages:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     description: Langues parlées
+ *     responses:
+ *       201:
+ *         description: Roadtrip généré avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 roadtrip:
+ *                   $ref: '#/components/schemas/RoadtripResponse'
+ *                 message:
+ *                   type: string
+ *       400:
+ *         description: Paramètres invalides
+ *       401:
+ *         description: Non autorisé
+ *       500:
+ *         description: Erreur serveur
+ */
+
+/**
+ * @swagger
  * /:
  *   post:
  *     summary: Créer un nouveau roadtrip

@@ -74,7 +74,7 @@ async function testGenererRecitStepAvecPhotos() {
     
     try {
         // Import dynamique de la fonction
-        const { genererRecitStepAvecPhotos } = await import('./server/utils/openaiUtils.js');
+        const { genererRecitStepAvecPhotos } = await import('./server/utils/openAI/recitStep.js');
         
         // Test 1: Avec photos activées
         console.log("\n1. Test avec photos activées:");
@@ -97,7 +97,7 @@ async function testGenererRecitStepAvecPhotos() {
         
         if (!mockUserSettings.enablePhotosInStories) {
             // Dans ce cas, on devrait utiliser genererRecitStep standard
-            const { genererRecitStep } = await import('./server/utils/openaiUtils.js');
+            const { genererRecitStep } = await import('./server/utils/openAI/recitStep.js');
             
             const resultWithoutPhotos = await genererRecitStep(
                 mockStepData, 

@@ -3,7 +3,7 @@ import axios from 'axios';
 const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 // Fonction pour obtenir les coordonnées géographiques à partir de l'adresse
-export const getCoordinates = async (address) => {
+export const getCoordinates = async (address, format = 'object') => {
     const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
             address: address,
@@ -13,9 +13,20 @@ export const getCoordinates = async (address) => {
 
     if (response.data.status === 'OK') {
         const location = response.data.results[0].geometry.location;
+        
+        // Retourner sous forme d'objet si demandé (nouveau format)
+        if (format === 'object') {
+            return {
+                lat: location.lat,
+                lng: location.lng
+            };
+        }
+        
+        // Retourner sous forme de chaîne si demandé (ancien format pour compatibilité)
         return `${location.lat} ${location.lng}`;
     } else {
-        throw new Error('No coordinates found for address');
+        // En cas d'erreur, retourner un objet vide ou une chaîne vide selon le format demandé
+        return format === 'object' ? { lat: 0, lng: 0 } : "0 0";
     }
 };
 
@@ -35,8 +46,8 @@ export const calculateTravelTime = async (origin, destination, departure_time = 
 
     console.log("   departureTimestamp : " + departureTimestamp);
     // Obtenir les coordonnées géographiques pour l'origine et la destination
-    const originCoordinates = await getCoordinates(origin);
-    const destinationCoordinates = await getCoordinates(destination);
+    const originCoordinates = await getCoordinates(origin, 'string');
+    const destinationCoordinates = await getCoordinates(destination, 'string');
     const mode = 'driving'; // mode de déplacement
     const trafficModel = 'optimistic';
 

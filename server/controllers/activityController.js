@@ -6,7 +6,7 @@ import { getCoordinates, getAddressFromCoordinates } from '../utils/googleMapsUt
 import { uploadToGCS, deleteFromGCS } from '../utils/fileUtils.js';
 import { updateStepDatesAndTravelTime } from '../utils/travelTimeUtils.js';
 import { getUserSettings, getUserAlgoliaRadius } from '../utils/userSettingsUtils.js';
-import { analyserPromptActivite } from '../utils/openaiUtils.js';
+import { analyserPromptActivite } from '../utils/openAI/analyserPrompt.js';
 
 /**
  * Fonction spécifique pour convertir une adresse en coordonnées pour la recherche Algolia
