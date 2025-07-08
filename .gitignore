@@ -2,3 +2,4 @@ node_modules/
 .vercel
 config/lithe-augury-437207-h6-4d4c600e3f5c.json
 .env
+.expo/
