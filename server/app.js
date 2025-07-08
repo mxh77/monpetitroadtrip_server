@@ -15,6 +15,7 @@ import activityRoutes from './routes/activityRoutes.js';
 import googleMapsRoutes from './routes/googleMapsRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
 import aiRoadtripRoutes from './routes/aiRoadtripRoutes.js';
+import roadtripTaskRoutes from './routes/roadtripTaskRoutes.js';
 import { connectDB } from './config/db.js';
 
 const app = express();
@@ -100,6 +101,7 @@ app.get('/auth/login', (req, res) => {
 // Routes avec authentification
 app.use('/auth', authRoutes);
 app.use('/roadtrips', auth, roadtripRoutes);
+app.use('/roadtrips', auth, roadtripTaskRoutes);
 app.use('/steps', auth, stepRoutes);
 // app.use('/stages', auth, stageRoutes);
 // app.use('/stops', auth, stopRoutes);
