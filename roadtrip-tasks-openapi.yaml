@@ -267,6 +267,164 @@ paths:
                   count:
                     type: number
 
+  /roadtrips/{roadtripId}/tasks/generate-ai:
+    post:
+      summary: Génère des tâches intelligentes personnalisées pour un roadtrip en utilisant l'IA
+      tags: [Tasks]
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                replace:
+                  type: boolean
+                  description: Si true, les tâches existantes seront remplacées
+      responses:
+        '201':
+          description: Tâches générées par IA
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  tasks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  count:
+                    type: number
+        '400':
+          description: Des tâches existent déjà pour ce roadtrip
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  existingTasksCount:
+                    type: number
+
+  /roadtrips/{roadtripId}/tasks/generate-ai-async:
+    post:
+      summary: Lance un job asynchrone de génération de tâches intelligentes personnalisées pour un roadtrip
+      tags: [Tasks]
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                replace:
+                  type: boolean
+                  description: Si true, les tâches existantes seront remplacées
+      responses:
+        '202':
+          description: Job de génération lancé avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                    enum: [pending, processing, completed, failed]
+        '400':
+          description: Des tâches existent déjà pour ce roadtrip
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  existingTasksCount:
+                    type: number
+        '409':
+          description: Un job est déjà en cours pour ce roadtrip
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+
+  /roadtrips/{roadtripId}/tasks/jobs/{jobId}:
+    get:
+      summary: Récupère le statut d'un job asynchrone de génération de tâches
+      tags: [Tasks]
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Statut du job récupéré avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                    enum: [pending, processing, completed, failed]
+                  createdAt:
+                    type: string
+                    format: date-time
+                  completedAt:
+                    type: string
+                    format: date-time
+                  taskCount:
+                    type: number
+                  tasks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  error:
+                    type: string
+        '404':
+          description: Job ou roadtrip non trouvé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
 components:
   securitySchemes:
     bearerAuth:

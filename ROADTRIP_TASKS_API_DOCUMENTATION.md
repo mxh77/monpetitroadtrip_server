@@ -320,6 +320,139 @@ Crée automatiquement 8 tâches prédéfinies basées sur les dates du roadtrip 
 
 **Note :** Cette route ne fonctionne que si aucune tâche n'existe déjà pour le roadtrip.
 
+### 9. Générer des tâches avec l'IA
+
+Génère une liste de tâches intelligentes et personnalisées pour un roadtrip en utilisant l'IA.
+
+```http
+POST /api/roadtrips/:roadtripId/tasks/generate-ai
+```
+
+#### Corps de la requête
+
+```json
+{
+  "replace": false // Optionnel, mettre à true pour remplacer les tâches existantes
+}
+```
+
+#### Paramètres de requête
+
+| Paramètre | Type | Description |
+| --- | --- | --- |
+| `roadtripId` | `string` | ID du roadtrip |
+
+#### Réponse
+
+```json
+{
+  "msg": "Tâches générées par IA créées avec succès",
+  "tasks": [
+    {
+      "_id": "60a1b2c3d4e5f6g7h8i9j0k1",
+      "title": "Réserver un hôtel à Paris",
+      "description": "Trouver et réserver un hôtel dans le centre de Paris pour les dates du séjour",
+      "category": "accommodation",
+      "priority": "high",
+      "status": "pending",
+      "dueDate": "2023-06-15T00:00:00.000Z",
+      "completedAt": null,
+      "userId": "123456789012345678901234",
+      "roadtripId": "abcdef123456789012345678",
+      "order": 0,
+      "createdAt": "2023-05-01T12:34:56.789Z",
+      "updatedAt": "2023-05-01T12:34:56.789Z"
+    },
+    // ...autres tâches générées
+  ],
+  "count": 15
+}
+```
+
+#### Erreurs possibles
+
+| Code | Message | Description |
+| --- | --- | --- |
+| 400 | Des tâches existent déjà pour ce roadtrip. Utilisez replace=true pour les remplacer. | Il existe déjà des tâches pour ce roadtrip |
+| 404 | Roadtrip non trouvé ou vous n'avez pas les permissions nécessaires | Le roadtrip n'existe pas ou n'appartient pas à l'utilisateur authentifié |
+| 500 | Erreur serveur lors de la génération des tâches par IA | Erreur lors de la génération des tâches |
+
+## Génération asynchrone de tâches par IA
+
+Pour les roadtrips complexes, la génération de tâches par IA peut prendre du temps. Cette API offre un mode asynchrone qui permet de lancer la génération en arrière-plan.
+
+```http
+POST /api/roadtrips/{roadtripId}/tasks/generate-ai-async
+```
+
+### Corps de la requête
+
+```json
+{
+  "replace": false // Optionnel, mettre à true pour remplacer les tâches existantes
+}
+```
+
+### Réponse
+
+```json
+{
+  "msg": "Génération de tâches lancée avec succès",
+  "jobId": "60a1b2c3d4e5f6g7h8i9j0k1",
+  "status": "pending"
+}
+```
+
+### Vérification du statut du job
+
+```http
+GET /api/roadtrips/{roadtripId}/tasks/jobs/{jobId}
+```
+
+### Réponses possibles selon le statut
+
+#### Job en attente ou en cours
+```json
+{
+  "jobId": "60a1b2c3d4e5f6g7h8i9j0k1",
+  "status": "processing", // ou "pending"
+  "createdAt": "2023-05-01T12:34:56.789Z"
+}
+```
+
+#### Job terminé avec succès
+```json
+{
+  "jobId": "60a1b2c3d4e5f6g7h8i9j0k1",
+  "status": "completed",
+  "createdAt": "2023-05-01T12:34:56.789Z",
+  "completedAt": "2023-05-01T12:36:56.789Z",
+  "taskCount": 15,
+  "tasks": [
+    // Liste des tâches générées (même format que l'API GET /tasks)
+  ]
+}
+```
+
+#### Job échoué
+```json
+{
+  "jobId": "60a1b2c3d4e5f6g7h8i9j0k1",
+  "status": "failed",
+  "createdAt": "2023-05-01T12:34:56.789Z",
+  "error": "Description de l'erreur"
+}
+```
+
+### Erreurs possibles
+
+| Code | Message | Description |
+| --- | --- | --- |
+| 400 | Des tâches existent déjà pour ce roadtrip. Utilisez replace=true pour les remplacer. | Il existe déjà des tâches pour ce roadtrip |
+| 404 | Roadtrip non trouvé ou vous n'avez pas les permissions nécessaires | Le roadtrip n'existe pas ou n'appartient pas à l'utilisateur authentifié |
+| 409 | Un job de génération de tâches est déjà en cours pour ce roadtrip | Un job est déjà en cours pour ce roadtrip |
+| 500 | Erreur serveur lors du lancement du job de génération | Erreur lors du lancement du job |
+
 ## Codes d'Erreur
 
 ### 400 - Bad Request
@@ -466,6 +599,32 @@ const useRoadtripTasks = (roadtripId, token) => {
     }
   };
 
+  const generateAITasks = async (replace = false) => {
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        `/roadtrips/${roadtripId}/tasks/generate-ai`,
+        { replace },
+        { headers }
+      );
+      setTasks(response.data.tasks);
+      setSuccess('Tâches générées avec succès par l\'IA !');
+      return response.data.tasks;
+    } catch (err) {
+      if (err.response?.status === 400 && !replace) {
+        // Des tâches existent déjà
+        if (confirm('Des tâches existent déjà. Voulez-vous les remplacer?')) {
+          return generateAITasks(true); // Appel récursif avec replace=true
+        }
+      } else {
+        setError(err.response?.data?.msg || 'Erreur lors de la génération par IA');
+      }
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (roadtripId && token) {
       fetchTasks();
@@ -483,7 +642,8 @@ const useRoadtripTasks = (roadtripId, token) => {
     deleteTask,
     toggleCompletion,
     reorderTasks,
-    generateDefaults
+    generateDefaults,
+    generateAITasks
   };
 };
 
@@ -504,7 +664,8 @@ const TaskList = ({ roadtripId, token }) => {
     error,
     createTask,
     toggleCompletion,
-    generateDefaults
+    generateDefaults,
+    generateAITasks
   } = useRoadtripTasks(roadtripId, token);
 
   const [newTaskTitle, setNewTaskTitle] = useState('');
@@ -533,6 +694,22 @@ const TaskList = ({ roadtripId, token }) => {
     }
   };
 
+  const handleGenerateDefaults = async () => {
+    try {
+      await generateDefaults();
+    } catch (err) {
+      console.error('Erreur génération par défaut:', err);
+    }
+  };
+
+  const handleGenerateAI = async () => {
+    try {
+      await generateAITasks();
+    } catch (err) {
+      console.error('Erreur génération IA:', err);
+    }
+  };
+
   if (loading) return <div>Chargement...</div>;
   if (error) return <div>Erreur: {error}</div>;
 
@@ -555,9 +732,14 @@ const TaskList = ({ roadtripId, token }) => {
       </form>
 
       {tasks.length === 0 && (
-        <button onClick={generateDefaults}>
-          Générer les tâches par défaut
-        </button>
+        <div>
+          <button onClick={handleGenerateDefaults}>
+            Générer les tâches par défaut
+          </button>
+          <button onClick={handleGenerateAI}>
+            Générer des tâches avec l'IA
+          </button>
+        </div>
       )}
 
       <ul>
@@ -584,6 +766,214 @@ const TaskList = ({ roadtripId, token }) => {
 };
 
 export default TaskList;
+```
+
+### Exemple d'utilisation React pour la génération asynchrone
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const AsyncTaskGenerator = ({ roadtripId, token, onSuccess }) => {
+  const [jobId, setJobId] = useState(null);
+  const [jobStatus, setJobStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [tasks, setTasks] = useState([]);
+  const [progress, setProgress] = useState(0);
+
+  // Lancer la génération asynchrone
+  const startGeneration = async (replace = false) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await axios.post(
+        `/roadtrips/${roadtripId}/tasks/generate-ai-async`,
+        { replace },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      
+      setJobId(response.data.jobId);
+      setJobStatus(response.data.status);
+      setProgress(10); // Progression initiale
+    } catch (err) {
+      if (err.response?.status === 400 && err.response?.data?.existingTasksCount) {
+        if (window.confirm('Des tâches existent déjà. Voulez-vous les remplacer?')) {
+          return startGeneration(true);
+        }
+      } else {
+        setError(err.response?.data?.msg || 'Erreur lors du lancement de la génération');
+      }
+      setLoading(false);
+    }
+  };
+
+  // Vérifier le statut du job périodiquement
+  useEffect(() => {
+    if (!jobId || ['completed', 'failed'].includes(jobStatus)) {
+      return;
+    }
+
+    const pollInterval = setInterval(async () => {
+      try {
+        const response = await axios.get(
+          `/roadtrips/${roadtripId}/tasks/jobs/${jobId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        
+        setJobStatus(response.data.status);
+        
+        if (response.data.status === 'processing') {
+          setProgress(50); // En cours de traitement
+        }
+        
+        if (response.data.status === 'completed') {
+          setTasks(response.data.tasks || []);
+          setProgress(100); // Terminé
+          setLoading(false);
+          
+          if (onSuccess) {
+            onSuccess(response.data.tasks || []);
+          }
+          clearInterval(pollInterval);
+        }
+        
+        if (response.data.status === 'failed') {
+          setError(response.data.error || 'Échec de la génération');
+          setLoading(false);
+          clearInterval(pollInterval);
+        }
+      } catch (err) {
+        setError(err.response?.data?.msg || 'Erreur lors de la vérification du statut');
+        setLoading(false);
+        clearInterval(pollInterval);
+      }
+    }, 2000); // Vérifier toutes les 2 secondes
+
+    return () => clearInterval(pollInterval);
+  }, [jobId, jobStatus, roadtripId, token, onSuccess]);
+
+  return (
+    <div className="async-task-generator">
+      {!jobId && !loading && (
+        <button 
+          onClick={() => startGeneration(false)}
+          className="generate-button"
+        >
+          <span className="ai-icon">✨</span> Générer ma liste de tâches avec l'IA
+        </button>
+      )}
+      
+      {loading && (
+        <div className="loading-container">
+          <div className="progress-bar">
+            <div 
+              className="progress-fill" 
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+          <p className="status-text">
+            {jobStatus === 'pending' && 'Initialisation...'}
+            {jobStatus === 'processing' && 'Génération en cours...'}
+            {!jobStatus && 'Préparation...'}
+          </p>
+        </div>
+      )}
+      
+      {error && (
+        <div className="error-message">
+          <p>{error}</p>
+          <button onClick={() => setError(null)}>Réessayer</button>
+        </div>
+      )}
+      
+      {jobStatus === 'completed' && tasks.length > 0 && (
+        <div className="success-message">
+          <p>✅ {tasks.length} tâches générées avec succès!</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AsyncTaskGenerator;
+```
+
+### Style CSS suggéré
+
+```css
+.async-task-generator {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.generate-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.generate-button:hover {
+  background-color: #3367d6;
+}
+
+.ai-icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.loading-container {
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4285f4;
+  transition: width 0.5s ease;
+}
+
+.status-text {
+  text-align: center;
+  color: #555;
+  font-size: 14px;
+}
+
+.error-message {
+  margin-top: 1rem;
+  padding: 12px;
+  background-color: #ffebee;
+  border-left: 4px solid #f44336;
+  color: #d32f2f;
+}
+
+.success-message {
+  margin-top: 1rem;
+  padding: 12px;
+  background-color: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  color: #2e7d32;
+  text-align: center;
+}
 ```
 
 ## Intégration UI/UX Recommandée

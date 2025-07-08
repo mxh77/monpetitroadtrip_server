@@ -9,6 +9,10 @@ import {
     reorderTasks,
     generateDefaultTasks
 } from '../controllers/roadtripTaskController.js';
+import {
+    startTaskGenerationJob,
+    getTaskGenerationJobStatus
+} from '../controllers/taskGenerationJobController.js';
 import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -27,5 +31,9 @@ router.delete('/:roadtripId/tasks/:taskId', deleteRoadtripTask);
 router.patch('/:roadtripId/tasks/:taskId/toggle-completion', toggleTaskCompletion);
 router.patch('/:roadtripId/tasks/reorder', reorderTasks);
 router.post('/:roadtripId/tasks/generate-defaults', generateDefaultTasks);
+
+// Routes pour la génération IA asynchrone
+router.post('/:roadtripId/tasks/generate-ai-async', startTaskGenerationJob);
+router.get('/:roadtripId/tasks/jobs/:jobId', getTaskGenerationJobStatus);
 
 export default router;

@@ -565,3 +565,64 @@ export const generateDefaultTasks = async (req, res) => {
         });
     }
 };
+
+/**
+/**
+ * Analyse le texte de date d'échéance et calcule la date réelle
+ * @param {string} dueDateText - Texte décrivant l'échéance (ex: "3 jours avant le départ")
+ * @param {Date} startDate - Date de début du roadtrip
+ * @returns {Date} - Date d'échéance calculée
+ */
+export const parseDueDateText = (dueDateText, startDate) => {
+    try {
+        if (!startDate) return null;
+        
+        // Créer une date de début pour calculer les échéances relatives
+        const tripStartDate = new Date(startDate);
+        
+        // Patterns communs pour les dates d'échéance
+        if (!dueDateText) return null;
+        
+        const dayBeforePattern = /(\d+)\s*(?:jour|jours|j)\s*avant/i;
+        const weekBeforePattern = /(\d+)\s*(?:semaine|semaines|sem)\s*avant/i;
+        const monthBeforePattern = /(\d+)\s*(?:mois)\s*avant/i;
+        
+        // Calculer la date d'échéance en fonction du pattern
+        let dueDate = new Date(tripStartDate);
+        
+        if (dayBeforePattern.test(dueDateText)) {
+            const days = parseInt(dueDateText.match(dayBeforePattern)[1]);
+            dueDate.setDate(dueDate.getDate() - days);
+            return dueDate;
+        }
+        
+        if (weekBeforePattern.test(dueDateText)) {
+            const weeks = parseInt(dueDateText.match(weekBeforePattern)[1]);
+            dueDate.setDate(dueDate.getDate() - (weeks * 7));
+            return dueDate;
+        }
+        
+        if (monthBeforePattern.test(dueDateText)) {
+            const months = parseInt(dueDateText.match(monthBeforePattern)[1]);
+            dueDate.setMonth(dueDate.getMonth() - months);
+            return dueDate;
+        }
+        
+        // Cas particuliers
+        if (dueDateText.includes('jour du départ') || dueDateText.includes('jour même')) {
+            return tripStartDate;
+        }
+        
+        if (dueDateText.includes('immédiatement') || dueDateText.includes('dès que possible')) {
+            return new Date(); // Date actuelle
+        }
+        
+        // Si aucun pattern ne correspond, retourner une date par défaut (1 semaine avant)
+        dueDate.setDate(dueDate.getDate() - 7);
+        return dueDate;
+        
+    } catch (error) {
+        console.error('Error parsing due date:', error);
+        return null;
+    }
+};
