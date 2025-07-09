@@ -72,11 +72,3 @@ curl -s -X GET "${BASE_URL}/api/roadtrips/${ROADTRIP_ID}/notifications" \
   -H "Authorization: Bearer ${TOKEN}" | jq '.'
 
 echo -e "\n${GREEN}✅ Tests terminés${NC}"
-echo -e "${BLUE}Pour tester le WebSocket, utilisez un client WebSocket avec:${NC}"
-echo -e "${BLUE}URL: ws://localhost:3001/websocket?token=${TOKEN}${NC}"
-
-echo -e "\n${YELLOW}Exemple de message WebSocket:${NC}"
-echo -e '{
-  "type": "subscribe_roadtrip",
-  "roadtripId": "' ${ROADTRIP_ID} '"
-}'

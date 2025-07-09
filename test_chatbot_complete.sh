@@ -92,20 +92,14 @@ else
 fi
 echo ""
 
-# Test 3: Tests complets du chatbot
+# Tests complets du chatbot
 echo "3. Tests complets du chatbot..."
 node testChatbotComplete.js
-echo ""
-
-# Test 4: Test WebSocket simple
-echo "4. Test WebSocket simple..."
-node testWebSocket.js
 echo ""
 
 # Afficher les informations pour les tests manuels
 echo "=== Tests manuels ==="
 echo "🌐 Interface de test: http://localhost:3000/test_chatbot.html"
-echo "🌐 Interface WebSocket: http://localhost:3000/test_websocket_simple.html"
 echo ""
 echo "⏸️  Le serveur reste en cours d'exécution pour les tests manuels"
 echo "   Appuyez sur Ctrl+C pour arrêter le serveur"

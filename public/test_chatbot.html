@@ -167,7 +167,7 @@
     <div class="container">
         <div class="header">
             <h1>🤖 Test Chatbot IA - MonPetitRoadtrip</h1>
-            <p>Interface de test pour le chatbot avec WebSocket</p>
+            <p>Interface de test pour le chatbot REST API</p>
         </div>
         
         <div class="main-content">
@@ -178,13 +178,12 @@
                     <input type="text" id="roadtripId" placeholder="ID du Roadtrip" value="test_roadtrip_123">
                     <input type="text" id="token" placeholder="Token JWT (optionnel pour test)" value="">
                     <div style="margin-top: 10px;">
-                        <button class="btn" onclick="connectWebSocket()">🔌 Connecter WebSocket</button>
-                        <button class="btn" onclick="testWithoutToken()" style="margin-left: 10px; background: #28a745;">🧪 Test sans token</button>
+                        <button class="btn" onclick="testWithoutToken()" style="background: #28a745;">🧪 Test sans token</button>
                     </div>
                 </div>
                 
                 <div class="status" id="connectionStatus">
-                    ❌ WebSocket déconnecté
+                    ✅ REST API disponible
                 </div>
                 
                 <div class="chat-messages" id="chatMessages">
@@ -228,105 +227,68 @@
     </div>
 
     <script>
-        let websocket = null;
         let currentRoadtripId = null;
         let currentToken = null;
         let currentJobId = null;
+        let notificationPolling = null;
         
         // Configuration
         const API_BASE = 'http://localhost:3000/api';
-        const WS_BASE = 'ws://localhost:3000/websocket';
-        
-        function connectWebSocket() {
-            const roadtripId = document.getElementById('roadtripId').value;
-            const token = document.getElementById('token').value;
-            
-            // Permettre la connexion même sans token pour test
-            currentRoadtripId = roadtripId || 'test_roadtrip_123';
-            currentToken = token;
-            
-            // Fermer la connexion existante
-            if (websocket) {
-                websocket.close();
-            }
-            
-            // Créer une nouvelle connexion (avec ou sans token)
-            let wsUrl = `${WS_BASE}`;
-            if (token) {
-                wsUrl += `?token=${token}`;
-            }
-            
-            addSystemMessage(`🔗 Connexion à ${wsUrl}`);
-            websocket = new WebSocket(wsUrl);
-            
-            websocket.onopen = function(event) {
-                updateConnectionStatus(true);
-                addSystemMessage('✅ WebSocket connecté');
-                
-                // S'abonner aux notifications du roadtrip
-                websocket.send(JSON.stringify({
-                    type: 'subscribe_roadtrip',
-                    roadtripId: roadtripId
-                }));
-            };
-            
-            websocket.onmessage = function(event) {
-                const data = JSON.parse(event.data);
-                handleWebSocketMessage(data);
-            };
-            
-            websocket.onclose = function(event) {
-                updateConnectionStatus(false);
-                addSystemMessage('❌ WebSocket déconnecté');
-            };
-            
-            websocket.onerror = function(error) {
-                console.error('WebSocket error:', error);
-                addSystemMessage('❌ Erreur WebSocket');
-            };
-        }
         
         function testWithoutToken() {
             // Configurer pour un test sans token
             document.getElementById('roadtripId').value = 'test_roadtrip_123';
             document.getElementById('token').value = '';
             
-            // Connecter directement
-            connectWebSocket();
+            currentRoadtripId = 'test_roadtrip_123';
+            currentToken = '';
             
             addSystemMessage('🧪 Mode test sans token activé');
-            addSystemMessage('📝 Vous pouvez maintenant envoyer des messages');
+            addSystemMessage('� Vous pouvez maintenant envoyer des messages');
+            
+            // Démarrer le polling des notifications
+            startNotificationPolling();
         }
         
-        function handleWebSocketMessage(data) {
-            switch (data.type) {
-                case 'notification':
-                    addNotification(data.data);
-                    break;
-                case 'job_update':
-                    handleJobUpdate(data.data);
-                    break;
-                case 'connection_established':
-                    addSystemMessage('🔗 Connexion établie');
-                    break;
-                case 'subscription_confirmed':
-                    addSystemMessage(`✅ Abonné au roadtrip ${data.roadtripId}`);
-                    break;
-                case 'typing_indicator':
-                    showTypingIndicator(data.isTyping);
-                    break;
-                default:
-                    console.log('Message WebSocket inconnu:', data);
+        function startNotificationPolling() {
+            if (notificationPolling) {
+                clearInterval(notificationPolling);
             }
+            
+            // Polling toutes les 2 secondes pour les notifications
+            notificationPolling = setInterval(async () => {
+                await checkForNotifications();
+            }, 2000);
         }
         
-        function handleJobUpdate(jobData) {
-            if (jobData.status === 'completed') {
-                hideProgressBar();
-                addAssistantMessage(`✅ ${jobData.result.message}`);
-            } else if (jobData.status === 'failed') {
-                hideProgressBar();
-                addAssistantMessage(`❌ Erreur: ${jobData.error}`);
+        async function checkForNotifications() {
+            if (!currentRoadtripId) return;
+            
+            try {
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+                
+                if (currentToken) {
+                    headers['Authorization'] = `Bearer ${currentToken}`;
+                }
+                
+                const response = await fetch(`${API_BASE}/roadtrips/${currentRoadtripId}/notifications`, {
+                    method: 'GET',
+                    headers: headers
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success && result.data && result.data.length > 0) {
+                        // Afficher les nouvelles notifications
+                        result.data.slice(0, 3).forEach(notification => {
+                            addNotification(notification);
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Erreur lors du polling des notifications:', error);
             }
         }
         
@@ -334,9 +296,15 @@
             const input = document.getElementById('messageInput');
             const message = input.value.trim();
             
-            if (!message || !currentRoadtripId) {
-                alert('Veuillez vous connecter et entrer un message');
+            if (!message) {
+                alert('Veuillez entrer un message');
                 return;
+            }
+            
+            if (!currentRoadtripId) {
+                currentRoadtripId = document.getElementById('roadtripId').value || 'test_roadtrip_123';
+                currentToken = document.getElementById('token').value;
+                startNotificationPolling();
             }
             
             // Afficher le message utilisateur
@@ -425,21 +393,10 @@
             notificationDiv.innerHTML = `
                 <div class="notification-title">${notification.title}</div>
                 <div>${notification.message}</div>
-                <div class="notification-time">${new Date(notification.timestamp).toLocaleTimeString()}</div>
+                <div class="notification-time">${new Date(notification.createdAt || notification.timestamp).toLocaleTimeString()}</div>
             `;
             
             notificationsDiv.insertBefore(notificationDiv, notificationsDiv.firstChild);
-        }
-        
-        function updateConnectionStatus(connected) {
-            const statusDiv = document.getElementById('connectionStatus');
-            if (connected) {
-                statusDiv.className = 'status connected';
-                statusDiv.textContent = '✅ WebSocket connecté';
-            } else {
-                statusDiv.className = 'status disconnected';
-                statusDiv.textContent = '❌ WebSocket déconnecté';
-            }
         }
         
         function showProgressBar() {
@@ -466,11 +423,6 @@
             progressBar.style.display = 'none';
         }
         
-        function showTypingIndicator(isTyping) {
-            // Implémentation pour afficher l'indicateur de frappe
-            console.log('Typing indicator:', isTyping);
-        }
-        
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
                 sendMessage();
@@ -479,7 +431,7 @@
         
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Interface de test du chatbot chargée');
+            console.log('Interface de test du chatbot chargée (REST API)');
         });
     </script>
 </body>

@@ -60,15 +60,9 @@ echo 3. Tests complets du chatbot...
 node testChatbotComplete.js
 echo.
 
-REM Test 4: Test WebSocket simple
-echo 4. Test WebSocket simple...
-node testWebSocket.js
-echo.
-
 REM Afficher les informations pour les tests manuels
 echo === Tests manuels ===
 echo Interface de test: http://localhost:3000/test_chatbot.html
-echo Interface WebSocket: http://localhost:3000/test_websocket_simple.html
 echo.
 echo Le serveur reste en cours d'execution pour les tests manuels
 echo Appuyez sur une touche pour arreter le serveur

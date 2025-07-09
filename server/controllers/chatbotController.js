@@ -68,16 +68,6 @@ const processJobAsync = async (jobId) => {
             data: { result }
         });
         
-        // 6. Envoyer mise à jour WebSocket
-        if (global.websocketService) {
-            global.websocketService.sendJobUpdate(job.userId, {
-                jobId: job._id,
-                status: 'completed',
-                result,
-                executionTime
-            });
-        }
-        
     } catch (error) {
         console.error(`Error processing job ${jobId}:`, error);
         
@@ -98,14 +88,7 @@ const processJobAsync = async (jobId) => {
             relatedJobId: job._id
         });
         
-        // Envoyer mise à jour WebSocket
-        if (global.websocketService) {
-            global.websocketService.sendJobUpdate(job.userId, {
-                jobId: job._id,
-                status: 'failed',
-                error: error.message
-            });
-        }
+
     }
 };
 

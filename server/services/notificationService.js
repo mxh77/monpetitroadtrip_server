@@ -1,19 +1,11 @@
 import Notification from '../models/Notification.js';
-import { EventEmitter } from 'events';
 
 /**
  * Service de gestion des notifications
  */
-class NotificationService extends EventEmitter {
+class NotificationService {
     constructor() {
-        super();
-    }
-    
-    /**
-     * Obtenir le service WebSocket global
-     */
-    getWebSocketService() {
-        return global.websocketService;
+        // Service simple sans WebSocket
     }
     
     /**
@@ -42,24 +34,6 @@ class NotificationService extends EventEmitter {
             
             console.log(`✅ Notification créée:`, notification._id);
             
-            // Envoyer en temps réel via WebSocket
-            const websocketService = global.websocketService || this.websocketService;
-            if (websocketService) {
-                websocketService.sendNotification(notification.userId, {
-                    id: notification._id,
-                    type: notification.type,
-                    title: notification.title,
-                    message: notification.message,
-                    icon: notification.icon,
-                    data: notification.data,
-                    roadtripId: notification.roadtripId,
-                    timestamp: notification.createdAt
-                });
-            }
-            
-            // Émettre un événement local
-            this.emit('notification_created', notification);
-            
             return notification;
             
         } catch (error) {
@@ -84,15 +58,6 @@ class NotificationService extends EventEmitter {
             }
             
             console.log(`📖 Notification marquée comme lue:`, notificationId);
-            
-            // Notifier via WebSocket
-            if (this.websocketService) {
-                this.websocketService.sendNotificationUpdate(userId, {
-                    id: notification._id,
-                    read: true,
-                    readAt: notification.readAt
-                });
-            }
             
             return notification;
             
@@ -166,11 +131,6 @@ class NotificationService extends EventEmitter {
             }
             
             console.log(`🗑️ Notification supprimée:`, notificationId);
-            
-            // Notifier via WebSocket
-            if (this.websocketService) {
-                this.websocketService.sendNotificationDeleted(userId, notificationId);
-            }
             
             return true;
             
