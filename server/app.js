@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import axios from 'axios';
 import path from 'path';
 import cors from 'cors';
+import http from 'http';
 import { fileURLToPath } from 'url';
 import { auth } from './middleware/auth.js';
 import authRoutes from './routes/authRoutes.js';
@@ -17,6 +18,7 @@ import settingsRoutes from './routes/settingsRoutes.js';
 import aiRoadtripRoutes from './routes/aiRoadtripRoutes.js';
 import roadtripTaskRoutes from './routes/roadtripTaskRoutes.js';
 import { connectDB } from './config/db.js';
+import websocketService from './services/websocketService.js';
 
 const app = express();
 
@@ -154,8 +156,18 @@ app.get('/autocomplete', async (req, res) => {
 const PORT = process.env.PORT || 3001;
 const HOST = process.env.HOST || '0.0.0.0'; // Écouter sur toutes les interfaces
 
-app.listen(PORT, HOST, () => {
+// Créer le serveur HTTP
+const server = http.createServer(app);
+
+// Initialiser le service WebSocket
+websocketService.init(server);
+
+// Rendre le websocketService accessible globalement
+global.websocketService = websocketService;
+
+server.listen(PORT, HOST, () => {
   console.log(`Server running on http://${HOST}:${PORT}`);
+  console.log(`WebSocket server running on ws://${HOST}:${PORT}/websocket`);
   console.log(`Server accessible via:`);
   console.log(`  - http://localhost:${PORT}`);
   console.log(`  - http://127.0.0.1:${PORT}`);

@@ -1,10 +1,12 @@
 import express from 'express';
 import { auth } from '../middleware/auth.js';
+import { authFlexible } from '../middleware/authFlexible.js';
 import * as roadtripController from '../controllers/roadtripController.js';
 import * as stepController from '../controllers/stepController.js';
 import * as accommodationController from '../controllers/accommodationController.js';
 import * as activityController from '../controllers/activityController.js';
 import * as aiRoadtripController from '../controllers/aiRoadtripController.js';
+import * as chatbotController from '../controllers/chatbotController.js';
 import multer from 'multer';
 
 const router = express.Router();
@@ -117,5 +119,30 @@ router.get('/:idRoadtrip/steps/sync/jobs/:jobId/status', auth, roadtripControlle
 
 // Lister les jobs de synchronisation d'un roadtrip
 router.get('/:idRoadtrip/steps/sync/jobs', auth, roadtripController.getStepSyncJobs);
+
+/***************************/
+/***CHATBOT & ASSISTANT IA*/
+/***************************/
+
+// Traiter une requête utilisateur en langage naturel
+router.post('/:idRoadtrip/chat/query', authFlexible, chatbotController.processUserQuery);
+
+// Obtenir le statut d'un job de traitement
+router.get('/:idRoadtrip/chat/jobs/:jobId/status', authFlexible, chatbotController.getJobStatus);
+
+// Obtenir l'historique des conversations
+router.get('/:idRoadtrip/chat/conversations', authFlexible, chatbotController.getConversations);
+
+// Obtenir une conversation spécifique
+router.get('/:idRoadtrip/chat/conversations/:conversationId', authFlexible, chatbotController.getConversation);
+
+// Obtenir les notifications du roadtrip
+router.get('/:idRoadtrip/notifications', authFlexible, chatbotController.getNotifications);
+
+// Marquer une notification comme lue
+router.patch('/:idRoadtrip/notifications/:notificationId/read', auth, chatbotController.markNotificationAsRead);
+
+// Supprimer une notification
+router.delete('/:idRoadtrip/notifications/:notificationId', auth, chatbotController.deleteNotification);
 
 export default router;

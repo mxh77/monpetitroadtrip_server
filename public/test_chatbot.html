@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Chatbot IA - MonPetitRoadtrip</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .main-content {
+            display: flex;
+            height: 600px;
+        }
+        .chat-section {
+            flex: 2;
+            padding: 20px;
+            border-right: 1px solid #eee;
+        }
+        .notifications-section {
+            flex: 1;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #fff;
+            border-radius: 5px;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 8px 12px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .user-message {
+            background: #007bff;
+            color: white;
+            margin-left: auto;
+        }
+        .assistant-message {
+            background: #e9ecef;
+            color: #333;
+        }
+        .system-message {
+            background: #28a745;
+            color: white;
+            text-align: center;
+            margin: 5px auto;
+            font-size: 0.9em;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        .input-group input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .notifications {
+            height: 500px;
+            overflow-y: auto;
+        }
+        .notification {
+            background: white;
+            border-left: 4px solid #007bff;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .notification.success {
+            border-left-color: #28a745;
+        }
+        .notification.error {
+            border-left-color: #dc3545;
+        }
+        .notification-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .notification-time {
+            font-size: 0.8em;
+            color: #666;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .status.connected {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .config-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .config-section input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #007bff;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Test Chatbot IA - MonPetitRoadtrip</h1>
+            <p>Interface de test pour le chatbot avec WebSocket</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="chat-section">
+                <h3>💬 Chat avec l'IA</h3>
+                
+                <div class="config-section">
+                    <input type="text" id="roadtripId" placeholder="ID du Roadtrip" value="test_roadtrip_123">
+                    <input type="text" id="token" placeholder="Token JWT (optionnel pour test)" value="">
+                    <div style="margin-top: 10px;">
+                        <button class="btn" onclick="connectWebSocket()">🔌 Connecter WebSocket</button>
+                        <button class="btn" onclick="testWithoutToken()" style="margin-left: 10px; background: #28a745;">🧪 Test sans token</button>
+                    </div>
+                </div>
+                
+                <div class="status" id="connectionStatus">
+                    ❌ WebSocket déconnecté
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="system-message">
+                        🤖 Bonjour ! Je suis votre assistant IA pour gérer votre roadtrip.
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <input type="text" id="messageInput" placeholder="Tapez votre message..." onkeypress="handleKeyPress(event)">
+                    <button class="btn" onclick="sendMessage()" id="sendButton">Envoyer</button>
+                </div>
+                
+                <div class="progress-bar" id="progressBar" style="display: none;">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <p><strong>Exemples de commandes :</strong></p>
+                    <ul>
+                        <li>"Ajoute une étape à Paris du 15 au 17 juillet"</li>
+                        <li>"Ajoute un hébergement Hôtel de la Paix à Marseille"</li>
+                        <li>"Ajoute une activité visite du Louvre"</li>
+                        <li>"Supprime l'étape de Lyon"</li>
+                        <li>"Aide"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notifications-section">
+                <h3>🔔 Notifications</h3>
+                <div class="notifications" id="notifications">
+                    <div class="notification">
+                        <div class="notification-title">Bienvenue</div>
+                        <div>Connectez-vous pour voir les notifications en temps réel</div>
+                        <div class="notification-time">Maintenant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let websocket = null;
+        let currentRoadtripId = null;
+        let currentToken = null;
+        let currentJobId = null;
+        
+        // Configuration
+        const API_BASE = 'http://localhost:3000/api';
+        const WS_BASE = 'ws://localhost:3000/websocket';
+        
+        function connectWebSocket() {
+            const roadtripId = document.getElementById('roadtripId').value;
+            const token = document.getElementById('token').value;
+            
+            // Permettre la connexion même sans token pour test
+            currentRoadtripId = roadtripId || 'test_roadtrip_123';
+            currentToken = token;
+            
+            // Fermer la connexion existante
+            if (websocket) {
+                websocket.close();
+            }
+            
+            // Créer une nouvelle connexion (avec ou sans token)
+            let wsUrl = `${WS_BASE}`;
+            if (token) {
+                wsUrl += `?token=${token}`;
+            }
+            
+            addSystemMessage(`🔗 Connexion à ${wsUrl}`);
+            websocket = new WebSocket(wsUrl);
+            
+            websocket.onopen = function(event) {
+                updateConnectionStatus(true);
+                addSystemMessage('✅ WebSocket connecté');
+                
+                // S'abonner aux notifications du roadtrip
+                websocket.send(JSON.stringify({
+                    type: 'subscribe_roadtrip',
+                    roadtripId: roadtripId
+                }));
+            };
+            
+            websocket.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                handleWebSocketMessage(data);
+            };
+            
+            websocket.onclose = function(event) {
+                updateConnectionStatus(false);
+                addSystemMessage('❌ WebSocket déconnecté');
+            };
+            
+            websocket.onerror = function(error) {
+                console.error('WebSocket error:', error);
+                addSystemMessage('❌ Erreur WebSocket');
+            };
+        }
+        
+        function testWithoutToken() {
+            // Configurer pour un test sans token
+            document.getElementById('roadtripId').value = 'test_roadtrip_123';
+            document.getElementById('token').value = '';
+            
+            // Connecter directement
+            connectWebSocket();
+            
+            addSystemMessage('🧪 Mode test sans token activé');
+            addSystemMessage('📝 Vous pouvez maintenant envoyer des messages');
+        }
+        
+        function handleWebSocketMessage(data) {
+            switch (data.type) {
+                case 'notification':
+                    addNotification(data.data);
+                    break;
+                case 'job_update':
+                    handleJobUpdate(data.data);
+                    break;
+                case 'connection_established':
+                    addSystemMessage('🔗 Connexion établie');
+                    break;
+                case 'subscription_confirmed':
+                    addSystemMessage(`✅ Abonné au roadtrip ${data.roadtripId}`);
+                    break;
+                case 'typing_indicator':
+                    showTypingIndicator(data.isTyping);
+                    break;
+                default:
+                    console.log('Message WebSocket inconnu:', data);
+            }
+        }
+        
+        function handleJobUpdate(jobData) {
+            if (jobData.status === 'completed') {
+                hideProgressBar();
+                addAssistantMessage(`✅ ${jobData.result.message}`);
+            } else if (jobData.status === 'failed') {
+                hideProgressBar();
+                addAssistantMessage(`❌ Erreur: ${jobData.error}`);
+            }
+        }
+        
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message || !currentRoadtripId) {
+                alert('Veuillez vous connecter et entrer un message');
+                return;
+            }
+            
+            // Afficher le message utilisateur
+            addUserMessage(message);
+            input.value = '';
+            
+            // Désactiver le bouton
+            const sendButton = document.getElementById('sendButton');
+            sendButton.disabled = true;
+            
+            try {
+                // Préparer les headers
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+                
+                // Ajouter le token seulement s'il existe
+                if (currentToken) {
+                    headers['Authorization'] = `Bearer ${currentToken}`;
+                }
+                
+                // Envoyer à l'API
+                const response = await fetch(`${API_BASE}/roadtrips/${currentRoadtripId}/chat/query`, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({
+                        query: message,
+                        conversationId: `web_test_${Date.now()}`
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    addAssistantMessage(result.message);
+                    currentJobId = result.jobId;
+                    
+                    // Afficher la barre de progression
+                    if (result.estimatedTime > 3) {
+                        showProgressBar();
+                    }
+                } else {
+                    addAssistantMessage(`❌ Erreur: ${result.error || 'Erreur inconnue'}`);
+                }
+                
+            } catch (error) {
+                console.error('Erreur envoi message:', error);
+                addAssistantMessage('❌ Erreur de communication avec le serveur');
+            } finally {
+                sendButton.disabled = false;
+            }
+        }
+        
+        function addUserMessage(message) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user-message';
+            messageDiv.textContent = message;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function addAssistantMessage(message) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message assistant-message';
+            messageDiv.textContent = message;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function addSystemMessage(message) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message system-message';
+            messageDiv.textContent = message;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function addNotification(notification) {
+            const notificationsDiv = document.getElementById('notifications');
+            const notificationDiv = document.createElement('div');
+            notificationDiv.className = `notification ${notification.type}`;
+            
+            notificationDiv.innerHTML = `
+                <div class="notification-title">${notification.title}</div>
+                <div>${notification.message}</div>
+                <div class="notification-time">${new Date(notification.timestamp).toLocaleTimeString()}</div>
+            `;
+            
+            notificationsDiv.insertBefore(notificationDiv, notificationsDiv.firstChild);
+        }
+        
+        function updateConnectionStatus(connected) {
+            const statusDiv = document.getElementById('connectionStatus');
+            if (connected) {
+                statusDiv.className = 'status connected';
+                statusDiv.textContent = '✅ WebSocket connecté';
+            } else {
+                statusDiv.className = 'status disconnected';
+                statusDiv.textContent = '❌ WebSocket déconnecté';
+            }
+        }
+        
+        function showProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            progressBar.style.display = 'block';
+            progressFill.style.width = '0%';
+            
+            // Animation de progression
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 2;
+                progressFill.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    hideProgressBar();
+                }
+            }, 100);
+        }
+        
+        function hideProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.display = 'none';
+        }
+        
+        function showTypingIndicator(isTyping) {
+            // Implémentation pour afficher l'indicateur de frappe
+            console.log('Typing indicator:', isTyping);
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Interface de test du chatbot chargée');
+        });
+    </script>
+</body>
+</html>
