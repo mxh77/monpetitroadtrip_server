@@ -3,8 +3,10 @@ import cookieParser from 'cookie-parser';
 import axios from 'axios';
 import path from 'path';
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
 import { fileURLToPath } from 'url';
 import { auth } from './middleware/auth.js';
+import User from './models/User.js';
 import authRoutes from './routes/authRoutes.js';
 import roadtripRoutes from './routes/roadtripRoutes.js';
 import stepRoutes from './routes/stepRoutes.js';
@@ -124,8 +126,36 @@ app.get('/', auth, (req, res) => {
 });
 
 // Route pour vérifier l'état de connexion
-app.get('/auth/status', auth, (req, res) => {
-  res.json({ isAuthenticated: true });
+app.get('/auth/status', async (req, res) => {
+  const token = req.cookies.token;
+  
+  if (!token) {
+    return res.json({ isAuthenticated: false });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.user.id;
+    
+    // Récupérer les informations complètes de l'utilisateur depuis la base de données
+    const user = await User.findById(userId).select('-password -resetPasswordToken -resetPasswordExpires');
+    
+    if (!user) {
+      return res.json({ isAuthenticated: false });
+    }
+
+    res.json({ 
+      isAuthenticated: true,
+      user: {
+        _id: user._id.toString(), // Convertir ObjectId en string
+        name: user.username, // Utiliser username comme name
+        email: user.email
+      }
+    });
+  } catch (err) {
+    console.log('Token is not valid:', err.message);
+    res.json({ isAuthenticated: false });
+  }
 });
 
 app.get('/autocomplete', async (req, res) => {
