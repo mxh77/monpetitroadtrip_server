@@ -127,19 +127,16 @@ components:
         photos:
           type: array
           items:
-            type: string
-            format: objectid
-          description: "IDs des photos associées"
+            $ref: '#/components/schemas/File'
+          description: "Photos associées"
         documents:
           type: array
           items:
-            type: string
-            format: objectid
-          description: "IDs des documents associés"
+            $ref: '#/components/schemas/File'
+          description: "Documents associés"
         thumbnail:
-          type: string
-          format: objectid
-          description: "ID de l'image miniature"
+          $ref: '#/components/schemas/File'
+          description: "Image miniature"
         steps:
           type: array
           items:
@@ -236,19 +233,16 @@ components:
         photos:
           type: array
           items:
-            type: string
-            format: objectid
-          description: "IDs des photos de l'étape"
+            $ref: '#/components/schemas/File'
+          description: "Photos de l'étape"
         documents:
           type: array
           items:
-            type: string
-            format: objectid
-          description: "IDs des documents de l'étape"
+            $ref: '#/components/schemas/File'
+          description: "Documents de l'étape"
         thumbnail:
-          type: string
-          format: objectid
-          description: "ID de l'image miniature"
+          $ref: '#/components/schemas/File'
+          description: "Image miniature"
         accommodations:
           type: array
           items:
@@ -398,19 +392,16 @@ components:
         photos:
           type: array
           items:
-            type: string
-            format: objectid
-          description: "IDs des photos de l'activité"
+            $ref: '#/components/schemas/File'
+          description: "Photos de l'activité"
         documents:
           type: array
           items:
-            type: string
-            format: objectid
-          description: "IDs des documents de l'activité"
+            $ref: '#/components/schemas/File'
+          description: "Documents de l'activité"
         thumbnail:
-          type: string
-          format: objectid
-          description: "ID de l'image miniature"
+          $ref: '#/components/schemas/File'
+          description: "Image miniature"
         algoliaId:
           type: string
           example: "trail_123456"
@@ -513,19 +504,16 @@ components:
         photos:
           type: array
           items:
-            type: string
-            format: objectid
-          description: "IDs des photos de l'hébergement"
+            $ref: '#/components/schemas/File'
+          description: "Photos de l'hébergement"
         documents:
           type: array
           items:
-            type: string
-            format: objectid
-          description: "IDs des documents de l'hébergement"
+            $ref: '#/components/schemas/File'
+          description: "Documents de l'hébergement"
         thumbnail:
-          type: string
-          format: objectid
-          description: "ID de l'image miniature"
+          $ref: '#/components/schemas/File'
+          description: "Image miniature"
 
     File:
       type: object
@@ -607,6 +595,401 @@ components:
           type: string
           example: "Operation completed successfully"
           description: "Message de succès"
+
+    # ===== MODÈLES SPÉCIALISÉS =====
+    
+    RoadtripTask:
+      type: object
+      required:
+        - _id
+        - userId
+        - roadtripId
+        - title
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef6"
+        userId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef1"
+        roadtripId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef0"
+        title:
+          type: string
+          example: "Réserver billets de train"
+          description: "Titre de la tâche"
+        description:
+          type: string
+          example: "Réserver les billets Paris-Nice"
+          description: "Description détaillée"
+        category:
+          type: string
+          enum: [preparation, booking, packing, documents, transport, accommodation, activities, health, finances, communication, other]
+          example: "transport"
+          description: "Catégorie de la tâche"
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+          example: "high"
+          description: "Niveau de priorité"
+        status:
+          type: string
+          enum: [pending, in_progress, completed, cancelled]
+          example: "pending"
+          description: "Statut actuel"
+        dueDate:
+          type: string
+          format: date-time
+          example: "2024-07-25T12:00:00.000Z"
+          description: "Date limite"
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: "Date de completion"
+        assignedTo:
+          type: string
+          example: "Jean Dupont"
+          description: "Personne responsable"
+        estimatedDuration:
+          type: integer
+          example: 30
+          description: "Durée estimée en minutes"
+        reminderDate:
+          type: string
+          format: date-time
+          description: "Date de rappel"
+        order:
+          type: integer
+          example: 1
+          description: "Ordre d'affichage"
+        notes:
+          type: string
+          example: "Préférer les trains directs"
+          description: "Notes additionnelles"
+        attachments:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "Fichiers attachés"
+        createdAt:
+          type: string
+          format: date-time
+          description: "Date de création"
+        updatedAt:
+          type: string
+          format: date-time
+          description: "Date de modification"
+
+    RoadtripTaskInput:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          example: "Réserver billets de train"
+        description:
+          type: string
+          example: "Réserver les billets Paris-Nice"
+        category:
+          type: string
+          enum: [preparation, booking, packing, documents, transport, accommodation, activities, health, finances, communication, other]
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+        status:
+          type: string
+          enum: [pending, in_progress, completed, cancelled]
+        dueDate:
+          type: string
+          format: date-time
+        assignedTo:
+          type: string
+        estimatedDuration:
+          type: integer
+        reminderDate:
+          type: string
+          format: date-time
+        notes:
+          type: string
+
+    JobStatus:
+      type: object
+      properties:
+        jobId:
+          type: string
+          example: "64f123abc456789012345678"
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+          example: "running"
+        progress:
+          type: object
+          properties:
+            total:
+              type: integer
+              example: 10
+            completed:
+              type: integer
+              example: 7
+            percentage:
+              type: number
+              format: float
+              example: 70.0
+        startedAt:
+          type: string
+          format: date-time
+          example: "2024-08-01T10:00:00.000Z"
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+          example: "2024-08-01T10:15:00.000Z"
+        errorMessage:
+          type: string
+          nullable: true
+          description: "Message d'erreur si échec"
+        results:
+          type: object
+          description: "Résultats spécifiques au type de job"
+          additionalProperties: true
+
+    TravelTimeJobResults:
+      allOf:
+        - $ref: '#/components/schemas/JobStatus'
+        - type: object
+          properties:
+            results:
+              type: object
+              properties:
+                stepsProcessed:
+                  type: integer
+                  example: 5
+                totalDistance:
+                  type: number
+                  format: float
+                  example: 1247.8
+                  description: "Distance totale en km"
+                totalTravelTime:
+                  type: integer
+                  example: 720
+                  description: "Temps total en minutes"
+                inconsistentSteps:
+                  type: integer
+                  example: 1
+                  description: "Nombre d'étapes avec incohérences"
+                errors:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      stepId:
+                        type: string
+                        format: objectid
+                      stepName:
+                        type: string
+                      error:
+                        type: string
+
+    UserSettings:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef7"
+        userId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef1"
+        systemPrompt:
+          type: string
+          example: "Tu es le narrateur officiel de MonPetitRoadtrip..."
+          description: "Prompt système pour l'IA"
+        algoliaSearchRadius:
+          type: integer
+          example: 50000
+          minimum: 1000
+          maximum: 200000
+          description: "Rayon de recherche Algolia en mètres"
+        dragSnapInterval:
+          type: integer
+          enum: [5, 10, 15, 30, 60]
+          example: 15
+          description: "Intervalle de snap en minutes pour le planning"
+        preferences:
+          type: object
+          properties:
+            defaultCurrency:
+              type: string
+              example: "EUR"
+            language:
+              type: string
+              example: "fr"
+            timezone:
+              type: string
+              example: "Europe/Paris"
+        notifications:
+          type: object
+          properties:
+            email:
+              type: boolean
+              example: true
+            push:
+              type: boolean
+              example: false
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    UserSettingsInput:
+      type: object
+      properties:
+        systemPrompt:
+          type: string
+        algoliaSearchRadius:
+          type: integer
+          minimum: 1000
+          maximum: 200000
+        dragSnapInterval:
+          type: integer
+          enum: [5, 10, 15, 30, 60]
+        preferences:
+          type: object
+          properties:
+            defaultCurrency:
+              type: string
+            language:
+              type: string
+            timezone:
+              type: string
+        notifications:
+          type: object
+          properties:
+            email:
+              type: boolean
+            push:
+              type: boolean
+
+    Conversation:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef8"
+        roadtripId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef0"
+        title:
+          type: string
+          example: "Modification du planning"
+          description: "Titre de la conversation"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        messageCount:
+          type: integer
+          example: 5
+          description: "Nombre de messages dans la conversation"
+
+    ConversationDetailed:
+      allOf:
+        - $ref: '#/components/schemas/Conversation'
+        - type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    enum: [user, assistant]
+                    example: "user"
+                  content:
+                    type: string
+                    example: "Ajoute une visite du Louvre demain"
+                  timestamp:
+                    type: string
+                    format: date-time
+
+    GoogleMapsReview:
+      type: object
+      properties:
+        author_name:
+          type: string
+          example: "Jean Dupont"
+          description: "Nom de l'auteur de l'avis"
+        rating:
+          type: number
+          format: float
+          example: 4.5
+          description: "Note de 1 à 5"
+        text:
+          type: string
+          example: "Excellent musée, visite recommandée"
+          description: "Texte de l'avis"
+        time:
+          type: integer
+          example: 1627891200
+          description: "Timestamp Unix de l'avis"
+        profile_photo_url:
+          type: string
+          format: uri
+          description: "URL de la photo de profil"
+        relative_time_description:
+          type: string
+          example: "il y a 2 mois"
+          description: "Description relative du temps"
+
+    GoogleMapsDirection:
+      type: object
+      properties:
+        distance:
+          type: object
+          properties:
+            text:
+              type: string
+              example: "245 km"
+            value:
+              type: integer
+              example: 245000
+              description: "Distance en mètres"
+        duration:
+          type: object
+          properties:
+            text:
+              type: string
+              example: "2 h 45 min"
+            value:
+              type: integer
+              example: 9900
+              description: "Durée en secondes"
+        start_address:
+          type: string
+          example: "Paris, France"
+        end_address:
+          type: string
+          example: "Lyon, France"
+        overview_polyline:
+          type: object
+          properties:
+            points:
+              type: string
+              description: "Polyline encodée pour affichage sur carte"
 
   # ===== RÉPONSES COMMUNES =====
   responses:
@@ -1647,411 +2030,1473 @@ paths:
               schema:
                 $ref: '#/components/schemas/Activity'
 
-    # ===== MODÈLES SPÉCIALISÉS =====
-    
-    RoadtripTask:
-      type: object
-      required:
-        - _id
-        - userId
-        - roadtripId
-        - title
-      properties:
-        _id:
-          type: string
-          format: objectid
-          example: "64a1b2c3d4e5f6789abcdef6"
-        userId:
-          type: string
-          format: objectid
-          example: "64a1b2c3d4e5f6789abcdef1"
-        roadtripId:
-          type: string
-          format: objectid
-          example: "64a1b2c3d4e5f6789abcdef0"
-        title:
-          type: string
-          maxLength: 200
-          example: "Réserver billets de train"
-          description: "Titre de la tâche"
-        description:
-          type: string
-          maxLength: 1000
-          example: "Réserver les billets Paris-Nice pour le 1er août"
-          description: "Description détaillée"
-        category:
-          type: string
-          enum: [preparation, booking, packing, documents, transport, accommodation, activities, health, finances, communication, other]
-          example: "transport"
-          description: "Catégorie de la tâche"
-        priority:
-          type: string
-          enum: [low, medium, high, urgent]
-          example: "high"
-          description: "Niveau de priorité"
-        status:
-          type: string
-          enum: [pending, in_progress, completed, cancelled]
-          example: "pending"
-          description: "Statut de la tâche"
-        dueDate:
-          type: string
-          format: date-time
-          example: "2024-07-25T18:00:00.000Z"
-          description: "Date d'échéance"
-        completedAt:
-          type: string
-          format: date-time
-          nullable: true
-          example: "2024-07-20T14:30:00.000Z"
-          description: "Date de completion (automatique)"
-        assignedTo:
-          type: string
-          maxLength: 100
-          example: "Jean Dupont"
-          description: "Personne responsable"
-        estimatedDuration:
-          type: integer
-          example: 30
-          description: "Durée estimée en minutes"
-        reminderDate:
-          type: string
-          format: date-time
-          example: "2024-07-24T09:00:00.000Z"
-          description: "Date de rappel"
-        attachments:
-          type: array
-          items:
+# ===== TASKS - GESTION DES TÂCHES =====
+  /roadtrips/{roadtripId}/tasks:
+    get:
+      tags: [Tasks]
+      summary: "Lister les tâches d'un roadtrip"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
             type: string
             format: objectid
-          description: "IDs des fichiers attachés"
-        notes:
-          type: string
-          maxLength: 2000
-          example: "Préférer les places côté fenêtre"
-          description: "Notes supplémentaires"
-        order:
-          type: integer
-          example: 1
-          description: "Ordre d'affichage"
-        isRecurring:
-          type: boolean
-          example: false
-          description: "Tâche récurrente"
-        recurringPattern:
-          type: string
-          enum: [daily, weekly, monthly]
-          nullable: true
-          example: "weekly"
-          description: "Modèle de récurrence"
-        isOverdue:
-          type: boolean
-          readOnly: true
-          example: false
-          description: "Tâche en retard (calculé automatiquement)"
-        timeRemaining:
-          type: integer
-          readOnly: true
-          nullable: true
-          example: 432000000
-          description: "Temps restant en millisecondes (calculé automatiquement)"
-        createdAt:
-          type: string
-          format: date-time
-          example: "2024-07-15T10:00:00.000Z"
-        updatedAt:
-          type: string
-          format: date-time
-          example: "2024-07-15T10:00:00.000Z"
+      responses:
+        200:
+          description: "Liste des tâches"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoadtripTask'
 
-    RoadtripTaskInput:
-      type: object
-      required: [title]
-      properties:
-        title:
-          type: string
-          maxLength: 200
-          example: "Réserver billets de train"
-        description:
-          type: string
-          maxLength: 1000
-          example: "Réserver les billets Paris-Nice"
-        category:
-          type: string
-          enum: [preparation, booking, packing, documents, transport, accommodation, activities, health, finances, communication, other]
-          example: "transport"
-        priority:
-          type: string
-          enum: [low, medium, high, urgent]
-          example: "high"
-        status:
-          type: string
-          enum: [pending, in_progress, completed, cancelled]
-          example: "pending"
-        dueDate:
-          type: string
-          format: date-time
-          example: "2024-07-25T18:00:00.000Z"
-        assignedTo:
-          type: string
-          maxLength: 100
-          example: "Jean Dupont"
-        estimatedDuration:
-          type: integer
-          example: 30
-        reminderDate:
-          type: string
-          format: date-time
-          example: "2024-07-24T09:00:00.000Z"
-        notes:
-          type: string
-          maxLength: 2000
-          example: "Préférer les places côté fenêtre"
+    post:
+      tags: [Tasks]
+      summary: "Créer une nouvelle tâche"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoadtripTaskInput'
+      responses:
+        201:
+          description: "Tâche créée avec succès"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripTask'
 
-    JobStatus:
-      type: object
-      properties:
-        jobId:
-          type: string
-          example: "64f123abc456789012345678"
-        status:
-          type: string
-          enum: [pending, running, completed, failed]
-          example: "running"
-        progress:
-          type: object
-          properties:
-            total:
-              type: integer
-              example: 10
-            completed:
-              type: integer
-              example: 7
-            percentage:
-              type: number
-              format: float
-              example: 70.0
-        startedAt:
-          type: string
-          format: date-time
-          example: "2024-07-15T10:00:00.000Z"
-        completedAt:
-          type: string
-          format: date-time
-          nullable: true
-          example: "2024-07-15T10:05:00.000Z"
-        errorMessage:
-          type: string
-          nullable: true
-          example: "Erreur de connexion à l'API Google Maps"
-        results:
-          type: object
-          description: "Résultats variables selon le type de job"
+  /roadtrips/{roadtripId}/tasks/{taskId}:
+    get:
+      tags: [Tasks]
+      summary: "Obtenir une tâche spécifique"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        200:
+          description: "Détails de la tâche"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripTask'
 
-    TravelTimeJobResults:
-      allOf:
-        - $ref: '#/components/schemas/JobStatus'
-        - type: object
-          properties:
-            results:
+    put:
+      tags: [Tasks]
+      summary: "Modifier une tâche"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoadtripTaskInput'
+      responses:
+        200:
+          description: "Tâche modifiée avec succès"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripTask'
+
+    delete:
+      tags: [Tasks]
+      summary: "Supprimer une tâche"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        204:
+          description: "Tâche supprimée avec succès"
+
+# ===== TRAVEL TIME ASYNC - CALCUL ASYNCHRONE =====
+  /roadtrips/{roadtripId}/travel-time:
+    post:
+      tags: [Travel Time]
+      summary: "Lancer le calcul asynchrone des temps de trajet"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        202:
+          description: "Job lancé avec succès"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                    example: "64f123abc456789012345678"
+                  message:
+                    type: string
+                    example: "Calcul des temps de trajet en cours"
+
+  /jobs/{jobId}/status:
+    get:
+      tags: [Travel Time]
+      summary: "Vérifier le statut d'un job"
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Statut du job"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelTimeJobResults'
+
+# ===== CHATBOT - ASSISTANT IA =====
+  /chatbot/{roadtripId}/conversations:
+    get:
+      tags: [Chatbot]
+      summary: "Lister les conversations d'un roadtrip"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        200:
+          description: "Liste des conversations"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Conversation'
+
+    post:
+      tags: [Chatbot]
+      summary: "Créer une nouvelle conversation"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
               type: object
               properties:
-                stepsProcessed:
-                  type: integer
-                  example: 5
-                errors:
+                message:
+                  type: string
+                  example: "Ajoute une visite du Louvre demain"
+      responses:
+        201:
+          description: "Conversation créée"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationDetailed'
+
+  /chatbot/{roadtripId}/conversations/{conversationId}:
+    get:
+      tags: [Chatbot]
+      summary: "Obtenir une conversation avec tous ses messages"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: conversationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        200:
+          description: "Détails de la conversation"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationDetailed'
+
+    post:
+      tags: [Chatbot]
+      summary: "Ajouter un message à une conversation"
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: conversationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "Modifie l'heure de départ à 9h"
+      responses:
+        200:
+          description: "Message ajouté, réponse de l'IA"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationDetailed'
+
+# ===== GOOGLE MAPS - INTÉGRATIONS =====
+  /google-maps/reviews:
+    post:
+      tags: [Google Maps]
+      summary: "Récupérer les avis Google Maps d'un lieu"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                placeId:
+                  type: string
+                  example: "ChIJD7fiBh9u5kcRYJSMaMOCCwQ"
+      responses:
+        200:
+          description: "Avis récupérés"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GoogleMapsReview'
+
+  /google-maps/directions:
+    post:
+      tags: [Google Maps]
+      summary: "Calculer un itinéraire"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                origin:
+                  type: string
+                  example: "Paris, France"
+                destination:
+                  type: string
+                  example: "Lyon, France"
+                travelMode:
+                  type: string
+                  enum: [driving, walking, bicycling, transit]
+                  example: "driving"
+      responses:
+        200:
+          description: "Itinéraire calculé"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleMapsDirection'
+
+# ===== USER SETTINGS - PARAMÈTRES UTILISATEUR =====
+  /users/{userId}/settings:
+    get:
+      tags: [User Settings]
+      summary: "Obtenir les paramètres utilisateur"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        200:
+          description: "Paramètres utilisateur"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettings'
+
+    put:
+      tags: [User Settings]
+      summary: "Modifier les paramètres utilisateur"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSettingsInput'
+      responses:
+        200:
+          description: "Paramètres modifiés"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettings'
+
+  /roadtrips/{roadtripId}/tasks/{taskId}/status:
+    patch:
+      tags: [Tasks]
+      summary: Basculer statut completion
+      description: Basculer rapidement entre 'pending' et 'completed'
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Statut modifié
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripTask'
+
+  /roadtrips/{roadtripId}/tasks/reorder:
+    patch:
+      tags: [Tasks]
+      summary: Réorganiser tâches
+      description: Modifier l'ordre d'affichage des tâches
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [taskOrders]
+              properties:
+                taskOrders:
                   type: array
                   items:
                     type: object
+                    required: [taskId, order]
                     properties:
-                      stepId:
+                      taskId:
                         type: string
                         format: objectid
-                      error:
+                      order:
+                        type: integer
+      responses:
+        '200':
+          description: Tâches réorganisées
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+
+  /roadtrips/{roadtripId}/tasks/generate-defaults:
+    post:
+      tags: [Tasks]
+      summary: Générer tâches par défaut
+      description: |
+        Générer automatiquement des tâches prédéfinies pour le roadtrip.
+        Créé des tâches communes comme réservations, documents, bagages, etc.
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '201':
+          description: Tâches par défaut générées
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Default tasks generated successfully"
+                  tasksCreated:
+                    type: integer
+                    example: 8
+
+  /roadtrips/{roadtripId}/tasks/generate-ai-async:
+    post:
+      tags: [Tasks]
+      summary: Générer tâches IA (asynchrone)
+      description: |
+        Lancer la génération asynchrone de tâches personnalisées via IA
+        basées sur le contenu du roadtrip
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                replace:
+                  type: boolean
+                  default: false
+                  description: "Remplacer les tâches existantes"
+      responses:
+        '200':
+          description: Job de génération lancé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                    enum: [pending, processing]
+
+  /roadtrips/{roadtripId}/tasks/jobs/{jobId}:
+    get:
+      tags: [Tasks]
+      summary: Statut job génération tâches IA
+      description: Vérifier le statut d'un job de génération de tâches IA
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Statut du job
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/JobStatus'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          tasks:
+                            type: array
+                            items:
+                              type: string
+                              format: objectid
+                          count:
+                            type: integer
+
+  # ===== TRAVEL TIME & SYNCHRONISATION =====
+  /roadtrips/{idRoadtrip}/travel-time/refresh:
+    patch:
+      tags: [Travel Time]
+      summary: Recalculer temps trajet (synchrone)
+      description: |
+        Recalculer immédiatement tous les temps de trajet du roadtrip.
+        Version synchrone - peut prendre du temps pour de gros roadtrips.
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Temps de trajet recalculés
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Travel times updated successfully"
+                  stepsProcessed:
+                    type: integer
+                    example: 5
+                  totalDistance:
+                    type: number
+                    format: float
+                    example: 1250.5
+                  totalTravelTime:
+                    type: integer
+                    example: 720
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /roadtrips/{idRoadtrip}/travel-time/refresh/async:
+    patch:
+      tags: [Travel Time]
+      summary: Lancer calcul temps trajet asynchrone
+      description: |
+        Lancer le calcul asynchrone des temps de trajet.
+        Recommandé pour les roadtrips avec beaucoup d'étapes.
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Job de calcul lancé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                    example: "64f123abc456789012345678"
+                  status:
+                    type: string
+                    enum: [pending, running]
+
+  /roadtrips/{idRoadtrip}/travel-time/jobs/{jobId}/status:
+    get:
+      tags: [Travel Time]
+      summary: Statut job calcul temps trajet
+      description: Vérifier le statut et la progression d'un job de calcul
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Statut du job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelTimeJobResults'
+
+  /roadtrips/{idRoadtrip}/travel-time/jobs:
+    get:
+      tags: [Travel Time]
+      summary: Liste jobs calcul temps trajet
+      description: Historique des jobs de calcul pour ce roadtrip
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Liste des jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TravelTimeJobResults'
+
+  /roadtrips/{idRoadtrip}/steps/sync/async:
+    patch:
+      tags: [Travel Time]
+      summary: Synchroniser heures étapes (asynchrone)
+      description: |
+        Lancer la synchronisation asynchrone des heures d'arrivée/départ
+        de toutes les étapes en tenant compte des temps de trajet
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Job de synchronisation lancé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                    enum: [pending, running]
+
+  /roadtrips/{idRoadtrip}/steps/sync/jobs/{jobId}/status:
+    get:
+      tags: [Travel Time]
+      summary: Statut job synchronisation étapes
+      description: Vérifier le statut d'un job de synchronisation des heures
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Statut du job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+
+  /roadtrips/{idRoadtrip}/steps/sync/jobs:
+    get:
+      tags: [Travel Time]
+      summary: Liste jobs synchronisation étapes
+      description: Historique des jobs de synchronisation pour ce roadtrip
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Liste des jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobStatus'
+
+  /roadtrips/{idRoadtrip}/steps/{idStep}/sync:
+    patch:
+      tags: [Travel Time]
+      summary: Synchroniser étape individuelle
+      description: Synchroniser les heures d'une étape spécifique
+
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Étape synchronisée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Step synchronized successfully"
+                  changes:
+                    type: object
+                    properties:
+                      arrivalDateTime:
+                        type: object
+                        properties:
+                          before:
+                            type: string
+                            format: date-time
+                          after:
+                            type: string
+                            format: date-time
+                      departureDateTime:
+                        type: object
+                        properties:
+                          before:
+                            type: string
+                            format: date-time
+                          after:
+                            type: string
+                            format: date-time
+
+  /roadtrips/{idRoadtrip}/steps/{idStep}/fix-dates:
+    patch:
+      tags: [Travel Time]
+      summary: Corriger dates étape
+      description: |
+        Recalculer et corriger automatiquement les dates d'une étape
+        en tenant compte des hébergements et des temps de trajet
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Dates corrigées
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Step dates fixed successfully"
+                  accommodationsFixes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        oldNights:
+                          type: integer
+                        newNights:
+                          type: integer
+
+  # ===== STORIES - RÉCITS DE VOYAGE =====
+  /steps/{idStep}/story:
+    get:
+      tags: [Stories]
+      summary: Générer récit d'étape
+      description: |
+        Générer un récit chronologique de l'étape en analysant
+        les hébergements, activités et notes
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Récit généré
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  story:
+                    type: string
+                    example: "Notre journée à Paris a commencé par un petit-déjeuner à l'hôtel..."
+
+    patch:
+      tags: [Stories]
+      summary: Régénérer récit
+      description: Forcer la régénération du récit d'une étape
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Récit régénéré
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  story:
+                    type: string
+
+  /steps/{idStep}/story/with-photos:
+    get:
+      tags: [Stories]
+      summary: Générer récit avec photos
+      description: |
+        Générer un récit en analysant aussi les photos (GPT-4 Vision)
+        si activé dans les paramètres utilisateur
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Récit avec analyse photos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  story:
+                    type: string
+                  photos:
+                    type: array
+                    items:
+                      type: string
+                      format: uri
+                    description: "URLs des photos analysées"
+
+  /steps/{idStep}/story/async:
+    post:
+      tags: [Stories]
+      summary: Générer récit asynchrone
+      description: Lancer la génération asynchrone du récit
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Job de génération lancé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+
+  /steps/{idStep}/story/{jobId}/status:
+    get:
+      tags: [Stories]
+      summary: Statut job génération récit
+      description: Vérifier le statut d'un job de génération de récit
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Statut du job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+
+  # ===== TRAILS & RANDONNÉES =====
+  /steps/{idStep}/hikes-algolia:
+    get:
+      tags: [Steps]
+      summary: Randonnées Algolia pour étape
+      description: |
+        Rechercher des randonnées via l'API Algolia dans le rayon
+        configuré autour de l'étape
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: radius
+          in: query
+          schema:
+            type: integer
+            default: 50000
+          description: "Rayon de recherche en mètres"
+      responses:
+        '200':
+          description: Randonnées trouvées
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  trails:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        distance:
+                          type: number
+                        elevation:
+                          type: number
+                        difficulty:
+                          type: string
+                        coordinates:
+                          type: object
+                          properties:
+                            lat:
+                              type: number
+                            lng:
+                              type: number
+
+  /steps/{idStep}/hikes-suggestion:
+    get:
+      tags: [Steps]
+      summary: Suggestions randonnées étape
+      description: Obtenir des suggestions de randonnées personnalisées
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Suggestions de randonnées
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  suggestions:
+                    type: array
+                    items:
+                      type: object
+
+  /steps/trails/{idTrail}/reviews/summary:
+    get:
+      tags: [Steps]
+      summary: Synthèse avis randonnée
+      description: |
+        Générer une synthèse IA des avis d'une randonnée
+        pour aider à la décision
+      parameters:
+        - name: idTrail
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Synthèse des avis
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  summary:
+                    type: string
+                    example: "Cette randonnée est appréciée pour ses paysages magnifiques mais attention à la difficulté..."
+                  averageRating:
+                    type: number
+                    format: float
+                    example: 4.2
+                  totalReviews:
+                    type: integer
+                    example: 47
+
+  /steps/{idStep}/refresh-travel-time:
+    patch:
+      tags: [Steps]
+      summary: Recalculer temps trajet étape
+      description: |
+        Recalculer le temps de trajet d'une étape spécifique
+        par rapport à l'étape précédente
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Temps de trajet recalculé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Travel time refreshed successfully"
+                  travelTime:
+                    type: integer
+                    example: 120
+                    description: "Nouveau temps en minutes"
+                  distance:
+                    type: number
+                    format: float
+                    example: 95.3
+                    description: "Distance en km"
+
+  # ===== CHATBOT & ASSISTANT IA =====
+  /roadtrips/{idRoadtrip}/chat/query:
+    post:
+      tags: [Chatbot]
+      summary: Requête assistant IA
+      description: |
+        Traiter une requête utilisateur en langage naturel.
+        L'assistant peut modifier le roadtrip, ajouter des éléments,
+        répondre à des questions, etc.
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [message]
+              properties:
+                message:
+                  type: string
+                  example: "Ajoute une visite du Louvre demain matin à 10h"
+                  description: "Message en langage naturel"
+                conversationId:
+                  type: string
+                  format: objectid
+                  description: "ID conversation existante (optionnel)"
+      responses:
+        '200':
+          description: Réponse de l'assistant
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    description: "Réponse immédiate"
+                    properties:
+                      response:
                         type: string
-                summary:
-                  type: object
-                  properties:
-                    totalDistance:
-                      type: number
-                      format: float
-                      example: 1250.5
-                      description: "Distance totale en km"
-                    totalTravelTime:
-                      type: integer
-                      example: 720
-                      description: "Temps de trajet total en minutes"
-                    inconsistentSteps:
-                      type: integer
-                      example: 1
-                      description: "Nombre d'étapes avec problèmes horaires"
+                        example: "J'ai ajouté la visite du Louvre à votre planning demain à 10h"
+                      conversationId:
+                        type: string
+                        format: objectid
+                      changes:
+                        type: object
+                        description: "Modifications apportées au roadtrip"
+                  - type: object
+                    description: "Traitement asynchrone"
+                    properties:
+                      jobId:
+                        type: string
+                      status:
+                        type: string
+                        enum: [pending, processing]
 
-    UserSettings:
-      type: object
-      required:
-        - _id
-        - userId
-      properties:
-        _id:
-          type: string
-          format: objectid
-          example: "64a1b2c3d4e5f6789abcdef7"
-        userId:
-          type: string
-          format: objectid
-          example: "64a1b2c3d4e5f6789abcdef1"
-        systemPrompt:
-          type: string
-          example: "Tu es le narrateur officiel de MonPetitRoadtrip..."
-          description: "Prompt système pour l'IA"
-        algoliaSearchRadius:
-          type: integer
-          minimum: 1000
-          maximum: 200000
-          default: 50000
-          example: 50000
-          description: "Rayon de recherche Algolia en mètres"
-        dragSnapInterval:
-          type: integer
-          enum: [5, 10, 15, 30, 60]
-          default: 15
-          example: 15
-          description: "Intervalle de déplacement planning en minutes"
-        enablePhotosInStories:
-          type: boolean
-          default: true
-          example: true
-          description: "Activer analyse photos dans récits (GPT-4 Vision)"
+  /roadtrips/{idRoadtrip}/chat/jobs/{jobId}/status:
+    get:
+      tags: [Chatbot]
+      summary: Statut job traitement chatbot
+      description: Vérifier le statut d'un job de traitement de requête
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Statut du job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
 
-    UserSettingsInput:
-      type: object
-      properties:
-        systemPrompt:
-          type: string
-          example: "Tu es le narrateur officiel de MonPetitRoadtrip..."
-        algoliaSearchRadius:
-          type: integer
-          minimum: 1000
-          maximum: 200000
-          example: 50000
-        dragSnapInterval:
-          type: integer
-          enum: [5, 10, 15, 30, 60]
-          example: 15
-        enablePhotosInStories:
-          type: boolean
-          example: true
-
-    Conversation:
-      type: object
-      properties:
-        _id:
-          type: string
-          format: objectid
-          example: "64a1b2c3d4e5f6789abcdef8"
-        roadtripId:
-          type: string
-          format: objectid
-          example: "64a1b2c3d4e5f6789abcdef0"
-        title:
-          type: string
-          example: "Modifications du roadtrip"
-          description: "Titre généré automatiquement"
-        createdAt:
-          type: string
-          format: date-time
-          example: "2024-07-15T10:00:00.000Z"
-        updatedAt:
-          type: string
-          format: date-time
-          example: "2024-07-15T10:05:00.000Z"
-        messageCount:
-          type: integer
-          example: 4
-          description: "Nombre de messages dans la conversation"
-
-    ConversationDetailed:
-      allOf:
-        - $ref: '#/components/schemas/Conversation'
-        - type: object
-          properties:
-            messages:
-              type: array
-              items:
+  /roadtrips/{idRoadtrip}/chat/conversations:
+    get:
+      tags: [Chatbot]
+      summary: Historique conversations
+      description: Récupérer l'historique des conversations avec l'assistant
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Liste des conversations
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  role:
-                    type: string
-                    enum: [user, assistant]
-                    example: "user"
-                  content:
-                    type: string
-                    example: "Ajoute une visite du Louvre demain"
-                  timestamp:
-                    type: string
-                    format: date-time
-                    example: "2024-07-15T10:01:00.000Z"
+                  success:
+                    type: boolean
+                  conversations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conversation'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
 
-    GoogleMapsReview:
-      type: object
-      properties:
-        author_name:
-          type: string
-          example: "Jean D."
-        rating:
-          type: number
-          format: float
-          example: 4.5
-        text:
-          type: string
-          example: "Excellent musée, à visiter absolument!"
-        time:
-          type: integer
-          example: 1642694400
-          description: "Timestamp Unix"
+  /roadtrips/{idRoadtrip}/chat/conversations/{conversationId}:
+    get:
+      tags: [Chatbot]
+      summary: Conversation spécifique
+      description: Récupérer les détails complets d'une conversation
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: conversationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Détails de la conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationDetailed'
 
-    GoogleMapsDirection:
-      type: object
-      properties:
-        distance:
-          type: object
-          properties:
-            text:
-              type: string
-              example: "350 km"
-            value:
-              type: integer
-              example: 350000
-              description: "Distance en mètres"
-        duration:
-          type: object
-          properties:
-            text:
-              type: string
-              example: "3h 45min"
-            value:
-              type: integer
-              example: 13500
-              description: "Durée en secondes"
-        steps:
-          type: array
-          items:
-            type: object
-            properties:
-              html_instructions:
-                type: string
-                example: "Prendre l'A6 direction Lyon"
-              distance:
+  # ===== GOOGLE MAPS =====
+  /gm/reviews:
+    get:
+      tags: [Google Maps]
+      summary: Avis lieu Google Maps
+      description: Récupérer les avis d'un lieu via l'API Google Places
+      parameters:
+        - name: placeId
+          in: query
+          required: true
+          schema:
+            type: string
+          description: "Place ID Google Maps"
+          example: "ChIJD7fiBh9u5kcRYJSMaMOCCwQ"
+      responses:
+        '200':
+          description: Avis du lieu
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  text:
-                    type: string
-                  value:
-                    type: integer
-              duration:
+                  reviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GoogleMapsReview'
+
+  /gm/steps/reviews:
+    get:
+      tags: [Google Maps]
+      summary: Avis lieu par adresse
+      description: |
+        Récupérer les avis d'un lieu en utilisant son adresse.
+        Effectue d'abord une recherche de lieu puis récupère les avis.
+      parameters:
+        - name: address
+          in: query
+          required: true
+          schema:
+            type: string
+          description: "Adresse du lieu"
+          example: "Musée du Louvre, Paris"
+      responses:
+        '200':
+          description: Avis du lieu
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  text:
+                  reviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GoogleMapsReview'
+        '404':
+          description: Lieu non trouvé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
                     type: string
-                  value:
-                    type: integer
+                    example: "Lieu non trouvé."
+
+  /gm/directions:
+    get:
+      tags: [Google Maps]
+      summary: Calculer itinéraire
+      description: |
+        Calculer un itinéraire entre deux points avec l'API Google Directions.
+        Retourne distance, durée et étapes détaillées.
+      parameters:
+        - name: origin
+          in: query
+          required: true
+          schema:
+            type: string
+          description: "Point de départ"
+          example: "Paris, France"
+        - name: destination
+          in: query
+          required: true
+          schema:
+            type: string
+          description: "Point d'arrivée"
+          example: "Lyon, France"
+        - name: mode
+          in: query
+          schema:
+            type: string
+            enum: [driving, walking, transit, bicycling]
+            default: driving
+          description: "Mode de transport"
+      responses:
+        '200':
+          description: Itinéraire calculé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleMapsDirection'
+
+  /gm/trails:
+    get:
+      tags: [Google Maps]
+      summary: Randonnées par adresse
+      description: |
+        Rechercher des sentiers de randonnée autour d'une adresse
+        en utilisant l'API Google Places et les données locales
+      parameters:
+        - name: address
+          in: query
+          required: true
+          schema:
+            type: string
+          description: "Adresse de recherche"
+        - name: radius
+          in: query
+          schema:
+            type: integer
+            default: 50000
+          description: "Rayon de recherche en mètres"
+      responses:
+        '200':
+          description: Sentiers trouvés
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  trails:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        address:
+                          type: string
+                        distance:
+                          type: number
+                        elevation:
+                          type: number
+
+  # ===== PARAMÈTRES UTILISATEUR =====
+  /settings:
+    get:
+      tags: [Settings]
+      summary: Obtenir paramètres utilisateur
+      description: |
+        Récupérer tous les paramètres personnalisés de l'utilisateur
+        (prompt IA, rayon recherche, intervalle planning, etc.)
+      responses:
+        '200':
+          description: Paramètres utilisateur
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettings'
+
+    put:
+      tags: [Settings]
+      summary: Modifier paramètres utilisateur
+      description: |
+        Mettre à jour les paramètres utilisateur.
+        Tous les champs sont optionnels, seuls les champs fournis seront modifiés.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSettingsInput'
+      responses:
+        '200':
+          description: Paramètres modifiés
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettings'
+
+  # ===== AUTOCOMPLÉTION =====
+  /autocomplete:
+    get:
+      tags: [Google Maps]
+      summary: Autocomplétion d'adresses
+      description: |
+        Autocomplétion d'adresses via l'API Google Places Autocomplete.
+        Utilisé pour les champs d'adresse dans l'interface utilisateur.
+      security: []
+      parameters:
+        - name: input
+          in: query
+          required: true
+          schema:
+            type: string
+          description: "Texte saisi par l'utilisateur"
+          example: "Paris"
+      responses:
+        '200':
+          description: Suggestions d'adresses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  predictions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                          example: "Paris, France"
+                        place_id:
+                          type: string
+                          example: "ChIJD7fiBh9u5kcRYJSMaMOCCwQ"
+                        types:
+                          type: array
+                          items:
+                            type: string
