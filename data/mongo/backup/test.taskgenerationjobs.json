@@ -1,0 +1,78 @@
+[{
+  "_id": {
+    "$oid": "686d2dfa0f319e555b30f4d6"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "status": "failed",
+  "options": {
+    "replace": true
+  },
+  "createdAt": {
+    "$date": "2025-07-08T14:40:58.649Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-08T14:41:00.389Z"
+  },
+  "__v": 0,
+  "result": {
+    "error": "400 Invalid parameter: 'response_format' of type 'json_object' is not supported with this model."
+  }
+},
+{
+  "_id": {
+    "$oid": "686d2f6a52828b8177349ed7"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "status": "failed",
+  "options": {
+    "replace": true
+  },
+  "createdAt": {
+    "$date": "2025-07-08T14:47:06.311Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-08T14:47:26.623Z"
+  },
+  "__v": 0,
+  "result": {
+    "error": "RoadtripTask validation failed: category: `food` is not a valid enum value for path `category`."
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c5002872d3fcb513d77"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "status": "completed",
+  "options": {
+    "replace": true
+  },
+  "createdAt": {
+    "$date": "2025-07-08T15:42:08.186Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-08T15:42:28.451Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2025-07-08T15:42:28.450Z"
+  },
+  "result": {
+    "taskCount": 13
+  }
+}]

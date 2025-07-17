@@ -33,6 +33,7 @@ const roadtripTaskSchema = new Schema({
             'packing', // Bagages
             'documents', // Documents/papiers
             'transport', // Transport
+            'restaurant', // Restaurant
             'accommodation', // Hébergement
             'activities', // Activités
             'health', // Santé/médicaments

@@ -1,0 +1,309 @@
+[{
+  "_id": {
+    "$oid": "6863b36d6d15f5ac2d13a9ed"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 28,
+    "completed": 28,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalDistance": 3106.11,
+      "totalTravelTime": 2136,
+      "inconsistentSteps": 6
+    },
+    "stepsProcessed": 28,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-01T10:07:41.105Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T10:08:31.009Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-01T10:07:41.165Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-01T10:08:30.996Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863b8836d15f5ac2d13abc7"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 28,
+    "completed": 28,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalDistance": 3106.11,
+      "totalTravelTime": 2136,
+      "inconsistentSteps": 6
+    },
+    "stepsProcessed": 28,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-01T10:29:23.258Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T10:30:09.649Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-01T10:29:23.294Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-01T10:30:09.648Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d4297b566640001b126b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 28,
+    "completed": 28,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalDistance": 3183.07,
+      "totalTravelTime": 2229,
+      "inconsistentSteps": 5
+    },
+    "stepsProcessed": 28,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-01T12:27:21.771Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:28:21.558Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-01T12:27:21.813Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-01T12:28:21.557Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6864d0e53262a941ab4e4beb"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 28,
+    "completed": 28,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalDistance": 3183.01,
+      "totalTravelTime": 2227,
+      "inconsistentSteps": 5
+    },
+    "stepsProcessed": 28,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-02T06:25:41.720Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-02T06:26:38.096Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-02T06:25:41.758Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-02T06:26:38.095Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68669c5f75b43b206482a936"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "68669740e4503a471a1a3cec"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 2,
+    "completed": 2,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalDistance": 668.44,
+      "totalTravelTime": 408,
+      "inconsistentSteps": 0
+    },
+    "stepsProcessed": 2,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-03T15:06:07.030Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-03T15:06:13.490Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-03T15:06:07.091Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-03T15:06:13.486Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68695450f903ea981a63b810"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "running",
+  "progress": {
+    "total": 28,
+    "completed": 0,
+    "percentage": 24
+  },
+  "results": {
+    "summary": {
+      "totalDistance": 0,
+      "totalTravelTime": 0,
+      "inconsistentSteps": 0
+    },
+    "stepsProcessed": 0,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-05T16:35:28.809Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-05T16:37:10.253Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-05T16:35:29.380Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686a2b4a5085a8f36febd129"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "686a29a1c3d88a0eb158b113"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 1,
+    "completed": 1,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalDistance": 835.2,
+      "totalTravelTime": 481,
+      "inconsistentSteps": 1
+    },
+    "stepsProcessed": 1,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-06T07:52:42.154Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-06T07:53:13.031Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-06T07:52:42.443Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-06T07:53:13.030Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686fffcb30ae690e852ab64e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 6,
+    "completed": 6,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalDistance": 1039.82,
+      "totalTravelTime": 614,
+      "inconsistentSteps": 2
+    },
+    "stepsProcessed": 6,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-10T18:00:43.836Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-10T18:04:11.266Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-10T18:00:44.126Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-10T18:04:11.265Z"
+  }
+}]

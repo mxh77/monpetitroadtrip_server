@@ -1,0 +1,1962 @@
+[{
+  "_id": {
+    "$oid": "686e29c1ac538753e00643a3"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "optional_conversation_id",
+  "userQuery": "Ajoute une étape à Paris du 15 au 17 juillet",
+  "intent": "add_step",
+  "entities": {
+    "location": "Paris",
+    "dates": {
+      "arrival": "2024-07-15",
+      "departure": "2024-07-17"
+    },
+    "duration": null,
+    "name": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Paris",
+      "address": "Paris",
+      "latitude": 48.8575475,
+      "longitude": 2.3513765,
+      "arrivalDateTime": {
+        "$date": "2024-07-15T00:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2024-07-17T00:00:00.000Z"
+      },
+      "travelTimePreviousStep": 0,
+      "distancePreviousStep": 0,
+      "isArrivalTimeConsistent": true,
+      "travelTimeNote": "OK",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "story": "",
+      "_id": {
+        "$oid": "686e29c1ac538753e00643a7"
+      },
+      "__v": 0
+    },
+    "message": "Étape \"Paris\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e29c1ac538753e00643a7"
+      }
+    ],
+    "createdItemsModel": "Step"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T08:35:13.158Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T08:35:13.382Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T08:35:13.197Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T08:35:13.379Z"
+  },
+  "executionTime": 180
+},
+{
+  "_id": {
+    "$oid": "686e2affac538753e00643b6"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "686e29c1e2678d77d660b67d",
+  "userQuery": "Pour cette nouvelle étape, ajoutes une note pour dire qu'il fera beau",
+  "intent": "add_task",
+  "entities": {
+    "notes": "il fera beau",
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "note",
+    "duration": null,
+    "price": null,
+    "people": null
+  },
+  "status": "failed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "createdItems": []
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T08:40:31.390Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T08:40:31.480Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T08:40:31.437Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T08:40:31.479Z"
+  },
+  "errorMessage": "RoadtripTask validation failed: category: `general` is not a valid enum value for path `category`."
+},
+{
+  "_id": {
+    "$oid": "686e3566ac538753e00643ee"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "chat_1752053003643",
+  "userQuery": "Ajoute une étape à Paris du 15 au 17 juillet 2025",
+  "intent": "add_step",
+  "entities": {
+    "location": "Paris",
+    "dates": {
+      "arrival": "2025-07-15",
+      "departure": "2025-07-17"
+    },
+    "duration": null,
+    "name": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Paris",
+      "address": "Paris",
+      "latitude": 48.8575475,
+      "longitude": 2.3513765,
+      "arrivalDateTime": {
+        "$date": "2025-07-15T00:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2025-07-17T00:00:00.000Z"
+      },
+      "travelTimePreviousStep": 0,
+      "distancePreviousStep": 0,
+      "isArrivalTimeConsistent": true,
+      "travelTimeNote": "OK",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "story": "",
+      "_id": {
+        "$oid": "686e3566ac538753e00643f2"
+      },
+      "__v": 0
+    },
+    "message": "Étape \"Paris\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e3566ac538753e00643f2"
+      }
+    ],
+    "createdItemsModel": "Step"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T09:24:54.573Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T09:24:54.756Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T09:24:54.605Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T09:24:54.755Z"
+  },
+  "executionTime": 150
+},
+{
+  "_id": {
+    "$oid": "686e35c6ac538753e0064417"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "chat_1752053003643",
+  "userQuery": "Modifier l'étape watertone et ajoute la note. Attention, il va pleuvoir",
+  "intent": "modify_step",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "watertone",
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": "Attention, il va pleuvoir"
+  },
+  "status": "failed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "createdItems": []
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T09:26:30.976Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T09:26:31.024Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T09:26:31.005Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T09:26:31.023Z"
+  },
+  "errorMessage": "Étape non trouvée"
+},
+{
+  "_id": {
+    "$oid": "686e35edac538753e0064425"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "chat_1752053003643",
+  "userQuery": "Modifier l'étape Waterton et ajoute la note : Attention, il va pleuvoir",
+  "intent": "modify_step",
+  "entities": {
+    "notes": "Attention, il va pleuvoir",
+    "location": "Waterton",
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": null,
+    "duration": null,
+    "price": null,
+    "people": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "_id": {
+        "$oid": "67d7c4b15c5cee2d1bbfa64f"
+      },
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Waterton",
+      "address": "Waterton, AB, Canada",
+      "arrivalDateTime": {
+        "$date": "2025-03-14T10:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2025-03-30T01:46:00.000Z"
+      },
+      "travelTimePreviousStep": 57,
+      "distancePreviousStep": 77.78,
+      "isArrivalTimeConsistent": false,
+      "travelTimeNote": "ERROR",
+      "notes": "Attention, il va pleuvoir",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "__v": 2,
+      "latitude": 0,
+      "longitude": 0,
+      "story": ""
+    },
+    "message": "Étape \"Waterton\" modifiée avec succès"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T09:27:09.563Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T09:27:09.659Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T09:27:09.596Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T09:27:09.659Z"
+  },
+  "executionTime": 63
+},
+{
+  "_id": {
+    "$oid": "686e3631ac538753e006445b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "chat_1752053003643",
+  "userQuery": "Il faut prévoir de prendre des médicaments",
+  "intent": "add_task",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "prendre des médicaments",
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "failed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "createdItems": []
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T09:28:17.420Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T09:28:17.470Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T09:28:17.451Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T09:28:17.470Z"
+  },
+  "errorMessage": "RoadtripTask validation failed: category: `general` is not a valid enum value for path `category`."
+},
+{
+  "_id": {
+    "$oid": "686e3f560505053e7efa44be"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "chat_1752053003643",
+  "userQuery": "Il faut prévoir de prendre des médicaments",
+  "intent": "add_task",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "prendre des médicaments",
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "title": "prendre des médicaments",
+      "description": "Créé via chatbot IA",
+      "category": "health",
+      "priority": "medium",
+      "status": "pending",
+      "dueDate": null,
+      "completedAt": null,
+      "assignedTo": "",
+      "estimatedDuration": null,
+      "reminderDate": null,
+      "attachments": [],
+      "notes": "",
+      "order": 0,
+      "isRecurring": false,
+      "recurringPattern": null,
+      "_id": {
+        "$oid": "686e3f570505053e7efa44c2"
+      },
+      "createdAt": {
+        "$date": "2025-07-09T10:07:19.066Z"
+      },
+      "updatedAt": {
+        "$date": "2025-07-09T10:07:19.066Z"
+      },
+      "__v": 0
+    },
+    "message": "Tâche \"prendre des médicaments\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e3f570505053e7efa44c2"
+      }
+    ],
+    "createdItemsModel": "RoadtripTask"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T10:07:18.984Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T10:07:19.122Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T10:07:19.032Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T10:07:19.115Z"
+  },
+  "executionTime": 79
+},
+{
+  "_id": {
+    "$oid": "686e3f890505053e7efa44e6"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "chat_1752053003643",
+  "userQuery": "Ajoute deux tâches road trip la première pour indiquer de ne pas oublier les passeports et la deuxième pour indiquer de ne pas oublier les médicaments",
+  "intent": "add_task",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": [
+      "road trip",
+      "ne pas oublier les passeports",
+      "ne pas oublier les médicaments"
+    ],
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "failed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "createdItems": []
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T10:08:09.822Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T10:08:09.897Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T10:08:09.867Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T10:08:09.895Z"
+  },
+  "errorMessage": "taskName.toLowerCase is not a function"
+},
+{
+  "_id": {
+    "$oid": "686e49279de1373278df6c59"
+  },
+  "userId": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-123",
+  "userQuery": "Ajoute une t�che: Test SSE notification",
+  "intent": "add_task",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "Test SSE notification",
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "507f1f77bcf86cd799439011"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "title": "Test SSE notification",
+      "description": "Créé via chatbot IA",
+      "category": "other",
+      "priority": "medium",
+      "status": "pending",
+      "dueDate": null,
+      "completedAt": null,
+      "assignedTo": "",
+      "estimatedDuration": null,
+      "reminderDate": null,
+      "attachments": [],
+      "notes": "",
+      "order": 0,
+      "isRecurring": false,
+      "recurringPattern": null,
+      "_id": {
+        "$oid": "686e49279de1373278df6c5d"
+      },
+      "createdAt": {
+        "$date": "2025-07-09T10:49:11.992Z"
+      },
+      "updatedAt": {
+        "$date": "2025-07-09T10:49:11.992Z"
+      },
+      "__v": 0
+    },
+    "message": "Tâche \"Test SSE notification\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e49279de1373278df6c5d"
+      }
+    ],
+    "createdItemsModel": "RoadtripTask"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T10:49:11.928Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T10:49:12.023Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T10:49:11.967Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T10:49:12.022Z"
+  },
+  "executionTime": 53
+},
+{
+  "_id": {
+    "$oid": "686e49bf9de1373278df6c66"
+  },
+  "userId": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-123",
+  "userQuery": "Ajoute une t�che: Test SSE notification",
+  "intent": "add_task",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "Test SSE notification",
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "507f1f77bcf86cd799439011"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "title": "Test SSE notification",
+      "description": "Créé via chatbot IA",
+      "category": "other",
+      "priority": "medium",
+      "status": "pending",
+      "dueDate": null,
+      "completedAt": null,
+      "assignedTo": "",
+      "estimatedDuration": null,
+      "reminderDate": null,
+      "attachments": [],
+      "notes": "",
+      "order": 0,
+      "isRecurring": false,
+      "recurringPattern": null,
+      "_id": {
+        "$oid": "686e49c09de1373278df6c6a"
+      },
+      "createdAt": {
+        "$date": "2025-07-09T10:51:44.016Z"
+      },
+      "updatedAt": {
+        "$date": "2025-07-09T10:51:44.016Z"
+      },
+      "__v": 0
+    },
+    "message": "Tâche \"Test SSE notification\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e49c09de1373278df6c6a"
+      }
+    ],
+    "createdItemsModel": "RoadtripTask"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T10:51:43.967Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T10:51:44.035Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T10:51:43.998Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T10:51:44.034Z"
+  },
+  "executionTime": 35
+},
+{
+  "_id": {
+    "$oid": "686e49f9a0aefecc13c71753"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute une tâche: Test SSE notification",
+  "intent": "add_task",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "Test SSE notification",
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "title": "Test SSE notification",
+      "description": "Créé via chatbot IA",
+      "category": "other",
+      "priority": "medium",
+      "status": "pending",
+      "dueDate": null,
+      "completedAt": null,
+      "assignedTo": "",
+      "estimatedDuration": null,
+      "reminderDate": null,
+      "attachments": [],
+      "notes": "",
+      "order": 0,
+      "isRecurring": false,
+      "recurringPattern": null,
+      "_id": {
+        "$oid": "686e49f9a0aefecc13c71757"
+      },
+      "createdAt": {
+        "$date": "2025-07-09T10:52:41.931Z"
+      },
+      "updatedAt": {
+        "$date": "2025-07-09T10:52:41.931Z"
+      },
+      "__v": 0
+    },
+    "message": "Tâche \"Test SSE notification\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e49f9a0aefecc13c71757"
+      }
+    ],
+    "createdItemsModel": "RoadtripTask"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T10:52:41.856Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T10:52:41.956Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T10:52:41.899Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T10:52:41.954Z"
+  },
+  "executionTime": 52
+},
+{
+  "_id": {
+    "$oid": "686e87aac7928e2d833bfbaf"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute une étape à Paris du 15 au 17 juillet",
+  "intent": "add_step",
+  "entities": {
+    "location": "Paris",
+    "dates": {
+      "arrival": "2024-07-15",
+      "departure": "2024-07-17"
+    },
+    "duration": null,
+    "name": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Paris",
+      "address": "Paris",
+      "latitude": 48.8575475,
+      "longitude": 2.3513765,
+      "arrivalDateTime": {
+        "$date": "2024-07-15T00:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2024-07-17T00:00:00.000Z"
+      },
+      "travelTimePreviousStep": 0,
+      "distancePreviousStep": 0,
+      "isArrivalTimeConsistent": true,
+      "travelTimeNote": "OK",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "story": "",
+      "_id": {
+        "$oid": "686e87aac7928e2d833bfbb3"
+      },
+      "__v": 0
+    },
+    "message": "Étape \"Paris\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e87aac7928e2d833bfbb3"
+      }
+    ],
+    "createdItemsModel": "Step"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T15:15:54.300Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T15:15:54.489Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T15:15:54.333Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T15:15:54.488Z"
+  },
+  "executionTime": 154
+},
+{
+  "_id": {
+    "$oid": "686e8889c7928e2d833bfbf4"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute une étape à Paris du 15 au 17 juillet",
+  "intent": "add_step",
+  "entities": {
+    "location": "Paris",
+    "dates": {
+      "arrival": "2024-07-15",
+      "departure": "2024-07-17"
+    },
+    "duration": null,
+    "name": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Paris",
+      "address": "Paris",
+      "latitude": 48.8575475,
+      "longitude": 2.3513765,
+      "arrivalDateTime": {
+        "$date": "2024-07-15T00:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2024-07-17T00:00:00.000Z"
+      },
+      "travelTimePreviousStep": 0,
+      "distancePreviousStep": 0,
+      "isArrivalTimeConsistent": true,
+      "travelTimeNote": "OK",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "story": "",
+      "_id": {
+        "$oid": "686e8889c7928e2d833bfbf9"
+      },
+      "__v": 0
+    },
+    "message": "Étape \"Paris\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e8889c7928e2d833bfbf9"
+      }
+    ],
+    "createdItemsModel": "Step"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T15:19:37.508Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T15:19:37.717Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T15:19:37.544Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T15:19:37.715Z"
+  },
+  "executionTime": 168
+},
+{
+  "_id": {
+    "$oid": "686e8bdfc7928e2d833bfcbf"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute une étape à Paris du 15 au 17 juillet",
+  "intent": "add_step",
+  "entities": {
+    "location": "Paris",
+    "dates": {
+      "arrival": "2024-07-15",
+      "departure": "2024-07-17"
+    },
+    "duration": null,
+    "name": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Paris",
+      "address": "Paris",
+      "latitude": 48.8575475,
+      "longitude": 2.3513765,
+      "arrivalDateTime": {
+        "$date": "2024-07-15T00:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2024-07-17T00:00:00.000Z"
+      },
+      "travelTimePreviousStep": 0,
+      "distancePreviousStep": 0,
+      "isArrivalTimeConsistent": true,
+      "travelTimeNote": "OK",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "story": "",
+      "_id": {
+        "$oid": "686e8bdfc7928e2d833bfcc3"
+      },
+      "__v": 0
+    },
+    "message": "Étape \"Paris\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e8bdfc7928e2d833bfcc3"
+      }
+    ],
+    "createdItemsModel": "Step"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T15:33:51.824Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T15:33:52.006Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T15:33:51.856Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T15:33:52.005Z"
+  },
+  "executionTime": 149
+},
+{
+  "_id": {
+    "$oid": "686e8c59c7928e2d833bfd1b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute une étape à Paris du 15 au 17 juillet",
+  "intent": "add_step",
+  "entities": {
+    "location": "Paris",
+    "dates": {
+      "arrival": "2024-07-15",
+      "departure": "2024-07-17"
+    },
+    "duration": null,
+    "name": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Paris",
+      "address": "Paris",
+      "latitude": 48.8575475,
+      "longitude": 2.3513765,
+      "arrivalDateTime": {
+        "$date": "2024-07-15T00:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2024-07-17T00:00:00.000Z"
+      },
+      "travelTimePreviousStep": 0,
+      "distancePreviousStep": 0,
+      "isArrivalTimeConsistent": true,
+      "travelTimeNote": "OK",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "story": "",
+      "_id": {
+        "$oid": "686e8c5ac7928e2d833bfd1f"
+      },
+      "__v": 0
+    },
+    "message": "Étape \"Paris\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e8c5ac7928e2d833bfd1f"
+      }
+    ],
+    "createdItemsModel": "Step"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T15:35:53.935Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T15:35:54.085Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T15:35:53.970Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T15:35:54.085Z"
+  },
+  "executionTime": 114
+},
+{
+  "_id": {
+    "$oid": "686e8d3bc7928e2d833bfda0"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute une étape à Paris du 15 au 17 juillet",
+  "intent": "add_step",
+  "entities": {
+    "location": "Paris",
+    "dates": {
+      "arrival": "2024-07-15",
+      "departure": "2024-07-17"
+    },
+    "duration": null,
+    "name": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Paris",
+      "address": "Paris",
+      "latitude": 48.8575475,
+      "longitude": 2.3513765,
+      "arrivalDateTime": {
+        "$date": "2024-07-15T00:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2024-07-17T00:00:00.000Z"
+      },
+      "travelTimePreviousStep": 0,
+      "distancePreviousStep": 0,
+      "isArrivalTimeConsistent": true,
+      "travelTimeNote": "OK",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "story": "",
+      "_id": {
+        "$oid": "686e8d3bc7928e2d833bfda5"
+      },
+      "__v": 0
+    },
+    "message": "Étape \"Paris\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e8d3bc7928e2d833bfda5"
+      }
+    ],
+    "createdItemsModel": "Step"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T15:39:39.278Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T15:39:39.478Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T15:39:39.313Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T15:39:39.477Z"
+  },
+  "executionTime": 163
+},
+{
+  "_id": {
+    "$oid": "686e8f4b61b56fe61dbe7de4"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute une étape à Bordeaux du 15 au 23 juillet",
+  "intent": "add_step",
+  "entities": {
+    "location": "Bordeaux",
+    "dates": {
+      "arrival": "2024-07-15",
+      "departure": "2024-07-23"
+    },
+    "duration": null,
+    "name": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Bordeaux",
+      "address": "Bordeaux",
+      "latitude": 44.8416106,
+      "longitude": -0.5810938000000001,
+      "arrivalDateTime": {
+        "$date": "2024-07-15T00:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2024-07-23T00:00:00.000Z"
+      },
+      "travelTimePreviousStep": 0,
+      "distancePreviousStep": 0,
+      "isArrivalTimeConsistent": true,
+      "travelTimeNote": "OK",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "story": "",
+      "_id": {
+        "$oid": "686e8f5461b56fe61dbe7dea"
+      },
+      "__v": 0
+    },
+    "message": "Étape \"Bordeaux\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e8f5461b56fe61dbe7dea"
+      }
+    ],
+    "createdItemsModel": "Step"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T15:48:27.050Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T15:48:37.711Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T15:48:34.289Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T15:48:37.710Z"
+  },
+  "executionTime": 2490
+},
+{
+  "_id": {
+    "$oid": "686e8f7261b56fe61dbe7e31"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute une tâche, prendre des médicaments",
+  "intent": "add_task",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "prendre des médicaments",
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "title": "prendre des médicaments",
+      "description": "Créé via chatbot IA",
+      "category": "health",
+      "priority": "medium",
+      "status": "pending",
+      "dueDate": null,
+      "completedAt": null,
+      "assignedTo": "",
+      "estimatedDuration": null,
+      "reminderDate": null,
+      "attachments": [],
+      "notes": "",
+      "order": 0,
+      "isRecurring": false,
+      "recurringPattern": null,
+      "_id": {
+        "$oid": "686e8f7261b56fe61dbe7e36"
+      },
+      "createdAt": {
+        "$date": "2025-07-09T15:49:07.105Z"
+      },
+      "updatedAt": {
+        "$date": "2025-07-09T15:49:07.105Z"
+      },
+      "__v": 0
+    },
+    "message": "Tâche \"prendre des médicaments\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e8f7261b56fe61dbe7e36"
+      }
+    ],
+    "createdItemsModel": "RoadtripTask"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T15:49:06.125Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T15:49:07.198Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T15:49:06.532Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T15:49:07.197Z"
+  },
+  "executionTime": 664
+},
+{
+  "_id": {
+    "$oid": "686e90336f0f328768804064"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute les deux tâches suivantes: \n- Prendre des Médicaments\n- Prendre les passeports",
+  "intent": "add_task",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": [
+      "Prendre des Médicaments",
+      "Prendre les passeports"
+    ],
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "title": "Prendre des Médicaments,Prendre les passeports",
+      "description": "Créé via chatbot IA",
+      "category": "documents",
+      "priority": "medium",
+      "status": "pending",
+      "dueDate": null,
+      "completedAt": null,
+      "assignedTo": "",
+      "estimatedDuration": null,
+      "reminderDate": null,
+      "attachments": [],
+      "notes": "",
+      "order": 0,
+      "isRecurring": false,
+      "recurringPattern": null,
+      "_id": {
+        "$oid": "686e90346f0f328768804069"
+      },
+      "createdAt": {
+        "$date": "2025-07-09T15:52:20.185Z"
+      },
+      "updatedAt": {
+        "$date": "2025-07-09T15:52:20.185Z"
+      },
+      "__v": 0
+    },
+    "message": "Tâche \"Prendre des Médicaments,Prendre les passeports\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686e90346f0f328768804069"
+      }
+    ],
+    "createdItemsModel": "RoadtripTask"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T15:52:19.137Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T15:52:20.279Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T15:52:19.447Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T15:52:20.278Z"
+  },
+  "executionTime": 830
+},
+{
+  "_id": {
+    "$oid": "686e99b05907c8bad38e139c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute la visite de la tour Eiffel pour l'étape de paris\nNous y serons  à partir de 14h",
+  "intent": "add_activity",
+  "entities": {
+    "location": "tour Eiffel, paris",
+    "name": "visite de la tour Eiffel",
+    "duration": null,
+    "time": "14",
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "price": null,
+    "people": null,
+    "notes": "Nous y serons à partir de 14h"
+  },
+  "status": "failed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "createdItems": []
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T16:32:48.591Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T16:32:55.145Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T16:32:49.245Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T16:32:55.144Z"
+  },
+  "errorMessage": "Activity validation failed: stepId: Path `stepId` is required."
+},
+{
+  "_id": {
+    "$oid": "686e9ffe392d1c4d68939a1f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajouter une activité à Paris pour visiter la tour Eiffel à 14h",
+  "intent": "add_activity",
+  "entities": {
+    "location": "Paris",
+    "duration": null,
+    "time": "14h",
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "visiter la tour Eiffel",
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "stepId": {
+        "$oid": "686e8f5461b56fe61dbe7dea"
+      },
+      "active": true,
+      "type": "Randonnée",
+      "name": "visiter la tour Eiffel",
+      "address": "Paris",
+      "latitude": 48.8575475,
+      "longitude": 2.3513765,
+      "website": "",
+      "phone": "",
+      "email": "",
+      "startDateTime": null,
+      "endDateTime": null,
+      "duration": 0,
+      "typeDuration": "M",
+      "reservationNumber": "",
+      "price": 0,
+      "currency": "USD",
+      "trailDistance": 0,
+      "trailElevation": 0,
+      "trailType": "",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "algoliaId": "",
+      "_id": {
+        "$oid": "686ea001392d1c4d68939a2a"
+      },
+      "__v": 0
+    },
+    "message": "Activité \"visiter la tour Eiffel\" ajoutée avec succès à l'étape correspondante",
+    "createdItems": [
+      {
+        "$oid": "686ea001392d1c4d68939a2a"
+      }
+    ],
+    "createdItemsModel": "Activity"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T16:59:42.372Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T16:59:46.391Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T16:59:42.874Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T16:59:46.390Z"
+  },
+  "executionTime": 3515
+},
+{
+  "_id": {
+    "$oid": "686ea05174fcab66aa647b3b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Nous irons dormir à Paris à l'hôtel de la paix ",
+  "intent": "add_accommodation",
+  "entities": {
+    "location": "Paris",
+    "name": "hôtel de la paix",
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "stepId": {
+        "$oid": "686e8f5461b56fe61dbe7dea"
+      },
+      "active": true,
+      "name": "hôtel de la paix",
+      "address": "Paris",
+      "latitude": 48.8575475,
+      "longitude": 2.3513765,
+      "website": "",
+      "phone": "",
+      "email": "",
+      "reservationNumber": "",
+      "confirmationDateTime": null,
+      "arrivalDateTime": null,
+      "departureDateTime": null,
+      "nights": 0,
+      "price": 0,
+      "currency": "USD",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "_id": {
+        "$oid": "686ea05274fcab66aa647b44"
+      },
+      "__v": 0
+    },
+    "message": "Hébergement \"hôtel de la paix\" ajouté avec succès à l'étape correspondante",
+    "createdItems": [
+      {
+        "$oid": "686ea05274fcab66aa647b44"
+      }
+    ],
+    "createdItemsModel": "Accommodation"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T17:01:05.622Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T17:01:10.206Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T17:01:05.992Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T17:01:10.206Z"
+  },
+  "executionTime": 4212
+},
+{
+  "_id": {
+    "$oid": "686edb36895f63c302fef6f1"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Généré une liste de tâches pour mon roadtrip ",
+  "intent": "add_task",
+  "entities": {
+    "location": null,
+    "dates": {
+      "arrival": null,
+      "departure": null
+    },
+    "name": "liste de tâches pour mon roadtrip",
+    "duration": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "title": "liste de tâches pour mon roadtrip",
+      "description": "Créé via chatbot IA",
+      "category": "other",
+      "priority": "medium",
+      "status": "pending",
+      "dueDate": null,
+      "completedAt": null,
+      "assignedTo": "",
+      "estimatedDuration": null,
+      "reminderDate": null,
+      "attachments": [],
+      "notes": "",
+      "order": 0,
+      "isRecurring": false,
+      "recurringPattern": null,
+      "_id": {
+        "$oid": "686edb3c895f63c302fef6f5"
+      },
+      "createdAt": {
+        "$date": "2025-07-09T21:12:28.261Z"
+      },
+      "updatedAt": {
+        "$date": "2025-07-09T21:12:28.261Z"
+      },
+      "__v": 0
+    },
+    "message": "Tâche \"liste de tâches pour mon roadtrip\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686edb3c895f63c302fef6f5"
+      }
+    ],
+    "createdItemsModel": "RoadtripTask"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-09T21:12:22.317Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T21:12:28.353Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-09T21:12:22.698Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-09T21:12:28.352Z"
+  },
+  "executionTime": 5653
+},
+{
+  "_id": {
+    "$oid": "686f5030f06ecf32f569409d"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userQuery": "Ajoute une étape à Bordeaux du 15 au 23 juillet",
+  "intent": "add_step",
+  "entities": {
+    "location": "Bordeaux",
+    "dates": {
+      "arrival": "2024-07-15",
+      "departure": "2024-07-23"
+    },
+    "duration": null,
+    "name": null,
+    "price": null,
+    "people": null,
+    "notes": null
+  },
+  "status": "completed",
+  "progress": {
+    "percentage": 0,
+    "steps": []
+  },
+  "result": {
+    "success": true,
+    "data": {
+      "userId": {
+        "$oid": "6708fb9f349574b62d828725"
+      },
+      "roadtripId": {
+        "$oid": "67ac491396003c7411aea948"
+      },
+      "type": "Stage",
+      "name": "Bordeaux",
+      "address": "Bordeaux",
+      "latitude": 44.8416106,
+      "longitude": -0.5810938000000001,
+      "arrivalDateTime": {
+        "$date": "2024-07-15T00:00:00.000Z"
+      },
+      "departureDateTime": {
+        "$date": "2024-07-23T00:00:00.000Z"
+      },
+      "travelTimePreviousStep": 0,
+      "distancePreviousStep": 0,
+      "isArrivalTimeConsistent": true,
+      "travelTimeNote": "OK",
+      "notes": "Créé via chatbot IA",
+      "photos": [],
+      "documents": [],
+      "accommodations": [],
+      "activities": [],
+      "story": "",
+      "_id": {
+        "$oid": "686f5030f06ecf32f56940a1"
+      },
+      "__v": 0
+    },
+    "message": "Étape \"Bordeaux\" ajoutée avec succès à votre roadtrip",
+    "createdItems": [
+      {
+        "$oid": "686f5030f06ecf32f56940a1"
+      }
+    ],
+    "createdItemsModel": "Step"
+  },
+  "aiModel": "gpt-4",
+  "tokensUsed": 0,
+  "createdAt": {
+    "$date": "2025-07-10T05:31:28.196Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-10T05:31:28.385Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-10T05:31:28.225Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-10T05:31:28.384Z"
+  },
+  "executionTime": 157
+}]

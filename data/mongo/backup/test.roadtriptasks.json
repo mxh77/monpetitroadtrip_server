@@ -1,0 +1,416 @@
+[{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d81"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Vérifier le passeport et les visas",
+  "description": "Assurez-vous que votre passeport est valide pour au moins six mois après la date de retour. Vérifiez également si vous avez besoin de visas pour entrer aux États-Unis et au Canada.",
+  "category": "documents",
+  "priority": "high",
+  "status": "completed",
+  "dueDate": {
+    "$date": "2025-06-29T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 0,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.417Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T15:26:30.004Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d84"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Planifier l'itinéraire",
+  "description": "Établissez un itinéraire détaillé avec les distances entre chaque destination, le temps de conduite et les arrêts prévus.",
+  "category": "preparation",
+  "priority": "medium",
+  "status": "completed",
+  "dueDate": {
+    "$date": "2025-06-29T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 3,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T15:26:37.359Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d87"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Planifier les activités",
+  "description": "Recherchez et planifiez des activités à faire à chaque destination, comme des randonnées, des visites de parcs nationaux, etc.",
+  "category": "activities",
+  "priority": "medium",
+  "status": "completed",
+  "dueDate": {
+    "$date": "2025-06-29T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 6,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T15:27:17.879Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d8a"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Préparer les documents de voyage",
+  "description": "Imprimez ou sauvegardez électroniquement vos billets d'avion, réservations d'hébergement, et autres documents importants.",
+  "category": "documents",
+  "priority": "high",
+  "status": "completed",
+  "dueDate": {
+    "$date": "2025-07-26T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 9,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T15:27:38.305Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d86"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Préparer la trousse de premiers secours",
+  "description": "Assemblez une trousse de premiers secours comprenant des médicaments de base, des bandages, et tout médicament personnel nécessaire.",
+  "category": "health",
+  "priority": "medium",
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-07-22T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 5,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d82"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Réserver les vols",
+  "description": "Réservez vos billets d'avion pour Paris - Calgary aller-retour. Vérifiez les options de changement et les politiques d'annulation.",
+  "category": "booking",
+  "priority": "high",
+  "status": "completed",
+  "dueDate": {
+    "$date": "2025-05-30T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 1,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T15:26:22.231Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d85"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Vérifier la couverture d'assurance voyage",
+  "description": "Souscrivez une assurance voyage qui couvre les maladies, les accidents et les annulations. Vérifiez que la couverture est suffisante pour les États-Unis et le Canada.",
+  "category": "health",
+  "priority": "high",
+  "status": "completed",
+  "dueDate": {
+    "$date": "2025-06-29T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 4,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T15:26:42.192Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d89"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Faire une liste de bagages",
+  "description": "Établissez une liste de tous les articles à emporter, y compris vêtements, équipement pour les activités et articles personnels.",
+  "category": "packing",
+  "priority": "medium",
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-07-22T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 8,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d83"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Réserver les hébergements",
+  "description": "Confirmez et réservez tous les hébergements pour chaque étape du voyage, y compris Calgary, Lundbreck, Mammoth Hot Spring, etc.",
+  "category": "booking",
+  "priority": "high",
+  "status": "completed",
+  "dueDate": {
+    "$date": "2025-06-14T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 2,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T15:26:33.529Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686d3c6402872d3fcb513d88"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "title": "Préparer le véhicule",
+  "description": "Si vous louez une voiture, vérifiez les options de location. Sinon, faites un contrôle complet de votre véhicule : niveaux d'huile, pression des pneus, etc.",
+  "category": "transport",
+  "priority": "high",
+  "status": "completed",
+  "dueDate": {
+    "$date": "2025-07-15T08:00:00.000Z"
+  },
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 7,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-08T15:42:28.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T15:28:20.776Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686e49279de1373278df6c5d"
+  },
+  "userId": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "title": "Test SSE notification",
+  "description": "Créé via chatbot IA",
+  "category": "other",
+  "priority": "medium",
+  "status": "pending",
+  "dueDate": null,
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 0,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "createdAt": {
+    "$date": "2025-07-09T10:49:11.992Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T10:49:11.992Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686e49c09de1373278df6c6a"
+  },
+  "userId": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "title": "Test SSE notification",
+  "description": "Créé via chatbot IA",
+  "category": "other",
+  "priority": "medium",
+  "status": "pending",
+  "dueDate": null,
+  "completedAt": null,
+  "assignedTo": "",
+  "estimatedDuration": null,
+  "reminderDate": null,
+  "attachments": [],
+  "notes": "",
+  "order": 0,
+  "isRecurring": false,
+  "recurringPattern": null,
+  "createdAt": {
+    "$date": "2025-07-09T10:51:44.016Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T10:51:44.016Z"
+  },
+  "__v": 0
+}]

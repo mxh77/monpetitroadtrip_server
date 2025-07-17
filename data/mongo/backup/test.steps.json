@@ -1,68 +1,1900 @@
 [{
   "_id": {
-    "$oid": "67a85b4035436832048a185e"
+    "$oid": "67ac491096003c7411aea832"
   },
   "userId": {
     "$oid": "6708fb9f349574b62d828725"
   },
   "roadtripId": {
-    "$oid": "67a8591991c9b3eaf1917920"
+    "$oid": "67ac490f96003c7411aea82e"
   },
   "type": "Stage",
-  "name": "Step Test",
-  "address": "Calgary, AB, Canada",
-  "latitude": 0,
-  "longitude": 0,
+  "name": "Marina Inn",
+  "address": "San Francisco, Californie, États-Unis",
   "arrivalDateTime": {
-    "$date": "2025-07-29T14:05:00.000Z"
+    "$date": "2023-08-03T16:00:00.000Z"
   },
   "departureDateTime": {
-    "$date": "2025-07-30T12:00:00.000Z"
+    "$date": "2023-08-04T07:00:00.000Z"
   },
-  "travelTime": null,
+  "travelTime": 0,
   "isArrivalTimeConsistent": true,
-  "notes": "Bienvenue à TEST !!!",
+  "notes": "Notes de Marina Inn",
   "photos": [],
   "documents": [],
+  "thumbnail": null,
   "accommodations": [
     {
-      "$oid": "67a862e71ba201bb05eac99c"
+      "$oid": "67ac491096003c7411aea834"
     }
   ],
   "activities": [
     {
-      "$oid": "67a864decba77366c5dd80a1"
+      "$oid": "67ac491096003c7411aea840"
     }
   ],
-  "__v": 2
+  "__v": 0,
+  "distancePreviousStep": 0,
+  "story": "",
+  "travelTimeNote": "OK",
+  "travelTimePreviousStep": 0,
+  "latitude": 0,
+  "longitude": 0
 },
 {
   "_id": {
-    "$oid": "67a860e061109e48f5ddc87f"
+    "$oid": "67ac491096003c7411aea843"
   },
   "userId": {
     "$oid": "6708fb9f349574b62d828725"
   },
   "roadtripId": {
-    "$oid": "67a8591991c9b3eaf1917920"
+    "$oid": "67ac490f96003c7411aea82e"
   },
-  "type": "Stop",
-  "name": "Step Stop",
-  "address": "Calgary, AB, Canada",
+  "type": "Stage",
+  "name": "Sequoia National Park",
+  "address": "Sequoia National Park, California, USA",
+  "latitude": 36.4863668,
+  "longitude": -118.5657516,
+  "arrivalDateTime": {
+    "$date": "1970-01-01T00:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-05T09:00:00.000Z"
+  },
+  "travelTime": 0,
+  "isArrivalTimeConsistent": false,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "accommodations": [
+    {
+      "$oid": "686c36ea9dd1e584344cd379"
+    },
+    {
+      "$oid": "686c36fb9dd1e584344cd38c"
+    }
+  ],
+  "activities": [],
+  "__v": 2,
+  "distancePreviousStep": 410.45,
+  "story": "",
+  "travelTimeNote": "ERROR",
+  "travelTimePreviousStep": 279
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea844"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac490f96003c7411aea82e"
+  },
+  "type": "Stage",
+  "name": "Kingsman",
+  "address": "Kingman KOA Journey, North Roosevelt Street, Kingman, Arizona, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2023-08-05T17:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-06T08:00:00.000Z"
+  },
+  "travelTime": 0,
+  "isArrivalTimeConsistent": false,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "68640249a288455489e02754"
+  },
+  "accommodations": [
+    {
+      "$oid": "686402a64777c0a3c4ce06fe"
+    }
+  ],
+  "activities": [],
+  "__v": 2,
+  "distancePreviousStep": 732.5,
+  "story": "",
+  "travelTimeNote": "ERROR",
+  "travelTimePreviousStep": 500,
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea84d"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac490f96003c7411aea82e"
+  },
+  "type": "Stage",
+  "name": "kxtyqh",
+  "address": "jhhzqy",
   "latitude": 0,
   "longitude": 0,
   "arrivalDateTime": {
-    "$date": "2025-07-30T11:00:00.000Z"
+    "$date": "2025-01-20T15:51:00.000Z"
   },
   "departureDateTime": {
-    "$date": "2025-07-31T12:00:00.000Z"
+    "$date": "2025-01-20T15:51:00.000Z"
+  },
+  "travelTime": null,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea84e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac490f96003c7411aea82e"
+  },
+  "type": "Stage",
+  "name": "Bozeman",
+  "address": "Bozeman Hot Springs Campground, Welcome Drive, Bozeman, MT, USA",
+  "latitude": 45.660086,
+  "longitude": -111.1899187,
+  "arrivalDateTime": {
+    "$date": "2025-08-03T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-04T10:00:00.000Z"
+  },
+  "travelTime": null,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea84f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac490f96003c7411aea82e"
+  },
+  "type": "Stop",
+  "name": "Welcome Bobby",
+  "address": "Road Bear RV Rentals & Sales, San Leandro Boulevard, San Leandro, Californie, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2023-08-04T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-04T12:00:00.000Z"
   },
   "travelTime": 0,
   "isArrivalTimeConsistent": true,
-  "notes": "Bienvenue à TEST !!!",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "distancePreviousStep": 5.95,
+  "story": "",
+  "travelTimeNote": "OK",
+  "travelTimePreviousStep": 12,
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea866"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Calgary",
+  "address": "Calgary, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-07-29T12:55:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-30T14:30:49.000Z"
+  },
+  "travelTime": 82,
+  "isArrivalTimeConsistent": true,
+  "notes": "Bienvenue à Calgary !!!",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67b19c72412d3f150ad79361"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "6864df303262a941ab4e4e9f"
+  },
+  "accommodations": [
+    {
+      "$oid": "67ac491096003c7411aea868"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67ac491096003c7411aea870"
+    },
+    {
+      "$oid": "67cdb9a4d0b0936d3894e440"
+    },
+    {
+      "$oid": "67d684c36ee28636d56112a4"
+    },
+    {
+      "$oid": "67e96856458175b3f782c308"
+    }
+  ],
+  "__v": 9,
+  "distancePreviousStep": 0,
+  "travelTimePreviousStep": 0,
+  "travelTimeNote": "OK",
+  "story": "Nous avons enfin mis les pieds à Calgary, cette charmante ville canadienne qui nous attendait avec impatience ! C'est le 29 juillet 2025, et après avoir atterri à l'aéroport international de Calgary (YYC) à 12h55, nous avons déjà commencé notre aventure. La première chose qui nous a frappés, c’est la chaleur de l’accueil et l’enthousiasme ambiant. \n\nAprès avoir récupéré nos bagages, nous avons pris un moment pour nous imprégner de l’atmosphère de la ville avant de prendre la route vers notre hébergement. À 14h05, nous sommes arrivés au Sheraton Cavalier Hotel, un endroit qui promettait confort et convivialité, et pour un prix de 257,10 CAD, nous avons pu nous installer dans nos chambres. Nous avions réservé pour une nuit, et c'était le moment idéal pour nous reposer un peu après ce long voyage.\n\nLe temps de se rafraîchir et de se retrouver, nous avons décidé de sortir explorer un peu les environs. Nous avons passé l'après-midi à flâner dans les rues animées de Calgary, découvrant des boutiques locales et savourant quelques délices culinaires. L'énergie de la ville était contagieuse, et nos enfants, Loan et Leni, étaient ravis de découvrir un nouvel environnement. \n\nLe lendemain, le 30 juillet, nous avons eu un planning bien chargé ! Après un bon petit-déjeuner, il était temps de récupérer notre camping-car, Johnny Boy. À 10h00, nous avons pris la direction de CanaDream RV Rentals, où nous attendait notre fidèle compagnon de route pour cette partie du voyage, pour un montant total de 6200,81 EUR. C’était un moment excitant, car nous savions que Johnny Boy serait notre maison sur roues pour les jours à venir.\n\nAprès avoir fait le check-in et pris possession de Johnny Boy, nous avons pris un peu de temps pour nous familiariser avec l'équipement et les spécificités du camping-car. Une fois prêts, nous avons décidé de faire un arrêt au Real Canadian Superstore à 13h00 pour faire des courses et nous approvisionner pour notre roadtrip. C'était l'occasion idéale de nous procurer quelques collations et de la nourriture pour la route.\n\nFinalement, après avoir rempli nos provisions, nous avons pris la route vers notre prochaine destination. Calgary nous a offert une belle introduction au Canada, et nous étions impatients de découvrir les merveilles des Rocheuses qui nous attendaient au tournant !",
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea877"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Lundbreck",
+  "address": "Lundbreck Falls, Range Road 24B, Lundbreck, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-07-30T16:30:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-31T08:30:00.000Z"
+  },
+  "travelTime": 127,
+  "isArrivalTimeConsistent": true,
+  "notes": "Premières notes",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "6863aaf0e8818043fb14b3a2"
+  },
+  "accommodations": [
+    {
+      "$oid": "67ac491196003c7411aea879"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67ac491196003c7411aea882"
+    },
+    {
+      "$oid": "67ac491196003c7411aea88a"
+    },
+    {
+      "$oid": "67ac491196003c7411aea892"
+    },
+    {
+      "$oid": "67d6aa5ba8671ab4216504a6"
+    }
+  ],
+  "__v": 3,
+  "distancePreviousStep": 181.34,
+  "travelTimePreviousStep": 106,
+  "travelTimeNote": "WARNING",
+  "story": "Notre aventure à Lundbreck commence en fin d’après-midi, lorsque nous arrivons aux magnifiques chutes de Lundbreck. Le panorama est à couper le souffle. Les cascades se déversent avec puissance, entourées de verdure luxuriante et d’un pont ferroviaire emblématique en arrière-plan. Nous nous arrêtons un moment pour apprécier ce spectacle naturel avant de nous lancer dans notre première randonnée.\n\nAprès avoir admiré les chutes, nous nous dirigeons vers le Frank Slide Trailhead. Ce site historique est impressionnant, avec un paysage rocheux s'étendant à perte de vue, résultat d’un énorme glissement de terrain. En chemin, nous avons la surprise incroyable de croiser un ours majestueux. C’est un moment d’émerveillement et de respect pour la nature sauvage qui nous entoure. Les garçons, Loan et Leni, sont captivés par cette rencontre inattendue.\n\nNotre prochaine étape est la boucle des chutes de Star Creek. Le sentier serpente à travers une forêt dense, offrant des vues sublimes sur les montagnes environnantes. Les arbres imposants et le murmure de l’eau créent une atmosphère paisible et ressourçante. C’est l’occasion parfaite pour nous de nous reconnecter avec la nature, loin de l’agitation du quotidien.\n\nLa journée bien remplie s’achève alors que nous nous dirigeons vers notre hébergement pour la nuit. Le Veteran's Memorial Campground à Pincher Creek nous accueille chaleureusement. Le camping est charmant, situé près d'une piscine et entouré de verdure, idéal pour une nuit de repos après une journée d’aventures. À 45 CAD la nuit, c’est un choix abordable et confortable pour notre famille.\n\nUne fois installés, nous profitons de l’air frais du soir. Le camping est calme, offrant un cadre parfait pour se détendre après une journée bien remplie. Marielle s’installe dans un hamac confortable, profitant d’un moment de relaxation bien mérité. Les garçons, pleins d’énergie, partagent leurs impressions enthousiastes sur la journée.\n\nLe lendemain matin, nous nous réveillons avec le chant des oiseaux et la lumière douce du matin perçant à travers les arbres. Nous savourons un petit déjeuner en plein air avant de reprendre la route, remplis d’impatience pour les aventures à venir.\n\nCe séjour à Lundbreck a été riche en découvertes et en moments inoubliables, renforçant notre amour pour les voyages et la nature. Les paysages spectaculaires et la faune sauvage ont laissé une empreinte durable dans nos mémoires, et nous sommes impatients de découvrir ce que la suite de notre périple nous réserve.",
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea899"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Calgary",
+  "address": "Sheraton Cavalier Calgary Hotel, 32 Avenue Northeast, Calgary, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-20T10:40:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-21T18:15:00.000Z"
+  },
+  "travelTime": 93,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67b6fe720828c5f1501d8095"
+  },
+  "accommodations": [
+    {
+      "$oid": "67ac491196003c7411aea89b"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67b0c8263c2b066051434fb1"
+    },
+    {
+      "$oid": "67e832b5a0d2406ec5a7db04"
+    },
+    {
+      "$oid": "67e8339bf0db9bbcc8fc6e50"
+    }
+  ],
+  "__v": 3,
+  "distancePreviousStep": 178.53,
+  "travelTimePreviousStep": 109,
+  "travelTimeNote": "OK",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea89e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Waterton",
+  "address": "Waterton Lakes National Park, Waterton Park, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-07-31T09:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-01T12:00:00.000Z"
+  },
+  "travelTime": 59,
+  "isArrivalTimeConsistent": false,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67cdcda41cba570f3b6b5b05"
+  },
+  "accommodations": [
+    {
+      "$oid": "67ac491196003c7411aea8a0"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67ac491196003c7411aea8a8"
+    },
+    {
+      "$oid": "67ac491296003c7411aea8b0"
+    },
+    {
+      "$oid": "67cdc245a43ceb9e01a41cdd"
+    },
+    {
+      "$oid": "67cdc530382b7c22c2414ae7"
+    }
+  ],
+  "__v": 8,
+  "distancePreviousStep": 65.68,
+  "travelTimePreviousStep": 53,
+  "travelTimeNote": "ERROR",
+  "latitude": 0,
+  "longitude": 0,
+  "story": "Nous arrivons à Waterton Lakes National Park en ce matin lumineux du 31 juillet 2025. Le trajet depuis notre étape précédente a été rapide, environ 53 minutes, et nous sommes impatients de découvrir les merveilles de ce parc enchanteur.\n\nNotre première aventure commence par une randonnée au Red Rock Canyon. Les formations rocheuses rouges nous accueillent avec leur éclat saisissant. Le contraste des couleurs avec la végétation environnante est spectaculaire, et nous nous perdons dans la beauté des paysages pendant notre balade de 0,8 km. Le léger dénivelé de 31 mètres nous permet de profiter d'une vue magnifique sans trop d'effort.\n\nAprès cette mise en jambe, nous nous dirigeons vers le Bear's Hump Trailhead. Cette randonnée est un peu plus exigeante, avec un dénivelé de 218 mètres sur 2,3 km. Au sommet, nous sommes récompensés par une vue panoramique époustouflante sur le parc et les lacs étincelants. La ville de Waterton se dessine en contrebas, entourée par les montagnes majestueuses.\n\nAprès un déjeuner bien mérité, nous partons pour notre dernière randonnée de la journée vers Bertha Falls et le lac. Le sentier de 5,3 km est plus long, mais nous sommes captivés par les cascades tumultueuses et les eaux cristallines du lac Bertha. La tranquillité des lieux nous invite à un moment de contemplation, loin du tumulte quotidien.\n\nLe soir venu, nous nous installons au Crooked Creek Campground, à l'emplacement 29. Le cadre est idyllique, entouré de sommets enneigés et de vallées verdoyantes. Pour 110,1 CAD, nous passons une nuit confortable, prêts pour notre prochaine aventure.\n\nLe lendemain matin, nous nous lançons dans une balade à cheval avec Alpine Stables Ltd. Chacun de nous se lie rapidement d'amitié avec son cheval : Leni avec Oldie, Loan avec Nash, Marielle avec Walt, et moi-même avec Spider. Cette expérience nous rappelle notre balade mémorable à Bryce Canyon. Le calme des montagnes et la vue imprenable sur le lac nous offrent un dernier souvenir inoubliable de Waterton.\n\nAlors que nous quittons Waterton à midi, nous emportons avec nous des souvenirs précieux de cette étape inoubliable, enrichis par la beauté naturelle et la sérénité du parc. Notre aventure continue, mais Waterton restera gravé dans nos cœurs comme un moment de connexion profonde avec la nature et entre nous."
+},
+{
+  "_id": {
+    "$oid": "67ac491296003c7411aea8b7"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Glacier National Park - Saint Mary",
+  "address": "Grinnell Glacier, Montana, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-01T18:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-03T08:00:00.000Z"
+  },
+  "travelTime": 61,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "6805f8b0eb667c252f59accf"
+  },
+  "accommodations": [
+    {
+      "$oid": "67ac491296003c7411aea8bd"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67ac491296003c7411aea8c5"
+    }
+  ],
+  "__v": 0,
+  "distancePreviousStep": 72.46,
+  "travelTimePreviousStep": 59,
+  "travelTimeNote": "OK",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491296003c7411aea8cc"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Bozeman",
+  "address": "Bozeman, MT, USA",
+  "arrivalDateTime": {
+    "$date": "2025-08-03T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-04T09:00:00.000Z"
+  },
+  "travelTime": 99,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67b776f15a13e7cc8c442fe0"
+  },
+  "accommodations": [
+    {
+      "$oid": "67ac491296003c7411aea8d2"
+    }
+  ],
+  "activities": [],
+  "__v": 0,
+  "distancePreviousStep": 154.42,
+  "travelTimePreviousStep": 98,
+  "travelTimeNote": "OK",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491296003c7411aea8d9"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Mammoth Hot Spring",
+  "address": "Mammoth Hot Springs, Mammoth, WY, USA",
+  "arrivalDateTime": {
+    "$date": "2025-08-04T11:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-05T09:00:00.000Z"
+  },
+  "travelTime": 93,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67b703a29dfcd9e624dd6d7b"
+  },
+  "accommodations": [
+    {
+      "$oid": "67ac491296003c7411aea8df"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67ac491296003c7411aea8e7"
+    },
+    {
+      "$oid": "67d7036f5ecbad61fac6c881"
+    }
+  ],
+  "__v": 3,
+  "distancePreviousStep": 146.18,
+  "travelTimePreviousStep": 109,
+  "travelTimeNote": "WARNING",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea8ee"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Canyon Village",
+  "address": "Canyon Village, Wyoming, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-05T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-06T09:00:00.000Z"
+  },
+  "travelTime": 49,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67b7206376cde61a5176380e"
+  },
+  "accommodations": [
+    {
+      "$oid": "67ac491396003c7411aea8f4"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67ac491396003c7411aea8fc"
+    },
+    {
+      "$oid": "67ac491396003c7411aea90c"
+    }
+  ],
+  "__v": 1,
+  "distancePreviousStep": 38.54,
+  "travelTimePreviousStep": 47,
+  "travelTimeNote": "WARNING",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea90f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Norris Geyser Basin",
+  "address": "Norris Geyser Basin Museum, Yellowstone National Park, Wyoming, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-06T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-07T09:00:00.000Z"
+  },
+  "travelTime": 20,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "6863ffc64777c0a3c4ce05d1"
+  },
+  "accommodations": [
+    {
+      "$oid": "67ac491396003c7411aea911"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67ac491396003c7411aea919"
+    },
+    {
+      "$oid": "67dff2242244b24bf7365ee0"
+    },
+    {
+      "$oid": "67dff2e22244b24bf7365f1e"
+    }
+  ],
+  "__v": 2,
+  "distancePreviousStep": 22.64,
+  "travelTimePreviousStep": 25,
+  "travelTimeNote": "OK",
+  "story": "",
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea920"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Grant Village",
+  "address": "Grant Village, Rainbow Loop, Yellowstone National Park, Wyoming, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-08T08:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-08T09:00:00.000Z"
+  },
+  "travelTime": 37,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67afac880ad4b0f204ecc7b4"
+  },
+  "accommodations": [
+    {
+      "$oid": "67dff975b70f8aa444071a7f"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67e010c48a56856d34b2f067"
+    }
+  ],
+  "__v": 4,
+  "latitude": 0,
+  "longitude": 0,
+  "distancePreviousStep": 31.51,
+  "travelTimePreviousStep": 32,
+  "travelTimeNote": "OK",
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea921"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Grand Teton",
+  "address": "100 Colter Bay Campground Road, Colter Bay RV Park, 100 Colter Bay Village Rd, Moran, WY 83013, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-08T10:30:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-09T16:30:00.000Z"
+  },
+  "travelTime": 57,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67d6e7115fef6d461828ae21"
+  },
+  "accommodations": [
+    {
+      "$oid": "67dffb7eb70f8aa444071b21"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67e015c540bd43b84da3e397"
+    },
+    {
+      "$oid": "67e0166540bd43b84da3e414"
+    },
+    {
+      "$oid": "67e018d640bd43b84da3e55d"
+    },
+    {
+      "$oid": "67e0197440bd43b84da3e57f"
+    },
+    {
+      "$oid": "67e01efc40bd43b84da3e88d"
+    }
+  ],
+  "__v": 6,
+  "distancePreviousStep": 64.52,
+  "travelTimePreviousStep": 57,
+  "travelTimeNote": "OK",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea922"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Jackson Hole",
+  "address": "Jackson Hole, Wyoming, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-09T19:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-10T16:00:00.000Z"
+  },
+  "travelTime": 54,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67b0b75fb07ed3ea5170cdc1"
+  },
+  "accommodations": [
+    {
+      "$oid": "67b0b665b07ed3ea5170cd64"
+    },
+    {
+      "$oid": "67b0b670b07ed3ea5170cd6a"
+    },
+    {
+      "$oid": "67e01a7840bd43b84da3e63e"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67b0b6bbb07ed3ea5170cd80"
+    },
+    {
+      "$oid": "67e01cc940bd43b84da3e749"
+    },
+    {
+      "$oid": "67e01d3740bd43b84da3e76c"
+    },
+    {
+      "$oid": "67e01ddb40bd43b84da3e7ae"
+    }
+  ],
+  "__v": 13,
+  "latitude": 0,
+  "longitude": 0,
+  "distancePreviousStep": 27.31,
+  "travelTimePreviousStep": 28,
+  "travelTimeNote": "OK",
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea923"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Missoula ",
+  "address": "Missoula, Montana, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-11T19:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-12T08:00:00.000Z"
+  },
+  "travelTime": 81,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67b0bc94ecfbb726b8813b70"
+  },
+  "accommodations": [
+    {
+      "$oid": "67dfecf32244b24bf7365d0f"
+    }
+  ],
+  "activities": [],
+  "__v": 1,
+  "latitude": 0,
+  "longitude": 0,
+  "distancePreviousStep": 105.65,
+  "travelTimePreviousStep": 81,
+  "travelTimeNote": "WARNING",
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea924"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Fort Steele",
+  "address": "Fort Steele, BC, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-12T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-13T09:00:00.000Z"
+  },
+  "travelTime": 174,
+  "isArrivalTimeConsistent": false,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67b0bd07bb0959167ebef72b"
+  },
+  "accommodations": [
+    {
+      "$oid": "67b0bd62bb0959167ebef738"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67f29fa4d5ec8bffd235065b"
+    }
+  ],
+  "__v": 2,
+  "latitude": 0,
+  "longitude": 0,
+  "distancePreviousStep": 248.53,
+  "travelTimePreviousStep": 171,
+  "travelTimeNote": "ERROR",
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea926"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stop",
+  "name": "Helena",
+  "address": "Helena, Montana, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-03T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-03T14:00:00.000Z"
+  },
+  "travelTime": 205,
+  "isArrivalTimeConsistent": true,
+  "notes": "Courses Safeway\n",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67d6fb5032bea0455ff60b67"
+  },
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "distancePreviousStep": 324.86,
+  "travelTimePreviousStep": 197,
+  "travelTimeNote": "OK",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea928"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stop",
+  "name": "Dillon",
+  "address": "Dillon, Montana, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-11T13:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-11T14:00:00.000Z"
+  },
+  "travelTime": 216,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67e04e09d015f5a240d37196"
+  },
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "distancePreviousStep": 368.87,
+  "travelTimePreviousStep": 235,
+  "travelTimeNote": "OK",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea929"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stop",
+  "name": "Dutton Ranch",
+  "address": "Yellowstone Dutton Ranch, Appaloosa Trail, Darby, Montana, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-11T17:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-11T17:30:00.000Z"
+  },
+  "travelTime": 124,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67dfeeb12244b24bf7365d8e"
+  },
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "distancePreviousStep": 194.14,
+  "travelTimePreviousStep": 121,
+  "travelTimeNote": "OK",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea92a"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stop",
+  "name": "Lac Mac Donald",
+  "address": "Lac McDonald, Montana, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-12T11:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-12T15:00:00.000Z"
+  },
+  "travelTime": 161,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67dfef292244b24bf7365db7"
+  },
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "distancePreviousStep": 232.63,
+  "travelTimePreviousStep": 162,
+  "travelTimeNote": "OK",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea92b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stop",
+  "name": "Saint Clair Canyon",
+  "address": "Sinclair Canyon Trail, Radium Hot Springs, BC, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-13T10:30:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-13T12:00:00.000Z"
+  },
+  "travelTime": 83,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67e04da6d015f5a240d37140"
+  },
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "distancePreviousStep": 126.59,
+  "travelTimePreviousStep": 81,
+  "travelTimeNote": "WARNING",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491596003c7411aea98d"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "type": "Stage",
+  "name": "Lundbreck ",
+  "address": "Lundbreck, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-03-13T08:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-01T14:00:00.000Z"
+  },
+  "travelTime": null,
+  "isArrivalTimeConsistent": false,
+  "notes": "Notes",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "accommodations": [
+    {
+      "$oid": "67dfac00c3947d69776ab5b5"
+    },
+    {
+      "$oid": "67dfb1dfc3947d69776ab6ef"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67e791cae84f79be2dbb8e63"
+    },
+    {
+      "$oid": "686237dbc2ac1a41250f7077"
+    }
+  ],
+  "__v": 106,
+  "distancePreviousStep": 0,
+  "travelTimeNote": "ERROR",
+  "travelTimePreviousStep": 0,
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67b0cc8a4e88eb4d0598a0a7"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Columbia Icefield",
+  "address": "Columbia Icefield Glacier Adventure, Icefields Parkway, District d'amélioration No 12, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-13T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-14T12:00:00.000Z"
+  },
+  "travelTime": 174,
+  "isArrivalTimeConsistent": false,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "67b0ccf74e88eb4d0598a0bf"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67b0cd2f4e88eb4d0598a0c7"
+    }
+  ],
+  "__v": 2,
+  "thumbnail": {
+    "$oid": "67b7763f543c9e98772c6767"
+  },
+  "distancePreviousStep": 155.95,
+  "travelTimePreviousStep": 102,
+  "travelTimeNote": "ERROR",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67b0ced24e88eb4d0598a0ff"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Jasper",
+  "address": "Jasper National Park Of Canada, Jasper, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-14T14:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-15T15:00:00.000Z"
+  },
+  "travelTime": 71,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "67b0cef24e88eb4d0598a10e"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67b0d1ce99026036489675f0"
+    },
+    {
+      "$oid": "67fb8fe335c8eca8efb2fdba"
+    },
+    {
+      "$oid": "67fb9254f658512f295bf7da"
+    }
+  ],
+  "__v": 4,
+  "thumbnail": {
+    "$oid": "67b0d3a4990260364896762b"
+  },
+  "latitude": 0,
+  "longitude": 0,
+  "distancePreviousStep": 99.63,
+  "travelTimePreviousStep": 72,
+  "travelTimeNote": "OK",
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67b1d6ad1376e49417e4ccda"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Saskatchewan",
+  "address": "Saskatchewan River Crossing, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-15T15:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-16T09:00:00.000Z"
+  },
+  "travelTime": 105,
+  "isArrivalTimeConsistent": false,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "67b1d7291376e49417e4cd07"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67fb92a7f658512f295bf810"
+    }
+  ],
+  "__v": 2,
+  "thumbnail": {
+    "$oid": "67b1d6da1376e49417e4ccec"
+  },
+  "latitude": 0,
+  "longitude": 0,
+  "distancePreviousStep": 103.71,
+  "travelTimePreviousStep": 74,
+  "travelTimeNote": "ERROR",
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67b1d8971376e49417e4cd1b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stop",
+  "name": "Lac Peyto",
+  "address": "Lac Peyto, District d'amélioration No 9, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-16T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-16T12:00:00.000Z"
+  },
+  "travelTime": 23,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
   "photos": [],
   "documents": [],
   "accommodations": [],
   "activities": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67b1d8e61376e49417e4cd2d"
+  },
+  "latitude": 0,
+  "longitude": 0,
+  "distancePreviousStep": 10.2,
+  "travelTimePreviousStep": 8,
+  "travelTimeNote": "OK",
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67b1d9ae1376e49417e4cd45"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stop",
+  "name": "Lac Bow",
+  "address": "Lac Bow, District d'amélioration No 9, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-16T12:15:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-16T14:00:00.000Z"
+  },
+  "travelTime": 5,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67e04dc4d015f5a240d3716c"
+  },
+  "distancePreviousStep": 6.74,
+  "travelTimePreviousStep": 5,
+  "travelTimeNote": "WARNING",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67b1da621376e49417e4cd6f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Lac Louise",
+  "address": "Lake Louise, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-16T18:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-19T09:00:00.000Z"
+  },
+  "travelTime": 26,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "67b21ec46b9ba0d01515874e"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67b21f096b9ba0d015158757"
+    },
+    {
+      "$oid": "67b21f4f6b9ba0d015158761"
+    },
+    {
+      "$oid": "67b21fbc6b9ba0d01515876b"
+    },
+    {
+      "$oid": "67b21ff06b9ba0d015158775"
+    }
+  ],
+  "__v": 5,
+  "thumbnail": {
+    "$oid": "67b776155a13e7cc8c442f1e"
+  },
+  "distancePreviousStep": 23.36,
+  "travelTimePreviousStep": 19,
+  "travelTimeNote": "OK",
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67b222e35cb1ce4a82d73077"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Banff",
+  "address": "Banff, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-19T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-19T12:00:00.000Z"
+  },
+  "travelTime": 38,
+  "isArrivalTimeConsistent": true,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "67b223c85cb1ce4a82d73091"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67b223265cb1ce4a82d73089"
+    }
+  ],
+  "__v": 2,
+  "thumbnail": {
+    "$oid": "67b224765cb1ce4a82d730bd"
+  },
+  "latitude": 0,
+  "longitude": 0,
+  "distancePreviousStep": 34.94,
+  "travelTimePreviousStep": 29,
+  "travelTimeNote": "OK",
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67b77ea0fc49cd80a704959d"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac490f96003c7411aea82e"
+  },
+  "type": "Stage",
+  "name": "kxtyqh",
+  "address": "jhhzqy",
+  "latitude": 0,
+  "longitude": 0,
+  "arrivalDateTime": {
+    "$date": "2025-02-20T19:11:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-02-20T19:11:00.000Z"
+  },
+  "travelTimePreviousStep": null,
+  "distancePreviousStep": 0,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "OK",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d7c4b15c5cee2d1bbfa64f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "type": "Stage",
+  "name": "Waterton",
+  "address": "Waterton, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-03-14T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-03-30T01:46:00.000Z"
+  },
+  "travelTimePreviousStep": 0,
+  "distancePreviousStep": 0,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "OK",
+  "notes": "Attention, il va pleuvoir",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 2,
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67d7c6115c5cee2d1bbfa692"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "type": "Stage",
+  "name": "Etape 3",
+  "address": "dsdsds",
+  "arrivalDateTime": {
+    "$date": "2025-03-19T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "1970-01-01T00:00:00.000Z"
+  },
+  "travelTimePreviousStep": 0,
+  "distancePreviousStep": 0,
+  "isArrivalTimeConsistent": false,
+  "travelTimeNote": "ERROR",
+  "notes": "Cein\nEst un\nTest",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "67d7c89d60b1d0e2897baf3d"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "67d7c79360b1d0e2897baf1b"
+    },
+    {
+      "$oid": "67d7c79f60b1d0e2897baf1f"
+    }
+  ],
+  "__v": 3,
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67d7e4e0e9632e538c0a57d6"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "type": "Stage",
+  "name": "Etape 4",
+  "address": "28000 Chartres, France",
+  "arrivalDateTime": {
+    "$date": "2025-03-23T10:50:00.000Z"
+  },
+  "departureDateTime": null,
+  "travelTimePreviousStep": 0,
+  "distancePreviousStep": 0,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "OK",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67d7e532e9632e538c0a57e5"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "type": "Stage",
+  "name": "Etape 5",
+  "address": "Lyon, France",
+  "arrivalDateTime": {
+    "$date": "2025-04-25T09:14:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-04-30T07:14:00.000Z"
+  },
+  "travelTimePreviousStep": 0,
+  "distancePreviousStep": 0,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "OK",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67dff4ad187af529f4d4e081"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Grand Prismatic",
+  "address": "Grand Prismatic Spring Overlook, Yellowstone National Park, Wyoming, États-Unis",
+  "arrivalDateTime": {
+    "$date": "2025-08-07T09:30:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-07T16:00:00.000Z"
+  },
+  "travelTimePreviousStep": 17,
+  "distancePreviousStep": 16.84,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "WARNING",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [
+    {
+      "$oid": "67dff52b2759051a0b040ac7"
+    },
+    {
+      "$oid": "67dff5f9b70f8aa44407196c"
+    },
+    {
+      "$oid": "67dff717b70f8aa4440719ca"
+    },
+    {
+      "$oid": "67dff8c0b70f8aa444071a42"
+    }
+  ],
+  "__v": 4,
+  "thumbnail": {
+    "$oid": "67dff639b70f8aa44407198c"
+  },
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67e841644cda8e73cf87ee41"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Hector Lake",
+  "address": "Hector Lake Viewpoint, Icefields Parkway, District d'amélioration No 9, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-08-16T14:05:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-16T15:00:00.000Z"
+  },
+  "travelTimePreviousStep": 10,
+  "distancePreviousStep": 15.62,
+  "isArrivalTimeConsistent": false,
+  "travelTimeNote": "ERROR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67fb96faf658512f295bf8b8"
+  },
+  "latitude": 0,
+  "longitude": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "67f2a2624f07698f6674d31f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "type": "Stage",
+  "name": "Dog Lake Trail",
+  "address": "Dog Lake, Kootenay National Park, District régional d'East Kootenay, BC, Canada",
+  "latitude": 0,
+  "longitude": 0,
+  "arrivalDateTime": {
+    "$date": "2025-08-13T15:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-13T17:00:00.000Z"
+  },
+  "travelTimePreviousStep": 23,
+  "distancePreviousStep": 28.06,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "OK",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "__v": 0,
+  "story": ""
+},
+{
+  "_id": {
+    "$oid": "686403cda288455489e02830"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac490f96003c7411aea82e"
+  },
+  "type": "Stage",
+  "name": "Visite du Grand Canyon",
+  "address": "Grand Canyon, Arizona, États-Unis",
+  "latitude": 0,
+  "longitude": 0,
+  "arrivalDateTime": {
+    "$date": "2025-08-06T10:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-07T18:00:00.000Z"
+  },
+  "travelTimePreviousStep": 855,
+  "distancePreviousStep": 1484.85,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "OK",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "story": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686e8f5461b56fe61dbe7dea"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "type": "Stage",
+  "name": "Paris",
+  "address": "Paris, France",
+  "latitude": 48.8575475,
+  "longitude": 2.3513765,
+  "arrivalDateTime": {
+    "$date": "1970-01-01T00:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "1970-01-01T00:00:00.000Z"
+  },
+  "travelTimePreviousStep": 0,
+  "distancePreviousStep": 0,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "OK",
+  "notes": "Créé via chatbot IA",
+  "photos": [],
+  "documents": [],
+  "accommodations": [
+    {
+      "$oid": "686ea05274fcab66aa647b44"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "686ea001392d1c4d68939a2a"
+    }
+  ],
+  "story": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686f5030f06ecf32f56940a1"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "type": "Stage",
+  "name": "Bordeaux",
+  "address": "Bordeaux",
+  "latitude": 44.8416106,
+  "longitude": -0.5810938000000001,
+  "arrivalDateTime": {
+    "$date": "2024-07-15T00:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2024-07-23T00:00:00.000Z"
+  },
+  "travelTimePreviousStep": 314,
+  "distancePreviousStep": 528.1,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "OK",
+  "notes": "Créé via chatbot IA",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "story": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6873cbb54db71d191b9afaa1"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "6873cb9382558d9a62e9fc12"
+  },
+  "type": "Stage",
+  "name": "Idjfjfjf",
+  "address": "Paris, France",
+  "latitude": 48.8575475,
+  "longitude": 2.3513765,
+  "arrivalDateTime": {
+    "$date": "2025-07-13T15:07:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-13T15:07:00.000Z"
+  },
+  "travelTimePreviousStep": 0,
+  "distancePreviousStep": 0,
+  "isArrivalTimeConsistent": true,
+  "travelTimeNote": "OK",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "accommodations": [],
+  "activities": [],
+  "story": "",
   "__v": 0
 }]

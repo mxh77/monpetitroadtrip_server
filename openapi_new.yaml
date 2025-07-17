@@ -1,0 +1,2057 @@
+openapi: 3.0.3
+info:
+  title: Mon Petit Roadtrip API
+  description: |
+    API complète pour la gestion de roadtrips avec IA, synchronisation et gestion asynchrone.
+    
+    ## Fonctionnalités principales
+    - **Authentification JWT** avec gestion d'utilisateurs
+    - **CRUD complet des roadtrips** avec support multimédia
+    - **Gestion d'étapes** (Stage/Stop) avec coordonnées GPS
+    - **Hébergements et activités** par étape
+    - **Génération IA** de roadtrips complets et d'éléments individuels
+    - **Système de tâches** de préparation de voyage
+    - **Calcul asynchrone** des temps de trajet
+    - **Intégration Google Maps** pour directions et avis
+    - **Assistant conversationnel IA** pour modifications en langage naturel
+    - **Génération de récits de voyage** avec photos
+    
+    ## Architecture
+    L'API suit une architecture RESTful avec support des jobs asynchrones pour les opérations longues.
+    Toutes les routes nécessitent une authentification JWT sauf `/auth/register` et `/auth/login`.
+    
+  version: 2.0.0
+  contact:
+    name: Mon Petit Roadtrip
+    email: contact@monpetitroadtrip.com
+    url: https://monpetitroadtrip.com
+
+servers:
+  - url: http://localhost:3001
+    description: Serveur de développement local
+  - url: https://api.monpetitroadtrip.com
+    description: Serveur de production
+
+security:
+  - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Authentification via token JWT.
+        Format: `Authorization: Bearer <token>`
+
+  schemas:
+    # ===== MODÈLES PRINCIPAUX =====
+    
+    User:
+      type: object
+      required:
+        - _id
+        - username
+        - email
+        - dateCreated
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef1"
+          description: "Identifiant unique MongoDB"
+        username:
+          type: string
+          example: "jean_dupont"
+          description: "Nom d'utilisateur unique"
+        email:
+          type: string
+          format: email
+          example: "jean.dupont@email.com"
+          description: "Adresse email unique"
+        dateCreated:
+          type: string
+          format: date-time
+          example: "2024-01-20T10:00:00.000Z"
+          description: "Date de création du compte"
+
+    Roadtrip:
+      type: object
+      required:
+        - _id
+        - userId
+        - name
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef0"
+        userId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef1"
+          description: "Référence vers l'utilisateur propriétaire"
+        name:
+          type: string
+          example: "Mon Roadtrip en France"
+          description: "Nom du roadtrip"
+        startLocation:
+          type: string
+          example: "Paris, France"
+          description: "Lieu de départ"
+        startDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-01T09:00:00.000Z"
+          description: "Date et heure de début"
+        endLocation:
+          type: string
+          example: "Nice, France"
+          description: "Lieu d'arrivée"
+        endDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-15T18:00:00.000Z"
+          description: "Date et heure de fin"
+        currency:
+          type: string
+          enum: [EUR, USD, CAD]
+          default: EUR
+          example: "EUR"
+          description: "Devise utilisée pour les prix"
+        notes:
+          type: string
+          example: "Vacances d'été en famille"
+          description: "Notes personnelles"
+        photos:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des photos associées"
+        documents:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des documents associés"
+        thumbnail:
+          type: string
+          format: objectid
+          description: "ID de l'image miniature"
+        steps:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des étapes du roadtrip"
+
+    RoadtripDetailed:
+      allOf:
+        - $ref: '#/components/schemas/Roadtrip'
+        - type: object
+          properties:
+            steps:
+              type: array
+              items:
+                $ref: '#/components/schemas/StepDetailed'
+              description: "Étapes complètes avec hébergements et activités"
+
+    Step:
+      type: object
+      required:
+        - _id
+        - userId
+        - roadtripId
+        - type
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef2"
+        userId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef1"
+        roadtripId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef0"
+        type:
+          type: string
+          enum: [Stage, Stop]
+          example: "Stage"
+          description: "Type d'étape - Stage (lieu de séjour) ou Stop (arrêt court)"
+        name:
+          type: string
+          example: "Paris"
+          description: "Nom de l'étape"
+        address:
+          type: string
+          example: "Paris, France"
+          description: "Adresse complète"
+        latitude:
+          type: number
+          format: float
+          example: 48.8566
+          description: "Latitude GPS"
+        longitude:
+          type: number
+          format: float
+          example: 2.3522
+          description: "Longitude GPS"
+        arrivalDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-01T14:00:00.000Z"
+          description: "Date et heure d'arrivée"
+        departureDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-03T10:00:00.000Z"
+          description: "Date et heure de départ"
+        travelTimePreviousStep:
+          type: integer
+          example: 120
+          description: "Temps de trajet depuis l'étape précédente (en minutes)"
+        distancePreviousStep:
+          type: number
+          format: float
+          example: 350.5
+          description: "Distance depuis l'étape précédente (en km)"
+        isArrivalTimeConsistent:
+          type: boolean
+          example: true
+          description: "Cohérence des horaires d'arrivée"
+        travelTimeNote:
+          type: string
+          enum: [ERROR, WARNING, OK]
+          example: "OK"
+          description: "Statut du calcul des temps de trajet"
+        notes:
+          type: string
+          example: "Visite de la Tour Eiffel prévue"
+          description: "Notes personnelles"
+        photos:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des photos de l'étape"
+        documents:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des documents de l'étape"
+        thumbnail:
+          type: string
+          format: objectid
+          description: "ID de l'image miniature"
+        accommodations:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des hébergements (uniquement pour type=Stage)"
+        activities:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des activités (uniquement pour type=Stage)"
+        story:
+          type: string
+          example: "Notre première journée à Paris..."
+          description: "Récit généré par IA"
+
+    StepDetailed:
+      allOf:
+        - $ref: '#/components/schemas/Step'
+        - type: object
+          properties:
+            accommodations:
+              type: array
+              items:
+                $ref: '#/components/schemas/Accommodation'
+              description: "Hébergements complets avec détails"
+            activities:
+              type: array
+              items:
+                $ref: '#/components/schemas/Activity'
+              description: "Activités complètes avec détails"
+
+    Activity:
+      type: object
+      required:
+        - _id
+        - userId
+        - stepId
+        - name
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef3"
+        userId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef1"
+        stepId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef2"
+        active:
+          type: boolean
+          default: true
+          description: "Activité active ou désactivée"
+        type:
+          type: string
+          enum: [Randonnée, Courses, Visite, Transport, Restaurant, Autre]
+          example: "Visite"
+          description: "Type d'activité"
+        name:
+          type: string
+          example: "Musée du Louvre"
+          description: "Nom de l'activité"
+        address:
+          type: string
+          example: "Rue de Rivoli, 75001 Paris"
+          description: "Adresse de l'activité"
+        latitude:
+          type: number
+          format: float
+          example: 48.8606
+          description: "Latitude GPS"
+        longitude:
+          type: number
+          format: float
+          example: 2.3376
+          description: "Longitude GPS"
+        website:
+          type: string
+          format: uri
+          example: "https://www.louvre.fr"
+          description: "Site web officiel"
+        phone:
+          type: string
+          example: "+33 1 40 20 50 50"
+          description: "Numéro de téléphone"
+        email:
+          type: string
+          format: email
+          example: "info@louvre.fr"
+          description: "Adresse email"
+        startDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-01T10:00:00.000Z"
+          description: "Date et heure de début"
+        endDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-01T12:00:00.000Z"
+          description: "Date et heure de fin"
+        duration:
+          type: integer
+          example: 120
+          description: "Durée en minutes/heures/jours selon typeDuration"
+        typeDuration:
+          type: string
+          enum: [M, H, J]
+          example: "H"
+          description: "Unité de durée - M(inutes), H(eures), J(ours)"
+        reservationNumber:
+          type: string
+          example: "LV20240801-123"
+          description: "Numéro de réservation"
+        price:
+          type: number
+          format: float
+          example: 25.50
+          description: "Prix en devise spécifiée"
+        currency:
+          type: string
+          enum: [USD, CAD, EUR]
+          default: EUR
+          example: "EUR"
+          description: "Devise du prix"
+        trailDistance:
+          type: number
+          format: float
+          example: 12.5
+          description: "Distance de randonnée (en km)"
+        trailElevation:
+          type: number
+          format: float
+          example: 450
+          description: "Dénivelé de randonnée (en m)"
+        trailType:
+          type: string
+          example: "Boucle"
+          description: "Type de sentier de randonnée"
+        notes:
+          type: string
+          example: "Réserver à l'avance recommandé"
+          description: "Notes personnelles"
+        photos:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des photos de l'activité"
+        documents:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des documents de l'activité"
+        thumbnail:
+          type: string
+          format: objectid
+          description: "ID de l'image miniature"
+        algoliaId:
+          type: string
+          example: "trail_123456"
+          description: "Référence Algolia optionnelle pour randonnées"
+
+    Accommodation:
+      type: object
+      required:
+        - _id
+        - userId
+        - stepId
+        - name
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef4"
+        userId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef1"
+        stepId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef2"
+        active:
+          type: boolean
+          default: true
+          description: "Hébergement actif ou désactivé"
+        name:
+          type: string
+          example: "Hôtel du Louvre"
+          description: "Nom de l'hébergement"
+        address:
+          type: string
+          example: "Place André Malraux, 75001 Paris"
+          description: "Adresse complète"
+        latitude:
+          type: number
+          format: float
+          example: 48.8642
+          description: "Latitude GPS"
+        longitude:
+          type: number
+          format: float
+          example: 2.3353
+          description: "Longitude GPS"
+        website:
+          type: string
+          format: uri
+          example: "https://www.hoteldulouvre.com"
+          description: "Site web officiel"
+        phone:
+          type: string
+          example: "+33 1 44 58 38 38"
+          description: "Numéro de téléphone"
+        email:
+          type: string
+          format: email
+          example: "reservation@hoteldulouvre.com"
+          description: "Email de réservation"
+        reservationNumber:
+          type: string
+          example: "HDL20240801-456"
+          description: "Numéro de réservation"
+        confirmationDateTime:
+          type: string
+          format: date-time
+          example: "2024-07-15T14:30:00.000Z"
+          description: "Date et heure de confirmation"
+        arrivalDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-01T15:00:00.000Z"
+          description: "Date et heure d'arrivée (check-in)"
+        departureDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-03T11:00:00.000Z"
+          description: "Date et heure de départ (check-out)"
+        nights:
+          type: integer
+          example: 2
+          description: "Nombre de nuits (calculé automatiquement)"
+        price:
+          type: number
+          format: float
+          example: 180.00
+          description: "Prix total en devise spécifiée"
+        currency:
+          type: string
+          enum: [USD, CAD, EUR]
+          default: EUR
+          example: "EUR"
+          description: "Devise du prix"
+        notes:
+          type: string
+          example: "Chambre avec vue sur la Seine"
+          description: "Notes personnelles"
+        photos:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des photos de l'hébergement"
+        documents:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des documents de l'hébergement"
+        thumbnail:
+          type: string
+          format: objectid
+          description: "ID de l'image miniature"
+
+    File:
+      type: object
+      required:
+        - _id
+        - fileId
+        - url
+        - type
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef5"
+        fileId:
+          type: string
+          example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+          description: "UUID unique du fichier"
+        name:
+          type: string
+          example: "tour_eiffel.jpg"
+          description: "Nom original du fichier"
+        url:
+          type: string
+          format: uri
+          example: "https://storage.googleapis.com/bucket/tour_eiffel.jpg"
+          description: "URL publique du fichier"
+        type:
+          type: string
+          enum: [photo, document, thumbnail]
+          example: "photo"
+          description: "Type de fichier"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-08-01T10:30:00.000Z"
+          description: "Date de création"
+
+    # ===== MODÈLES UTILITAIRES =====
+    
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+          description: "Page actuelle"
+        limit:
+          type: integer
+          example: 10
+          description: "Nombre d'éléments par page"
+        total:
+          type: integer
+          example: 156
+          description: "Nombre total d'éléments"
+        pages:
+          type: integer
+          example: 16
+          description: "Nombre total de pages"
+
+    ErrorResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: "Validation error"
+          description: "Message d'erreur principal"
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: "Erreurs détaillées par champ"
+
+    SuccessMessage:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: "Operation completed successfully"
+          description: "Message de succès"
+
+  # ===== RÉPONSES COMMUNES =====
+  responses:
+    BadRequest:
+      description: Erreur de validation des données
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            validation_error:
+              summary: Erreur de validation
+              value:
+                msg: "Validation failed"
+                errors:
+                  name: ["Le nom est requis"]
+                  email: ["Format email invalide"]
+
+    Unauthorized:
+      description: Non autorisé - Token manquant ou invalide
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            no_token:
+              summary: Token manquant
+              value:
+                msg: "No token, authorization denied"
+            invalid_token:
+              summary: Token invalide
+              value:
+                msg: "Token is not valid"
+
+    Forbidden:
+      description: Accès interdit - Permissions insuffisantes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            msg: "User not authorized"
+
+    NotFound:
+      description: Ressource non trouvée
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            roadtrip_not_found:
+              summary: Roadtrip introuvable
+              value:
+                msg: "Roadtrip not found"
+            step_not_found:
+              summary: Étape introuvable
+              value:
+                msg: "Step not found"
+
+    Conflict:
+      description: Conflit - Opération déjà en cours
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            msg: "Un calcul est déjà en cours pour ce roadtrip"
+
+    ServerError:
+      description: Erreur interne du serveur
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            msg: "Server error"
+
+# ===== TAGS =====
+tags:
+  - name: Authentification
+    description: Gestion des utilisateurs et authentification JWT
+  - name: Roadtrips
+    description: CRUD des roadtrips avec génération IA
+  - name: Steps
+    description: Gestion des étapes de roadtrip (Stage/Stop)
+  - name: Activities
+    description: Activités par étape avec support IA
+  - name: Accommodations
+    description: Hébergements par étape
+  - name: Tasks
+    description: Tâches de préparation de roadtrip
+  - name: Travel Time
+    description: Calcul et synchronisation des temps de trajet
+  - name: Chatbot
+    description: Assistant IA conversationnel
+  - name: Stories
+    description: Génération de récits de voyage
+  - name: Google Maps
+    description: Intégration Google Maps pour avis et directions
+  - name: Settings
+    description: Paramètres utilisateur
+
+# ===== ROUTES =====
+paths:
+  # ===== AUTHENTIFICATION =====
+  /auth/register:
+    post:
+      tags: [Authentification]
+      summary: Inscription nouvel utilisateur
+      description: Créer un nouveau compte utilisateur avec username, email et mot de passe
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, email, password]
+              properties:
+                username:
+                  type: string
+                  example: "jean_dupont"
+                  description: "Nom d'utilisateur unique"
+                email:
+                  type: string
+                  format: email
+                  example: "jean.dupont@email.com"
+                  description: "Adresse email unique"
+                password:
+                  type: string
+                  minLength: 6
+                  example: "motdepasse123"
+                  description: "Mot de passe (minimum 6 caractères)"
+      responses:
+        '201':
+          description: Utilisateur créé avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    description: "Token JWT pour authentification"
+                  user:
+                    $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /auth/login:
+    post:
+      tags: [Authentification]
+      summary: Connexion utilisateur
+      description: Authentifier un utilisateur avec email et mot de passe
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "jean.dupont@email.com"
+                password:
+                  type: string
+                  example: "motdepasse123"
+      responses:
+        '200':
+          description: Connexion réussie
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  user:
+                    $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /auth/logout:
+    get:
+      tags: [Authentification]
+      summary: Déconnexion utilisateur
+      description: Déconnecter l'utilisateur actuel
+      responses:
+        '200':
+          description: Déconnexion réussie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+
+  /auth/forgot-password:
+    post:
+      tags: [Authentification]
+      summary: Demande de réinitialisation mot de passe
+      description: Envoyer un email pour réinitialiser le mot de passe
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "jean.dupont@email.com"
+      responses:
+        '200':
+          description: Email de réinitialisation envoyé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /auth/reset-password/{token}:
+    post:
+      tags: [Authentification]
+      summary: Réinitialiser mot de passe
+      description: Réinitialiser le mot de passe avec le token reçu par email
+      security: []
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Token de réinitialisation reçu par email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [password]
+              properties:
+                password:
+                  type: string
+                  minLength: 6
+                  example: "nouveaumotdepasse123"
+      responses:
+        '200':
+          description: Mot de passe réinitialisé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /auth/status:
+    get:
+      tags: [Authentification]
+      summary: Vérifier statut de connexion
+      description: Vérifier si l'utilisateur est connecté et retourner ses informations
+      security: []
+      responses:
+        '200':
+          description: Statut utilisateur
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isAuthenticated:
+                    type: boolean
+                    example: true
+                  user:
+                    $ref: '#/components/schemas/User'
+
+  # ===== ROADTRIPS - GESTION PRINCIPALE =====
+  /roadtrips:
+    get:
+      tags: [Roadtrips]
+      summary: Obtenir liste des roadtrips utilisateur
+      description: Récupérer tous les roadtrips de l'utilisateur connecté avec pagination
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: Numéro de page
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+          description: Nombre d'éléments par page
+      responses:
+        '200':
+          description: Liste des roadtrips
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  roadtrips:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Roadtrip'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+    post:
+      tags: [Roadtrips]
+      summary: Créer nouveau roadtrip
+      description: Créer un nouveau roadtrip avec support de fichiers (photos, documents, thumbnail)
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié des données du roadtrip
+                  example: '{"name":"Roadtrip en France","startLocation":"Paris","startDateTime":"2024-08-01T09:00:00.000Z"}'
+                thumbnail:
+                  type: string
+                  format: binary
+                  description: Image miniature du roadtrip
+                photos:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                  description: Photos du roadtrip (max 10)
+                documents:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                  description: Documents du roadtrip (max 10)
+      responses:
+        '201':
+          description: Roadtrip créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Roadtrip'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /roadtrips/ai:
+    post:
+      tags: [Roadtrips]
+      summary: Générer roadtrip complet via IA (synchrone)
+      description: |
+        Générer un roadtrip complet avec étapes, hébergements et activités via l'IA.
+        Version synchrone - pour de gros roadtrips, utiliser /roadtrips/ai/async
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [startLocation]
+              properties:
+                startLocation:
+                  type: string
+                  example: "Paris, France"
+                  description: "Point de départ du roadtrip (obligatoire)"
+                endLocation:
+                  type: string
+                  example: "Nice, France"
+                  description: "Destination finale (optionnel)"
+                startDate:
+                  type: string
+                  format: date
+                  example: "2024-08-01"
+                  description: "Date de début (YYYY-MM-DD)"
+                endDate:
+                  type: string
+                  format: date
+                  example: "2024-08-15"
+                  description: "Date de fin (YYYY-MM-DD)"
+                duration:
+                  type: integer
+                  example: 14
+                  description: "Durée en jours (alternative à endDate)"
+                budget:
+                  type: number
+                  example: 1500
+                  description: "Budget total pour le voyage"
+                travelers:
+                  type: integer
+                  example: 2
+                  description: "Nombre de voyageurs"
+                description:
+                  type: string
+                  example: "Je veux un roadtrip de 7 jours dans le sud de la France avec des visites culturelles"
+                  description: "Description en langage naturel du voyage souhaité"
+                preferences:
+                  type: object
+                  description: "Préférences de voyage"
+                  properties:
+                    themes:
+                      type: array
+                      items:
+                        type: string
+                      example: ["culture", "gastronomie"]
+                    accommodation_type:
+                      type: string
+                      example: "hotel"
+      responses:
+        '201':
+          description: Roadtrip généré avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripDetailed'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /roadtrips/ai/async:
+    post:
+      tags: [Roadtrips]
+      summary: Générer roadtrip complet via IA (asynchrone)
+      description: |
+        Lancer la génération asynchrone d'un roadtrip complet.
+        Retourne un jobId pour suivre la progression.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [startLocation]
+              properties:
+                startLocation:
+                  type: string
+                  example: "Paris, France"
+                endLocation:
+                  type: string
+                  example: "Nice, France"
+                startDate:
+                  type: string
+                  format: date
+                  example: "2024-08-01"
+                endDate:
+                  type: string
+                  format: date
+                  example: "2024-08-15"
+                duration:
+                  type: integer
+                  example: 14
+                budget:
+                  type: number
+                  example: 1500
+                travelers:
+                  type: integer
+                  example: 2
+                description:
+                  type: string
+                  example: "Roadtrip familial dans le sud de la France"
+                preferences:
+                  type: object
+      responses:
+        '200':
+          description: Job de génération lancé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                    example: "64f123abc456789012345678"
+                  status:
+                    type: string
+                    enum: [pending, planning]
+                    example: "pending"
+
+  /roadtrips/ai/jobs/{jobId}:
+    get:
+      tags: [Roadtrips]
+      summary: Statut job génération IA
+      description: Vérifier le statut et la progression d'un job de génération de roadtrip
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID du job de génération
+      responses:
+        '200':
+          description: Statut du job
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                    enum: [pending, planning, detailing, creating, completed, failed]
+                  progress:
+                    type: object
+                    properties:
+                      percentage:
+                        type: number
+                        example: 75
+                      currentStep:
+                        type: string
+                        example: "Création des activités"
+                  results:
+                    type: object
+                    properties:
+                      roadtripId:
+                        type: string
+                        format: objectid
+                      stepsCreated:
+                        type: integer
+                      accommodationsCreated:
+                        type: integer
+                      activitiesCreated:
+                        type: integer
+
+  /roadtrips/ai/jobs:
+    get:
+      tags: [Roadtrips]
+      summary: Historique jobs génération IA
+      description: Liste des jobs de génération IA de l'utilisateur
+      responses:
+        '200':
+          description: Liste des jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    jobId:
+                      type: string
+                    status:
+                      type: string
+                    createdAt:
+                      type: string
+                      format: date-time
+                    completedAt:
+                      type: string
+                      format: date-time
+
+  /roadtrips/{idRoadtrip}:
+    get:
+      tags: [Roadtrips]
+      summary: Obtenir détails d'un roadtrip
+      description: Récupérer les détails complets d'un roadtrip avec ses étapes, hébergements et activités
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+          description: ID du roadtrip
+      responses:
+        '200':
+          description: Détails du roadtrip
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripDetailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Forbidden'
+
+    put:
+      tags: [Roadtrips]
+      summary: Modifier roadtrip
+      description: Modifier un roadtrip existant avec support de fichiers
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié des modifications
+                thumbnail:
+                  type: string
+                  format: binary
+                photos:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                documents:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Roadtrip modifié
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripDetailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Roadtrips]
+      summary: Supprimer roadtrip
+      description: Supprimer complètement un roadtrip et toutes ses données associées
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Roadtrip supprimé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /roadtrips/{idRoadtrip}/files/{fileId}:
+    delete:
+      tags: [Roadtrips]
+      summary: Supprimer fichier spécifique
+      description: Supprimer un fichier spécifique (photo, document, thumbnail) du roadtrip
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Fichier supprimé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ===== ROADTRIPS - GESTION DES ÉTAPES =====
+  /roadtrips/{idRoadtrip}/steps:
+    get:
+      tags: [Steps]
+      summary: Obtenir étapes d'un roadtrip
+      description: Récupérer toutes les étapes d'un roadtrip avec leurs hébergements et activités
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Liste des étapes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StepDetailed'
+
+    post:
+      tags: [Steps]
+      summary: Créer nouvelle étape
+      description: Créer une nouvelle étape pour un roadtrip
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, type]
+              properties:
+                type:
+                  type: string
+                  enum: [Stage, Stop]
+                  example: "Stage"
+                name:
+                  type: string
+                  example: "Lyon"
+                address:
+                  type: string
+                  example: "Lyon, France"
+                arrivalDateTime:
+                  type: string
+                  format: date-time
+                  example: "2024-08-05T14:00:00.000Z"
+                departureDateTime:
+                  type: string
+                  format: date-time
+                  example: "2024-08-07T10:00:00.000Z"
+                notes:
+                  type: string
+                  example: "Visite du Vieux Lyon"
+      responses:
+        '201':
+          description: Étape créée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDetailed'
+
+  /roadtrips/{idRoadtrip}/steps/natural-language:
+    post:
+      tags: [Steps]
+      summary: Créer étape via IA
+      description: |
+        Créer une étape en utilisant l'intelligence artificielle pour analyser
+        un prompt en français et générer automatiquement les détails
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [prompt]
+              properties:
+                prompt:
+                  type: string
+                  example: "Ajoute une étape à Lyon avec visite du Vieux Lyon et départ le lendemain matin"
+                  description: "Description en langage naturel de l'étape à créer"
+      responses:
+        '201':
+          description: Étape créée par IA
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  step:
+                    $ref: '#/components/schemas/StepDetailed'
+                  extractedData:
+                    type: object
+                    description: "Données extraites du prompt pour debug"
+
+  # ===== STEPS - GESTION INDIVIDUELLE =====
+  /steps/{idStep}:
+    get:
+      tags: [Steps]
+      summary: Obtenir informations d'une étape
+      description: Récupérer les détails complets d'une étape spécifique
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Détails de l'étape
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDetailed'
+
+    put:
+      tags: [Steps]
+      summary: Modifier étape
+      description: Modifier une étape existante avec support de fichiers
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié des modifications
+                thumbnail:
+                  type: string
+                  format: binary
+                photos:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                documents:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Étape modifiée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDetailed'
+
+    delete:
+      tags: [Steps]
+      summary: Supprimer étape
+      description: Supprimer une étape et toutes ses données associées
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      responses:
+        '200':
+          description: Étape supprimée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+
+  # ===== ACCOMMODATIONS =====
+  /roadtrips/{idRoadtrip}/steps/{idStep}/accommodations:
+    post:
+      tags: [Accommodations]
+      summary: Créer hébergement
+      description: Créer un nouvel hébergement pour une étape avec support de fichiers
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié des données de l'hébergement
+                  example: '{"name":"Hôtel du Louvre","address":"Place André Malraux, 75001 Paris","arrivalDateTime":"2024-08-01T15:00:00.000Z","departureDateTime":"2024-08-03T11:00:00.000Z","price":180,"currency":"EUR"}'
+                thumbnail:
+                  type: string
+                  format: binary
+                photos:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                documents:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: Hébergement créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accommodation'
+
+  # ===== ACTIVITIES =====
+  /roadtrips/{idRoadtrip}/steps/{idStep}/activities:
+    post:
+      tags: [Activities]
+      summary: Créer activité
+      description: Créer une nouvelle activité pour une étape avec support de fichiers
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié des données de l'activité
+                  example: '{"name":"Musée du Louvre","type":"Visite","address":"Rue de Rivoli, 75001 Paris","startDateTime":"2024-08-01T10:00:00.000Z","endDateTime":"2024-08-01T12:00:00.000Z","price":25.50,"currency":"EUR"}'
+                thumbnail:
+                  type: string
+                  format: binary
+                photos:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                documents:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: Activité créée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+
+  /roadtrips/{idRoadtrip}/steps/{idStep}/activities/natural-language:
+    post:
+      tags: [Activities]
+      summary: Créer activité via IA
+      description: |
+        Créer une activité en utilisant l'intelligence artificielle pour analyser
+        un prompt en français et générer automatiquement les détails
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+            format: objectid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [prompt]
+              properties:
+                prompt:
+                  type: string
+                  example: "Ajoute une visite du Musée du Louvre demain à 14h"
+                  description: "Description en langage naturel de l'activité"
+                userLatitude:
+                  type: number
+                  example: 48.8566
+                  description: "Latitude de l'utilisateur (optionnel)"
+                userLongitude:
+                  type: number
+                  example: 2.3522
+                  description: "Longitude de l'utilisateur (optionnel)"
+      responses:
+        '201':
+          description: Activité créée par IA
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+
+    # ===== MODÈLES SPÉCIALISÉS =====
+    
+    RoadtripTask:
+      type: object
+      required:
+        - _id
+        - userId
+        - roadtripId
+        - title
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef6"
+        userId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef1"
+        roadtripId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef0"
+        title:
+          type: string
+          maxLength: 200
+          example: "Réserver billets de train"
+          description: "Titre de la tâche"
+        description:
+          type: string
+          maxLength: 1000
+          example: "Réserver les billets Paris-Nice pour le 1er août"
+          description: "Description détaillée"
+        category:
+          type: string
+          enum: [preparation, booking, packing, documents, transport, accommodation, activities, health, finances, communication, other]
+          example: "transport"
+          description: "Catégorie de la tâche"
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+          example: "high"
+          description: "Niveau de priorité"
+        status:
+          type: string
+          enum: [pending, in_progress, completed, cancelled]
+          example: "pending"
+          description: "Statut de la tâche"
+        dueDate:
+          type: string
+          format: date-time
+          example: "2024-07-25T18:00:00.000Z"
+          description: "Date d'échéance"
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+          example: "2024-07-20T14:30:00.000Z"
+          description: "Date de completion (automatique)"
+        assignedTo:
+          type: string
+          maxLength: 100
+          example: "Jean Dupont"
+          description: "Personne responsable"
+        estimatedDuration:
+          type: integer
+          example: 30
+          description: "Durée estimée en minutes"
+        reminderDate:
+          type: string
+          format: date-time
+          example: "2024-07-24T09:00:00.000Z"
+          description: "Date de rappel"
+        attachments:
+          type: array
+          items:
+            type: string
+            format: objectid
+          description: "IDs des fichiers attachés"
+        notes:
+          type: string
+          maxLength: 2000
+          example: "Préférer les places côté fenêtre"
+          description: "Notes supplémentaires"
+        order:
+          type: integer
+          example: 1
+          description: "Ordre d'affichage"
+        isRecurring:
+          type: boolean
+          example: false
+          description: "Tâche récurrente"
+        recurringPattern:
+          type: string
+          enum: [daily, weekly, monthly]
+          nullable: true
+          example: "weekly"
+          description: "Modèle de récurrence"
+        isOverdue:
+          type: boolean
+          readOnly: true
+          example: false
+          description: "Tâche en retard (calculé automatiquement)"
+        timeRemaining:
+          type: integer
+          readOnly: true
+          nullable: true
+          example: 432000000
+          description: "Temps restant en millisecondes (calculé automatiquement)"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-07-15T10:00:00.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-07-15T10:00:00.000Z"
+
+    RoadtripTaskInput:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          maxLength: 200
+          example: "Réserver billets de train"
+        description:
+          type: string
+          maxLength: 1000
+          example: "Réserver les billets Paris-Nice"
+        category:
+          type: string
+          enum: [preparation, booking, packing, documents, transport, accommodation, activities, health, finances, communication, other]
+          example: "transport"
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+          example: "high"
+        status:
+          type: string
+          enum: [pending, in_progress, completed, cancelled]
+          example: "pending"
+        dueDate:
+          type: string
+          format: date-time
+          example: "2024-07-25T18:00:00.000Z"
+        assignedTo:
+          type: string
+          maxLength: 100
+          example: "Jean Dupont"
+        estimatedDuration:
+          type: integer
+          example: 30
+        reminderDate:
+          type: string
+          format: date-time
+          example: "2024-07-24T09:00:00.000Z"
+        notes:
+          type: string
+          maxLength: 2000
+          example: "Préférer les places côté fenêtre"
+
+    JobStatus:
+      type: object
+      properties:
+        jobId:
+          type: string
+          example: "64f123abc456789012345678"
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+          example: "running"
+        progress:
+          type: object
+          properties:
+            total:
+              type: integer
+              example: 10
+            completed:
+              type: integer
+              example: 7
+            percentage:
+              type: number
+              format: float
+              example: 70.0
+        startedAt:
+          type: string
+          format: date-time
+          example: "2024-07-15T10:00:00.000Z"
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+          example: "2024-07-15T10:05:00.000Z"
+        errorMessage:
+          type: string
+          nullable: true
+          example: "Erreur de connexion à l'API Google Maps"
+        results:
+          type: object
+          description: "Résultats variables selon le type de job"
+
+    TravelTimeJobResults:
+      allOf:
+        - $ref: '#/components/schemas/JobStatus'
+        - type: object
+          properties:
+            results:
+              type: object
+              properties:
+                stepsProcessed:
+                  type: integer
+                  example: 5
+                errors:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      stepId:
+                        type: string
+                        format: objectid
+                      error:
+                        type: string
+                summary:
+                  type: object
+                  properties:
+                    totalDistance:
+                      type: number
+                      format: float
+                      example: 1250.5
+                      description: "Distance totale en km"
+                    totalTravelTime:
+                      type: integer
+                      example: 720
+                      description: "Temps de trajet total en minutes"
+                    inconsistentSteps:
+                      type: integer
+                      example: 1
+                      description: "Nombre d'étapes avec problèmes horaires"
+
+    UserSettings:
+      type: object
+      required:
+        - _id
+        - userId
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef7"
+        userId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef1"
+        systemPrompt:
+          type: string
+          example: "Tu es le narrateur officiel de MonPetitRoadtrip..."
+          description: "Prompt système pour l'IA"
+        algoliaSearchRadius:
+          type: integer
+          minimum: 1000
+          maximum: 200000
+          default: 50000
+          example: 50000
+          description: "Rayon de recherche Algolia en mètres"
+        dragSnapInterval:
+          type: integer
+          enum: [5, 10, 15, 30, 60]
+          default: 15
+          example: 15
+          description: "Intervalle de déplacement planning en minutes"
+        enablePhotosInStories:
+          type: boolean
+          default: true
+          example: true
+          description: "Activer analyse photos dans récits (GPT-4 Vision)"
+
+    UserSettingsInput:
+      type: object
+      properties:
+        systemPrompt:
+          type: string
+          example: "Tu es le narrateur officiel de MonPetitRoadtrip..."
+        algoliaSearchRadius:
+          type: integer
+          minimum: 1000
+          maximum: 200000
+          example: 50000
+        dragSnapInterval:
+          type: integer
+          enum: [5, 10, 15, 30, 60]
+          example: 15
+        enablePhotosInStories:
+          type: boolean
+          example: true
+
+    Conversation:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef8"
+        roadtripId:
+          type: string
+          format: objectid
+          example: "64a1b2c3d4e5f6789abcdef0"
+        title:
+          type: string
+          example: "Modifications du roadtrip"
+          description: "Titre généré automatiquement"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-07-15T10:00:00.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-07-15T10:05:00.000Z"
+        messageCount:
+          type: integer
+          example: 4
+          description: "Nombre de messages dans la conversation"
+
+    ConversationDetailed:
+      allOf:
+        - $ref: '#/components/schemas/Conversation'
+        - type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    enum: [user, assistant]
+                    example: "user"
+                  content:
+                    type: string
+                    example: "Ajoute une visite du Louvre demain"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2024-07-15T10:01:00.000Z"
+
+    GoogleMapsReview:
+      type: object
+      properties:
+        author_name:
+          type: string
+          example: "Jean D."
+        rating:
+          type: number
+          format: float
+          example: 4.5
+        text:
+          type: string
+          example: "Excellent musée, à visiter absolument!"
+        time:
+          type: integer
+          example: 1642694400
+          description: "Timestamp Unix"
+
+    GoogleMapsDirection:
+      type: object
+      properties:
+        distance:
+          type: object
+          properties:
+            text:
+              type: string
+              example: "350 km"
+            value:
+              type: integer
+              example: 350000
+              description: "Distance en mètres"
+        duration:
+          type: object
+          properties:
+            text:
+              type: string
+              example: "3h 45min"
+            value:
+              type: integer
+              example: 13500
+              description: "Durée en secondes"
+        steps:
+          type: array
+          items:
+            type: object
+            properties:
+              html_instructions:
+                type: string
+                example: "Prendre l'A6 direction Lyon"
+              distance:
+                type: object
+                properties:
+                  text:
+                    type: string
+                  value:
+                    type: integer
+              duration:
+                type: object
+                properties:
+                  text:
+                    type: string
+                  value:
+                    type: integer

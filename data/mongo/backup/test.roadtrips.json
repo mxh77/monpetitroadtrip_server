@@ -1,68 +1,5 @@
 [{
   "_id": {
-    "$oid": "670b5c91b93cc62f32c8e413"
-  },
-  "userId": {
-    "$oid": "6708fb9f349574b62d828725"
-  },
-  "name": "Roadtrip Ouest Américain 2023",
-  "days": 23,
-  "startLocation": "Paris",
-  "endLocation": "Calgary",
-  "currency": "EUR",
-  "notes": "California Dreaming !!",
-  "stages": [
-    {
-      "$oid": "670b951d9b1667a1ada89acb"
-    },
-    {
-      "$oid": "67162ed73f265412dc46c8eb"
-    },
-    {
-      "$oid": "67164306a8ddb3877b81898f"
-    },
-    {
-      "$oid": "67164685ebc92c75632ddcce"
-    },
-    {
-      "$oid": "678e711fa3d7b76eb5e802b9"
-    },
-    {
-      "$oid": "6796277a2222de5ca995e207"
-    }
-  ],
-  "stops": [
-    {
-      "$oid": "6714b5fda37fb4f6b5bc2a67"
-    },
-    {
-      "$oid": "6714b622a37fb4f6b5bc2a6a"
-    },
-    {
-      "$oid": "6714b632a37fb4f6b5bc2a6d"
-    },
-    {
-      "$oid": "67162e8bef841373b61db650"
-    },
-    {
-      "$oid": "67162fda1035dbaa7cdeaa28"
-    }
-  ],
-  "startDateTime": {
-    "$date": "2023-07-29T08:00:00.000Z"
-  },
-  "endDateTime": {
-    "$date": "2023-08-22T22:00:00.000Z"
-  },
-  "__v": 113,
-  "photos": [],
-  "documents": [],
-  "thumbnail": {
-    "$oid": "676f99712318007a18c423d3"
-  }
-},
-{
-  "_id": {
     "$oid": "6769a6797a9b6b7daa25f66e"
   },
   "userId": {
@@ -98,117 +35,200 @@
 },
 {
   "_id": {
-    "$oid": "676a4a6a77a0fc4bc0c2887a"
+    "$oid": "67ac490f96003c7411aea82e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "name": "Roadtrip Ouest Américain 2023",
+  "startLocation": "Paris",
+  "startDateTime": {
+    "$date": "2023-08-03T08:00:00.000Z"
+  },
+  "endLocation": "Calgary",
+  "endDateTime": {
+    "$date": "2023-08-22T22:00:00.000Z"
+  },
+  "currency": "EUR",
+  "notes": "California Dreaming !!",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "686c317a3ac4ce268ec3119b"
+  },
+  "steps": [
+    {
+      "$oid": "67ac491096003c7411aea832"
+    },
+    {
+      "$oid": "67ac491096003c7411aea843"
+    },
+    {
+      "$oid": "67ac491096003c7411aea844"
+    },
+    {
+      "$oid": "67ac491096003c7411aea84d"
+    },
+    {
+      "$oid": "67ac491096003c7411aea84e"
+    },
+    {
+      "$oid": "67ac491096003c7411aea84f"
+    },
+    {
+      "$oid": "67b77ea0fc49cd80a704959d"
+    },
+    {
+      "$oid": "686403cda288455489e02830"
+    }
+  ],
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea85e"
+  },
+  "userId": {
+    "$oid": "67091086215f2119f6844225"
+  },
+  "name": "Roadtrip au Canada",
+  "startLocation": "Paris, France",
+  "endLocation": "Vancouver, Canada",
+  "currency": "CAD",
+  "notes": "Roadtrip familial pour découvrir les plus beaux parcs nationaux du Canada.",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "steps": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea863"
   },
   "userId": {
     "$oid": "6708fb9f349574b62d828725"
   },
   "name": "Roadtrip Ouest Canadien 2025",
-  "days": 23,
   "startLocation": "Paris",
-  "endLocation": "Calgary",
-  "currency": "EUR",
-  "notes": "A nous les grandes Rocheuses !!",
-  "stages": [
-    {
-      "$oid": "6713514076abf468375b7155"
-    },
-    {
-      "$oid": "67164a219daf629f689c2807"
-    },
-    {
-      "$oid": "6730bdc24dbae9d8669196f1"
-    },
-    {
-      "$oid": "6730c3984dbae9d86691974c"
-    },
-    {
-      "$oid": "6733181dfe1f7c1a95e6e40b"
-    },
-    {
-      "$oid": "673a0ad48dce16fb010b435f"
-    },
-    {
-      "$oid": "673a0ba08dce16fb010b43d8"
-    },
-    {
-      "$oid": "6797237282f1400875364a30"
-    },
-    {
-      "$oid": "679729cd6c2405010b8fd85a"
-    },
-    {
-      "$oid": "67a5b8e37d9822b8f23860e9"
-    },
-    {
-      "$oid": "67a5b9617d9822b8f23860f7"
-    },
-    {
-      "$oid": "67a5b9dd7d9822b8f2386105"
-    },
-    {
-      "$oid": "67a5bb617d9822b8f2386131"
-    },
-    {
-      "$oid": "67a5bbff7d9822b8f238614e"
-    }
-  ],
-  "stops": [
-    {
-      "$oid": "673309147503e33b9b0aadb4"
-    },
-    {
-      "$oid": "67332b99d2f5b50b1bee596c"
-    },
-    {
-      "$oid": "673342491e6cfe4950bcb81c"
-    },
-    {
-      "$oid": "67a3ad7f1578abf6636b4b4f"
-    },
-    {
-      "$oid": "67a5ba4e7d9822b8f2386113"
-    },
-    {
-      "$oid": "67a5bb057d9822b8f2386122"
-    },
-    {
-      "$oid": "67a5bbc67d9822b8f238613f"
-    },
-    {
-      "$oid": "67a5bc537d9822b8f238615c"
-    }
-  ],
-  "__v": 19,
-  "startDate": {
-    "$date": "2025-07-29T00:00:00.000Z"
-  },
-  "endDate": {
-    "$date": "2025-08-21T00:00:00.000Z"
-  },
-  "endTime": "20:00",
-  "startTime": "08:00",
-  "endDateTime": {
-    "$date": "2025-08-21T22:00:00.000Z"
-  },
   "startDateTime": {
     "$date": "2025-07-29T08:00:00.000Z"
   },
+  "endLocation": "Calgary",
+  "endDateTime": {
+    "$date": "2025-08-21T22:00:00.000Z"
+  },
+  "currency": "EUR",
+  "notes": "A nous les grandes Rocheuses !!",
   "photos": [],
-  "documents": [],
+  "documents": [
+    "67b19c72412d3f150ad79361"
+  ],
   "thumbnail": {
-    "$oid": "676f99a02318007a18c423da"
-  }
+    "$oid": "67acd3c69f05d57d1f568486"
+  },
+  "steps": [
+    {
+      "$oid": "67ac491096003c7411aea866"
+    },
+    {
+      "$oid": "67ac491196003c7411aea877"
+    },
+    {
+      "$oid": "67ac491196003c7411aea899"
+    },
+    {
+      "$oid": "67ac491196003c7411aea89e"
+    },
+    {
+      "$oid": "67ac491296003c7411aea8b7"
+    },
+    {
+      "$oid": "67ac491296003c7411aea8cc"
+    },
+    {
+      "$oid": "67ac491296003c7411aea8d9"
+    },
+    {
+      "$oid": "67ac491396003c7411aea8ee"
+    },
+    {
+      "$oid": "67ac491396003c7411aea90f"
+    },
+    {
+      "$oid": "67ac491396003c7411aea920"
+    },
+    {
+      "$oid": "67ac491396003c7411aea921"
+    },
+    {
+      "$oid": "67ac491396003c7411aea922"
+    },
+    {
+      "$oid": "67ac491396003c7411aea923"
+    },
+    {
+      "$oid": "67ac491396003c7411aea924"
+    },
+    {
+      "$oid": "67ac491396003c7411aea926"
+    },
+    {
+      "$oid": "67ac491396003c7411aea928"
+    },
+    {
+      "$oid": "67ac491396003c7411aea929"
+    },
+    {
+      "$oid": "67ac491396003c7411aea92a"
+    },
+    {
+      "$oid": "67ac491396003c7411aea92b"
+    },
+    {
+      "$oid": "67b0cc8a4e88eb4d0598a0a7"
+    },
+    {
+      "$oid": "67b0ced24e88eb4d0598a0ff"
+    },
+    {
+      "$oid": "67b1d6ad1376e49417e4ccda"
+    },
+    {
+      "$oid": "67b1d8971376e49417e4cd1b"
+    },
+    {
+      "$oid": "67b1d9ae1376e49417e4cd45"
+    },
+    {
+      "$oid": "67b1da621376e49417e4cd6f"
+    },
+    {
+      "$oid": "67b222e35cb1ce4a82d73077"
+    },
+    {
+      "$oid": "67dff4ad187af529f4d4e081"
+    },
+    {
+      "$oid": "67e841644cda8e73cf87ee41"
+    },
+    {
+      "$oid": "67f2a2624f07698f6674d31f"
+    },
+    {
+      "$oid": "686590261f4cc2e0ddddc610"
+    }
+  ],
+  "__v": 33
 },
 {
   "_id": {
-    "$oid": "676a6b871aa5919cb2b2e8dc"
+    "$oid": "67ac491396003c7411aea948"
   },
   "userId": {
     "$oid": "6708fb9f349574b62d828725"
   },
   "name": "ROADTRIP TEST",
-  "days": 10,
   "startLocation": "Calgary",
   "startDateTime": {
     "$date": "2025-01-01T08:00:00.000Z"
@@ -219,103 +239,60 @@
   },
   "currency": "EUR",
   "notes": "Let's go to Canada !!!",
-  "stages": [
-    {
-      "$oid": "676f9ee346b8662fdd944061"
-    },
-    {
-      "$oid": "6794af462a35101dc5b292c4"
-    }
-  ],
-  "stops": [],
-  "__v": 46,
   "photos": [],
   "documents": [],
   "thumbnail": {
     "$oid": "679901c5126ea5384c4a5037"
-  }
-},
-{
-  "_id": {
-    "$oid": "67949af2458aa0641b3095e5"
   },
-  "userId": {
-    "$oid": "6708fb9f349574b62d828725"
-  },
-  "name": "New",
-  "startLocation": "",
-  "startDateTime": {
-    "$date": "2025-01-25T08:03:49.548Z"
-  },
-  "endLocation": "",
-  "endDateTime": {
-    "$date": "2025-01-25T08:03:49.548Z"
-  },
-  "currency": "EUR",
-  "notes": "",
-  "photos": [],
-  "documents": [],
-  "stages": [
+  "steps": [
     {
-      "$oid": "67949b358c5de5ba80b15651"
+      "$oid": "67ac491596003c7411aea98d"
+    },
+    {
+      "$oid": "67d7c4b15c5cee2d1bbfa64f"
+    },
+    {
+      "$oid": "67d7c6115c5cee2d1bbfa692"
+    },
+    {
+      "$oid": "67d7e4e0e9632e538c0a57d6"
+    },
+    {
+      "$oid": "67d7e532e9632e538c0a57e5"
+    },
+    {
+      "$oid": "686e8f5461b56fe61dbe7dea"
+    },
+    {
+      "$oid": "686f5030f06ecf32f56940a1"
     }
   ],
-  "stops": [],
-  "thumbnail": {
-    "$oid": "67949af3458aa0641b3095e6"
-  },
-  "__v": 1
+  "__v": 18
 },
 {
   "_id": {
-    "$oid": "67a8589091c9b3eaf191791d"
+    "$oid": "6873cb9382558d9a62e9fc12"
   },
   "userId": {
     "$oid": "6708fb9f349574b62d828725"
   },
-  "name": "Roadtrip Nouvelle Version",
-  "startLocation": "Chartres",
+  "name": "Test nEw Roadtripnckxkx",
+  "startLocation": "Jdjdjd",
   "startDateTime": {
-    "$date": "2025-07-29T08:00:00.000Z"
+    "$date": "2025-07-13T15:06:47.413Z"
   },
-  "endLocation": "Barcelone",
+  "endLocation": "Bdjdjfkf",
   "endDateTime": {
-    "$date": "2025-08-21T22:00:00.000Z"
+    "$date": "2025-07-20T15:06:47.413Z"
   },
   "currency": "EUR",
-  "notes": "Mini Trip",
-  "photos": [],
-  "documents": [],
-  "steps": [],
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67a8591991c9b3eaf1917920"
-  },
-  "userId": {
-    "$oid": "6708fb9f349574b62d828725"
-  },
-  "name": "Roadtrip With Step",
-  "startLocation": "Chartres",
-  "startDateTime": {
-    "$date": "2025-07-29T08:00:00.000Z"
-  },
-  "endLocation": "Barcelone",
-  "endDateTime": {
-    "$date": "2025-08-21T22:00:00.000Z"
-  },
-  "currency": "EUR",
-  "notes": "Mini Trip",
+  "notes": "Jxjdjxf",
   "photos": [],
   "documents": [],
   "steps": [
     {
-      "$oid": "67a85b4035436832048a185e"
-    },
-    {
-      "$oid": "67a860e061109e48f5ddc87f"
+      "$oid": "6873cbb54db71d191b9afaa1"
     }
   ],
-  "__v": 4
+  "__v": 1
 }]

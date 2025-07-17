@@ -1,0 +1,3980 @@
+[{
+  "_id": {
+    "$oid": "6863bf8df69c0ced579346a4"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 29,
+    "completed": 29,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalSteps": 29,
+      "synchronizedSteps": 2,
+      "unchangedSteps": 27,
+      "details": [
+        {
+          "stepId": {
+            "$oid": "67ac491096003c7411aea866"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934758"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea877"
+          },
+          "stepName": "Lundbreck",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934759"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea89e"
+          },
+          "stepName": "Waterton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793475a"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8b7"
+          },
+          "stepName": "Glacier National Park - Saint Mary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793475b"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea926"
+          },
+          "stepName": "Helena",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793475c"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8cc"
+          },
+          "stepName": "Bozeman",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793475d"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8d9"
+          },
+          "stepName": "Mammoth Hot Spring",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793475e"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea8ee"
+          },
+          "stepName": "Canyon Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "changed": true,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793475f"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea90f"
+          },
+          "stepName": "Norris Geyser Basin",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934760"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67dff4ad187af529f4d4e081"
+          },
+          "stepName": "Grand Prismatic",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934761"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea920"
+          },
+          "stepName": "Grant Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934762"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea921"
+          },
+          "stepName": "Grand Teton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934763"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea922"
+          },
+          "stepName": "Jackson Hole",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-10T08:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-10T08:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T13:00:00.000Z"
+            }
+          },
+          "changed": true,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934764"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea928"
+          },
+          "stepName": "Dillon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934765"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea929"
+          },
+          "stepName": "Dutton Ranch",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934766"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea923"
+          },
+          "stepName": "Missoula ",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934767"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92a"
+          },
+          "stepName": "Lac Mac Donald",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934768"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea924"
+          },
+          "stepName": "Fort Steele",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934769"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92b"
+          },
+          "stepName": "Saint Clair Canyon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793476a"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67f2a2624f07698f6674d31f"
+          },
+          "stepName": "Dog Lake Trail",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793476b"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0cc8a4e88eb4d0598a0a7"
+          },
+          "stepName": "Columbia Icefield",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793476c"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0ced24e88eb4d0598a0ff"
+          },
+          "stepName": "Jasper",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793476d"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d6ad1376e49417e4ccda"
+          },
+          "stepName": "Saskatchewan",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793476e"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d8971376e49417e4cd1b"
+          },
+          "stepName": "Lac Peyto",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced5793476f"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d9ae1376e49417e4cd45"
+          },
+          "stepName": "Lac Bow",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934770"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67e841644cda8e73cf87ee41"
+          },
+          "stepName": "Hector Lake",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934771"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1da621376e49417e4cd6f"
+          },
+          "stepName": "Lac Louise",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934772"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b222e35cb1ce4a82d73077"
+          },
+          "stepName": "Banff",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-20T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-20T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934773"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea899"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863bf94f69c0ced57934774"
+          }
+        }
+      ]
+    },
+    "stepsProcessed": 29,
+    "stepsSynchronized": 2,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-01T10:59:25.160Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T10:59:32.582Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-01T10:59:25.220Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-01T10:59:32.572Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863cc936b669e84ca259c26"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 29,
+    "completed": 29,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalSteps": 29,
+      "synchronizedSteps": 0,
+      "unchangedSteps": 29,
+      "details": [
+        {
+          "stepId": {
+            "$oid": "67ac491096003c7411aea866"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cd8"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea877"
+          },
+          "stepName": "Lundbreck",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cd9"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea89e"
+          },
+          "stepName": "Waterton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cda"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8b7"
+          },
+          "stepName": "Glacier National Park - Saint Mary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cdb"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea926"
+          },
+          "stepName": "Helena",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cdc"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8cc"
+          },
+          "stepName": "Bozeman",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cdd"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8d9"
+          },
+          "stepName": "Mammoth Hot Spring",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cde"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea8ee"
+          },
+          "stepName": "Canyon Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cdf"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea90f"
+          },
+          "stepName": "Norris Geyser Basin",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce0"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67dff4ad187af529f4d4e081"
+          },
+          "stepName": "Grand Prismatic",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce1"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea920"
+          },
+          "stepName": "Grant Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce2"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea921"
+          },
+          "stepName": "Grand Teton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce3"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea922"
+          },
+          "stepName": "Jackson Hole",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-10T08:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T13:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-10T08:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T13:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce4"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea928"
+          },
+          "stepName": "Dillon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce5"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea929"
+          },
+          "stepName": "Dutton Ranch",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce6"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea923"
+          },
+          "stepName": "Missoula ",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce7"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92a"
+          },
+          "stepName": "Lac Mac Donald",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce8"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea924"
+          },
+          "stepName": "Fort Steele",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ce9"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92b"
+          },
+          "stepName": "Saint Clair Canyon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cea"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67f2a2624f07698f6674d31f"
+          },
+          "stepName": "Dog Lake Trail",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ceb"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0cc8a4e88eb4d0598a0a7"
+          },
+          "stepName": "Columbia Icefield",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cec"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0ced24e88eb4d0598a0ff"
+          },
+          "stepName": "Jasper",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259ced"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d6ad1376e49417e4ccda"
+          },
+          "stepName": "Saskatchewan",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cee"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d8971376e49417e4cd1b"
+          },
+          "stepName": "Lac Peyto",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cef"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d9ae1376e49417e4cd45"
+          },
+          "stepName": "Lac Bow",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cf0"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67e841644cda8e73cf87ee41"
+          },
+          "stepName": "Hector Lake",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cf1"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1da621376e49417e4cd6f"
+          },
+          "stepName": "Lac Louise",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cf2"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b222e35cb1ce4a82d73077"
+          },
+          "stepName": "Banff",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-20T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-20T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cf3"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea899"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cc9a6b669e84ca259cf4"
+          }
+        }
+      ]
+    },
+    "stepsProcessed": 29,
+    "stepsSynchronized": 0,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-01T11:54:59.779Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T11:55:06.440Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-01T11:54:59.838Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-01T11:55:06.421Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863cddf1f7f41cd0458ef1b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 29,
+    "completed": 29,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalSteps": 29,
+      "synchronizedSteps": 0,
+      "unchangedSteps": 29,
+      "details": [
+        {
+          "stepId": {
+            "$oid": "67ac491096003c7411aea866"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efcd"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea877"
+          },
+          "stepName": "Lundbreck",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efce"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea89e"
+          },
+          "stepName": "Waterton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efcf"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8b7"
+          },
+          "stepName": "Glacier National Park - Saint Mary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd0"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea926"
+          },
+          "stepName": "Helena",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd1"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8cc"
+          },
+          "stepName": "Bozeman",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd2"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8d9"
+          },
+          "stepName": "Mammoth Hot Spring",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd3"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea8ee"
+          },
+          "stepName": "Canyon Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd4"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea90f"
+          },
+          "stepName": "Norris Geyser Basin",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd5"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67dff4ad187af529f4d4e081"
+          },
+          "stepName": "Grand Prismatic",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd6"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea920"
+          },
+          "stepName": "Grant Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd7"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea921"
+          },
+          "stepName": "Grand Teton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd8"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea922"
+          },
+          "stepName": "Jackson Hole",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-10T08:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T13:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-10T08:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T13:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efd9"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea928"
+          },
+          "stepName": "Dillon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efda"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea929"
+          },
+          "stepName": "Dutton Ranch",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efdb"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea923"
+          },
+          "stepName": "Missoula ",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efdc"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92a"
+          },
+          "stepName": "Lac Mac Donald",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efdd"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea924"
+          },
+          "stepName": "Fort Steele",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efde"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92b"
+          },
+          "stepName": "Saint Clair Canyon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efdf"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67f2a2624f07698f6674d31f"
+          },
+          "stepName": "Dog Lake Trail",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe0"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0cc8a4e88eb4d0598a0a7"
+          },
+          "stepName": "Columbia Icefield",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe1"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0ced24e88eb4d0598a0ff"
+          },
+          "stepName": "Jasper",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe2"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d6ad1376e49417e4ccda"
+          },
+          "stepName": "Saskatchewan",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe3"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d8971376e49417e4cd1b"
+          },
+          "stepName": "Lac Peyto",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe4"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d9ae1376e49417e4cd45"
+          },
+          "stepName": "Lac Bow",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe5"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67e841644cda8e73cf87ee41"
+          },
+          "stepName": "Hector Lake",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe6"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1da621376e49417e4cd6f"
+          },
+          "stepName": "Lac Louise",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe7"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b222e35cb1ce4a82d73077"
+          },
+          "stepName": "Banff",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-20T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-20T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe8"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea899"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863cde61f7f41cd0458efe9"
+          }
+        }
+      ]
+    },
+    "stepsProcessed": 29,
+    "stepsSynchronized": 0,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-01T12:00:31.729Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:00:38.532Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-01T12:00:31.788Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-01T12:00:38.518Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d1b17b566640001b107b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 29,
+    "completed": 29,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalSteps": 29,
+      "synchronizedSteps": 4,
+      "unchangedSteps": 25,
+      "details": [
+        {
+          "stepId": {
+            "$oid": "67ac491096003c7411aea866"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b112d"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea877"
+          },
+          "stepName": "Lundbreck",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b112e"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea89e"
+          },
+          "stepName": "Waterton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b112f"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8b7"
+          },
+          "stepName": "Glacier National Park - Saint Mary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1130"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea926"
+          },
+          "stepName": "Helena",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1131"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8cc"
+          },
+          "stepName": "Bozeman",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1132"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8d9"
+          },
+          "stepName": "Mammoth Hot Spring",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1133"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea8ee"
+          },
+          "stepName": "Canyon Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1134"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea90f"
+          },
+          "stepName": "Norris Geyser Basin",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T15:00:00.000Z"
+            }
+          },
+          "changed": true,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1135"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67dff4ad187af529f4d4e081"
+          },
+          "stepName": "Grand Prismatic",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1136"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea920"
+          },
+          "stepName": "Grant Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1137"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea921"
+          },
+          "stepName": "Grand Teton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1138"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea922"
+          },
+          "stepName": "Jackson Hole",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-10T08:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T13:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-09T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T16:00:00.000Z"
+            }
+          },
+          "changed": true,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1139"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea928"
+          },
+          "stepName": "Dillon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b113a"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea929"
+          },
+          "stepName": "Dutton Ranch",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b113b"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea923"
+          },
+          "stepName": "Missoula ",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b113c"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92a"
+          },
+          "stepName": "Lac Mac Donald",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b113d"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea924"
+          },
+          "stepName": "Fort Steele",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b113e"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92b"
+          },
+          "stepName": "Saint Clair Canyon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b113f"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67f2a2624f07698f6674d31f"
+          },
+          "stepName": "Dog Lake Trail",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1140"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0cc8a4e88eb4d0598a0a7"
+          },
+          "stepName": "Columbia Icefield",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1141"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0ced24e88eb4d0598a0ff"
+          },
+          "stepName": "Jasper",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1142"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d6ad1376e49417e4ccda"
+          },
+          "stepName": "Saskatchewan",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1143"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d8971376e49417e4cd1b"
+          },
+          "stepName": "Lac Peyto",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1144"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d9ae1376e49417e4cd45"
+          },
+          "stepName": "Lac Bow",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1145"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67e841644cda8e73cf87ee41"
+          },
+          "stepName": "Hector Lake",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1146"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1da621376e49417e4cd6f"
+          },
+          "stepName": "Lac Louise",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-17T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-18T17:00:00.000Z"
+            }
+          },
+          "changed": true,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1147"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b222e35cb1ce4a82d73077"
+          },
+          "stepName": "Banff",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-20T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T12:00:00.000Z"
+            }
+          },
+          "changed": true,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1148"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea899"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d1b87b566640001b1149"
+          }
+        }
+      ]
+    },
+    "stepsProcessed": 29,
+    "stepsSynchronized": 4,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-01T12:16:49.312Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:16:56.260Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-01T12:16:49.349Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-01T12:16:56.251Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d3ce7b566640001b1174"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "roadtripId": {
+    "$oid": "67ac491096003c7411aea863"
+  },
+  "status": "completed",
+  "progress": {
+    "total": 29,
+    "completed": 29,
+    "percentage": 100
+  },
+  "results": {
+    "summary": {
+      "totalSteps": 29,
+      "synchronizedSteps": 1,
+      "unchangedSteps": 28,
+      "details": [
+        {
+          "stepId": {
+            "$oid": "67ac491096003c7411aea866"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-29T12:55:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-30T14:30:49.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1226"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea877"
+          },
+          "stepName": "Lundbreck",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-30T16:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-07-31T08:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1227"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea89e"
+          },
+          "stepName": "Waterton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-07-31T09:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-01T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1228"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8b7"
+          },
+          "stepName": "Glacier National Park - Saint Mary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-01T18:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1229"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea926"
+          },
+          "stepName": "Helena",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T12:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-03T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b122a"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8cc"
+          },
+          "stepName": "Bozeman",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-03T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-04T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b122b"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491296003c7411aea8d9"
+          },
+          "stepName": "Mammoth Hot Spring",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-04T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-05T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b122c"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea8ee"
+          },
+          "stepName": "Canyon Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-05T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T09:00:00.000Z"
+            }
+          },
+          "changed": true,
+          "_id": {
+            "$oid": "6863d3d47b566640001b122d"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea90f"
+          },
+          "stepName": "Norris Geyser Basin",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-06T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-06T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b122e"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67dff4ad187af529f4d4e081"
+          },
+          "stepName": "Grand Prismatic",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-07T09:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-07T16:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b122f"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea920"
+          },
+          "stepName": "Grant Village",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T08:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-08T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1230"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea921"
+          },
+          "stepName": "Grand Teton",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-08T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-09T16:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1231"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea922"
+          },
+          "stepName": "Jackson Hole",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-09T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T16:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-09T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-10T16:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1232"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea928"
+          },
+          "stepName": "Dillon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T13:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1233"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea929"
+          },
+          "stepName": "Dutton Ranch",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T17:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-11T17:30:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1234"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea923"
+          },
+          "stepName": "Missoula ",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-11T19:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T08:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1235"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92a"
+          },
+          "stepName": "Lac Mac Donald",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T11:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-12T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1236"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea924"
+          },
+          "stepName": "Fort Steele",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-12T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1237"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491396003c7411aea92b"
+          },
+          "stepName": "Saint Clair Canyon",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T10:30:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1238"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67f2a2624f07698f6674d31f"
+          },
+          "stepName": "Dog Lake Trail",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-13T17:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1239"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0cc8a4e88eb4d0598a0a7"
+          },
+          "stepName": "Columbia Icefield",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-13T16:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-14T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b123a"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b0ced24e88eb4d0598a0ff"
+          },
+          "stepName": "Jasper",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-14T14:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b123b"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d6ad1376e49417e4ccda"
+          },
+          "stepName": "Saskatchewan",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-15T15:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T09:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b123c"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d8971376e49417e4cd1b"
+          },
+          "stepName": "Lac Peyto",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b123d"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1d9ae1376e49417e4cd45"
+          },
+          "stepName": "Lac Bow",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T12:15:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T14:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b123e"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67e841644cda8e73cf87ee41"
+          },
+          "stepName": "Hector Lake",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-16T14:05:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-16T15:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b123f"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b1da621376e49417e4cd6f"
+          },
+          "stepName": "Lac Louise",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-17T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-18T17:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-17T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-18T17:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1240"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67b222e35cb1ce4a82d73077"
+          },
+          "stepName": "Banff",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T12:00:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-19T10:00:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-19T12:00:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1241"
+          }
+        },
+        {
+          "stepId": {
+            "$oid": "67ac491196003c7411aea899"
+          },
+          "stepName": "Calgary",
+          "before": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "after": {
+            "arrivalDateTime": {
+              "$date": "2025-08-20T10:40:00.000Z"
+            },
+            "departureDateTime": {
+              "$date": "2025-08-21T18:15:00.000Z"
+            }
+          },
+          "changed": false,
+          "_id": {
+            "$oid": "6863d3d47b566640001b1242"
+          }
+        }
+      ]
+    },
+    "stepsProcessed": 29,
+    "stepsSynchronized": 1,
+    "errors": []
+  },
+  "createdAt": {
+    "$date": "2025-07-01T12:25:50.408Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:25:56.885Z"
+  },
+  "__v": 0,
+  "startedAt": {
+    "$date": "2025-07-01T12:25:50.444Z"
+  },
+  "completedAt": {
+    "$date": "2025-07-01T12:25:56.878Z"
+  }
+}]

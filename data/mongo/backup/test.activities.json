@@ -26,7 +26,8 @@
   "notes": "Miam miam",
   "files": [],
   "photos": [],
-  "__v": 0
+  "__v": 0,
+  "active": true
 },
 {
   "_id": {
@@ -56,7 +57,8 @@
   "notes": "Daily Rates\n(GST included)\n\n1 hour: $60\n1.5 hour: $85\n2 hour: $110 \n3 hours: $155\n5 hours: $225\n8 hours: $285\n\nJuly & August Schedule\n1 hour — 9am → 5pm leaving every hour on the hour (no ride at noon)\n1.5 hour — 11am, 2pm, 5pm\n2 hour — 9:30am, 12:30pm, 3:30pm\n3 hour — 9:30am, 1:30pm on Sunday\n5 hour — 9am\nFull Day — 8:30am",
   "files": [],
   "photos": [],
-  "__v": 0
+  "__v": 0,
+  "active": true
 },
 {
   "_id": {
@@ -92,7 +94,8 @@
   "duration": 0,
   "latitude": 0,
   "longitude": 0,
-  "typeDuration": "M"
+  "typeDuration": "M",
+  "active": true
 },
 {
   "_id": {
@@ -128,7 +131,8 @@
   "reservationNumber": "",
   "website": "",
   "duration": 0,
-  "typeDuration": "M"
+  "typeDuration": "M",
+  "active": true
 },
 {
   "_id": {
@@ -164,7 +168,8 @@
   },
   "startDateTime": {
     "$date": "2025-07-30T10:15:00.000Z"
-  }
+  },
+  "active": true
 },
 {
   "_id": {
@@ -197,7 +202,8 @@
   "__v": 0,
   "thumbnail": {
     "$oid": "67a11ae5b319cf0cc6116e10"
-  }
+  },
+  "active": true
 },
 {
   "_id": {
@@ -232,7 +238,8 @@
     "$oid": "67961d3edd9ade8e6dfddb7d"
   },
   "duration": 0,
-  "typeDuration": "M"
+  "typeDuration": "M",
+  "active": true
 },
 {
   "_id": {
@@ -265,7 +272,8 @@
   "__v": 0,
   "thumbnail": {
     "$oid": "67a1090f77839a3968fc361a"
-  }
+  },
+  "active": true
 },
 {
   "_id": {
@@ -300,7 +308,8 @@
     "$oid": "67971e974175d662fd6ddeb2"
   },
   "duration": 0,
-  "typeDuration": "M"
+  "typeDuration": "M",
+  "active": true
 },
 {
   "_id": {
@@ -333,7 +342,8 @@
   "__v": 0,
   "thumbnail": {
     "$oid": "6797277502964af2f83ec6d6"
-  }
+  },
+  "active": true
 },
 {
   "_id": {
@@ -366,7 +376,8 @@
   "__v": 0,
   "thumbnail": {
     "$oid": "6797245482f1400875364a58"
-  }
+  },
+  "active": true
 },
 {
   "_id": {
@@ -401,7 +412,8 @@
     "$oid": "67990dcbff986522cc9cfb09"
   },
   "duration": 0,
-  "typeDuration": "M"
+  "typeDuration": "M",
+  "active": true
 },
 {
   "_id": {
@@ -433,7 +445,8 @@
   "notes": "",
   "photos": [],
   "documents": [],
-  "__v": 0
+  "__v": 0,
+  "active": true
 },
 {
   "_id": {
@@ -466,7 +479,8 @@
   "__v": 0,
   "thumbnail": {
     "$oid": "67a1086477839a3968fc35ec"
-  }
+  },
+  "active": true
 },
 {
   "_id": {
@@ -499,28 +513,2328 @@
   "__v": 0,
   "thumbnail": {
     "$oid": "67a108e177839a3968fc3602"
-  }
+  },
+  "active": true
 },
 {
   "_id": {
-    "$oid": "67a864decba77366c5dd80a1"
+    "$oid": "67ac484a52690ffd75f8f8ff"
   },
   "userId": {
     "$oid": "6708fb9f349574b62d828725"
   },
   "stepId": {
-    "$oid": "67a85b4035436832048a185e"
+    "$oid": "67ac484a52690ffd75f8f8f1"
   },
-  "name": "Ballade",
+  "name": "Restaurant Mexicain",
+  "address": "Marina inn Bay",
   "latitude": 0,
   "longitude": 0,
+  "website": "",
+  "phone": "+15105644444",
+  "email": "",
+  "startDateTime": {
+    "$date": "2023-08-03T16:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2023-08-03T18:00:00.000Z"
+  },
+  "duration": 2,
+  "typeDuration": "H",
+  "reservationNumber": "ABC123",
+  "price": 100,
+  "notes": "Miam miam",
   "photos": [],
   "documents": [],
+  "thumbnail": null,
   "__v": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea840"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491096003c7411aea832"
+  },
+  "name": "Restaurant Mexicain",
+  "address": "Marina inn Bay",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "+15105644444",
+  "email": "",
+  "startDateTime": {
+    "$date": "2023-08-03T16:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2023-08-03T18:00:00.000Z"
+  },
+  "duration": 2,
+  "typeDuration": "H",
+  "reservationNumber": "ABC123",
+  "price": 100,
+  "notes": "Miam miam",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "__v": 0,
+  "active": true,
+  "algoliaId": "",
+  "currency": "USD",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée"
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea870"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491096003c7411aea866"
+  },
+  "name": "Johnny Boy ",
+  "address": "CanaDream RV Rentals and Sales Calgary, Crosspointe Drive, Calgary, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-30T10:00:00.000Z"
+  },
   "endDateTime": {
     "$date": "2025-07-30T12:00:00.000Z"
   },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "2410161366266",
+  "price": 6200.81,
+  "notes": "Check in : https://www.canadream.com/online-check-in",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e5b3076278a7ad299fcd4f"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "6863943ae8818043fb14b15b"
+  },
+  "__v": 1,
+  "currency": "EUR",
+  "active": true,
+  "algoliaId": "",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Transport"
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea882"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea877"
+  },
+  "name": "Lundbreck Falls",
+  "address": "Lundbreck Falls, Range Road 24B, Lundbreck, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
   "startDateTime": {
-    "$date": "2025-07-29T14:05:00.000Z"
+    "$date": "2025-07-30T16:30:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-30T17:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [
+    {
+      "$oid": "686401104777c0a3c4ce065a"
+    }
+  ],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "686401174777c0a3c4ce0663"
+  },
+  "__v": 111,
+  "duration": 0,
+  "typeDuration": "M",
+  "active": true,
+  "algoliaId": "trail-10944582",
+  "currency": "USD",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée"
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea88a"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea877"
+  },
+  "name": "Frank Slide Trailhead",
+  "address": "Frank Slide Trailhead, 153 Street, Blairmore, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-30T17:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-30T18:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "Rencontre avec un ours !!! MAGNIFIQUE !!!",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "68617b7b3c9acd9a2743bcd4"
+  },
+  "__v": 0,
+  "active": true,
+  "currency": "USD",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée",
+  "algoliaId": "trail-11312472",
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea892"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea877"
+  },
+  "name": "Star Creek Falls Loop",
+  "address": "Star Creek Falls, Crowsnest Pass, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-30T18:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-30T19:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "6861c9c4a9bfb0bff6d86d25"
+  },
+  "__v": 0,
+  "active": true,
+  "algoliaId": "trail-10338532",
+  "currency": "USD",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée"
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea8a8"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea89e"
+  },
+  "name": "Balade à Cheval",
+  "address": "Alpine Stables Ltd, marquis road, Waterton Park, AB, Canada",
+  "website": "https://www.alpinestables.com/rates/",
+  "phone": "403-859-2462",
+  "email": "alpinestablesltd@gmail.com",
+  "startDateTime": {
+    "$date": "2025-08-01T08:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-01T12:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 440,
+  "notes": "Nom des chevaux :\n- Leni : Oldie\n- Loan : Nash \n- Marielle : Walt\n- Maxime (moi) : Spider\n\nSouvenir balade Bryce Canyon",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "68638a6c87eb8c0936d50f2c"
+  },
+  "__v": 0,
+  "active": true,
+  "currency": "CAD",
+  "duration": 0,
+  "typeDuration": "M",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée",
+  "algoliaId": ""
+},
+{
+  "_id": {
+    "$oid": "67ac491296003c7411aea8b0"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea89e"
+  },
+  "name": "Red Rock Canyon",
+  "address": "Red Rock Canyon Loop, Waterton Park, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-31T09:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-31T10:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "Longueur : 0.8km. Dénivelé : 31m. Temps : 15m",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "68613f152dc867b99b27a9db"
+  },
+  "__v": 0,
+  "active": true,
+  "currency": "USD",
+  "duration": 0,
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée",
+  "typeDuration": "M",
+  "algoliaId": "trail-10243657",
+  "latitude": 49.1320773,
+  "longitude": -114.0262327
+},
+{
+  "_id": {
+    "$oid": "67ac491296003c7411aea8c5"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491296003c7411aea8b7"
+  },
+  "name": "Glacier Grinell",
+  "address": "Grinnell Glacier Trail, Browning, Montana, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-02T08:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-02T17:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "St. Mary Visitor Center\n8:35 a.m.\n9:35 a.m.\n4:35 p.m.\n6:35 p.m.\nMany Glacier Hotel /\nSwiftcurrent Motor Inn\nAdult $14\nChild $7",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "6862278e7e85b2c732e003e2"
+  },
+  "__v": 0,
+  "active": true,
+  "currency": "USD",
+  "algoliaId": "trail-10005697",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée",
+  "latitude": 48.7747544,
+  "longitude": -113.6979408
+},
+{
+  "_id": {
+    "$oid": "67ac491296003c7411aea8e7"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491296003c7411aea8d9"
+  },
+  "name": "Mammoth Hot Springs",
+  "address": "Mammoth, WY 82190, États-Unis",
+  "latitude": 44.9768789,
+  "longitude": -110.6991303,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-04T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-04T15:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67971e974175d662fd6ddeb2"
+  },
+  "__v": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea8fc"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea8ee"
+  },
+  "name": "Canyon Yellowstone",
+  "address": "Grand Canyon of the Yellowstone, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-05T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-05T17:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67dff1a42244b24bf7365e8b"
+  },
+  "__v": 0,
+  "active": true,
+  "algoliaId": "trail-10258692",
+  "currency": "USD",
+  "latitude": 44.719745,
+  "longitude": -110.48532,
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée"
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea90c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea8ee"
+  },
+  "name": "Tower Roosevelt Falls",
+  "address": "Tower/Roosevelt Service Station, Yellowstone National Park, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-05T10:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-05T11:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "__v": 0,
+  "active": true,
+  "algoliaId": "trail-10233520",
+  "currency": "USD",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée"
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea919"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea90f"
+  },
+  "name": "Norris Geyser Basin",
+  "address": "Norris Geyser Basin Trailhead, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-06T10:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-06T11:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67e04323e0d610596f0a6e02"
+  },
+  "__v": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67b0b6bbb07ed3ea5170cd80"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea922"
+  },
+  "name": "Rodeo",
+  "address": "Rodeo Drive, Jackson, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-09T19:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-09T22:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e01b0e40bd43b84da3e680"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "67e0845802fecc1e49a61bf5"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67b0c8263c2b066051434fb1"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea899"
+  },
+  "name": "Bye Bye Johnny Boy ",
+  "address": "CanaDream RV Rentals and Sales Calgary, Crosspointe Drive, Calgary, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-20T10:40:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-20T12:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "68616da6b68a45c1af2efc83"
+  },
+  "active": true,
+  "algoliaId": "",
+  "currency": "USD",
+  "duration": 0,
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée",
+  "typeDuration": "M"
+},
+{
+  "_id": {
+    "$oid": "67b0cd2f4e88eb4d0598a0c7"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b0cc8a4e88eb4d0598a0a7"
+  },
+  "name": "Columbia Icefield Expérience ",
+  "address": "Columbia Icefield Glacier Adventure, Parking lot, Icefields Parkway, District d'amélioration No 12, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-14T08:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-14T12:00:00.000Z"
+  },
+  "reservationNumber": "3189363",
+  "price": 0,
+  "notes": "Arrivée 30 min avant le départ\n",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67fb8bd4cd80cd7677027dff"
+    },
+    {
+      "$oid": "67fb8bd8cd80cd7677027e06"
+    }
+  ],
+  "__v": 2,
+  "thumbnail": {
+    "$oid": "67fb8ccccd80cd7677027e5b"
+  },
+  "active": true,
+  "currency": "USD",
+  "duration": 0,
+  "typeDuration": "M"
+},
+{
+  "_id": {
+    "$oid": "67b0d1ce99026036489675f0"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b0ced24e88eb4d0598a0ff"
+  },
+  "name": "Jasper",
+  "address": "Jasper, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-15T10:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-15T12:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67b0d4529902603648967680"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67b21f096b9ba0d015158757"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b1da621376e49417e4cd6f"
+  },
+  "name": "Takakaw Falls ",
+  "address": "Takakkaw Falls, District régional de Columbia-Shuswap, BC, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-17T10:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-17T12:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67b220366b9ba0d01515877e"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67b21f4f6b9ba0d015158761"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b1da621376e49417e4cd6f"
+  },
+  "name": "Emerald Lake",
+  "address": "Emerald Lake, District régional de Columbia-Shuswap, BC, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-17T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-17T17:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67b220686b9ba0d015158788"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67b21fbc6b9ba0d01515876b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b1da621376e49417e4cd6f"
+  },
+  "name": "Lac Louise",
+  "address": "CQ8J+PR4 Lake Louise, Alberta, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-18T07:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-18T12:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67b2217f5cb1ce4a82d7303d"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67b21ff06b9ba0d015158775"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b1da621376e49417e4cd6f"
+  },
+  "name": "Lac Moraine",
+  "address": "622 Moraine Lake Rd, Field, AB T0L, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-18T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-18T17:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67b221cf5cb1ce4a82d73055"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67b223265cb1ce4a82d73089"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b222e35cb1ce4a82d73077"
+  },
+  "name": "Johnston Canyon",
+  "address": "Johnston Canyon, Bow Valley Parkway, District d'amélioration No 9, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-19T10:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-19T12:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67b224155cb1ce4a82d73099"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67cdb9a4d0b0936d3894e440"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491096003c7411aea866"
+  },
+  "name": "Real Canadian super store ",
+  "address": "Real Canadian Superstore Seton Way, Seton Way Southeast, Calgary, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-30T13:00:49.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-30T14:30:49.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "686c31263ac4ce268ec3113f"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "active": true,
+  "currency": "USD",
+  "algoliaId": "",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Courses"
+},
+{
+  "_id": {
+    "$oid": "67cdc245a43ceb9e01a41cdd"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea89e"
+  },
+  "name": "Bear's Hump Trailhead",
+  "address": "Bear's Hump Trailhead, Waterton Park, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-31T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-31T12:30:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "Longueur : 2.3km. Dénivelé : 218m. Temps : 1h10m",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67d6f5d0e09cba613d8eee1c"
+  },
+  "__v": 0,
+  "active": true,
+  "algoliaId": "trail-10241623",
+  "currency": "USD",
+  "duration": 0,
+  "latitude": 49.0608319,
+  "longitude": -113.9080834,
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée",
+  "typeDuration": "M"
+},
+{
+  "_id": {
+    "$oid": "67cdc530382b7c22c2414ae7"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea89e"
+  },
+  "name": "Bertha Falls and Lake",
+  "address": "Bertha Trailhead, Waterton Park, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-31T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-31T18:00:00.000Z"
+  },
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "Longueur : 5.3km. Dénivelé : 202m. Temps : 1h38m",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67d6f605e09cba613d8eee2e"
+  },
+  "__v": 0,
+  "active": true,
+  "algoliaId": "trail-10291421",
+  "currency": "USD",
+  "duration": 0,
+  "latitude": 49.0470341,
+  "longitude": -113.916643,
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée",
+  "typeDuration": "M"
+},
+{
+  "_id": {
+    "$oid": "67d7036f5ecbad61fac6c881"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491296003c7411aea8d9"
+  },
+  "name": "Rafting",
+  "startDateTime": {
+    "$date": "2025-08-04T15:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-04T17:30:00.000Z"
+  },
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e6d57ab940b22a2af5a345"
+    }
+  ],
+  "__v": 1,
+  "address": "Wild West Rafting: Yellowstone Whitewater Rafting, US Highway 89 South, Gardiner, Montana, États-Unis",
+  "email": "wildwestrafting@gmail.com",
+  "notes": "",
+  "phone": "(406) 848-2252",
+  "price": 369.9,
+  "reservationNumber": "274046967",
+  "thumbnail": {
+    "$oid": "68639fcfe8818043fb14b210"
+  },
+  "website": "wildwestrafting.com",
+  "active": true,
+  "currency": "USD",
+  "duration": 0,
+  "typeDuration": "M",
+  "algoliaId": "",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Autre"
+},
+{
+  "_id": {
+    "$oid": "67d7c79f60b1d0e2897baf1f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67d7c6115c5cee2d1bbfa692"
+  },
+  "name": "Trst",
+  "address": "Chartres, France",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-03-19T12:00:00.000Z"
+  },
+  "endDateTime": null,
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "1\n2\n33\nE\nD\nF\nG\nF\nF\nG\nG\nH\nH\nF\nC\nH\nH\nH",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "duration": 0,
+  "typeDuration": "M",
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67dff2242244b24bf7365ee0"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea90f"
+  },
+  "name": "Hayden Valley",
+  "address": "Hayden Valley, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-06T12:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-06T13:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67e04ca8d015f5a240d3707d"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67dff2e22244b24bf7365f1e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea90f"
+  },
+  "name": "Mud Volcano",
+  "address": "Mud Volcano, Yellowstone National Park, Wyoming, États-Unis",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-06T13:30:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-06T15:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67dff2e32244b24bf7365f1f"
+  },
+  "__v": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67dff52b2759051a0b040ac7"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67dff4ad187af529f4d4e081"
+  },
+  "name": "Midway Geyser Trailhead",
+  "address": "Midway Geyser Basin Trail, Yellowstone National Park, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-07T09:30:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-07T10:30:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67dff7a7b70f8aa444071a04"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67dff5f9b70f8aa44407196c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67dff4ad187af529f4d4e081"
+  },
+  "name": "Fairy Falls Trailhead",
+  "address": "Fairy Falls Trailhead, Yellowstone National Park, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-07T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-07T13:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67dff7d8b70f8aa444071a23"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67dff717b70f8aa4440719ca"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67dff4ad187af529f4d4e081"
+  },
+  "name": "Biscuit Basin",
+  "address": "Biscuit Basin Trail, Yellowstone National Park, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-07T13:15:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-07T13:45:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67dff8c0b70f8aa444071a42"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67dff4ad187af529f4d4e081"
+  },
+  "name": "Old Faithful",
+  "address": "Upper Geyser Basin Trailhead, Yellowstone National Park, Wyoming, États-Unis",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-07T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-07T16:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67e010c48a56856d34b2f067"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea920"
+  },
+  "name": "West Thumb Geyser Basin",
+  "address": "West Thumb Geyser Basin Trail, Mammoth Hot Springs, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-08T08:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-08T09:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "68627988e7365cbf38d8c497"
+  },
+  "active": true,
+  "algoliaId": "trail-10026574",
+  "currency": "USD",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée"
+},
+{
+  "_id": {
+    "$oid": "67e015c540bd43b84da3e397"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea921"
+  },
+  "name": "Lakeshore Trail",
+  "address": "Colter Bay Grocery Store, Lakeshore Trail, Moran, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-08T10:30:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-08T12:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67e04e4dd015f5a240d371d9"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67e0166540bd43b84da3e414"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea921"
+  },
+  "name": "Swan Lake and Heron Pond Trail",
+  "address": "Heron Pond and Swan Lake Loop, Moran, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-08T13:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-08T15:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67e019fe40bd43b84da3e5e9"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67e018d640bd43b84da3e55d"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea921"
+  },
+  "name": "Jenny Lake Trail",
+  "address": "Jenny Lake, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-09T10:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-09T12:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67e01ed240bd43b84da3e86b"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67e0197440bd43b84da3e57f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea921"
+  },
+  "name": "Taggart Lake",
+  "address": "Taggart Lake Trailhead, Moose, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-09T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-09T16:30:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67e0199f40bd43b84da3e5a1"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67e01cc940bd43b84da3e749"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea922"
+  },
+  "name": "Million Dollar Cowboy Bar",
+  "address": "Million Dollar Cowboy Bar, North Cache Street, Jackson, Wyoming, États-Unis",
+  "latitude": 43.4798525,
+  "longitude": -110.7625048,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-10T12:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-10T13:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67e01cca40bd43b84da3e74a"
+  },
+  "__v": 0,
+  "active": true,
+  "algoliaId": "",
+  "currency": "USD",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée"
+},
+{
+  "_id": {
+    "$oid": "67e01d3740bd43b84da3e76c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea922"
+  },
+  "name": "Mormon Row",
+  "address": "Mormon Row North Parking, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-10T08:30:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-10T09:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "68622805cf70c8bf1b273419"
+  },
+  "active": true,
+  "algoliaId": "trail-10036191",
+  "currency": "USD",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée"
+},
+{
+  "_id": {
+    "$oid": "67e01ddb40bd43b84da3e7ae"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea922"
+  },
+  "name": "Chapelle Transfiguration ",
+  "address": "Chapel of the Transfiguration, Moose, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-10T15:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-10T16:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67e01e0c40bd43b84da3e7cf"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67e01efc40bd43b84da3e88d"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea921"
+  },
+  "name": "Oxbow Bend",
+  "address": "Oxbow Bend, Oxbow Bend Turn, Moran, Wyoming, États-Unis",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-09T08:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-09T10:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67e01efd40bd43b84da3e88e"
+  },
+  "__v": 0,
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "67e791cae84f79be2dbb8e63"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491596003c7411aea98d"
+  },
+  "active": true,
+  "name": "Chutes",
+  "address": "Lundbreck Falls, Range Road 24B, Lundbreck, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-03-29T06:22:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-03-29T12:22:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée",
+  "algoliaId": "trail-10944582",
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67e832b5a0d2406ec5a7db04"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea899"
+  },
+  "active": true,
+  "name": "Heritage Park",
+  "address": "Heritage Park, Heritage Drive Southwest, Calgary, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-20T13:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-20T16:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e8339bf0db9bbcc8fc6e50"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea899"
+  },
+  "active": true,
+  "name": "Aéroport ",
+  "address": "Calgary International Airport (YYC), Airport Road Northeast, Calgary, AB, Canada",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-21T18:15:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-21T18:15:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e96856458175b3f782c308"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491096003c7411aea866"
+  },
+  "active": true,
+  "name": "Aéroport ",
+  "address": "Calgary International Airport (YYC), Airport Road Northeast, Calgary, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-29T12:55:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-29T15:05:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "JGXDEY",
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [
+    {
+      "$oid": "6872170109944583070389e1"
+    }
+  ],
+  "documents": [
+    {
+      "$oid": "687216f509944583070389da"
+    }
+  ],
+  "__v": 2,
+  "thumbnail": {
+    "$oid": "6864d0243262a941ab4e4b8a"
+  },
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Transport",
+  "algoliaId": "",
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67f29fa4d5ec8bffd235065b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea924"
+  },
+  "active": true,
+  "name": "Fort Steele Heritage Town",
+  "address": "Fort Steele Heritage Town, British Columbia 95, Fort Steele, BC, Canada",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-12T16:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-12T18:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fb8fe335c8eca8efb2fdba"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b0ced24e88eb4d0598a0ff"
+  },
+  "active": true,
+  "name": "Wapiti Lake Trailhead",
+  "address": "Wapiti Campground, AB-93A, Jasper, AB, Canada",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-14T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-14T18:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0,
+  "thumbnail": {
+    "$oid": "67fb90eb35c8eca8efb2fddc"
   }
+},
+{
+  "_id": {
+    "$oid": "67fb9254f658512f295bf7da"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b0ced24e88eb4d0598a0ff"
+  },
+  "active": true,
+  "name": "Sunwapta Falls",
+  "address": "Sunwapta Falls, District d'amélioration No 12, AB, Canada",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-15T13:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-15T15:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": {
+    "$oid": "67fb9255f658512f295bf7db"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fb92a7f658512f295bf810"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b1d6ad1376e49417e4ccda"
+  },
+  "active": true,
+  "name": "Mistaya Canyon",
+  "address": "Canada, Alberta, Saskatchewan River Crossing, Mistaya Canyon Trail Head - Banff",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-08-15T15:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-08-15T17:00:00.000Z"
+  },
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 2,
+  "thumbnail": {
+    "$oid": "68616d2bb68a45c1af2efc24"
+  },
+  "algoliaId": "",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "type": "Randonnée"
+},
+{
+  "_id": {
+    "$oid": "686237dbc2ac1a41250f7077"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491596003c7411aea98d"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Visite des chutes de Lundbreck",
+  "address": "Lundbreck, AB, Canada",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-01T10:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-01T14:00:00.000Z"
+  },
+  "duration": 4,
+  "typeDuration": "H",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669741e4503a471a1a3cf2"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669740e4503a471a1a3cee"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Visite du Palais des Ducs",
+  "address": "Palais des Ducs, Dijon",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-15T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-15T16:00:00.000Z"
+  },
+  "duration": 120,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 15,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Découvrez l'histoire de Dijon.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669741e4503a471a1a3cf4"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669740e4503a471a1a3cee"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Dégustation de vins",
+  "address": "Cave de la Maison des Vins, Dijon",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-16T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-16T13:00:00.000Z"
+  },
+  "duration": 120,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 20,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Dégustez les vins de Bourgogne.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669742e4503a471a1a3d01"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669741e4503a471a1a3cfd"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Visite des Hospices de Beaune",
+  "address": "2 Rue de l'Hôtel-Dieu, Beaune",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-17T15:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-17T17:00:00.000Z"
+  },
+  "duration": 120,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 12,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Admirez l'architecture médiévale.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669742e4503a471a1a3d03"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669741e4503a471a1a3cfd"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Dégustation à la Cave de l'Ange Gardien",
+  "address": "15 Rue de l'Ange Gardien, Beaune",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-18T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-18T13:00:00.000Z"
+  },
+  "duration": 120,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 25,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Dégustez des vins de la région.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669743e4503a471a1a3d17"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669742e4503a471a1a3d13"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Visite du Palais des Papes",
+  "address": "Place du Palais des Papes, Avignon",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-19T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-19T16:00:00.000Z"
+  },
+  "duration": 120,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 14,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Explorez la résidence des papes.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669743e4503a471a1a3d19"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669742e4503a471a1a3d13"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Promenade sur le Pont Saint-Bénézet",
+  "address": "Pont Saint-Bénézet, Avignon",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-20T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-20T12:00:00.000Z"
+  },
+  "duration": 60,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 5,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Admirez la vue sur le Rhône.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669747e4503a471a1a3d2d"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669747e4503a471a1a3d29"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Visite du Cours Mirabeau",
+  "address": "Cours Mirabeau, Aix-en-Provence",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-21T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-21T16:00:00.000Z"
+  },
+  "duration": 120,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Promenez-vous dans cette rue emblématique.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669747e4503a471a1a3d2f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669747e4503a471a1a3d29"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Dégustation de vins à Château La Dorgonne",
+  "address": "Château La Dorgonne, Aix-en-Provence",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-22T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-22T13:00:00.000Z"
+  },
+  "duration": 120,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 20,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Dégustez des vins locaux.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669749e4503a471a1a3d43"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669748e4503a471a1a3d3f"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Promenade sur la Promenade des Anglais",
+  "address": "Promenade des Anglais, Nice",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-23T14:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-23T16:00:00.000Z"
+  },
+  "duration": 120,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Profitez de la vue sur la mer.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669749e4503a471a1a3d45"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669748e4503a471a1a3d3f"
+  },
+  "active": true,
+  "type": "Visite",
+  "name": "Visite du Vieux Nice",
+  "address": "Vieux Nice, Nice",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": {
+    "$date": "2025-07-24T11:00:00.000Z"
+  },
+  "endDateTime": {
+    "$date": "2025-07-24T13:00:00.000Z"
+  },
+  "duration": 120,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "EUR",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Découvrez les ruelles colorées.",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686ea001392d1c4d68939a2a"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "686e8f5461b56fe61dbe7dea"
+  },
+  "active": true,
+  "type": "Randonnée",
+  "name": "visiter la tour Eiffel",
+  "address": "Paris",
+  "latitude": 48.8575475,
+  "longitude": 2.3513765,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "startDateTime": null,
+  "endDateTime": null,
+  "duration": 0,
+  "typeDuration": "M",
+  "reservationNumber": "",
+  "price": 0,
+  "currency": "USD",
+  "trailDistance": 0,
+  "trailElevation": 0,
+  "trailType": "",
+  "notes": "Créé via chatbot IA",
+  "photos": [],
+  "documents": [],
+  "algoliaId": "",
+  "__v": 0
 }]

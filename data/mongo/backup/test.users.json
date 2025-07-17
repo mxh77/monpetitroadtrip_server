@@ -23,16 +23,14 @@
   "username": "user2",
   "email": "maxime.heron+user2@gmail.com",
   "password": "$2a$10$hrdar/PgKowvWjCiba12O.7YEYCsjmqacreEuds1Mas1xJyOUSm6a",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67091923215f2119f6844233"
+  "__v": 0,
+  "dateCreated": {
+    "$date": "2025-07-13T06:51:21.189Z"
   },
-  "username": "user3",
-  "email": "maxime.heron+user3@gmail.com",
-  "password": "$2a$10$KZLZ8Y1eHUb2RTGqIP8gmeLlrAZwYmTqfNIy8fn5c5Cgg9cNp4oVC",
-  "__v": 0
+  "resetPasswordExpires": {
+    "$date": "2025-07-13T07:51:21.192Z"
+  },
+  "resetPasswordToken": "3a481b58a1bcd18215c1eb415b32c2a9caea1937"
 },
 {
   "_id": {
@@ -52,6 +50,54 @@
   "password": "$2a$10$TUkwRrDPfZEJTrM6efBhEOk2Oat/mOBWnAZxTpFIGc7AJ/Au6WHCG",
   "dateCreated": {
     "$date": "2024-10-13T05:23:13.223Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c1f9d3ca338a7a65ba5157"
+  },
+  "username": "user6",
+  "email": "maxime.heron+user6@gmail.com",
+  "password": "$2a$10$AzEh7EeW9zv0zPtSgynvGOLrk1riulVOCwaIpz4Q0TzXuJpsi3TXW",
+  "dateCreated": {
+    "$date": "2025-02-28T18:00:51.583Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c1fa2bca338a7a65ba515d"
+  },
+  "username": "hron",
+  "email": "maxime.hiron@gmail.com",
+  "password": "$2a$10$SOG75CcmHZVCAA00nzmbTevja8Rznm0jktWeuFjWqf3mDI2iWyELm",
+  "dateCreated": {
+    "$date": "2025-02-28T18:02:19.622Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687353bc82558d9a62e9e8ab"
+  },
+  "username": "mxh3",
+  "email": "maxime.heron+user3@gmail.com",
+  "password": "$2a$10$8hz/L4K0Xr5QMwmdO2XflubwsTa2vQR4Sjo24yv/hehFocYAFaEqe",
+  "dateCreated": {
+    "$date": "2025-07-13T06:35:40.374Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687354cd82558d9a62e9e8af"
+  },
+  "username": "mxjd",
+  "email": "maxime.heron+user33@gmail.com",
+  "password": "$2a$10$5i4xQ2hS.C2XHC0zzO6oUuABsr/p0F0nOBMsu8kFEtUGBSCRdU..C",
+  "dateCreated": {
+    "$date": "2025-07-13T06:40:13.700Z"
   },
   "__v": 0
 }]

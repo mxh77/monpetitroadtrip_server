@@ -1,0 +1,1818 @@
+openapi: 3.0.3
+info:
+  title: Mon Petit Roadtrip API
+  description: API complète pour la gestion de roadtrips avec IA, synchronisation et queue asynchrone
+  version: 1.0.0
+  contact:
+    name: Mon Petit Roadtrip
+    email: contact@monpetitroadtrip.com
+
+servers:
+  - url: http://localhost:5000
+    description: Serveur de développement
+  - url: https://api.monpetitroadtrip.com
+    description: Serveur de production
+
+security:
+  - bearerAuth: []
+
+paths:
+  # ===== AUTHENTIFICATION =====
+  /auth/register:
+    post:
+      tags: [Authentification]
+      summary: Inscription nouvel utilisateur
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name:
+                  type: string
+                  example: "Jean Dupont"
+                email:
+                  type: string
+                  format: email
+                  example: "jean.dupont@email.com"
+                password:
+                  type: string
+                  minLength: 6
+                  example: "motdepasse123"
+      responses:
+        '201':
+          description: Utilisateur créé avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  user:
+                    $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /auth/login:
+    post:
+      tags: [Authentification]
+      summary: Connexion utilisateur
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "jean.dupont@email.com"
+                password:
+                  type: string
+                  example: "motdepasse123"
+      responses:
+        '200':
+          description: Connexion réussie
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  user:
+                    $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /auth/status:
+    get:
+      tags: [Authentification]
+      summary: Vérifier statut de connexion
+      responses:
+        '200':
+          description: Statut utilisateur
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isAuthenticated:
+                    type: boolean
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  # ===== ROADTRIPS =====
+  /roadtrips:
+    get:
+      tags: [Roadtrips]
+      summary: Obtenir liste des roadtrips utilisateur
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Liste des roadtrips
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  roadtrips:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Roadtrip'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+    post:
+      tags: [Roadtrips]
+      summary: Créer nouveau roadtrip avec fichiers
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié du roadtrip
+                  example: '{"name":"Roadtrip en France","startLocation":"Paris"}'
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: Roadtrip créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Roadtrip'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /roadtrips/ai:
+    post:
+      tags: [Roadtrips]
+      summary: Générer roadtrip complet via IA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [prompt]
+              properties:
+                prompt:
+                  type: string
+                  example: "Je veux un roadtrip de 7 jours dans le sud de la France avec des visites culturelles"
+                budget:
+                  type: number
+                  example: 1500
+                travelers:
+                  type: integer
+                  example: 2
+      responses:
+        '200':
+          description: Job de génération lancé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                    example: "64f123abc456789012345678"
+                  status:
+                    type: string
+                    enum: [pending, running]
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /roadtrips/{idRoadtrip}:
+    get:
+      tags: [Roadtrips]
+      summary: Obtenir détails d'un roadtrip
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "64a1b2c3d4e5f6789abcdef0"
+      responses:
+        '200':
+          description: Détails du roadtrip
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripDetailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Roadtrips]
+      summary: Modifier roadtrip avec fichiers
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié des modifications
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Roadtrip modifié
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripDetailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Roadtrips]
+      summary: Supprimer roadtrip
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Roadtrip supprimé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Roadtrip deleted successfully"
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /roadtrips/{idRoadtrip}/files/{fileId}:
+    delete:
+      tags: [Roadtrips]
+      summary: Supprimer fichier spécifique
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Fichier supprimé
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ===== STEPS =====
+  /roadtrips/{idRoadtrip}/steps:
+    get:
+      tags: [Steps]
+      summary: Obtenir étapes d'un roadtrip
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Liste des étapes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StepDetailed'
+
+    post:
+      tags: [Steps]
+      summary: Créer nouvelle étape
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié de l'étape
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: Étape créée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDetailed'
+
+  /roadtrips/{idRoadtrip}/steps/natural-language:
+    post:
+      tags: [Steps]
+      summary: Créer étape via IA
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [prompt]
+              properties:
+                prompt:
+                  type: string
+                  example: "Ajoute une étape à Lyon avec visite du Vieux Lyon"
+      responses:
+        '201':
+          description: Étape créée par IA
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDetailed'
+
+  /steps/{idStep}:
+    get:
+      tags: [Steps]
+      summary: Obtenir informations d'une étape
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Détails de l'étape
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDetailed'
+
+    put:
+      tags: [Steps]
+      summary: Modifier étape avec fichiers
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié des modifications
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Étape modifiée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDetailed'
+
+    delete:
+      tags: [Steps]
+      summary: Supprimer étape
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Étape supprimée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Step deleted successfully"
+
+  # ===== ACCOMMODATIONS =====
+  /roadtrips/{idRoadtrip}/steps/{idStep}/accommodations:
+    post:
+      tags: [Accommodations]
+      summary: Créer hébergement avec fichiers
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié de l'hébergement
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: Hébergement créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accommodation'
+
+  # ===== ACTIVITIES =====
+  /roadtrips/{idRoadtrip}/steps/{idStep}/activities:
+    post:
+      tags: [Activities]
+      summary: Créer activité avec fichiers
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [data]
+              properties:
+                data:
+                  type: string
+                  description: JSON stringifié de l'activité
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: Activité créée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+
+  /roadtrips/{idRoadtrip}/steps/{idStep}/activities/natural-language:
+    post:
+      tags: [Activities]
+      summary: Créer activité via IA
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [prompt]
+              properties:
+                prompt:
+                  type: string
+                  example: "Ajoute une visite du Musée du Louvre à 14h"
+      responses:
+        '201':
+          description: Activité créée par IA
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+
+  # ===== TASKS =====
+  /roadtrips/{roadtripId}/tasks:
+    get:
+      tags: [Tasks]
+      summary: Liste tâches d'un roadtrip
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Liste des tâches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  tasks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RoadtripTask'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+    post:
+      tags: [Tasks]
+      summary: Créer nouvelle tâche
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoadtripTaskInput'
+      responses:
+        '201':
+          description: Tâche créée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripTask'
+
+  /roadtrips/{roadtripId}/tasks/{taskId}:
+    get:
+      tags: [Tasks]
+      summary: Détail d'une tâche
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Détails de la tâche
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripTask'
+
+    put:
+      tags: [Tasks]
+      summary: Modifier tâche
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoadtripTaskInput'
+      responses:
+        '200':
+          description: Tâche modifiée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripTask'
+
+    delete:
+      tags: [Tasks]
+      summary: Supprimer tâche
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tâche supprimée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Task deleted successfully"
+
+  /roadtrips/{roadtripId}/tasks/{taskId}/toggle-completion:
+    patch:
+      tags: [Tasks]
+      summary: Basculer statut completion
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Statut modifié
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadtripTask'
+
+  /roadtrips/{roadtripId}/tasks/reorder:
+    patch:
+      tags: [Tasks]
+      summary: Réorganiser tâches
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [taskOrders]
+              properties:
+                taskOrders:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taskId:
+                        type: string
+                      order:
+                        type: integer
+      responses:
+        '200':
+          description: Tâches réorganisées
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Tasks reordered successfully"
+
+  /roadtrips/{roadtripId}/tasks/generate-defaults:
+    post:
+      tags: [Tasks]
+      summary: Générer tâches par défaut
+      parameters:
+        - name: roadtripId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Tâches par défaut générées
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Default tasks generated successfully"
+                  tasksCreated:
+                    type: integer
+                    example: 8
+
+  # ===== TRAVEL TIME & SYNC =====
+  /roadtrips/{idRoadtrip}/travel-time/refresh:
+    patch:
+      tags: [Travel Time]
+      summary: Recalculer temps trajet (synchrone)
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Temps de trajet recalculés
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Travel times updated successfully"
+        '409':
+          description: Calcul déjà en cours
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Un calcul est déjà en cours"
+
+  /roadtrips/{idRoadtrip}/travel-time/refresh/async:
+    patch:
+      tags: [Travel Time]
+      summary: Lancer calcul temps trajet asynchrone
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job de calcul lancé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                    example: "64f123abc456789012345678"
+                  status:
+                    type: string
+                    enum: [pending, running]
+
+  /roadtrips/{idRoadtrip}/travel-time/jobs/{jobId}/status:
+    get:
+      tags: [Travel Time]
+      summary: Statut job calcul temps trajet
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Statut du job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+
+  /roadtrips/{idRoadtrip}/travel-time/jobs:
+    get:
+      tags: [Travel Time]
+      summary: Liste jobs calcul temps trajet
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Liste des jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobStatus'
+
+  # ===== CHATBOT =====
+  /roadtrips/{idRoadtrip}/chat/query:
+    post:
+      tags: [Chatbot]
+      summary: Traiter requête utilisateur en langage naturel
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [message]
+              properties:
+                message:
+                  type: string
+                  example: "Ajoute une visite du Louvre demain matin"
+                conversationId:
+                  type: string
+                  description: ID conversation existante (optionnel)
+      responses:
+        '200':
+          description: Réponse immédiate ou job lancé
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      response:
+                        type: string
+                        example: "J'ai ajouté la visite du Louvre à votre planning"
+                      conversationId:
+                        type: string
+                  - type: object
+                    properties:
+                      jobId:
+                        type: string
+                      status:
+                        type: string
+                        enum: [pending, running]
+
+  /roadtrips/{idRoadtrip}/chat/conversations:
+    get:
+      tags: [Chatbot]
+      summary: Historique conversations
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Historique des conversations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  conversations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conversation'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /roadtrips/{idRoadtrip}/chat/conversations/{conversationId}:
+    get:
+      tags: [Chatbot]
+      summary: Conversation spécifique
+      parameters:
+        - name: idRoadtrip
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: conversationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Détails de la conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationDetailed'
+
+  # ===== SETTINGS =====
+  /settings:
+    get:
+      tags: [Settings]
+      summary: Obtenir paramètres utilisateur
+      responses:
+        '200':
+          description: Paramètres utilisateur
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettings'
+
+    put:
+      tags: [Settings]
+      summary: Modifier paramètres utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSettingsInput'
+      responses:
+        '200':
+          description: Paramètres modifiés
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettings'
+
+  # ===== STORIES =====
+  /steps/{idStep}/story:
+    get:
+      tags: [Stories]
+      summary: Générer récit d'étape (synchrone)
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Récit généré
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  story:
+                    type: string
+                    example: "Notre journée à Paris a commencé par..."
+
+    patch:
+      tags: [Stories]
+      summary: Régénérer récit
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Récit régénéré
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  story:
+                    type: string
+
+  /steps/{idStep}/story/with-photos:
+    get:
+      tags: [Stories]
+      summary: Générer récit avec photos
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Récit avec photos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  story:
+                    type: string
+                  photos:
+                    type: array
+                    items:
+                      type: string
+
+  /steps/{idStep}/story/async:
+    post:
+      tags: [Stories]
+      summary: Générer récit asynchrone
+      parameters:
+        - name: idStep
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job de génération lancé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+
+  # ===== GOOGLE MAPS =====
+  /gm/reviews:
+    get:
+      tags: [Google Maps]
+      summary: Obtenir avis lieu Google Maps
+      parameters:
+        - name: placeId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Avis du lieu
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reviews:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        author_name:
+                          type: string
+                        rating:
+                          type: number
+                        text:
+                          type: string
+                        time:
+                          type: number
+
+  /gm/directions:
+    get:
+      tags: [Google Maps]
+      summary: Calculer itinéraire
+      parameters:
+        - name: origin
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: destination
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: mode
+          in: query
+          schema:
+            type: string
+            enum: [driving, walking, transit]
+            default: driving
+      responses:
+        '200':
+          description: Itinéraire calculé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  distance:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                      value:
+                        type: number
+                  duration:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                      value:
+                        type: number
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "64a1b2c3d4e5f6789abcdef1"
+        name:
+          type: string
+          example: "Jean Dupont"
+        email:
+          type: string
+          format: email
+          example: "jean.dupont@email.com"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-01-20T10:00:00.000Z"
+
+    Roadtrip:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "64a1b2c3d4e5f6789abcdef0"
+        userId:
+          type: string
+          example: "64a1b2c3d4e5f6789abcdef1"
+        name:
+          type: string
+          example: "Mon Roadtrip"
+        startLocation:
+          type: string
+          example: "Paris, France"
+        startDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-01T09:00:00.000Z"
+        endLocation:
+          type: string
+          example: "Nice, France"
+        endDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-15T18:00:00.000Z"
+        currency:
+          type: string
+          example: "EUR"
+        notes:
+          type: string
+          example: "Vacances d'été"
+        photos:
+          type: array
+          items:
+            type: string
+        documents:
+          type: array
+          items:
+            type: string
+        thumbnail:
+          type: string
+        steps:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        __v:
+          type: integer
+
+    RoadtripDetailed:
+      allOf:
+        - $ref: '#/components/schemas/Roadtrip'
+        - type: object
+          properties:
+            steps:
+              type: array
+              items:
+                $ref: '#/components/schemas/StepDetailed'
+
+    Step:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "64a1b2c3d4e5f6789abcdef2"
+        userId:
+          type: string
+        roadtripId:
+          type: string
+        type:
+          type: string
+          enum: [Stage, Stop]
+          example: "Stage"
+        name:
+          type: string
+          example: "Paris"
+        address:
+          type: string
+          example: "Paris, France"
+        latitude:
+          type: number
+          example: 48.8566
+        longitude:
+          type: number
+          example: 2.3522
+        arrivalDateTime:
+          type: string
+          format: date-time
+        departureDateTime:
+          type: string
+          format: date-time
+        travelTimePreviousStep:
+          type: integer
+          description: "Temps en minutes"
+          example: 120
+        distancePreviousStep:
+          type: number
+          description: "Distance en km"
+          example: 350.5
+        isArrivalTimeConsistent:
+          type: boolean
+        travelTimeNote:
+          type: string
+          enum: [ERROR, WARNING, OK]
+        notes:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+        documents:
+          type: array
+          items:
+            type: string
+        thumbnail:
+          type: string
+        accommodations:
+          type: array
+          items:
+            type: string
+        activities:
+          type: array
+          items:
+            type: string
+        story:
+          type: string
+          description: "Récit généré par IA"
+
+    StepDetailed:
+      allOf:
+        - $ref: '#/components/schemas/Step'
+        - type: object
+          properties:
+            accommodations:
+              type: array
+              items:
+                $ref: '#/components/schemas/Accommodation'
+            activities:
+              type: array
+              items:
+                $ref: '#/components/schemas/Activity'
+
+    Activity:
+      type: object
+      properties:
+        _id:
+          type: string
+        userId:
+          type: string
+        stepId:
+          type: string
+        active:
+          type: boolean
+          default: true
+        type:
+          type: string
+          enum: [Visite, Randonnée, Courses, Transport, Autre]
+          example: "Visite"
+        name:
+          type: string
+          example: "Musée du Louvre"
+        address:
+          type: string
+          example: "Rue de Rivoli, 75001 Paris"
+        latitude:
+          type: number
+        longitude:
+          type: number
+        website:
+          type: string
+          format: uri
+        phone:
+          type: string
+        email:
+          type: string
+          format: email
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          description: "Durée en minutes"
+        typeDuration:
+          type: string
+          example: "Heures"
+        reservationNumber:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+        notes:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+        documents:
+          type: array
+          items:
+            type: string
+        thumbnail:
+          type: string
+        algoliaId:
+          type: string
+          description: "Référence Algolia optionnelle"
+
+    Accommodation:
+      type: object
+      properties:
+        _id:
+          type: string
+        userId:
+          type: string
+        stepId:
+          type: string
+        active:
+          type: boolean
+          default: true
+        type:
+          type: string
+          example: "Hôtel"
+        name:
+          type: string
+          example: "Hôtel du Louvre"
+        address:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        website:
+          type: string
+          format: uri
+        phone:
+          type: string
+        email:
+          type: string
+          format: email
+        arrivalDateTime:
+          type: string
+          format: date-time
+        departureDateTime:
+          type: string
+          format: date-time
+        reservationNumber:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+        notes:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+        documents:
+          type: array
+          items:
+            type: string
+        thumbnail:
+          type: string
+
+    RoadtripTask:
+      type: object
+      properties:
+        _id:
+          type: string
+        userId:
+          type: string
+        roadtripId:
+          type: string
+        title:
+          type: string
+          example: "Réserver billets de train"
+        description:
+          type: string
+          example: "Réserver les billets Paris-Nice"
+        category:
+          type: string
+          enum: [preparation, booking, packing, documents, transport, accommodation, activities, health, finances, communication, other]
+          example: "transport"
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+          example: "high"
+        status:
+          type: string
+          enum: [pending, in_progress, completed, cancelled]
+          example: "pending"
+        dueDate:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+        assignedTo:
+          type: string
+          example: "Jean Dupont"
+        estimatedDuration:
+          type: integer
+          description: "Durée estimée en minutes"
+        order:
+          type: integer
+        notes:
+          type: string
+        attachments:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    RoadtripTaskInput:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+          enum: [preparation, booking, packing, documents, transport, accommodation, activities, health, finances, communication, other]
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+        status:
+          type: string
+          enum: [pending, in_progress, completed, cancelled]
+        dueDate:
+          type: string
+          format: date-time
+        assignedTo:
+          type: string
+        estimatedDuration:
+          type: integer
+        notes:
+          type: string
+
+    JobStatus:
+      type: object
+      properties:
+        jobId:
+          type: string
+          example: "64f123abc456789012345678"
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+        progress:
+          type: object
+          properties:
+            total:
+              type: integer
+            completed:
+              type: integer
+            percentage:
+              type: number
+        startedAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+        errorMessage:
+          type: string
+          nullable: true
+        results:
+          type: object
+          description: "Varie selon le type de job"
+
+    Conversation:
+      type: object
+      properties:
+        _id:
+          type: string
+        roadtripId:
+          type: string
+        title:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        messageCount:
+          type: integer
+
+    ConversationDetailed:
+      allOf:
+        - $ref: '#/components/schemas/Conversation'
+        - type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    enum: [user, assistant]
+                  content:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+
+    UserSettings:
+      type: object
+      properties:
+        _id:
+          type: string
+        userId:
+          type: string
+        preferences:
+          type: object
+          properties:
+            defaultCurrency:
+              type: string
+              example: "EUR"
+            language:
+              type: string
+              example: "fr"
+            timezone:
+              type: string
+              example: "Europe/Paris"
+        notifications:
+          type: object
+          properties:
+            email:
+              type: boolean
+            push:
+              type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    UserSettingsInput:
+      type: object
+      properties:
+        preferences:
+          type: object
+          properties:
+            defaultCurrency:
+              type: string
+            language:
+              type: string
+            timezone:
+              type: string
+        notifications:
+          type: object
+          properties:
+            email:
+              type: boolean
+            push:
+              type: boolean
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 50
+        total:
+          type: integer
+          example: 156
+        pages:
+          type: integer
+          example: 4
+
+  responses:
+    BadRequest:
+      description: Erreur de validation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: "Invalid JSON in data field"
+              errors:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+
+    Unauthorized:
+      description: Non autorisé
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: "User not authorized"
+
+    NotFound:
+      description: Ressource non trouvée
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: "Roadtrip not found"
+
+    Conflict:
+      description: Conflit - opération déjà en cours
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: "Un calcul est déjà en cours"
+
+    ServerError:
+      description: Erreur serveur
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: "Server error"
+
+tags:
+  - name: Authentification
+    description: Gestion des utilisateurs et authentification JWT
+  - name: Roadtrips
+    description: CRUD des roadtrips avec génération IA
+  - name: Steps
+    description: Gestion des étapes de roadtrip
+  - name: Activities
+    description: Activités par étape avec support IA
+  - name: Accommodations
+    description: Hébergements par étape
+  - name: Tasks
+    description: Tâches de préparation de roadtrip
+  - name: Travel Time
+    description: Calcul et synchronisation des temps de trajet
+  - name: Chatbot
+    description: Assistant IA conversationnel
+  - name: Stories
+    description: Génération de récits de voyage
+  - name: Google Maps
+    description: Intégration Google Maps pour avis et directions
+  - name: Settings
+    description: Paramètres utilisateur

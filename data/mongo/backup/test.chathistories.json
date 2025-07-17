@@ -1,0 +1,385 @@
+[{
+  "_id": {
+    "$oid": "686e29c1e2678d77d660b67d"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "conversationId": "optional_conversation_id",
+  "__v": 0,
+  "context": {
+    "activeRoadtripId": {
+      "$oid": "67ac491396003c7411aea948"
+    },
+    "lastIntent": "add_step",
+    "pendingActions": []
+  },
+  "createdAt": {
+    "$date": "2025-07-09T08:35:13.119Z"
+  },
+  "isActive": true,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Ajoute une étape à Paris du 15 au 17 juillet",
+      "timestamp": {
+        "$date": "2025-07-09T08:35:13.118Z"
+      },
+      "_id": {
+        "$oid": "686e29c1ac538753e00643a0"
+      }
+    }
+  ],
+  "updatedAt": {
+    "$date": "2025-07-09T08:35:13.119Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686e2affe2678d77d660b68b"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "686e29c1e2678d77d660b67d",
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "__v": 0,
+  "context": {
+    "activeRoadtripId": {
+      "$oid": "67ac491396003c7411aea948"
+    },
+    "lastIntent": "add_task",
+    "pendingActions": []
+  },
+  "createdAt": {
+    "$date": "2025-07-09T08:40:31.363Z"
+  },
+  "isActive": true,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Pour cette nouvelle étape, ajoutes une note pour dire qu'il fera beau",
+      "timestamp": {
+        "$date": "2025-07-09T08:40:31.363Z"
+      },
+      "_id": {
+        "$oid": "686e2affac538753e00643b3"
+      }
+    }
+  ],
+  "updatedAt": {
+    "$date": "2025-07-09T08:40:31.363Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686e3566e2678d77d660b6e5"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "conversationId": "chat_1752053003643",
+  "__v": 0,
+  "context": {
+    "activeRoadtripId": {
+      "$oid": "67ac491396003c7411aea948"
+    },
+    "lastIntent": "add_task",
+    "pendingActions": []
+  },
+  "createdAt": {
+    "$date": "2025-07-09T09:24:54.537Z"
+  },
+  "isActive": true,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Ajoute une étape à Paris du 15 au 17 juillet 2025",
+      "timestamp": {
+        "$date": "2025-07-09T09:24:54.536Z"
+      },
+      "_id": {
+        "$oid": "686e3566ac538753e00643eb"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Modifier l'étape watertone et ajoute la note. Attention, il va pleuvoir",
+      "timestamp": {
+        "$date": "2025-07-09T09:26:30.958Z"
+      },
+      "_id": {
+        "$oid": "686e35c6ac538753e0064413"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Modifier l'étape Waterton et ajoute la note : Attention, il va pleuvoir",
+      "timestamp": {
+        "$date": "2025-07-09T09:27:09.536Z"
+      },
+      "_id": {
+        "$oid": "686e35edac538753e0064420"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Il faut prévoir de prendre des médicaments",
+      "timestamp": {
+        "$date": "2025-07-09T09:28:17.400Z"
+      },
+      "_id": {
+        "$oid": "686e3631ac538753e0064455"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Il faut prévoir de prendre des médicaments",
+      "timestamp": {
+        "$date": "2025-07-09T10:07:18.934Z"
+      },
+      "_id": {
+        "$oid": "686e3f560505053e7efa44b7"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute deux tâches road trip la première pour indiquer de ne pas oublier les passeports et la deuxième pour indiquer de ne pas oublier les médicaments",
+      "timestamp": {
+        "$date": "2025-07-09T10:08:09.790Z"
+      },
+      "_id": {
+        "$oid": "686e3f890505053e7efa44de"
+      }
+    }
+  ],
+  "updatedAt": {
+    "$date": "2025-07-09T10:08:09.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686e4927e2678d77d660b796"
+  },
+  "conversationId": "test-sse-123",
+  "userId": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "__v": 0,
+  "context": {
+    "activeRoadtripId": {
+      "$oid": "67ac491396003c7411aea948"
+    },
+    "lastIntent": "add_task",
+    "pendingActions": []
+  },
+  "createdAt": {
+    "$date": "2025-07-09T10:49:11.891Z"
+  },
+  "isActive": true,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Ajoute une t�che: Test SSE notification",
+      "timestamp": {
+        "$date": "2025-07-09T10:49:11.890Z"
+      },
+      "_id": {
+        "$oid": "686e49279de1373278df6c56"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute une t�che: Test SSE notification",
+      "timestamp": {
+        "$date": "2025-07-09T10:51:43.942Z"
+      },
+      "_id": {
+        "$oid": "686e49bf9de1373278df6c62"
+      }
+    }
+  ],
+  "updatedAt": {
+    "$date": "2025-07-09T10:51:43.942Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "686e49f9e2678d77d660b79e"
+  },
+  "roadtripId": {
+    "$oid": "67ac491396003c7411aea948"
+  },
+  "conversationId": "test-sse-1752058353211",
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "__v": 0,
+  "context": {
+    "activeRoadtripId": {
+      "$oid": "67ac491396003c7411aea948"
+    },
+    "lastIntent": "add_step",
+    "pendingActions": []
+  },
+  "createdAt": {
+    "$date": "2025-07-09T10:52:41.795Z"
+  },
+  "isActive": true,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Ajoute une tâche: Test SSE notification",
+      "timestamp": {
+        "$date": "2025-07-09T10:52:41.790Z"
+      },
+      "_id": {
+        "$oid": "686e49f9a0aefecc13c71750"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute une étape à Paris du 15 au 17 juillet",
+      "timestamp": {
+        "$date": "2025-07-09T15:15:54.206Z"
+      },
+      "_id": {
+        "$oid": "686e87aac7928e2d833bfbab"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute une étape à Paris du 15 au 17 juillet",
+      "timestamp": {
+        "$date": "2025-07-09T15:19:37.480Z"
+      },
+      "_id": {
+        "$oid": "686e8889c7928e2d833bfbef"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute une étape à Paris du 15 au 17 juillet",
+      "timestamp": {
+        "$date": "2025-07-09T15:33:51.804Z"
+      },
+      "_id": {
+        "$oid": "686e8bdfc7928e2d833bfcb9"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute une étape à Paris du 15 au 17 juillet",
+      "timestamp": {
+        "$date": "2025-07-09T15:35:53.915Z"
+      },
+      "_id": {
+        "$oid": "686e8c59c7928e2d833bfd14"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute une étape à Paris du 15 au 17 juillet",
+      "timestamp": {
+        "$date": "2025-07-09T15:39:39.247Z"
+      },
+      "_id": {
+        "$oid": "686e8d3bc7928e2d833bfd98"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute une étape à Bordeaux du 15 au 23 juillet",
+      "timestamp": {
+        "$date": "2025-07-09T15:48:26.936Z"
+      },
+      "_id": {
+        "$oid": "686e8f4a61b56fe61dbe7ddb"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute une tâche, prendre des médicaments",
+      "timestamp": {
+        "$date": "2025-07-09T15:49:06.033Z"
+      },
+      "_id": {
+        "$oid": "686e8f7261b56fe61dbe7e27"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute les deux tâches suivantes: \n- Prendre des Médicaments\n- Prendre les passeports",
+      "timestamp": {
+        "$date": "2025-07-09T15:52:19.009Z"
+      },
+      "_id": {
+        "$oid": "686e90336f0f328768804059"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute la visite de la tour Eiffel pour l'étape de paris\nNous y serons  à partir de 14h",
+      "timestamp": {
+        "$date": "2025-07-09T16:32:48.474Z"
+      },
+      "_id": {
+        "$oid": "686e99b05907c8bad38e1390"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajouter une activité à Paris pour visiter la tour Eiffel à 14h",
+      "timestamp": {
+        "$date": "2025-07-09T16:59:42.274Z"
+      },
+      "_id": {
+        "$oid": "686e9ffe392d1c4d68939a12"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Nous irons dormir à Paris à l'hôtel de la paix ",
+      "timestamp": {
+        "$date": "2025-07-09T17:01:05.514Z"
+      },
+      "_id": {
+        "$oid": "686ea05174fcab66aa647b2d"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Généré une liste de tâches pour mon roadtrip ",
+      "timestamp": {
+        "$date": "2025-07-09T21:12:22.199Z"
+      },
+      "_id": {
+        "$oid": "686edb36895f63c302fef6e2"
+      }
+    },
+    {
+      "role": "user",
+      "content": "Ajoute une étape à Bordeaux du 15 au 23 juillet",
+      "timestamp": {
+        "$date": "2025-07-10T05:31:28.165Z"
+      },
+      "_id": {
+        "$oid": "686f5030f06ecf32f569408d"
+      }
+    }
+  ],
+  "updatedAt": {
+    "$date": "2025-07-10T05:31:28.167Z"
+  }
+}]

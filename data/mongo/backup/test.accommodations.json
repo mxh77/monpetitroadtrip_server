@@ -202,7 +202,7 @@
   "stageId": {
     "$oid": "67164a219daf629f689c2807"
   },
-  "name": "Veteran's Memorial Campground",
+  "name": "Veteran's Memorial Campgrounde",
   "address": "940 Lawrence St, Pincher Creek, AB T0K 1W0, Canada",
   "website": "http://www.pinchercreek.ca/campground",
   "phone": "(403)627-4322",
@@ -528,24 +528,1219 @@
 },
 {
   "_id": {
-    "$oid": "67a862e71ba201bb05eac99c"
+    "$oid": "67ac484a52690ffd75f8f8f3"
   },
   "userId": {
     "$oid": "6708fb9f349574b62d828725"
   },
   "stepId": {
-    "$oid": "67a85b4035436832048a185e"
+    "$oid": "67ac484a52690ffd75f8f8f1"
   },
-  "name": "Accommodation",
+  "name": "Hotel Marina Inn",
+  "address": "68 Monarch Bay Dr, San Leandro, CA 94577, États-Unis",
   "latitude": 0,
   "longitude": 0,
+  "website": "http://www.slmarinainn.com/",
+  "phone": "+1234567890",
+  "email": "",
+  "reservationNumber": "ABC123456",
+  "confirmationDateTime": {
+    "$date": "2023-04-30T00:00:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2023-08-03T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-04T07:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 600,
+  "notes": "Near the beach, includes breakfast",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67ac484a52690ffd75f8f908"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac484a52690ffd75f8f903"
+  },
+  "name": "KOA",
+  "address": "",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": null,
+  "departureDateTime": null,
+  "nights": null,
+  "price": null,
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea834"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491096003c7411aea832"
+  },
+  "name": "Hotel Marina Inn",
+  "address": "68 Monarch Bay Dr, San Leandro, CA 94577, États-Unis",
+  "website": "http://www.slmarinainn.com/",
+  "phone": "+1234567890",
+  "email": "",
+  "reservationNumber": "ABC123456",
+  "confirmationDateTime": {
+    "$date": "2023-04-30T00:00:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2023-08-03T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-04T07:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 600,
+  "notes": "Near the beach, includes breakfast",
+  "photos": [],
+  "documents": [],
+  "thumbnail": null,
+  "__v": 0,
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67ac491096003c7411aea868"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491096003c7411aea866"
+  },
+  "name": "Sheraton Cavalier Hotel",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67b3347d528dcf559461eea0"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "6864d01e3262a941ab4e4b6a"
+  },
+  "__v": 42,
+  "address": "Sheraton Cavalier Calgary Hotel, 32 Avenue Northeast, Calgary, AB, Canada",
+  "arrivalDateTime": {
+    "$date": "2025-07-29T18:00:00.000Z"
+  },
+  "confirmationDateTime": {
+    "$date": "2025-07-29T08:13:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-30T13:00:00.000Z"
+  },
+  "email": "",
+  "nights": 1,
+  "notes": "",
+  "phone": "",
+  "price": 257.1,
+  "reservationNumber": "4554.368.646",
+  "website": "",
+  "currency": "CAD",
+  "active": true,
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea879"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea877"
+  },
+  "name": "Veteran's Memorial Campground",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67da6869d548bbd1687b812a"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "686402d64777c0a3c4ce0721"
+  },
+  "__v": 99,
+  "arrivalDateTime": {
+    "$date": "2025-07-30T19:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-31T08:30:00.000Z"
+  },
+  "confirmationDateTime": {
+    "$date": "2025-01-26T00:00:00.000Z"
+  },
+  "address": "Pincher Creek Swimming Pool, 895 Main Street, Pincher Creek, AB, Canada",
+  "email": "",
+  "nights": 1,
+  "notes": "",
+  "phone": "(403) 627-4322",
+  "price": 45,
+  "reservationNumber": "FA-3145",
+  "website": "",
+  "active": true,
+  "currency": "CAD"
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea89b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea899"
+  },
+  "name": "Sheraton Cavalier Hotel",
+  "address": "Sheraton Cavalier Calgary Hotel, 32 Avenue Northeast, Calgary, AB, Canada",
+  "website": "https://www.marriott.com/en-us/hotels/yycsc-sheraton-cavalier-calgary-hotel/overview/?scid=f2ae0541-1279-4f24-b197-a979c79310b0",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "4420.083.978",
+  "confirmationDateTime": {
+    "$date": "2025-02-16T17:46:43.265Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-20T15:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-21T10:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 257.1,
+  "notes": "Pin code : 4563",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e04a87d015f5a240d37042"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "67e04afcd015f5a240d3704b"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67ac491196003c7411aea8a0"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491196003c7411aea89e"
+  },
+  "name": "Crooked Creek Campground",
+  "address": "Crooked Creek Campground, Alberta 5, Waterton Park, AB, Canada",
+  "website": "https://crookedcreekcampground.ca",
+  "phone": "(403) 653-1100",
+  "email": "crookedcreekcampground@gmail.com",
+  "reservationNumber": "CRO-25-556",
+  "confirmationDateTime": {
+    "$date": "2025-01-26T00:00:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-07-31T19:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-01T08:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 110.1,
+  "notes": "Emplacement 29",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67bc99e65e8bac91f97d2178"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "67e6d298b940b22a2af5a266"
+  },
+  "__v": 1,
+  "active": true,
+  "currency": "CAD"
+},
+{
+  "_id": {
+    "$oid": "67ac491296003c7411aea8bd"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491296003c7411aea8b7"
+  },
+  "name": "Johnson's Campground ",
+  "address": "21 Red Eagle Rd, Browning, MT 59417, États-Unis",
+  "website": "",
+  "phone": "(406) 732-4207",
+  "email": "johnsonsofstmaryllc@gmail.com",
+  "reservationNumber": "WRSA-V6E2",
+  "confirmationDateTime": {
+    "$date": "2025-01-26T00:00:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-01T18:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-03T08:00:00.000Z"
+  },
+  "nights": 2,
+  "price": 192.24,
+  "notes": "",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67d6f75ae09cba613d8eee86"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "67e6d4a7b940b22a2af5a2c3"
+  },
+  "__v": 1,
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67ac491296003c7411aea8d2"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491296003c7411aea8cc"
+  },
+  "name": "Bozeman Hot Springs Campground",
+  "address": "Bozeman Hot Springs Campground, Welcome Drive, Bozeman, MT, USA",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "78087073",
+  "confirmationDateTime": {
+    "$date": "2025-01-26T00:00:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-03T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-04T09:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 135,
+  "notes": "Emplacement H-4",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67d6fcac32bea0455ff60bab"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "67e02146ab0a33c94e62cc4d"
+  },
+  "__v": 1,
+  "active": true,
+  "currency": "USD",
+  "latitude": 0,
+  "longitude": 0
+},
+{
+  "_id": {
+    "$oid": "67ac491296003c7411aea8df"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491296003c7411aea8d9"
+  },
+  "name": "Yellowstone RV Park",
+  "address": "Yellowstone RV Park, US Highway 89 South, Gardiner, Montana, États-Unis",
+  "website": "https://www.nps.gov/yell/planyourvisit/mammothhscg.htm",
+  "phone": "1-406-8487496",
+  "email": "stay@rvparkyellowstone.com",
+  "reservationNumber": "398B10909794",
+  "confirmationDateTime": {
+    "$date": "2025-01-26T00:00:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-04T11:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-05T09:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 114,
+  "notes": "",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67d6f7bbe09cba613d8eeeec"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "67e6d55cb940b22a2af5a322"
+  },
+  "__v": 1,
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea8f4"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea8ee"
+  },
+  "name": "Madison Campground",
+  "address": "Madison Campground, Madison Campground East Loop, Yellowstone National Park, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": {
+    "$date": "2025-01-27T06:11:13.101Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-05T17:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-06T09:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 42.35,
+  "notes": "",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67d6f813e09cba613d8eef2a"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "67e6d678b940b22a2af5a388"
+  },
+  "__v": 1,
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67ac491396003c7411aea911"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea90f"
+  },
+  "name": "Madison Campground ",
+  "address": "Madison Campground, Madison Campground East Loop, Yellowstone National Park, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-06T17:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-07T09:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e02183ab0a33c94e62ccaa"
+    }
+  ],
+  "thumbnail": {
+    "$oid": "6864fc2413ff640d52fd1569"
+  },
+  "__v": 1,
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67b0bd62bb0959167ebef738"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea924"
+  },
+  "name": "Fort Steele Resort & RV Park",
+  "address": "Fort Steele Resort & RV Park, Wardner Fort Steele Road, Fort Steele, BC, Canada",
+  "website": "www.fortsteele.com",
+  "phone": "+1-250-489-4268",
+  "email": "resort@fortsteele.com",
+  "reservationNumber": "#51023",
+  "confirmationDateTime": {
+    "$date": "2025-08-12T00:00:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-12T18:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-13T09:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 78.75,
+  "notes": "",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67dfef472244b24bf7365de2"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "67f40724c94610ca15e05971"
+  },
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67b0ccf74e88eb4d0598a0bf"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b0cc8a4e88eb4d0598a0a7"
+  },
+  "name": "Silverhorn Campground ",
+  "address": "Silverhorn Creek Campground, Alberta 93, Lake Louise, AB, Canada",
+  "website": "https://reservation.pc.gc.ca/account/booking-details/ba6372e5-3296-44ed-aeb5-5f2ffc93aa6f",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "INPC24-9424293B1",
+  "confirmationDateTime": {
+    "$date": "2025-01-26T17:20:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-13T16:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-14T10:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 48.25,
+  "notes": "Emplacement 22",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e04418e0d610596f0a6e77"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "68616cf0b5b249898e0e2ab8"
+  },
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67b0cef24e88eb4d0598a10e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b0ced24e88eb4d0598a0ff"
+  },
+  "name": "Wapiti Campground ",
+  "address": "Wapiti Campground, AB-93A, Jasper, AB, Canada",
+  "website": "https://reservation.pc.gc.ca/account/booking-details/32efa62d-8171-4a7e-9535-5b04a49837b7",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "INPC24-9527942B1",
+  "confirmationDateTime": {
+    "$date": "2025-01-28T17:29:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-14T15:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-15T12:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 61.25,
+  "notes": "Emplacement FF45",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e0458fe0d610596f0a6efd"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "67e047f0d015f5a240d36f1a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b1d7291376e49417e4cd07"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b1d6ad1376e49417e4ccda"
+  },
+  "name": "Silverhorn Creek Campground ",
+  "address": "Silverhorn Creek Campground, Alberta 93, Lake Louise, AB, Canada",
+  "website": "https://reservation.pc.gc.ca/account/booking-details/b82b18c7-40a3-4429-90ea-dfd17d46a1d2",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "INPC24-9424496B1",
+  "confirmationDateTime": {
+    "$date": "2025-01-26T12:15:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-15T18:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-16T09:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 48.25,
+  "notes": "Emplacement 15",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e048a7d015f5a240d36f69"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "68616d5fb68a45c1af2efc4a"
+  },
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67b21ec46b9ba0d01515874e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b1da621376e49417e4cd6f"
+  },
+  "name": "Lake Louise Hardsided Campground",
+  "address": "Lake Louise Hardsided Campground, Fairview Road, Lake Louise, AB, Canada",
+  "website": "https://reservation.pc.gc.ca/account/booking-details/c8452cd9-7376-4eee-a13b-160b6864b978",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "INPC24-9424961B1",
+  "confirmationDateTime": {
+    "$date": "2025-01-26T17:20:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-16T18:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-19T09:00:00.000Z"
+  },
+  "nights": 3,
+  "price": 119.5,
+  "notes": "Emplacement 127",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e0490ed015f5a240d36fa3"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "6865019dababe8fcbf7f7a45"
+  },
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67b223c85cb1ce4a82d73091"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67b222e35cb1ce4a82d73077"
+  },
+  "name": "Tunnel Mountain Trailer Court ",
+  "address": "Tunnel Mountain Trailer Court, Tunnel Mountain Road, Banff, AB, Canada",
+  "website": "https://reservation.pc.gc.ca/account/booking-details/f985329c-4711-4630-aab4-5e8c52f13c73",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "INPC24-9425247B1",
+  "confirmationDateTime": {
+    "$date": "2025-01-26T17:42:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-19T14:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-20T09:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 54,
+  "notes": "Emplacement 608",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e049e7d015f5a240d36fdf"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "67e04a62d015f5a240d3700d"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d7c89d60b1d0e2897baf3d"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67d7c6115c5cee2d1bbfa692"
+  },
+  "name": "Uuuuu",
+  "address": "Chartres, France",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": null,
+  "departureDateTime": null,
+  "nights": 0,
+  "price": 0,
+  "notes": "Ceci\nEst\nSjd\nSjd\nFjx\nD\nD\nFw\nF\nF \n\nC\nC\nXkf",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67dfb1dfc3947d69776ab6ef"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491596003c7411aea98d"
+  },
+  "name": "Vétéran Campground ",
+  "address": "Pincher Creek Veteran's Memorial Campground, Lawrence Street, Pincher Creek, AB, Canada",
+  "website": "123",
+  "phone": "456",
+  "email": "789",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2025-03-13T08:00:00.000Z"
+  },
+  "nights": 0,
+  "price": 0,
+  "notes": "dsqdsqdsqdqsdsqdsqdsq",
   "photos": [],
   "documents": [],
   "__v": 0,
+  "departureDateTime": {
+    "$date": "2025-03-14T14:00:00.000Z"
+  },
+  "active": true,
+  "currency": "USD"
+},
+{
+  "_id": {
+    "$oid": "67dfecf32244b24bf7365d0f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea923"
+  },
+  "name": "Jim & Mary RV Park",
+  "address": "Jim & Mary's RV Park, U.S. Highway 93 North, Missoula, Montana, États-Unis",
+  "website": "https://www.jimandmarys.com/",
+  "phone": "(406) 549-4416",
+  "email": "hello@jimandmarys.com",
+  "reservationNumber": "R00000022068",
+  "confirmationDateTime": {
+    "$date": "2024-10-20T11:19:00.000Z"
+  },
   "arrivalDateTime": {
-    "$date": "2025-07-29T14:05:00.000Z"
+    "$date": "2025-08-11T19:00:00.000Z"
   },
   "departureDateTime": {
-    "$date": "2025-07-30T12:00:00.000Z"
+    "$date": "2025-08-12T08:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 74.67,
+  "notes": "Emplacement D7",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67dfed8b2244b24bf7365d29"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "67dfee6b2244b24bf7365d60"
   }
+},
+{
+  "_id": {
+    "$oid": "67dff975b70f8aa444071a7f"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea920"
+  },
+  "name": "Grant Village Campground",
+  "address": "Grant Village Campground, N 44 23.610 W, Yellowstone National Park, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2025-08-07T19:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-08T09:00:00.000Z"
+  },
+  "nights": 0,
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e011288a56856d34b2f0a9"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "67e0112d8a56856d34b2f0b2"
+  }
+},
+{
+  "_id": {
+    "$oid": "67dffb7eb70f8aa444071b21"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea921"
+  },
+  "name": "Colter Bay Campground",
+  "address": "Colter Bay Campground, Colter Bay Campground Road, Moran, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "#0720337498-1",
+  "confirmationDateTime": {
+    "$date": "2025-02-09T14:06:00.000Z"
+  },
+  "arrivalDateTime": {
+    "$date": "2025-08-08T15:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-09T08:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 66.08,
+  "notes": "Emplacement 278",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e014e140bd43b84da3e34b"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "67e0168c40bd43b84da3e438"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e01a7840bd43b84da3e63e"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491396003c7411aea922"
+  },
+  "name": "Virginian RV Park",
+  "address": "Virginian RV Park, Virginian Lane, Jackson, Wyoming, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2025-08-09T17:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-08-11T09:00:00.000Z"
+  },
+  "nights": 2,
+  "price": 0,
+  "notes": "",
+  "photos": [],
+  "documents": [
+    {
+      "$oid": "67e01a8340bd43b84da3e65c"
+    }
+  ],
+  "__v": 1,
+  "thumbnail": {
+    "$oid": "67e0841602fecc1e49a61bbc"
+  }
+},
+{
+  "_id": {
+    "$oid": "686402a64777c0a3c4ce06fe"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491096003c7411aea844"
+  },
+  "active": true,
+  "name": "KOA Kingsman ",
+  "address": "Kingman KOA Journey, North Roosevelt Street, Kingman, Arizona, États-Unis",
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2023-08-05T17:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-06T08:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669741e4503a471a1a3cf0"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669740e4503a471a1a3cee"
+  },
+  "active": true,
+  "name": "Hôtel des Ducs",
+  "address": "1 Place de la Libération, Dijon",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2025-07-15T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-17T10:00:00.000Z"
+  },
+  "nights": 2,
+  "price": 120,
+  "currency": "EUR",
+  "notes": "Hôtel central avec charme et confort.",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669741e4503a471a1a3cff"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669741e4503a471a1a3cfd"
+  },
+  "active": true,
+  "name": "Hostellerie de la Poste",
+  "address": "15 Rue de l'Hôtel de Ville, Beaune",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2025-07-17T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-19T10:00:00.000Z"
+  },
+  "nights": 2,
+  "price": 130,
+  "currency": "EUR",
+  "notes": "Hôtel traditionnel au cœur de Beaune.",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669743e4503a471a1a3d15"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669742e4503a471a1a3d13"
+  },
+  "active": true,
+  "name": "Hôtel de l'Horloge",
+  "address": "12 Place de l'Horloge, Avignon",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2025-07-19T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-21T10:00:00.000Z"
+  },
+  "nights": 2,
+  "price": 140,
+  "currency": "EUR",
+  "notes": "Hôtel élégant proche des attractions.",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669747e4503a471a1a3d2b"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669747e4503a471a1a3d29"
+  },
+  "active": true,
+  "name": "Hôtel Le Pigonnet",
+  "address": "405 Avenue Pierre Semard, Aix-en-Provence",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2025-07-21T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-23T10:00:00.000Z"
+  },
+  "nights": 2,
+  "price": 150,
+  "currency": "EUR",
+  "notes": "Hôtel de luxe avec jardin.",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68669748e4503a471a1a3d41"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "68669748e4503a471a1a3d3f"
+  },
+  "active": true,
+  "name": "Hôtel Negresco",
+  "address": "37 Promenade des Anglais, Nice",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2025-07-23T12:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2025-07-25T10:00:00.000Z"
+  },
+  "nights": 2,
+  "price": 200,
+  "currency": "EUR",
+  "notes": "Hôtel emblématique avec vue sur mer.",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686c36ea9dd1e584344cd379"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491096003c7411aea843"
+  },
+  "active": true,
+  "name": "Big Meadow Campground",
+  "address": "Big Meadows, Sequoia National Forest, Californie, États-Unis",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": null,
+  "departureDateTime": null,
+  "nights": 0,
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686c36fb9dd1e584344cd38c"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "67ac491096003c7411aea843"
+  },
+  "active": true,
+  "name": "Big Meadow Campground",
+  "address": "Big Meadows, Sequoia National Forest, Californie, États-Unis",
+  "latitude": 0,
+  "longitude": 0,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": {
+    "$date": "2023-08-04T14:00:00.000Z"
+  },
+  "departureDateTime": {
+    "$date": "2023-08-05T09:00:00.000Z"
+  },
+  "nights": 1,
+  "price": 0,
+  "currency": "EUR",
+  "notes": "",
+  "photos": [],
+  "documents": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686ea05274fcab66aa647b44"
+  },
+  "userId": {
+    "$oid": "6708fb9f349574b62d828725"
+  },
+  "stepId": {
+    "$oid": "686e8f5461b56fe61dbe7dea"
+  },
+  "active": true,
+  "name": "hôtel de la paix",
+  "address": "Paris",
+  "latitude": 48.8575475,
+  "longitude": 2.3513765,
+  "website": "",
+  "phone": "",
+  "email": "",
+  "reservationNumber": "",
+  "confirmationDateTime": null,
+  "arrivalDateTime": null,
+  "departureDateTime": null,
+  "nights": 0,
+  "price": 0,
+  "currency": "USD",
+  "notes": "Créé via chatbot IA",
+  "photos": [],
+  "documents": [],
+  "__v": 0
 }]
