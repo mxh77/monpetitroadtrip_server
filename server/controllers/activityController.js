@@ -266,6 +266,19 @@ export const updateActivity = async (req, res) => {
             activity.algoliaId = data.algoliaId;
         }
 
+        // Gérer la suppression de thumbnail si demandée
+        if (data.removeThumbnail === true) {
+            console.log('Removing thumbnail as requested...');
+            if (activity.thumbnail) {
+                const oldThumbnail = await File.findById(activity.thumbnail);
+                if (oldThumbnail) {
+                    await deleteFromGCS(oldThumbnail.url);
+                    await oldThumbnail.deleteOne();
+                }
+                activity.thumbnail = null;
+            }
+        }
+
         // Gérer les suppressions différées
         if (data.existingFiles) {
             console.log('Processing existing files:', data.existingFiles);
